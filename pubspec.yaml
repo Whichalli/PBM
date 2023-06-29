@@ -1,0 +1,102 @@
+name: pbm_care
+description: A new Flutter project.
+version: 1.0.0+1
+environment: 
+  sdk: '>=2.12.0 <3.0.0'
+dependencies: 
+  flutter: 
+    sdk: flutter
+  get: ^4.6.5
+  connectivity_plus: ^2.3.9
+  shared_preferences: ^2.0.15
+  cached_network_image: ^3.2.1
+  flutter_svg: ^1.1.6
+  flutter_login_facebook: ^1.6.2
+  google_sign_in: ^5.0.7
+  intl: ^0.18.0
+  fluttertoast: ^8.0.8
+dev_dependencies: 
+  flutter_test: 
+    sdk: flutter
+flutter: 
+  uses-material-design: true
+  assets: 
+    - assets/
+    - assets/images/
+  fonts: 
+    - family: Open Sans
+      fonts: 
+        - asset: assets/fonts/OpenSansRomanSemiBold.ttf
+          weight: 600
+        - asset: assets/fonts/OpenSans.ttf
+          weight: 400
+        - asset: assets/fonts/OpenSansRomanBold.ttf
+          weight: 700
+        - asset: assets/fonts/OpenSansRomanRegular.ttf
+          weight: 400
+        - asset: assets/fonts/OpenSansLight.ttf
+          weight: 300
+        - asset: assets/fonts/OpenSansBold.ttf
+          weight: 700
+        - asset: assets/fonts/OpenSansItalicLight.ttf
+          weight: 300
+    - family: Nunito
+      fonts: 
+        - asset: assets/fonts/NunitoBold.ttf
+          weight: 700
+        - asset: assets/fonts/NunitoSemiBold.ttf
+          weight: 600
+        - asset: assets/fonts/NunitoExtraBold.ttf
+          weight: 800
+        - asset: assets/fonts/NunitoRegular.ttf
+          weight: 400
+        - asset: assets/fonts/NunitoLight.ttf
+          weight: 300
+    - family: Poppins
+      fonts: 
+        - asset: assets/fonts/PoppinsRegular.ttf
+          weight: 400
+        - asset: assets/fonts/PoppinsSemiBold.ttf
+          weight: 600
+    - family: Raleway
+      fonts: 
+        - asset: assets/fonts/RalewayBold.ttf
+          weight: 700
+        - asset: assets/fonts/RalewayMedium.ttf
+          weight: 500
+    - family: Rubik
+      fonts: 
+        - asset: assets/fonts/RubikMedium.ttf
+          weight: 500
+        - asset: assets/fonts/RubikBold.ttf
+          weight: 700
+    - family: Alegreya Sans
+      fonts: 
+        - asset: assets/fonts/AlegreyaSansRegular.ttf
+          weight: 400
+        - asset: assets/fonts/AlegreyaSansBold.ttf
+          weight: 700
+    - family: Sacramento
+      fonts: 
+        - asset: assets/fonts/SacramentoRegular.ttf
+          weight: 400
+    - family: Roboto
+      fonts: 
+        - asset: assets/fonts/RobotoRegular.ttf
+          weight: 400
+    - family: Manrope
+      fonts: 
+        - asset: assets/fonts/ManropeExtraBold.ttf
+          weight: 800
+        - asset: assets/fonts/ManropeMedium.ttf
+          weight: 500
+        - asset: assets/fonts/ManropeBold.ttf
+          weight: 700
+    - family: Inter
+      fonts: 
+        - asset: assets/fonts/InterSemiBold.ttf
+          weight: 600
+        - asset: assets/fonts/InterMedium.ttf
+          weight: 500
+        - asset: assets/fonts/InterRegular.ttf
+          weight: 400

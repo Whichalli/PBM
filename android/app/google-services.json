@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "324928799072",
+    "project_id": "pbm-booking-care",
+    "storage_bucket": "pbm-booking-care.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:324928799072:android:1fe5d39b16241bf1351e05",
+        "android_client_info": {
+          "package_name": "com.preciousbabiesandmums.pbmcare"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "324928799072-f5a2qq3opbps2g32m6faijio5sf6k97u.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.preciousbabiesandmums.pbmcare",
+            "certificate_hash": "6a525fd5aca0384f74fdc81052064fd526543f79"
+          }
+        },
+        {
+          "client_id": "324928799072-kgh1m7070eaoflq5gv9050qn09hpup0f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBFWjUNFutzvXzUYfR_Gcp6R7C350U68eE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "324928799072-1d683trm9hrue6am1dd2u7acp0krofe2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

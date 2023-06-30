@@ -24,38 +24,18 @@ jobs:
       - name: Build Android APK
         run: flutter build apk
 
-      - name: Build iOS IPA
-        run: flutter build ios --no-codesign
-
       - name: Archive artifacts
         uses: actions/upload-artifact@v2
         with:
           name: App Build
-          path: |
-            build/app/outputs/apk/release/app-release.apk
-            build/ios/archive/Runner.xcarchive/Products/Applications/Runner.app
+          path: build/app/outputs/apk/release/app-release.apk
 
       - name: Send Slack notification
-        uses: slack/webhook-action@v2
+        uses: 8398a7/action-slack@v3
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
         with:
-          url: ${{ secrets.SLACK_WEBHOOK_URL }}
-          payload: |
-            {
-              "text": "New build is available!",
-              "attachments": [
-                {
-                  "title": "Workflow: ${{ github.workflow }}",
-                  "fields": [
-                    {
-                      "title": "Event",
-                      "value": "${{ github.event_name }}"
-                    },
-                    {
-                      "title": "Commit",
-                      "value": "${{ github.sha }}"
-                    }
-                  ],
-                  "color": "${{ job.status == 'success' && 'good' || 'danger' }}"
-                }
-              ]
-            }
+          status: ${{ job.status }}
+          fields: workflow,event,commit
+          color: ${{ job.status == 'success' && 'good' || 'danger' }}
+          channel: ci-cd-updates

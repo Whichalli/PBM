@@ -16,7 +16,8 @@ jobs:
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: stable
+          flutter-version: '3.10.5'
+          channel: 'stable'
 
       - name: Install dependencies
         run: flutter pub get
@@ -36,6 +37,10 @@ jobs:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
         with:
           status: ${{ job.status }}
-          fields: workflow,event,commit
-          color: ${{ job.status == 'success' && 'good' || 'danger' }}
+          text: |
+            New build is available!
+            Workflow: ${{ github.workflow }}
+            Event: ${{ github.event_name }}
+            Commit: ${{ github.sha }}
           channel: ci-cd-updates
+          color: ${{ job.status == 'success' && 'good' || 'danger' }}

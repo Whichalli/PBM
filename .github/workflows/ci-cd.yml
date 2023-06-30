@@ -43,3 +43,4 @@ jobs:
             Commit: ${{ github.sha }}
           channel: ci-cd-updates
           color: ${{ job.status == 'success' && 'good' || 'danger' }}
+          webhook_url: ${{ secrets.SLACK_WEBHOOK_URL }}

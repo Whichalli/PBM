@@ -42,13 +42,7 @@ jobs:
             Workflow: ${{ github.workflow }}
             Event: ${{ github.event_name }}
             Commit: ${{ github.sha }}
+            Instructions: To download the APK build, go to the [Actions tab](../../actions) and locate the latest workflow run. Download the artifact named 'App Build'.
           channel: ci-cd-updates
           color: ${{ job.status == 'success' && 'good' || 'danger' }}
-          attachments: |
-            [
-              {
-                "title": "Download APK",
-                "title_link": "${{ steps.archive.outputs.artifact_paths }}",
-                "color": "#2EB67D"
-              }
-            ]
+          

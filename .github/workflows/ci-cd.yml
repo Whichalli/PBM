@@ -25,16 +25,12 @@ jobs:
       - name: Build Android APK
         run: flutter build apk
 
-      - name: Build iOS IPA
-        run: flutter build ios --no-codesign
-
       - name: Archive artifacts
         uses: actions/upload-artifact@v2
         with:
           name: App Build
           path: |
             build/app/outputs/apk/release/app-release.apk
-            build/ios/archive/Runner.xcarchive/Products/Applications/Runner.app
 
       - name: Send Slack notification
         uses: 8398a7/action-slack@v3

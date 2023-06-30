@@ -35,13 +35,27 @@ jobs:
             build/app/outputs/apk/release/app-release.apk
             build/ios/archive/Runner.xcarchive/Products/Applications/Runner.app
 
-      - name: Notify Slack
-        uses: rtCamp/action-slack-notify@v3
+      - name: Send Slack notification
+        uses: slack/webhook-action@v2
         with:
-          status: ${{ job.status }}
-          text: |
-            Workflow: ${{ github.workflow }}
-            Event: ${{ github.event_name }}
-            Commit: ${{ github.sha }}
-          channel: ci-cd-updates
-          color: ${{ job.status == 'success' && 'good' || 'danger' }}
+          url: ${{ secrets.SLACK_WEBHOOK_URL }}
+          payload: |
+            {
+              "text": "New build is available!",
+              "attachments": [
+                {
+                  "title": "Workflow: ${{ github.workflow }}",
+                  "fields": [
+                    {
+                      "title": "Event",
+                      "value": "${{ github.event_name }}"
+                    },
+                    {
+                      "title": "Commit",
+                      "value": "${{ github.sha }}"
+                    }
+                  ],
+                  "color": "${{ job.status == 'success' && 'good' || 'danger' }}"
+                }
+              ]
+            }

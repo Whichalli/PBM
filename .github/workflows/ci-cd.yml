@@ -48,7 +48,7 @@ jobs:
             [
               {
                 "title": "Download APK",
-                "title_link": "${{ steps.upload.outputs.artifact_url }}",
+                "title_link": "${{ steps.archive.outputs.artifact_paths }}",
                 "color": "#2EB67D"
               }
             ]

@@ -16,8 +16,7 @@ jobs:
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.10.5'
-          channel: 'stable'
+          flutter-version: stable
 
       - name: Install dependencies
         run: flutter pub get
@@ -25,22 +24,38 @@ jobs:
       - name: Build Android APK
         run: flutter build apk
 
+      - name: Build iOS IPA
+        run: flutter build ios --no-codesign
+
       - name: Archive artifacts
         uses: actions/upload-artifact@v2
         with:
           name: App Build
           path: |
             build/app/outputs/apk/release/app-release.apk
+            build/ios/archive/Runner.xcarchive/Products/Applications/Runner.app
 
       - name: Send Slack notification
-        uses: 8398a7/action-slack@v3
+        uses: slack/webhook-action@v2
         with:
-          status: ${{ job.status }}
-          text: |
-            New build is available!
-            Workflow: ${{ github.workflow }}
-            Event: ${{ github.event_name }}
-            Commit: ${{ github.sha }}
-          channel: ci-cd-updates
-          color: ${{ job.status == 'success' && 'good' || 'danger' }}
-          webhook_url: ${{ secrets.SLACK_WEBHOOK_URL }}
+          url: ${{ secrets.SLACK_WEBHOOK_URL }}
+          payload: |
+            {
+              "text": "New build is available!",
+              "attachments": [
+                {
+                  "title": "Workflow: ${{ github.workflow }}",
+                  "fields": [
+                    {
+                      "title": "Event",
+                      "value": "${{ github.event_name }}"
+                    },
+                    {
+                      "title": "Commit",
+                      "value": "${{ github.sha }}"
+                    }
+                  ],
+                  "color": "${{ job.status == 'success' && 'good' || 'danger' }}"
+                }
+              ]
+            }

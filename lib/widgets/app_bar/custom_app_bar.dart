@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+<<<<<<< HEAD
 import 'package:pbm_care/core/app_export.dart';
+=======
+import 'package:pbm_app/core/app_export.dart';
+>>>>>>> dev
 
 // ignore: must_be_immutable
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -12,6 +16,11 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.title,
     this.centerTitle,
     this.actions,
+<<<<<<< HEAD
+=======
+    this.elevation,
+    this.backgroundColor,
+>>>>>>> dev
   }) : super(
           key: key,
         );
@@ -29,14 +38,26 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   bool? centerTitle;
 
   List<Widget>? actions;
+<<<<<<< HEAD
+=======
+  double? elevation;
+  Color? backgroundColor;
+>>>>>>> dev
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
+<<<<<<< HEAD
       elevation: 0,
       toolbarHeight: height,
       automaticallyImplyLeading: false,
       backgroundColor: Colors.transparent,
+=======
+      elevation: elevation ?? 0,
+      toolbarHeight: height,
+      automaticallyImplyLeading: false,
+      backgroundColor: backgroundColor ?? Colors.transparent,
+>>>>>>> dev
       flexibleSpace: _getStyle(),
       leadingWidth: leadingWidth ?? 0,
       leading: leading,

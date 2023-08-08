@@ -1,11 +1,20 @@
 import 'controller/newroutine_controller.dart';
 import 'package:flutter/material.dart';
+<<<<<<< HEAD
 import 'package:pbm_care/core/app_export.dart';
 import 'package:pbm_care/widgets/app_bar/appbar_image.dart';
 import 'package:pbm_care/widgets/app_bar/appbar_subtitle.dart';
 import 'package:pbm_care/widgets/app_bar/custom_app_bar.dart';
 import 'package:pbm_care/widgets/custom_button.dart';
 import 'package:pbm_care/widgets/custom_floating_button.dart';
+=======
+import 'package:pbm_app/core/app_export.dart';
+import 'package:pbm_app/widgets/app_bar/appbar_image.dart';
+import 'package:pbm_app/widgets/app_bar/appbar_subtitle.dart';
+import 'package:pbm_app/widgets/app_bar/custom_app_bar.dart';
+import 'package:pbm_app/widgets/custom_button.dart';
+import 'package:pbm_app/widgets/custom_floating_button.dart';
+>>>>>>> dev
 
 class NewroutineScreen extends GetWidget<NewroutineController> {
   const NewroutineScreen({Key? key}) : super(key: key);

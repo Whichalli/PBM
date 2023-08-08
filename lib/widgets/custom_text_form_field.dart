@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+<<<<<<< HEAD
 import 'package:pbm_care/core/app_export.dart';
+=======
+import 'package:pbm_app/core/app_export.dart';
+>>>>>>> dev
 
 class CustomTextFormField extends StatelessWidget {
   CustomTextFormField(
@@ -22,9 +26,20 @@ class CustomTextFormField extends StatelessWidget {
       this.prefixConstraints,
       this.suffix,
       this.suffixConstraints,
+<<<<<<< HEAD
       this.validator});
 
   TextFormFieldShape? shape;
+=======
+      this.readOnly,
+      this.onTap,
+      this.validator});
+
+  TextFormFieldShape? shape;
+  Function()? onTap;
+
+  bool? readOnly;
+>>>>>>> dev
 
   TextFormFieldPadding? padding;
 
@@ -79,7 +94,13 @@ class CustomTextFormField extends StatelessWidget {
       width: width ?? double.maxFinite,
       margin: margin,
       child: TextFormField(
+<<<<<<< HEAD
         controller: controller,
+=======
+        onTap: onTap,
+        controller: controller,
+        readOnly: readOnly ?? false,
+>>>>>>> dev
         focusNode: focusNode,
         autofocus: autofocus!,
         style: _setFontStyle(),
@@ -249,6 +270,14 @@ class CustomTextFormField extends StatelessWidget {
           borderRadius: _setOutlineBorderRadius(),
           borderSide: BorderSide.none,
         );
+<<<<<<< HEAD
+=======
+        case TextFormFieldVariant.OutlinePinkA100:
+        return OutlineInputBorder(
+          borderRadius: _setOutlineBorderRadius(),
+          borderSide: BorderSide(color: ColorConstant.pinkA100),
+        );
+>>>>>>> dev
       case TextFormFieldVariant.OutlineGray30002:
         return OutlineInputBorder(
           borderRadius: _setOutlineBorderRadius(),
@@ -356,14 +385,25 @@ enum TextFormFieldShape {
   RoundedBorder12,
   RoundedBorder25,
 }
+<<<<<<< HEAD
 enum TextFormFieldPadding {
   PaddingAll19,
+=======
+
+enum TextFormFieldPadding {
+  PaddingAll19,
+  PaddingAll14,
+>>>>>>> dev
   PaddingAll9,
   PaddingT18,
   PaddingT17,
   PaddingAll4,
   PaddingT10,
 }
+<<<<<<< HEAD
+=======
+
+>>>>>>> dev
 enum TextFormFieldVariant {
   None,
   FillPinkA10019,
@@ -371,7 +411,13 @@ enum TextFormFieldVariant {
   OutlineGray30002,
   OutlineGray10001,
   Brand,
+<<<<<<< HEAD
 }
+=======
+  OutlinePinkA100,
+}
+
+>>>>>>> dev
 enum TextFormFieldFontStyle {
   OpenSans12,
   OpenSansRomanSemiBold15,

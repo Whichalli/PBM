@@ -20,4 +20,21 @@ class PrefUtils {
   void clearPreferencesData() async {
     _sharedPreferences!.clear();
   }
+<<<<<<< HEAD
+=======
+
+  
+
+  Future<void> setThemeData(String value) {
+    return _sharedPreferences!.setString('themeData', value);
+  }
+
+  String getThemeData() {
+    try {
+      return _sharedPreferences!.getString('themeData')!;
+    } catch (e) {
+      return 'primary';
+    }
+  }
+>>>>>>> dev
 }

@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+<<<<<<< HEAD
 import 'package:pbm_care/core/app_export.dart';
+=======
+import 'package:pbm_app/core/app_export.dart';
+>>>>>>> dev
 
 class CustomDropDown extends StatelessWidget {
   CustomDropDown(
@@ -145,6 +149,15 @@ class CustomDropDown extends StatelessWidget {
             4.00,
           ),
         );
+<<<<<<< HEAD
+=======
+      case DropDownShape.RoundedBorder12:
+        return BorderRadius.circular(
+          getHorizontalSize(
+            12.00,
+          ),
+        );
+>>>>>>> dev
       default:
         return BorderRadius.circular(
           getHorizontalSize(
@@ -172,6 +185,17 @@ class CustomDropDown extends StatelessWidget {
             width: 1,
           ),
         );
+<<<<<<< HEAD
+=======
+      case DropDownVariant.OutlinePinkA100:
+        return OutlineInputBorder(
+          borderRadius: _setOutlineBorderRadius(),
+          borderSide: BorderSide(
+            color: ColorConstant.pinkA700,
+            width: 1,
+          ),
+        );
+>>>>>>> dev
       case DropDownVariant.FillGray5001:
         return OutlineInputBorder(
           borderRadius: _setOutlineBorderRadius(),
@@ -236,19 +260,37 @@ class CustomDropDown extends StatelessWidget {
 
 enum DropDownShape {
   RoundedBorder16,
+<<<<<<< HEAD
   RoundedBorder4,
 }
+=======
+  RoundedBorder12,
+  RoundedBorder4,
+}
+
+>>>>>>> dev
 enum DropDownPadding {
   PaddingT14,
   PaddingT10,
 }
+<<<<<<< HEAD
+=======
+
+>>>>>>> dev
 enum DropDownVariant {
   None,
   Brand,
   White,
   OutlinePinkA10019,
+<<<<<<< HEAD
   FillGray5001,
 }
+=======
+  OutlinePinkA100,
+  FillGray5001,
+}
+
+>>>>>>> dev
 enum DropDownFontStyle {
   OpenSansRomanSemiBold14,
   OpenSansRomanSemiBold16,

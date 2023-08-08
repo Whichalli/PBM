@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+<<<<<<< HEAD
 import 'package:pbm_care/core/app_export.dart';
+=======
+import 'package:pbm_app/core/app_export.dart';
+>>>>>>> dev
 
 class CustomRadioButton extends StatelessWidget {
   CustomRadioButton(
@@ -14,6 +18,10 @@ class CustomRadioButton extends StatelessWidget {
       this.value,
       this.groupValue,
       this.text,
+<<<<<<< HEAD
+=======
+      this.textAlign,
+>>>>>>> dev
       this.width,
       this.margin});
 
@@ -26,6 +34,10 @@ class CustomRadioButton extends StatelessWidget {
   RadioFontStyle? fontStyle;
 
   Alignment? alignment;
+<<<<<<< HEAD
+=======
+  TextAlign? textAlign;
+>>>>>>> dev
 
   Function(String)? onChange;
 
@@ -108,7 +120,11 @@ class CustomRadioButton extends StatelessWidget {
   Widget getTextWidget() {
     return Text(
       text ?? "",
+<<<<<<< HEAD
       textAlign: TextAlign.center,
+=======
+      textAlign: textAlign ?? TextAlign.center,
+>>>>>>> dev
       style: _setFontStyle(),
     );
   }
@@ -152,6 +168,18 @@ class CustomRadioButton extends StatelessWidget {
           fontFamily: 'Nunito',
           fontWeight: FontWeight.w400,
         );
+<<<<<<< HEAD
+=======
+      case RadioFontStyle.NunitoRegular12:
+        return TextStyle(
+          color: ColorConstant.black90001,
+          fontSize: getFontSize(
+            12,
+          ),
+          fontFamily: 'Nunito',
+          fontWeight: FontWeight.w400,
+        );
+>>>>>>> dev
       default:
         return TextStyle(
           color: ColorConstant.blueGray90003,
@@ -166,9 +194,27 @@ class CustomRadioButton extends StatelessWidget {
 
   _setPadding() {
     switch (padding) {
+<<<<<<< HEAD
       case RadioPadding.PaddingAll5:
         return getPadding(
           all: 5,
+=======
+      case RadioPadding.PaddingAll4:
+        return getPadding(
+          all: 4,
+        );
+      case RadioPadding.PaddingAll8:
+        return getPadding(
+          all: 8,
+        );
+      case RadioPadding.PaddingAll12:
+        return getPadding(
+          all: 12,
+        );
+      case RadioPadding.PaddingAll16:
+        return getPadding(
+          all: 16,
+>>>>>>> dev
         );
       default:
         return null;
@@ -179,6 +225,11 @@ class CustomRadioButton extends StatelessWidget {
     switch (variant) {
       case RadioVariant.OutlinePinkA100:
         return ColorConstant.whiteA700;
+<<<<<<< HEAD
+=======
+      case RadioVariant.Default:
+        return ColorConstant.whiteA700;
+>>>>>>> dev
       default:
         return null;
     }
@@ -193,6 +244,16 @@ class CustomRadioButton extends StatelessWidget {
             2.00,
           ),
         );
+<<<<<<< HEAD
+=======
+      case RadioVariant.Default:
+        return Border.all(
+          color: Colors.black54,
+          width: getHorizontalSize(
+            2.00,
+          ),
+        );
+>>>>>>> dev
       default:
         return null;
     }
@@ -213,6 +274,7 @@ class CustomRadioButton extends StatelessWidget {
 }
 
 enum RadioPadding {
+<<<<<<< HEAD
   PaddingAll5,
 }
 enum RadioShape {
@@ -221,8 +283,26 @@ enum RadioShape {
 enum RadioVariant {
   OutlinePinkA100,
 }
+=======
+  PaddingAll4,
+  PaddingAll8,
+  PaddingAll12,
+  PaddingAll16,
+}
+
+enum RadioShape {
+  RoundedBorder12,
+}
+
+enum RadioVariant { OutlinePinkA100, Default }
+
+>>>>>>> dev
 enum RadioFontStyle {
   OpenSansRomanRegular15,
   ManropeBold14,
   NunitoRegular10,
+<<<<<<< HEAD
+=======
+  NunitoRegular12,
+>>>>>>> dev
 }

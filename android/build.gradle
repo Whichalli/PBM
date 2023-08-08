@@ -1,4 +1,5 @@
 buildscript {
+<<<<<<< HEAD
     ext.kotlin_version = '1.8.10'
     repositories {
         google()
@@ -8,6 +9,16 @@ buildscript {
 
     dependencies {
         classpath 'com.android.tools.build:gradle:4.2.0'
+=======
+    ext.kotlin_version = '1.7.10'
+    repositories {
+        google()
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath 'com.android.tools.build:gradle:7.3.0'
+>>>>>>> dev
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath 'com.google.gms:google-services:4.3.15'
     }
@@ -17,7 +28,10 @@ allprojects {
     repositories {
         google()
         mavenCentral()
+<<<<<<< HEAD
         jcenter()
+=======
+>>>>>>> dev
     }
 }
 
@@ -32,3 +46,13 @@ subprojects {
 tasks.register("clean", Delete) {
     delete rootProject.buildDir
 }
+<<<<<<< HEAD
+=======
+
+configurations.all {
+    resolutionStrategy {
+        force 'org.jetbrains.kotlin:kotlin-stdlib:1.8.10'
+        force 'org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.8.10'
+    }
+}
+>>>>>>> dev

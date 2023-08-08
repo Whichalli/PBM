@@ -1,12 +1,22 @@
 import 'package:flutter/material.dart';
+<<<<<<< HEAD
 import 'package:pbm_care/core/app_export.dart';
+=======
+import 'package:pbm_app/core/app_export.dart';
+>>>>>>> dev
 
 class AppStyle {
   static TextStyle txtOpenSansRomanSemiBold15Bluegray90003 = TextStyle(
     color: ColorConstant.blueGray90003,
     fontSize: getFontSize(
       15,
+<<<<<<< HEAD
     ),
+=======
+
+    ),
+    
+>>>>>>> dev
     fontFamily: 'Open Sans',
     fontWeight: FontWeight.w600,
   );

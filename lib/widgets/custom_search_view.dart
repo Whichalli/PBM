@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+<<<<<<< HEAD
 import 'package:pbm_care/core/app_export.dart';
+=======
+import 'package:pbm_app/core/app_export.dart';
+>>>>>>> dev
 
 class CustomSearchView extends StatelessWidget {
   CustomSearchView(
@@ -17,6 +21,10 @@ class CustomSearchView extends StatelessWidget {
       this.prefix,
       this.prefixConstraints,
       this.suffix,
+<<<<<<< HEAD
+=======
+      this.onChanged,
+>>>>>>> dev
       this.suffixConstraints});
 
   SearchViewShape? shape;
@@ -49,6 +57,11 @@ class CustomSearchView extends StatelessWidget {
 
   BoxConstraints? suffixConstraints;
 
+<<<<<<< HEAD
+=======
+  Function(String value)? onChanged;
+
+>>>>>>> dev
   @override
   Widget build(BuildContext context) {
     return alignment != null
@@ -67,6 +80,10 @@ class CustomSearchView extends StatelessWidget {
         controller: controller,
         focusNode: focusNode,
         autofocus: autofocus!,
+<<<<<<< HEAD
+=======
+        onChanged: onChanged,
+>>>>>>> dev
         style: _setFontStyle(),
         decoration: _buildDecoration(),
       ),
@@ -199,15 +216,27 @@ enum SearchViewShape {
   RoundedBorder12,
   CircleBorder21,
 }
+<<<<<<< HEAD
 enum SearchViewPadding {
   PaddingT10,
 }
+=======
+
+enum SearchViewPadding {
+  PaddingT10,
+}
+
+>>>>>>> dev
 enum SearchViewVariant {
   None,
   FillGray200,
   Brand,
   FillPinkA10019,
 }
+<<<<<<< HEAD
+=======
+
+>>>>>>> dev
 enum SearchViewFontStyle {
   AlegreyaSansRegular14,
   OpenSans14,

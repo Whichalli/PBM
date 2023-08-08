@@ -1,7 +1,35 @@
 import 'package:flutter/material.dart';
+<<<<<<< HEAD
 import 'package:pbm_care/core/app_export.dart';
 
 class AppDecoration {
+=======
+import 'package:pbm_app/core/app_export.dart';
+
+class AppDecoration {
+  static BoxDecoration get brand => BoxDecoration(
+        color: ColorConstant.pinkA100,
+      );
+  static BoxDecoration get fill => BoxDecoration(
+        color: ColorConstant.blueGray90002,
+      );
+  static BoxDecoration get fill4 => BoxDecoration(
+        color: ColorConstant.whiteA70001,
+      );
+  static BoxDecoration get fill1 => BoxDecoration(
+        color: ColorConstant.pink400,
+      );
+  static BoxDecoration get fill3 => BoxDecoration(
+        color: ColorConstant.gray900,
+      );
+  static BoxDecoration get fill2 => BoxDecoration(
+        color: ColorConstant.greenA400,
+      );
+  static BoxDecoration get txtFill => BoxDecoration(
+        color: ColorConstant.blueGray900,
+      );
+      
+>>>>>>> dev
   static BoxDecoration get fillBlue5002 => BoxDecoration(
         color: ColorConstant.blue5002,
       );
@@ -201,9 +229,15 @@ class AppDecoration {
           ),
         ),
       );
+<<<<<<< HEAD
   static BoxDecoration get brand => BoxDecoration(
         color: ColorConstant.pinkA100,
       );
+=======
+  // static BoxDecoration get brand => BoxDecoration(
+  //       color: ColorConstant.pinkA100,
+  //     );
+>>>>>>> dev
   static BoxDecoration get fillGreenA400 => BoxDecoration(
         color: ColorConstant.greenA400,
       );

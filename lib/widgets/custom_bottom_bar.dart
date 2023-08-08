@@ -1,10 +1,21 @@
+<<<<<<< HEAD
 import 'package:flutter/material.dart';
 import 'package:pbm_care/core/app_export.dart';
+=======
+import 'dart:developer';
+
+import 'package:flutter/material.dart';
+import 'package:pbm_app/core/app_export.dart';
+>>>>>>> dev
 
 class CustomBottomBar extends StatelessWidget {
   CustomBottomBar({
     Key? key,
+<<<<<<< HEAD
     this.onChanged,
+=======
+    required this.onChanged,
+>>>>>>> dev
   }) : super(
           key: key,
         );
@@ -38,7 +49,11 @@ class CustomBottomBar extends StatelessWidget {
     )
   ];
 
+<<<<<<< HEAD
   Function(BottomBarEnum)? onChanged;
+=======
+  Function(BottomBarEnum) onChanged;
+>>>>>>> dev
 
   @override
   Widget build(BuildContext context) {
@@ -92,7 +107,12 @@ class CustomBottomBar extends StatelessWidget {
           }),
           onTap: (index) {
             selectedIndex.value = index;
+<<<<<<< HEAD
             onChanged?.call(bottomMenuList[index].type);
+=======
+            log('index = $index');
+            onChanged.call(bottomMenuList[index].type);
+>>>>>>> dev
           },
         ),
       ),
@@ -106,6 +126,11 @@ enum BottomBarEnum {
   Vuesaxlinearaddpinka100,
   Car,
   User,
+<<<<<<< HEAD
+=======
+  Play,
+  Profile,
+>>>>>>> dev
 }
 
 class BottomMenuModel {

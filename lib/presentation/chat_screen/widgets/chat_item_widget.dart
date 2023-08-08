@@ -1,8 +1,13 @@
 import '../controller/chat_controller.dart';
 import '../models/chat_item_model.dart';
 import 'package:flutter/material.dart';
+<<<<<<< HEAD
 import 'package:pbm_care/core/app_export.dart';
 import 'package:pbm_care/widgets/custom_button.dart';
+=======
+import 'package:pbm_app/core/app_export.dart';
+import 'package:pbm_app/widgets/custom_button.dart';
+>>>>>>> dev
 
 // ignore: must_be_immutable
 class ChatItemWidget extends StatelessWidget {
@@ -80,6 +85,7 @@ class ChatItemWidget extends StatelessWidget {
             ],
           ),
         ),
+<<<<<<< HEAD
         Padding(
           padding: getPadding(
             left: 21,
@@ -107,11 +113,46 @@ class ChatItemWidget extends StatelessWidget {
                 ),
               ),
             ],
+=======
+        Expanded(
+          child: Padding(
+            padding: getPadding(
+              left: 16,
+              top: 3,
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Text(
+                  "lbl_thanawan_chadee".tr,
+                  overflow: TextOverflow.ellipsis,
+                  textAlign: TextAlign.left,
+                  style: AppStyle.txtOpenSansRomanSemiBold16Gray800,
+                ),
+                Padding(
+                  padding: getPadding(
+                    top: 5,
+                  ),
+                  child: Text(
+                    "msg_this_was_how_i_helped".tr,
+                    overflow: TextOverflow.ellipsis,
+                    textAlign: TextAlign.left,
+                    style: AppStyle.txtOpenSans12,
+                  ),
+                ),
+              ],
+            ),
+>>>>>>> dev
           ),
         ),
         Padding(
           padding: getPadding(
+<<<<<<< HEAD
             left: 34,
+=======
+            left: 8,
+>>>>>>> dev
             bottom: 1,
           ),
           child: Column(
@@ -123,6 +164,7 @@ class ChatItemWidget extends StatelessWidget {
                 textAlign: TextAlign.left,
                 style: AppStyle.txtOpenSansRomanSemiBold12Gray600,
               ),
+<<<<<<< HEAD
               CustomButton(
                 height: getVerticalSize(
                   26,
@@ -137,6 +179,25 @@ class ChatItemWidget extends StatelessWidget {
                 shape: ButtonShape.CircleBorder13,
                 padding: ButtonPadding.PaddingAll4,
                 fontStyle: ButtonFontStyle.OpenSansRomanSemiBold12,
+=======
+              const SizedBox(
+                height: 4,
+              ),
+              Container(
+                width: 20,
+                height: 20,
+                alignment: Alignment.center,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(1000),
+                    color: ColorConstant.pinkA100),
+                child: Text(
+                  '10',
+                  style: AppStyle.txtInterRegular16.copyWith(
+                      fontSize: 12,
+                      fontWeight: FontWeight.w500,
+                      color: Colors.white),
+                ),
+>>>>>>> dev
               ),
             ],
           ),

@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+<<<<<<< HEAD
 import 'package:pbm_care/core/app_export.dart';
+=======
+import 'package:pbm_app/core/app_export.dart';
+>>>>>>> dev
 
 class CustomButton extends StatelessWidget {
   CustomButton(
@@ -13,9 +17,20 @@ class CustomButton extends StatelessWidget {
       this.width,
       this.height,
       this.text,
+<<<<<<< HEAD
       this.prefixWidget,
       this.suffixWidget});
 
+=======
+      this.icon,
+      this.backgroundColor,
+      this.prefixWidget,
+      this.suffixWidget});
+
+  Color? backgroundColor;
+  Widget? icon;
+
+>>>>>>> dev
   ButtonShape? shape;
 
   ButtonPadding? padding;
@@ -53,10 +68,21 @@ class CustomButton extends StatelessWidget {
   _buildButtonWidget() {
     return Padding(
       padding: margin ?? EdgeInsets.zero,
+<<<<<<< HEAD
       child: TextButton(
         onPressed: onTap,
         style: _buildTextButtonStyle(),
         child: _buildButtonChildWidget(),
+=======
+      child: Container(
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(20), color: backgroundColor),
+        child: TextButton(
+          onPressed: onTap,
+          style: _buildTextButtonStyle(),
+          child: _buildButtonChildWidget(),
+        ),
+>>>>>>> dev
       ),
     );
   }
@@ -75,7 +101,11 @@ class CustomButton extends StatelessWidget {
   }
 
   _buildButtonWithOrWithoutIcon() {
+<<<<<<< HEAD
     if (prefixWidget != null || suffixWidget != null) {
+=======
+    if (prefixWidget != null || suffixWidget != null || icon != null) {
+>>>>>>> dev
       return Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -85,6 +115,10 @@ class CustomButton extends StatelessWidget {
             textAlign: TextAlign.center,
             style: _setFontStyle(),
           ),
+<<<<<<< HEAD
+=======
+          icon ?? SizedBox(),
+>>>>>>> dev
           suffixWidget ?? SizedBox(),
         ],
       );
@@ -196,6 +230,12 @@ class CustomButton extends StatelessWidget {
           top: 9,
           bottom: 9,
         );
+<<<<<<< HEAD
+=======
+
+      case ButtonPadding.none:
+        return getPadding(all: 0);
+>>>>>>> dev
       default:
         return getPadding(
           all: 16,
@@ -419,6 +459,19 @@ class CustomButton extends StatelessWidget {
           fontFamily: 'Raleway',
           fontWeight: FontWeight.w700,
         );
+<<<<<<< HEAD
+=======
+
+        case ButtonFontStyle.RalewayBold16Black:
+        return TextStyle(
+          color: ColorConstant.black900,
+          fontSize: getFontSize(
+            14,
+          ),
+          fontFamily: 'Raleway',
+          fontWeight: FontWeight.w700,
+        );
+>>>>>>> dev
       case ButtonFontStyle.NunitoExtraBold18:
         return TextStyle(
           color: ColorConstant.whiteA700,
@@ -819,6 +872,10 @@ enum ButtonShape {
   RoundedBorder4,
   RoundedBorder22,
 }
+<<<<<<< HEAD
+=======
+
+>>>>>>> dev
 enum ButtonPadding {
   PaddingAll16,
   PaddingT14_1,
@@ -833,7 +890,13 @@ enum ButtonPadding {
   PaddingAll27,
   PaddingAll4,
   PaddingT9,
+<<<<<<< HEAD
 }
+=======
+  none
+}
+
+>>>>>>> dev
 enum ButtonVariant {
   FillPinkA100,
   OutlineBlack90019,
@@ -851,7 +914,13 @@ enum ButtonVariant {
   OutlineGray80001,
   OutlinePinkA100_1,
 }
+<<<<<<< HEAD
 enum ButtonFontStyle {
+=======
+
+enum ButtonFontStyle {
+  RalewayBold16Black,
+>>>>>>> dev
   OpenSansRomanSemiBold14,
   RalewayBold16,
   NunitoExtraBold18,

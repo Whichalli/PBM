@@ -21,6 +21,15 @@ class ImageConstant {
   static String imgSearchGray600 = 'assets/images/img_search_gray_600.svg';
 
   static String imgArrowleft = 'assets/images/img_arrowleft.svg';
+<<<<<<< HEAD
+=======
+  static String imgComponent3 = 'assets/images/img_component3.svg';
+  static String imgSkipnext = 'assets/images/img_skipnext.svg';
+
+  static String imgSkipprevious = 'assets/images/img_skipprevious.svg';
+
+  static String logo = 'assets/images/pbm_logo.png';
+>>>>>>> dev
 
   static String imgArrowrightYellow5002 =
       'assets/images/img_arrowright_yellow_50_02.svg';
@@ -63,6 +72,10 @@ class ImageConstant {
   static String imgFacebook = 'assets/images/img_facebook.svg';
 
   static String imgVideocamera = 'assets/images/img_videocamera.svg';
+<<<<<<< HEAD
+=======
+  static String imgBabyMusic = 'assets/images/baby_music.jpg';
+>>>>>>> dev
 
   static String imgCallBlueGray90004 =
       'assets/images/img_call_blue_gray_900_04.svg';
@@ -167,6 +180,10 @@ class ImageConstant {
   static String imgSettings = 'assets/images/img_settings.svg';
 
   static String imgVector3 = 'assets/images/img_vector3.png';
+<<<<<<< HEAD
+=======
+  static String imgVector2 = 'assets/images/img_vector2.svg';
+>>>>>>> dev
 
   static String imgArrowrightBlueGray90003 =
       'assets/images/img_arrowright_blue_gray_900_03.svg';
@@ -344,6 +361,22 @@ class ImageConstant {
 
   static String imgIcons8play = 'assets/images/img_icons8play.svg';
 
+<<<<<<< HEAD
+=======
+  static String imgFruit = 'assets/images/fruit.svg';
+  static String imgVegetable = 'assets/images/vegetaable.svg';
+  static String imgBeverages = 'assets/images/beverages.svg';
+  static String imgCupcakes = 'assets/images/cupcakes.svg';
+  static String imgWater = 'assets/images/water.svg';
+
+  static String imgEmojiSad = 'assets/images/sad.png';
+  static String imgEmojiSmile = 'assets/images/ok.png';
+  static String imgEmojiLoveIt = 'assets/images/love_it.png';
+  static String imgEmojiLikeIt = 'assets/images/like_it.png';
+  static String imgEmojiNuertal = 'assets/images/nuetral.png';
+  static String imgEmojiWorst = 'assets/images/worst.png';
+
+>>>>>>> dev
   static String imgGoogleoriginal = 'assets/images/img_googleoriginal.svg';
 
   static String imgVector4 = 'assets/images/img_vector4.png';
@@ -351,6 +384,12 @@ class ImageConstant {
   static String imgUndrawdoctorshwty =
       'assets/images/img_undrawdoctorshwty.svg';
 
+<<<<<<< HEAD
+=======
+  static String imgUndrawUserRegister =
+      'assets/images/img_undrawuserregister.svg';
+
+>>>>>>> dev
   static String imgOverflowmenu = 'assets/images/img_overflowmenu.svg';
 
   static String imageNotFound = 'assets/images/image_not_found.png';

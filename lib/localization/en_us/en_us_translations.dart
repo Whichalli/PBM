@@ -19,6 +19,10 @@ final Map<String, String> enUs = {
       "Check your app's UI from the below demo screens of your app.",
   "msg_dha_registration": "DHA Registration Number (Optional)",
   "lbl_50": "50",
+<<<<<<< HEAD
+=======
+  "lbl_75": "75",
+>>>>>>> dev
   "lbl_past": "Past",
   "lbl_left": "Left",
   "lbl_consent": "Consent",
@@ -87,6 +91,10 @@ final Map<String, String> enUs = {
   "lbl_13": "13",
   "lbl_10": "10",
   "lbl_month_s_old": "Month (s) Old",
+<<<<<<< HEAD
+=======
+  "lbl_year_s_old": "Years (s) Old",
+>>>>>>> dev
   "lbl_11": "11",
   "msg_protocol_prestige": "Protocol Prestige",
   "lbl_sign_up": "Sign Up",
@@ -288,6 +296,10 @@ final Map<String, String> enUs = {
   "lbl_20_years": "20 Years",
   "lbl_12_pm": "12 pm",
   "lbl_email_address": "Email address",
+<<<<<<< HEAD
+=======
+  "lbl_phone_number": "Phone Number",
+>>>>>>> dev
   "lbl_s": "S",
   "msg_siblings_name": "Siblings Name & Age",
   "lbl_t": "T",
@@ -422,7 +434,13 @@ final Map<String, String> enUs = {
   "msg_looks_like_it_s":
       "Looks like it’s your first time here, let’s get you started",
   "lbl_02_37": "02:37",
+<<<<<<< HEAD
   "msg_sign_in_as_a_nurse_employee": "Sign In As A Nurse/Employee",
+=======
+  "msg_sign_in_as_a_nurse_employee": "Signin as a Nurse/Employee",
+  "msg_signup": "Signup",
+  "msg_create_an_account": "Don't have an account ? ",
+>>>>>>> dev
   "lbl_birds": "Birds",
   "lbl_wait_time": "Wait Time",
   "lbl_the_therapists": "The therapists",
@@ -482,7 +500,11 @@ final Map<String, String> enUs = {
   "msg_i_have_time_for":
       "I have time for 19:00 today. \nDoes this time work for you?",
   "lbl_view_all": "View all",
+<<<<<<< HEAD
   "lbl_name_in_company": "Name in company",
+=======
+  "lbl_name_of_company": "Name of company",
+>>>>>>> dev
   "lbl_saved_articles": "Saved Articles",
   "lbl_payment": "Payment",
   "lbl_09_24": "09:24",
@@ -532,6 +554,11 @@ final Map<String, String> enUs = {
   "lbl_ocean": "Ocean",
   "lbl_milestone": " Milestone",
   "lbl_name": "Name",
+<<<<<<< HEAD
+=======
+  "lbl_first_name": "First Name",
+  "lbl_last_name": "Last Name",
+>>>>>>> dev
   "lbl_profile": "Profile",
   "msg_usage_follow_up": "Usage follow up, negative, selection",
   "lbl_industrial": "Industrial",

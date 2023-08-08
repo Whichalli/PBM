@@ -1,19 +1,33 @@
 {
   "project_info": {
+<<<<<<< HEAD
     "project_number": "324928799072",
     "project_id": "pbm-booking-care",
     "storage_bucket": "pbm-booking-care.appspot.com"
+=======
+    "project_number": "898476850188",
+    "firebase_url": "https://pbm-care-12d99-default-rtdb.firebaseio.com",
+    "project_id": "pbm-care-12d99",
+    "storage_bucket": "pbm-care-12d99.appspot.com"
+>>>>>>> dev
   },
   "client": [
     {
       "client_info": {
+<<<<<<< HEAD
         "mobilesdk_app_id": "1:324928799072:android:1fe5d39b16241bf1351e05",
         "android_client_info": {
           "package_name": "com.preciousbabiesandmums.pbmcare"
+=======
+        "mobilesdk_app_id": "1:898476850188:android:db3d2b99dd07067b3f0229",
+        "android_client_info": {
+          "package_name": "com.example.pbm_app"
+>>>>>>> dev
         }
       },
       "oauth_client": [
         {
+<<<<<<< HEAD
           "client_id": "324928799072-f5a2qq3opbps2g32m6faijio5sf6k97u.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
@@ -23,19 +37,67 @@
         },
         {
           "client_id": "324928799072-kgh1m7070eaoflq5gv9050qn09hpup0f.apps.googleusercontent.com",
+=======
+          "client_id": "898476850188-ba3htutovkk0env4b2q538mccql9pfpd.apps.googleusercontent.com",
+>>>>>>> dev
           "client_type": 3
         }
       ],
       "api_key": [
         {
+<<<<<<< HEAD
           "current_key": "AIzaSyBFWjUNFutzvXzUYfR_Gcp6R7C350U68eE"
+=======
+          "current_key": "AIzaSyArZvTKsLDdZF23cf6tg5FFf2NuuqasEsM"
+>>>>>>> dev
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
+<<<<<<< HEAD
               "client_id": "324928799072-1d683trm9hrue6am1dd2u7acp0krofe2.apps.googleusercontent.com",
+=======
+              "client_id": "898476850188-ba3htutovkk0env4b2q538mccql9pfpd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:898476850188:android:1a99bf3cd35440d83f0229",
+        "android_client_info": {
+          "package_name": "com.preciousbabiesandmums.pbmcare"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "898476850188-hjjpd31k9f4sm3rgq7roft2480n3b1a4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.preciousbabiesandmums.pbmcare",
+            "certificate_hash": "d15fb9273f02bccdabf7bb28ffbaa6b74c248357"
+          }
+        },
+        {
+          "client_id": "898476850188-ba3htutovkk0env4b2q538mccql9pfpd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyArZvTKsLDdZF23cf6tg5FFf2NuuqasEsM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "898476850188-ba3htutovkk0env4b2q538mccql9pfpd.apps.googleusercontent.com",
+>>>>>>> dev
               "client_type": 3
             }
           ]

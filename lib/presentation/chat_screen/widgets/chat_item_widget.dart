@@ -80,38 +80,40 @@ class ChatItemWidget extends StatelessWidget {
             ],
           ),
         ),
-        Padding(
-          padding: getPadding(
-            left: 21,
-            top: 3,
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Text(
-                "lbl_thanawan_chadee".tr,
-                overflow: TextOverflow.ellipsis,
-                textAlign: TextAlign.left,
-                style: AppStyle.txtOpenSansRomanSemiBold16Gray800,
-              ),
-              Padding(
-                padding: getPadding(
-                  top: 5,
-                ),
-                child: Text(
-                  "msg_this_was_how_i_helped".tr,
+        Expanded(
+          child: Padding(
+            padding: getPadding(
+              left: 16,
+              top: 3,
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Text(
+                  "lbl_thanawan_chadee".tr,
                   overflow: TextOverflow.ellipsis,
                   textAlign: TextAlign.left,
-                  style: AppStyle.txtOpenSans12,
+                  style: AppStyle.txtOpenSansRomanSemiBold16Gray800,
                 ),
-              ),
-            ],
+                Padding(
+                  padding: getPadding(
+                    top: 5,
+                  ),
+                  child: Text(
+                    "msg_this_was_how_i_helped".tr,
+                    overflow: TextOverflow.ellipsis,
+                    textAlign: TextAlign.left,
+                    style: AppStyle.txtOpenSans12,
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
         Padding(
           padding: getPadding(
-            left: 34,
+            left: 8,
             bottom: 1,
           ),
           child: Column(
@@ -123,20 +125,23 @@ class ChatItemWidget extends StatelessWidget {
                 textAlign: TextAlign.left,
                 style: AppStyle.txtOpenSansRomanSemiBold12Gray600,
               ),
-              CustomButton(
-                height: getVerticalSize(
-                  26,
+              const SizedBox(
+                height: 4,
+              ),
+              Container(
+                width: 20,
+                height: 20,
+                alignment: Alignment.center,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(1000),
+                    color: ColorConstant.pinkA100),
+                child: Text(
+                  '10',
+                  style: AppStyle.txtInterRegular16.copyWith(
+                      fontSize: 12,
+                      fontWeight: FontWeight.w500,
+                      color: Colors.white),
                 ),
-                width: getHorizontalSize(
-                  27,
-                ),
-                text: "lbl_5".tr,
-                margin: getMargin(
-                  top: 3,
-                ),
-                shape: ButtonShape.CircleBorder13,
-                padding: ButtonPadding.PaddingAll4,
-                fontStyle: ButtonFontStyle.OpenSansRomanSemiBold12,
               ),
             ],
           ),

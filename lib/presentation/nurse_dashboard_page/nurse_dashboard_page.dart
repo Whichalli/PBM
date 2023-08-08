@@ -35,9 +35,11 @@ class NurseDashboardScreenPage
       onWillPop: () async => await Future.value(false),
       child: Scaffold(
         appBar: CustomAppBar(
-            height: getVerticalSize(47),
+            elevation: 2,
+            backgroundColor: Color.fromARGB(225, 255, 255, 255),
+            height: getVerticalSize(50),
             title: Padding(
-                padding: getPadding(left: 44),
+                padding: getPadding(left: 20, top: 8),
                 child: Obx(() => (controller.userId.value.isEmpty)
                     ? Align(
                         alignment: Alignment.centerLeft,
@@ -45,6 +47,8 @@ class NurseDashboardScreenPage
                             overflow: TextOverflow.ellipsis,
                             textAlign: TextAlign.left,
                             style: AppStyle.txtNunitoBold15.copyWith(
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
                                 letterSpacing: getHorizontalSize(0.6))))
                     : StreamBuilder<DocumentSnapshot<Map<String, dynamic>>>(
                         stream: FirebaseFirestore.instance
@@ -58,7 +62,7 @@ class NurseDashboardScreenPage
                                 Align(
                                     alignment: Alignment.centerLeft,
                                     child: Text(
-                                        "Hello \n${snapshot.data?.data()?['name'] ?? ''}"
+                                        "Hello ${snapshot.data?.data()?['name'] ?? ''}"
                                             .capitalize!,
                                         overflow: TextOverflow.ellipsis,
                                         textAlign: TextAlign.left,
@@ -99,8 +103,8 @@ class NurseDashboardScreenPage
                             url: snapshot.data?.data()?['photoUrl'],
                             fit: BoxFit.cover,
                             imagePath: ImageConstant.imageNotFound,
-                            height: getSize(39),
-                            width: getSize(39),
+                            height: getSize(40),
+                            width: getSize(40),
                             border: Border.all(color: Colors.black45),
                             radius:
                                 BorderRadius.circular(getHorizontalSize(100)),

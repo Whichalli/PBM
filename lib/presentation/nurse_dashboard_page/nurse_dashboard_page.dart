@@ -34,84 +34,51 @@ class NurseDashboardScreenPage
     return WillPopScope(
       onWillPop: () async => await Future.value(false),
       child: Scaffold(
-        appBar: CustomAppBar(
-            elevation: 2,
-            backgroundColor: Color.fromARGB(225, 255, 255, 255),
-            height: getVerticalSize(50),
-            title: Padding(
-                padding: getPadding(left: 20, top: 8),
-                child: Obx(() => (controller.userId.value.isEmpty)
-                    ? Align(
-                        alignment: Alignment.centerLeft,
-                        child: Text("Hello ".tr,
-                            overflow: TextOverflow.ellipsis,
-                            textAlign: TextAlign.left,
-                            style: AppStyle.txtNunitoBold15.copyWith(
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold,
-                                letterSpacing: getHorizontalSize(0.6))))
-                    : StreamBuilder<DocumentSnapshot<Map<String, dynamic>>>(
-                        stream: FirebaseFirestore.instance
-                            .collection('employee')
-                            .doc('/${controller.userId.value}')
-                            .snapshots(),
-                        builder: (context, snapshot) {
-                          return Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                Align(
-                                    alignment: Alignment.centerLeft,
-                                    child: Text(
-                                        "Hello ${snapshot.data?.data()?['name'] ?? ''}"
-                                            .capitalize!,
-                                        overflow: TextOverflow.ellipsis,
-                                        textAlign: TextAlign.left,
-                                        style: AppStyle.txtNunitoBold15
-                                            .copyWith(
-                                                letterSpacing:
-                                                    getHorizontalSize(0.6)))),
-                                Align(
-                                    alignment: Alignment.centerLeft,
-                                    child: Padding(
-                                        padding: getPadding(right: 61),
-                                        child: Text(
-                                            "${snapshot.data?.data()?['profession']}"
-                                                .capitalize!,
-                                            overflow: TextOverflow.ellipsis,
-                                            textAlign: TextAlign.left,
-                                            style: AppStyle
-                                                .txtNunitoRegular10Black90099
-                                                .copyWith(
-                                                    letterSpacing:
-                                                        getHorizontalSize(
-                                                            0.4)))))
-                              ]);
-                        }))),
-            actions: [
-              Obx(() => (controller.userId.value.isEmpty)
-                  ? CircularProgressIndicator(
-                      color: ColorConstant.pinkA100,
-                      strokeWidth: 2,
-                    )
-                  : StreamBuilder<DocumentSnapshot<Map<String, dynamic>>>(
-                      stream: FirebaseFirestore.instance
-                          .collection('employee')
-                          .doc('/${controller.userId.value}')
-                          .snapshots(),
-                      builder: (context, snapshot) {
-                        return CustomImageView(
-                            url: snapshot.data?.data()?['photoUrl'],
-                            fit: BoxFit.cover,
-                            imagePath: ImageConstant.imageNotFound,
-                            height: getSize(40),
-                            width: getSize(40),
-                            border: Border.all(color: Colors.black45),
-                            radius:
-                                BorderRadius.circular(getHorizontalSize(100)),
-                            margin: getMargin(
-                                left: 31, top: 4, right: 31, bottom: 4));
-                      }))
-            ]),
+        appBar: AppBar(
+          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+          elevation: .3,
+          title: const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 8.0),
+            child: Text(
+              "PBM Care",
+              style: TextStyle(
+                fontSize: 30,
+                color: Color.fromARGB(200, 0, 0, 0),
+                fontWeight: FontWeight.w900,
+              ),
+            ),
+          ),
+          actions: [
+            Obx(() => (controller.userId.value.isEmpty)
+                ? CircularProgressIndicator(
+                    color: ColorConstant.pinkA100,
+                    strokeWidth: 2,
+                  )
+                : StreamBuilder<DocumentSnapshot<Map<String, dynamic>>>(
+                    stream: FirebaseFirestore.instance
+                        .collection('employee')
+                        .doc('/${controller.userId.value}')
+                        .snapshots(),
+                    builder: (context, snapshot) {
+                      return Padding(
+                        padding: const EdgeInsets.all(4.0),
+                        child: Container(
+                          width: 50,
+                          height: 40,
+                          margin: getMargin(
+                            right: 18,
+                          ),
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(1000),
+                              image: DecorationImage(
+                                  fit: BoxFit.cover,
+                                  image: NetworkImage(
+                                      snapshot.data?.data()?['photoUrl']))),
+                        ),
+                      );
+                    }))
+          ],
+        ),
         body: Column(
           children: [
             Expanded(

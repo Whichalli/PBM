@@ -15,6 +15,6 @@ class InitialBindings extends Bindings {
     Connectivity connectivity = Connectivity();
     Get.put(NetworkInfo(connectivity));
     Get.put(WhiteNoiseController());
-    Get.put(NurseDashboardScreenController());
+    //Get.put(NurseDashboardScreenController());
   }
 }

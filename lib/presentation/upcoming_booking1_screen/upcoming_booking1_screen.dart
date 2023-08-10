@@ -1,5 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:pbm_app/domain/firebase/authentication.dart';
 
+import '../nurse_dashboard_page/pages/chat_screen/models/chat_item_model.dart';
 import 'controller/upcoming_booking1_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:pbm_app/core/app_export.dart';
@@ -197,7 +199,7 @@ class UpcomingBooking1Screen extends GetWidget<UpcomingBooking1Controller> {
                                                   right: 16,
                                                   bottom: 19),
                                               width: 400,
-                                              height: 200,
+                                              height: 175,
                                               decoration: AppDecoration
                                                   .outlineBluegray100
                                                   .copyWith(
@@ -461,7 +463,30 @@ class UpcomingBooking1Screen extends GetWidget<UpcomingBooking1Controller> {
                                                                           ImageConstant
                                                                               .imgSortGray800)),
                                                               CustomIconButton(
-                                                                  onTap: () {},
+                                                                  onTap: () {
+                                                                    Get.toNamed(
+                                                                        AppRoutes
+                                                                            .chatOneScreen,
+                                                                        arguments: {
+                                                                          'partnerId': data
+                                                                              .value[index]
+                                                                              .id,
+                                                                          'chatId':
+                                                                              '${data.value[index].id}-${Authentication.getCurrentUserId()}',
+                                                                          'account':
+                                                                              'parent',
+                                                                          'prtnerDetails': ChatItemModel(
+                                                                              chatId: '${data.value[index].id}-${Authentication.getCurrentUserId()}',
+                                                                              chatActive: true,
+                                                                              employeeId: data.value[index].id,
+                                                                              lastMessage: '',
+                                                                              parentId: Authentication.getCurrentUserId(),
+                                                                              accountType: 'parent',
+                                                                              field: 'parent',
+                                                                              unread: 0,
+                                                                              time: ''),
+                                                                        });
+                                                                  },
                                                                   height: 48,
                                                                   width: 48,
                                                                   margin:

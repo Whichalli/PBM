@@ -461,45 +461,26 @@ class AppointmentsScreen extends GetWidget<AppointmentsController> {
       //     Get.toNamed(getCurrentRoute(type), id: 1);
       //   },
       // ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.miniEndFloat,
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(1000),
-            side: BorderSide(color: ColorConstant.pinkA100, width: 3)),
-        backgroundColor: ColorConstant.whiteA70001,
-        child: Icon(
-          Icons.chat,
-          // size: 30,
-          color: ColorConstant.pinkA100,
-        ),
-      ),
+      // floatingActionButtonLocation: FloatingActionButtonLocation.miniEndFloat,
+      // floatingActionButton: FloatingActionButton(
+      //   onPressed: () {
+      //     Get.toNamed(
+      //       AppRoutes.chatOneScreen,
+      //       arguments: {
+
+      //       }
+      //     );
+      //   },
+      //   shape: RoundedRectangleBorder(
+      //       borderRadius: BorderRadius.circular(1000),
+      //       side: BorderSide(color: ColorConstant.pinkA100, width: 3)),
+      //   backgroundColor: ColorConstant.whiteA70001,
+      //   child: Icon(
+      //     Icons.chat,
+      //     // size: 30,
+      //     color: ColorConstant.pinkA100,
+      //   ),
+      // ),
     );
   }
-
-  // ///Handling route based on bottom click actions
-  // String getCurrentRoute(BottomBarEnum type) {
-  //   switch (type) {
-  //     case BottomBarEnum.Volume:
-  //       return "/";
-  //     case BottomBarEnum.Sort:
-  //       return "/";
-  //     case BottomBarEnum.Vuesaxlinearaddpinka100:
-  //       return "/";
-  //     case BottomBarEnum.Car:
-  //       return "/";
-  //     case BottomBarEnum.User:
-  //       return "/";
-  //     default:
-  //       return "/";
-  //   }
-  // }
-
-  // ///Handling page based on route
-  // Widget getCurrentPage(String currentRoute) {
-  //   switch (currentRoute) {
-  //     default:
-  //       return DefaultWidget();
-  //   }
-  // }
 }

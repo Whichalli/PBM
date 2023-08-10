@@ -1,13 +1,16 @@
+import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:pbm_app/domain/firebase/authentication.dart';
 import 'package:pbm_app/presentation/nurse_dashboard_page/pages/dashboard_screen/dashboard_screen.dart';
 import 'package:pbm_app/widgets/app_bar/bottom_bar/bottom_navbar.dart';
 
 import '../../core/app_export.dart';
 import '../../widgets/app_bar/bottom_bar/bottom_bar_buttom_model.dart';
 import '../../widgets/app_bar/custom_app_bar.dart';
-import '../chat_screen/chat_screen.dart';
+import 'pages/chat_screen/chat_screen.dart';
 import 'controller/controller.dart';
 
 // ignore: must_be_immutable
@@ -22,7 +25,7 @@ class NurseDashboardScreenPage
 // class _NurseDashboardScreenPageState extends State<NurseDashboardScreenPage> {
   final List<Widget> _pages = [
     const DashboardScreen(),
-    const ChatScreen(),
+    const ChatScreen(field: 'employeeId'),
     Container(),
     Container(),
     // const PackDetailComposerScreen(),
@@ -42,41 +45,48 @@ class NurseDashboardScreenPage
             child: Text(
               "PBM Care",
               style: TextStyle(
-                fontSize: 30,
+                fontSize: 24,
                 color: Color.fromARGB(200, 0, 0, 0),
                 fontWeight: FontWeight.w900,
               ),
             ),
           ),
           actions: [
-            Obx(() => (controller.userId.value.isEmpty)
-                ? CircularProgressIndicator(
-                    color: ColorConstant.pinkA100,
-                    strokeWidth: 2,
-                  )
-                : StreamBuilder<DocumentSnapshot<Map<String, dynamic>>>(
-                    stream: FirebaseFirestore.instance
-                        .collection('employee')
-                        .doc('/${controller.userId.value}')
-                        .snapshots(),
-                    builder: (context, snapshot) {
-                      return Padding(
-                        padding: const EdgeInsets.all(4.0),
-                        child: Container(
-                          width: 50,
-                          height: 40,
-                          margin: getMargin(
-                            right: 18,
+            Obx(() => StreamBuilder<DocumentSnapshot<Map<String, dynamic>>>(
+                stream: FirebaseFirestore.instance
+                    .collection('employee')
+                    .doc('/${controller.userId.value}')
+                    .snapshots(),
+                builder: (context, snapshot) {
+                  var data = snapshot.data?.data()!;
+                  log('data = $data');
+                  return !snapshot.hasData
+                      ? CircularProgressIndicator(
+                          color: ColorConstant.pinkA100,
+                          strokeWidth: 2,
+                        )
+                      : GestureDetector(
+                          onTap: () {
+                            Authentication.logout();
+                          },
+                          child: Padding(
+                            padding: const EdgeInsets.all(4.0),
+                            child: Container(
+                              width: 50,
+                              height: 40,
+                              margin: getMargin(
+                                right: 18,
+                              ),
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(1000),
+                                  image: DecorationImage(
+                                      fit: BoxFit.cover,
+                                      image: NetworkImage(
+                                          data!['photoUrl'] ?? ''))),
+                            ),
                           ),
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(1000),
-                              image: DecorationImage(
-                                  fit: BoxFit.cover,
-                                  image: NetworkImage(
-                                      snapshot.data?.data()?['photoUrl']))),
-                        ),
-                      );
-                    }))
+                        );
+                }))
           ],
         ),
         body: Column(

@@ -104,13 +104,13 @@ class Database {
       required Map<String, dynamic> data,
       required String table}) async {
     try {
-      await collection.collection('$table').doc('/$userId').update(data);
+      await collection.collection(table).doc('/$userId').update(data);
     } catch (e) {
       rethrow;
     }
   }
 
-// 05654987
+
   static Future<dynamic> uploadFile(
       {required File file, required String path}) async {
     try {

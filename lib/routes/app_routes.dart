@@ -77,8 +77,8 @@ import 'package:pbm_app/presentation/calling_nurse_screen/calling_nurse_screen.d
 import 'package:pbm_app/presentation/calling_nurse_screen/binding/calling_nurse_binding.dart';
 import 'package:pbm_app/presentation/chat_one_screen/chat_one_screen.dart';
 import 'package:pbm_app/presentation/chat_one_screen/binding/chat_one_binding.dart';
-import 'package:pbm_app/presentation/chat_screen/chat_screen.dart';
-import 'package:pbm_app/presentation/chat_screen/binding/chat_binding.dart';
+import 'package:pbm_app/presentation/nurse_dashboard_page/pages/chat_screen/chat_screen.dart';
+import 'package:pbm_app/presentation/nurse_dashboard_page/pages/chat_screen/binding/chat_binding.dart';
 import 'package:pbm_app/presentation/upcoming_booking1_screen/upcoming_booking1_screen.dart';
 import 'package:pbm_app/presentation/upcoming_booking1_screen/binding/upcoming_booking1_binding.dart';
 import 'package:pbm_app/presentation/upcoming_booking_two1_screen/upcoming_booking_two1_screen.dart';

@@ -61,6 +61,12 @@ extension DateTimeExtension on DateTime {
     return '$this'.split(' ')[0];
   }
 
+  
+  String getTime() {
+    return '$this'.split(' ')[1];
+  }
+
+
   int toSeconds() {
     return (hour * 3600) + (minute * 60) + second;
   }
@@ -152,8 +158,10 @@ extension DateTimeFormat on String {
 
   int toSeconds() {
     // DateTime time = DateTime.parse(this);
-    var hour = (int.parse(split(':')[0]) * 3600);
-    var min = (int.parse(split(':')[1].split(' ')[0]) * 60);
+    var time = split(' ');
+    var hh = time[1] == 'PM' ? 12 : 0;
+    var hour = ((int.parse(time[0].split(':')[0]) + hh) * 3600);
+    var min = (int.parse(time[0].split(':')[1]) * 60);
     // var period = hour < 12 ? 'AM' : 'PM';
     // hour = hour < 12 ? hour : hour - 12;
     return (hour + min);

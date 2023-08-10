@@ -18,8 +18,8 @@ class ChatOneScreen extends GetWidget<ChatOneController> {
             .doc(controller.chatId)
             .snapshots(),
         builder: (context, snapshot) {
-
           if (snapshot.hasData) {
+            log('data cointing = ${snapshot.data!['unread']}');
             controller.onOpenMessage(chat: snapshot.data!.data()!);
           }
           return Scaffold(
@@ -34,6 +34,7 @@ class ChatOneScreen extends GetWidget<ChatOneController> {
                         .doc('/${controller.user2!.id}')
                         .snapshots(),
                     builder: (context, profileSnapshot) {
+                      // log('profileSnapshot = ${controller.chatItemModel!.accountType.value} ..... ${controller.user2!.id} ...... ${profileSnapshot.data!.data()}');
                       controller.partnerName.value = profileSnapshot.hasData
                           ? profileSnapshot.data!.data()!['name']
                           : '';
@@ -74,102 +75,98 @@ class ChatOneScreen extends GetWidget<ChatOneController> {
                         ],
                       );
                     }),
-                leadingWidth: 200,
+                leadingWidth: size.width,
                 // titleSpacing: 30,
               ),
-              body: Column(
-                children: [
-                  DashChat(
-                    currentUser: controller.user!,
-                    readOnly: !controller.chatItemModel!.chatActive.value,
-                    messageListOptions: const MessageListOptions(
-                      scrollPhysics: BouncingScrollPhysics(),
-                      showDateSeparator: true,
-                    ),
+              body: DashChat(
+                currentUser: controller.user!,
+                readOnly: !controller.chatItemModel!.chatActive.value,
+                messageListOptions: const MessageListOptions(
+                  scrollPhysics: BouncingScrollPhysics(),
+                  showDateSeparator: true,
+                ),
 
-                    // typingUsers: [controller.user2!],
-                    messageOptions: MessageOptions(
-                      showOtherUsersName: false,
-                      showCurrentUserAvatar: false,
-                      currentUserContainerColor: ColorConstant.pinkA100,
-                      showTime: true,
-                      onTapMedia: (media) {},
-                    ),
+                // typingUsers: [controller.user2!],
+                messageOptions: MessageOptions(
+                  showOtherUsersName: false,
+                  showCurrentUserAvatar: false,
+                  currentUserContainerColor: ColorConstant.pinkA100,
+                  showTime: true,
+                  onTapMedia: (media) {},
+                ),
 
-                    onSend: (ChatMessage m) {
-                      controller.onSendeMessage(message: m);
-                      controller.messages.insert(0, m);
-                      // controller.update();
+                onSend: (ChatMessage m) {
+                  controller.onSendeMessage(message: m);
+                  controller.messages.insert(0, m);
+                  // controller.update();
+                },
+
+                inputOptions: InputOptions(
+                    autocorrect: true,
+                    textController: controller.messageController,
+                    onTextChange: (value) {
+                      controller.showOthers.value = value.isEmpty;
                     },
-
-                    inputOptions: InputOptions(
-                        autocorrect: true,
-                        textController: controller.messageController,
-                        onTextChange: (value) {
-                          controller.showOthers.value = value.isEmpty;
-                        },
-                        // alwaysShowSend: true,
-                        inputToolbarStyle: BoxDecoration(
-                            color: ColorConstant.pink50,
-                            borderRadius: const BorderRadius.only(
-                                topLeft: Radius.circular(16),
-                                topRight: Radius.circular(16))),
-                        sendButtonBuilder: (send) => InkWell(
-                            onTap: send,
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Icon(
-                                Icons.send_rounded,
-                                color: ColorConstant.pinkA100,
+                    // alwaysShowSend: true,
+                    inputToolbarStyle: BoxDecoration(
+                        color: ColorConstant.pink50,
+                        borderRadius: const BorderRadius.only(
+                            topLeft: Radius.circular(16),
+                            topRight: Radius.circular(16))),
+                    sendButtonBuilder: (send) => InkWell(
+                        onTap: send,
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Icon(
+                            Icons.send_rounded,
+                            color: ColorConstant.pinkA100,
+                          ),
+                        )),
+                    trailing: [
+                      Obx(() => controller.showOthers.value
+                          ? InkWell(
+                              onTap: () {},
+                              borderRadius: BorderRadius.circular(100),
+                              child: Padding(
+                                padding: const EdgeInsets.all(4.0),
+                                child: Icon(
+                                  Icons.camera_alt_rounded,
+                                  color: ColorConstant.pinkA100,
+                                ),
                               ),
-                            )),
-                        trailing: [
-                          Obx(() => controller.showOthers.value
-                              ? InkWell(
-                                  onTap: () {},
-                                  borderRadius: BorderRadius.circular(100),
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(4.0),
-                                    child: Icon(
-                                      Icons.camera_alt_rounded,
-                                      color: ColorConstant.pinkA100,
-                                    ),
+                            )
+                          : const SizedBox()),
+                      Obx(() => controller.showOthers.value
+                          ? InkWell(
+                              onTap: () {},
+                              borderRadius: BorderRadius.circular(100),
+                              child: Padding(
+                                padding: const EdgeInsets.all(4.0),
+                                child: Transform.rotate(
+                                  angle: 11,
+                                  child: Icon(
+                                    Icons.attachment,
+                                    color: ColorConstant.pinkA100,
                                   ),
-                                )
-                              : const SizedBox()),
-                          Obx(() => controller.showOthers.value
-                              ? InkWell(
-                                  onTap: () {},
-                                  borderRadius: BorderRadius.circular(100),
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(4.0),
-                                    child: Transform.rotate(
-                                      angle: 11,
-                                      child: Icon(
-                                        Icons.attachment,
-                                        color: ColorConstant.pinkA100,
-                                      ),
-                                    ),
-                                  ),
-                                )
-                              : const SizedBox()),
-                          Obx(() => controller.showOthers.value
-                              ? InkWell(
-                                  onTap: () {},
-                                  borderRadius: BorderRadius.circular(100),
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(4.0),
-                                    child: Icon(
-                                      Icons.mic,
-                                      color: ColorConstant.pinkA100,
-                                    ),
-                                  ),
-                                )
-                              : const SizedBox()),
-                        ]),
-                    messages: controller.messages,
-                  ),
-                ],
+                                ),
+                              ),
+                            )
+                          : const SizedBox()),
+                      Obx(() => controller.showOthers.value
+                          ? InkWell(
+                              onTap: () {},
+                              borderRadius: BorderRadius.circular(100),
+                              child: Padding(
+                                padding: const EdgeInsets.all(4.0),
+                                child: Icon(
+                                  Icons.mic,
+                                  color: ColorConstant.pinkA100,
+                                ),
+                              ),
+                            )
+                          : const SizedBox()),
+                    ]),
+                messages: controller.messages,
               ));
         });
   }

@@ -76,23 +76,31 @@ class ChatScreen extends GetWidget<ChatController> {
                             user.putIfAbsent('chatId', () => data[index].id);
                             user.putIfAbsent('field', () => field);
                             user.putIfAbsent('chatActive', () => true);
+                            
 
                             ChatItemModel model = ChatItemModel.fromMap(user);
+                            model.senderId.value =
+                                data[index].data()['senderId'];
                             model.chatId.value = data[index].id;
 
                             model.accountType.value =
                                 field == 'employeeId' ? 'parent' : 'employee';
-                            String partnerId = data[index]
-                                [field == 'employeeId' ? 'parentId' : field];
+                            String partnerId = data[index].data()[
+                                field == 'employeeId'
+                                    ? 'parentId'
+                                    : 'employeeId'];
+                            // log("[field == 'employeeId'? 'parentId': 'employeeId' = ${[
+                            //   field == 'employeeId' ? 'parentId' : 'employeeId'
+                            // ]}");
+                            // log('receiverId = $partnerId data[index] = ${data[index].data()}');
                             return InkWell(
                                 onTap: () {
-                                  log('receiverId = $partnerId');
                                   Get.toNamed(AppRoutes.chatOneScreen,
                                       arguments: {
                                         'partnerId': partnerId,
                                         'chatId': data[index].id,
                                         'account': model.accountType.value,
-                                        'prtnerDetails': model,
+                                        'partnerDetails': model,
                                       });
                                 },
                                 child: ChatItemWidget(model));

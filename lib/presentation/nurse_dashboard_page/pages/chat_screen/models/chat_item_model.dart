@@ -14,11 +14,13 @@ class ChatItemModel {
   final Rx<String> field = Rx("");
   final Rx<String> employeeId = Rx("");
   final Rx<bool> chatActive = Rx(true);
+  final Rx<String> senderId = Rx('');
   ChatItemModel({
     required String time,
     required int unread,
     required String lastMessage,
     required String parentId,
+    String? senderId,
     required bool chatActive,
     String? accountType,
     required String field,
@@ -30,6 +32,7 @@ class ChatItemModel {
     this.parentId.value = parentId;
     this.time.value = time;
     this.unread.value = unread;
+    this.senderId.value = senderId ?? '';
     this.lastMessage.value = lastMessage;
     this.accountType.value = accountType ?? '';
     this.field.value = field;
@@ -38,6 +41,7 @@ class ChatItemModel {
 
   static fromMap(Map<String, dynamic> data) => ChatItemModel(
       chatId: data['chatId'],
+      senderId: data['senderId'],
       chatActive: data['chatActive'],
       accountType: data['accountType'],
       field: data['field'],

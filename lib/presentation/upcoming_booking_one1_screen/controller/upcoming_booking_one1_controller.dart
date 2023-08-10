@@ -47,7 +47,7 @@ class UpcomingBookingOne1Controller extends GetxController {
             'senderId': Authentication.getCurrentUserId(),
             'isNewBooking': true,
             'unread': 1,
-            'lastMessage': '',
+            'lastMessage': 'New Booking',
             'isDocument': false,
             'lastSentTime': DateTime.now(),
           },

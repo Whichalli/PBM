@@ -13,6 +13,7 @@ import 'package:flutter/material.dart';
 import 'package:pbm_app/widgets/widgets.dart';
 import 'package:hive/hive.dart';
 import '../../../domain/facebookauth/facebook_auth_helper.dart';
+import '../../parent_page/controller/controller.dart';
 
 /// A controller class for the SignInScreen.
 ///
@@ -27,6 +28,7 @@ class SignInController extends GetxController {
 
   final Authentication authentication = Authentication();
   RxBool loading = false.obs;
+  final parentController = Get.find<ParentDashboardScreenController>();
 
   DocumentSnapshot<Map<String, dynamic>>? resp;
   @override
@@ -150,6 +152,7 @@ class SignInController extends GetxController {
     //   'phone': user.phoneNumber,
     //   'photoUrl': user.photoURL
     // });
+    parentController.userId.value = user.uid;
     Get.offAllNamed(
       AppRoutes.chooseAgeScreen,
     );

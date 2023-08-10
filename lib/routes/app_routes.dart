@@ -4,6 +4,7 @@ import 'package:pbm_app/presentation/already_signed_up_two_screen/already_signed
 import 'package:pbm_app/presentation/already_signed_up_two_screen/binding/already_signed_up_two_binding.dart';
 import 'package:pbm_app/presentation/nurse_dashboard_page/nurse_dashboard_page.dart';
 import 'package:pbm_app/presentation/nurse_profile/nurse_profile.dart';
+import 'package:pbm_app/presentation/parent_page/parent_page.dart';
 import 'package:pbm_app/presentation/pumping_screen/binding/pumping_binding.dart';
 import 'package:pbm_app/presentation/pumping_screen/pumping_screen.dart';
 import 'package:pbm_app/presentation/select_baby/binding/select_baby_bind.dart';
@@ -21,8 +22,8 @@ import 'package:pbm_app/presentation/home_screen/home_screen.dart';
 import 'package:pbm_app/presentation/home_screen/binding/home_binding.dart';
 import 'package:pbm_app/presentation/select_baby/select_baby_screen.dart';
 // import 'package:pbm_app/presentation/home1_screen/binding/home1_binding.dart';
-import 'package:pbm_app/presentation/home_onboarding_container_screen/home_onboarding_container_screen.dart';
-import 'package:pbm_app/presentation/home_onboarding_container_screen/binding/home_onboarding_container_binding.dart';
+import 'package:pbm_app/presentation/parent_page/pages/home_onboarding_container_screen/home_onboarding_container_screen.dart';
+import 'package:pbm_app/presentation/parent_page/pages/home_onboarding_container_screen/binding/home_onboarding_container_binding.dart';
 import 'package:pbm_app/presentation/home_empty_screen/home_empty_screen.dart';
 import 'package:pbm_app/presentation/home_empty_screen/binding/home_empty_binding.dart';
 import 'package:pbm_app/presentation/signup_screen/binding/signup_binding.dart';
@@ -105,6 +106,7 @@ import 'package:get/get.dart';
 import 'package:pbm_app/presentation/white_noise_page/white_noise_page.dart';
 
 import '../presentation/nurse_profile/binding/onboarding_two_binding.dart';
+import '../presentation/parent_page/binding/binding.dart';
 import '../presentation/white_noise_page/binding/binding.dart';
 import '../presentation/white_noise_page/now_playing/binding/now_playing_binding.dart';
 import '../presentation/white_noise_page/now_playing/now_playing_screen.dart';
@@ -132,7 +134,6 @@ class AppRoutes {
 
   static const String packDetailComposerContainerPage =
       '/pack_detail_composer_container_page';
-    
 
   static const String homeEmptyScreen = '/home_empty_screen';
 
@@ -230,13 +231,11 @@ class AppRoutes {
 
   static const String parentSignupScreen = '/signup_screen';
   static const String pumpingScreen = '/pumping_screen';
-  
-  
+
   // static const String nowPlayingScreen = '/now_playing_screen';
   static const String nurseProfileDetails = '/nurse_profile_details';
 
   static List<GetPage> pages = [
-
     //  GetPage(
     //   name: packDetailComposerContainer1Screen,
     //   page: () => PackDetailComposerContainer1Screen(),
@@ -265,8 +264,6 @@ class AppRoutes {
         AppNavigationBinding(),
       ],
     ),
-
-
 
     GetPage(
       name: signInScreen,
@@ -341,14 +338,13 @@ class AppRoutes {
       ],
     ),
 
-        GetPage(
+    GetPage(
       name: pumpingScreen,
       page: () => PumpingScreen(),
       bindings: [
         PumpingBinding(),
       ],
     ),
-
 
     GetPage(
       name: addBabyScreen,
@@ -360,11 +356,20 @@ class AppRoutes {
 
     GetPage(
       name: homeOnboardingContainerScreen,
-      page: () => HomeOnboardingContainerScreen(),
+      page: () => ParentDashboardScreenPage(),
       bindings: [
+        ParentDashboardBinding(),
         HomeOnboardingContainerBinding(),
       ],
     ),
+
+    // GetPage(
+    //   name: homeOnboardingContainerScreen,
+    //   page: () => HomeOnboardingContainerScreen(),
+    //   bindings: [
+    //     HomeOnboardingContainerBinding(),
+    //   ],
+    // ),
     GetPage(
       name: homeEmptyScreen,
       page: () => HomeEmptyScreen(),
@@ -622,6 +627,7 @@ class AppRoutes {
       page: () => NurseDashboardScreenPage(),
       bindings: [
         DashboardBinding(),
+        // ChatBinding()
       ],
     ),
     GetPage(

@@ -4,6 +4,7 @@ import 'package:pbm_app/core/utils/pref_utils.dart';
 import 'package:pbm_app/presentation/nurse_dashboard_page/controller/controller.dart';
 
 import '../../data/apiClient/api_client.dart';
+import '../../presentation/parent_page/controller/controller.dart';
 import '../../presentation/white_noise_page/controller/controller.dart';
 import '../network/network_info.dart';
 
@@ -16,5 +17,6 @@ class InitialBindings extends Bindings {
     Get.put(NetworkInfo(connectivity));
     Get.put(WhiteNoiseController());
     Get.put(NurseDashboardScreenController());
+    Get.put(ParentDashboardScreenController());
   }
 }

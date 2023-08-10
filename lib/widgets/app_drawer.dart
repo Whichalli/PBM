@@ -34,7 +34,7 @@ class AppDrawer extends StatelessWidget {
                     width: 60,
                     height: 60,
                     url: Authentication.getCurrentUser()!.photoURL,
-                    imagePath: ImageConstant.imgAvatar,
+                    imagePath: ImageConstant.imageNotFound,
                   ),
                   const SizedBox(
                     width: 8,

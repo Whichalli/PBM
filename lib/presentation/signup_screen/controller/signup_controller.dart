@@ -53,6 +53,7 @@ class SignUpController extends GetxController {
       'password': passwordController.text,
       'phone': phoneController.text,
       'accountType': 'parent',
+      'photoUrl': '',
       'name': '${firstNameController.text} ${lastNameController.text}'
     }, accountType: 'parent');
 

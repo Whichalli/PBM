@@ -4,7 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:pbm_app/core/app_export.dart';
 import 'package:pbm_app/domain/firebase/authentication.dart';
 import 'package:pbm_app/domain/firebase/firebase.dart';
-import 'package:pbm_app/presentation/home_onboarding_container_screen/models/home_onboarding_container_model.dart';
+import 'package:pbm_app/presentation/parent_page/pages/home_onboarding_container_screen/models/home_onboarding_container_model.dart';
 import 'package:flutter/material.dart';
 
 /// A controller class for the HomeOnboardingContainerScreen.
@@ -33,7 +33,7 @@ class HomeOnboardingContainerController extends GetxController {
   @override
   void onClose() {
     super.onClose();
-    searchController.dispose();
+    // searchController.dispose();
   }
 
   getUserDetails() async {

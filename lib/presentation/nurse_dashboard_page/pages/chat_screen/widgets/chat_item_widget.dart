@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:pbm_app/domain/firebase/authentication.dart';
 
 import '../controller/chat_controller.dart';
 import '../models/chat_item_model.dart';
@@ -146,7 +147,9 @@ class ChatItemWidget extends StatelessWidget {
                         textAlign: TextAlign.left,
                         style: AppStyle.txtOpenSansRomanSemiBold12Gray600,
                       ),
-                      if (chatItemModel.unread.value > 0) ...[
+                      if (chatItemModel.unread.value > 0 &&
+                          chatItemModel.senderId.value !=
+                              Authentication.getCurrentUserId()) ...[
                         const SizedBox(
                           height: 8,
                         ),

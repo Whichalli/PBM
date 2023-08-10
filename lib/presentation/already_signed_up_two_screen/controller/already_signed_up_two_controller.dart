@@ -12,6 +12,8 @@ import 'package:flutter/material.dart';
 import 'package:pbm_app/presentation/already_signed_up_two_screen/models/already_signed_up_one_model.dart';
 import 'package:pbm_app/widgets/widgets.dart';
 
+import '../../nurse_dashboard_page/controller/controller.dart';
+
 /// A controller class for the AlreadySignedUpTwoScreen.
 ///
 /// This class manages the state of the AlreadySignedUpTwoScreen, including the
@@ -30,6 +32,7 @@ class AlreadySignedUpTwoController extends GetxController {
 
   Rx<AlreadySignedUpTwoModel> alreadySignedUpTwoModelObj =
       AlreadySignedUpTwoModel().obs;
+  final nurseController = Get.find<NurseDashboardScreenController>();
 
   Rx<String> radioGroup = "".obs;
 
@@ -163,6 +166,7 @@ class AlreadySignedUpTwoController extends GetxController {
       Get.back();
       return;
     }
+    nurseController.userId.value = user.uid;
     Get.offNamedUntil(AppRoutes.dashboardScreen, (route) => false);
   }
 }

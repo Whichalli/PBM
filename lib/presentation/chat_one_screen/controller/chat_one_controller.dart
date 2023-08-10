@@ -31,13 +31,15 @@ class ChatOneController extends GetxController {
   Map<String, dynamic> chatData = {};
 
   List<ChatMessage> messages = <ChatMessage>[];
-
+  String senderId = '';
+  int messageCount = 0;
+  bool read = true;
   var chatId = Get.arguments['chatId'];
   @override
   void onInit() {
     user = ChatUser(id: currentUser!.uid);
     user2 = ChatUser(id: arguments['partnerId']);
-    chatItemModel = arguments['prtnerDetails'];
+    chatItemModel = arguments['partnerDetails'];
     super.onInit();
   }
 
@@ -47,6 +49,10 @@ class ChatOneController extends GetxController {
 
   onOpenMessage({required Map<String, dynamic> chat}) {
     messages.clear();
+    log('open');
+    senderId = chat['senderId'];
+    messageCount = chat['unread'];
+
     chatData = chat;
     var msg = (chatData['messages']);
     for (Map<String, dynamic> element in msg) {
@@ -60,11 +66,13 @@ class ChatOneController extends GetxController {
     }
     chatData['unread'] = 0;
     chatData['isNewBooking'] = false;
-    Database.update(userId: chatId, data: chatData, table: 'chat');
+    read = chatData['read'] ?? false;
+    if (chatData['senderId'] != Authentication.getCurrentUserId()) {
+      Database.update(userId: chatId, data: chatData, table: 'chat');
+    }
   }
 
   onSendeMessage({required ChatMessage message}) async {
-    log('message = ${message.toJson()}');
     List allMessages = chatData['messages'];
     allMessages.add(message.toJson());
     chatData['lastMessage'] = message.text;
@@ -72,6 +80,16 @@ class ChatOneController extends GetxController {
     chatData['isDocument'] = (message.medias != null);
     chatData['messages'] = allMessages;
 
+    // String senderId = chatData['senderId'];
+    // int unreadCount = chatData['unread'];
+
+    log('senderId = $senderId ...... ${Authentication.getCurrentUserId()}');
+    if (senderId == Authentication.getCurrentUserId() || !read) {
+      log('=============== chatData = $chatData');
+      chatData['unread'] = (messageCount + 1);
+    }
+    chatData['read'] = false;
+    chatData['senderId'] = Authentication.getCurrentUserId();
     Database.update(userId: chatId, table: 'chat', data: chatData);
   }
 }

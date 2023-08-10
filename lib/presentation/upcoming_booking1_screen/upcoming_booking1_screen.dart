@@ -452,7 +452,7 @@ class UpcomingBooking1Screen extends GetWidget<UpcomingBooking1Controller> {
                                                                   ],
                                                                 ),
                                                               ),
-                                                              Spacer(),
+                                                              const Spacer(),
                                                               CustomIconButton(
                                                                   height: 48,
                                                                   width: 48,
@@ -475,7 +475,7 @@ class UpcomingBooking1Screen extends GetWidget<UpcomingBooking1Controller> {
                                                                               '${data.value[index].id}-${Authentication.getCurrentUserId()}',
                                                                           'account':
                                                                               'parent',
-                                                                          'prtnerDetails': ChatItemModel(
+                                                                          'partnerDetails': ChatItemModel(
                                                                               chatId: '${data.value[index].id}-${Authentication.getCurrentUserId()}',
                                                                               chatActive: true,
                                                                               employeeId: data.value[index].id,

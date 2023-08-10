@@ -6,6 +6,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:firebase_core/firebase_core.dart';
 
+import '../../presentation/nurse_dashboard_page/controller/controller.dart';
+import '../../presentation/parent_page/controller/controller.dart';
 import '../../routes/app_routes.dart';
 import 'firebase.dart';
 
@@ -14,6 +16,8 @@ class Authentication {
   User? user;
   String? userId;
   DocumentSnapshot<Map<String, dynamic>>? resp;
+  static final parentController = Get.find<ParentDashboardScreenController>();
+  static final nurseController = Get.find<NurseDashboardScreenController>();
   // final RealtimeDatabase _database;
   static getCurrentUserId() {
     return _auth.currentUser?.uid;
@@ -25,6 +29,8 @@ class Authentication {
 
   static logout() async {
     await _auth.signOut();
+    parentController.currentPageIndex.value = 0;
+    nurseController.currentPageIndex.value = 0;
     Get.offNamedUntil(AppRoutes.signInScreen, (route) => false);
   }
 

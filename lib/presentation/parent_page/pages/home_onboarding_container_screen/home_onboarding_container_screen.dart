@@ -25,7 +25,9 @@ class HomeOnboardingContainerScreen
       child: Scaffold(
         resizeToAvoidBottomInset: false,
         backgroundColor: ColorConstant.whiteA700,
-       
+        drawer: const AppDrawer(
+          profileRoutes: AppRoutes.upcomingBookingFourScreen,
+        ),
         body: SizedBox(
             width: size.width,
             child: SingleChildScrollView(

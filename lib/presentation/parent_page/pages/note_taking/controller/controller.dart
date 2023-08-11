@@ -137,6 +137,8 @@ class NoteTakingScreenController extends GetxController {
         data!['body'] = bodyController.text;
         await Database.update(userId: noteId, data: data, table: 'note');
       }
+      titleController.clear();
+      bodyController.clear();
       Get.back();
       return;
     }

@@ -35,9 +35,14 @@ class ChatOneScreen extends GetWidget<ChatOneController> {
                         .snapshots(),
                     builder: (context, profileSnapshot) {
                       // log('profileSnapshot = ${controller.chatItemModel!.accountType.value} ..... ${controller.user2!.id} ...... ${profileSnapshot.data!.data()}');
-                      controller.partnerName.value = profileSnapshot.hasData
-                          ? profileSnapshot.data!.data()!['name']
-                          : '';
+                      // controller.partnerName.value = profileSnapshot.hasData
+                      //     ? profileSnapshot.data!.data()!['name']
+                      //     : '';
+                      log('user2 Id = ${controller.user2!.id}');
+                      log('accountType = ${controller.chatItemModel!.accountType.value}');
+                      if (snapshot.hasData) {
+                        log('profile = ${profileSnapshot.data!.data()}');
+                      }
                       return Row(
                         children: [
                           IconButton(

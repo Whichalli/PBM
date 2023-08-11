@@ -98,8 +98,8 @@ class UpcomingBooking1Screen extends GetWidget<UpcomingBooking1Controller> {
                     );
                   } else {
                     var resp = snapshot.data!.docs;
-                    Rx<List<QueryDocumentSnapshot<Map<String, dynamic>>>>
-                        data = Rx([]);
+                    Rx<List<QueryDocumentSnapshot<Map<String, dynamic>>>> data =
+                        Rx([]);
                     data.value = resp;
                     // for (var element in resp) {
                     //   data
@@ -130,8 +130,7 @@ class UpcomingBooking1Screen extends GetWidget<UpcomingBooking1Controller> {
                                     ),
                                     Expanded(
                                       child: TextFormField(
-                                        controller:
-                                            controller.searchController,
+                                        controller: controller.searchController,
                                         onChanged: (value) {
                                           if (controller.searchController.text
                                               .isNotEmpty) {
@@ -169,8 +168,8 @@ class UpcomingBooking1Screen extends GetWidget<UpcomingBooking1Controller> {
                                       onPressed: () {
                                         onTapRownurselist();
                                       },
-                                      icon: const Icon(
-                                          Icons.filter_list_rounded),
+                                      icon:
+                                          const Icon(Icons.filter_list_rounded),
                                       iconSize: 20,
                                       color: Colors.black26,
                                     ),
@@ -187,8 +186,7 @@ class UpcomingBooking1Screen extends GetWidget<UpcomingBooking1Controller> {
                                       (index) => GestureDetector(
                                         onTap: () {
                                           controller.bookEmployee(
-                                              employeeId:
-                                                  data.value[index].id);
+                                              employeeId: data.value[index].id);
                                         },
                                         child: Container(
                                             margin: getMargin(
@@ -207,8 +205,7 @@ class UpcomingBooking1Screen extends GetWidget<UpcomingBooking1Controller> {
                                                         BorderRadiusStyle
                                                             .roundedBorder30),
                                             child: Column(
-                                                mainAxisSize:
-                                                    MainAxisSize.min,
+                                                mainAxisSize: MainAxisSize.min,
                                                 mainAxisAlignment:
                                                     MainAxisAlignment.start,
                                                 children: [
@@ -221,17 +218,14 @@ class UpcomingBooking1Screen extends GetWidget<UpcomingBooking1Controller> {
                                                               .start,
                                                       children: [
                                                         SizedBox(
-                                                            height:
-                                                                getSize(50),
-                                                            width:
-                                                                getSize(50),
+                                                            height: getSize(50),
+                                                            width: getSize(50),
                                                             // margin: getMargin(
                                                             //     top: 10,
                                                             //     bottom: 12),
                                                             child: Stack(
-                                                                alignment:
-                                                                    Alignment
-                                                                        .bottomRight,
+                                                                alignment: Alignment
+                                                                    .bottomRight,
                                                                 children: [
                                                                   CustomImageView(
                                                                       onTap:
@@ -243,7 +237,8 @@ class UpcomingBooking1Screen extends GetWidget<UpcomingBooking1Controller> {
                                                                               'data': data.value[index].data()
                                                                             });
                                                                       },
-                                                                      url: data.value[index]
+                                                                      url: data.value[
+                                                                              index]
                                                                           [
                                                                           'photoUrl'],
                                                                       imagePath:
@@ -253,10 +248,15 @@ class UpcomingBooking1Screen extends GetWidget<UpcomingBooking1Controller> {
                                                                       //     44),
                                                                       // width: getSize(
                                                                       //     44),
-                                                                      radius: BorderRadius.circular(getHorizontalSize(
-                                                                          100)),
+                                                                      border: Border.all(
+                                                                          color: Colors
+                                                                              .black87),
+                                                                      radius: BorderRadius
+                                                                          .circular(getHorizontalSize(
+                                                                              100)),
                                                                       alignment:
-                                                                          Alignment.center),
+                                                                          Alignment
+                                                                              .center),
                                                                   Align(
                                                                       alignment:
                                                                           Alignment
@@ -272,9 +272,8 @@ class UpcomingBooking1Screen extends GetWidget<UpcomingBooking1Controller> {
                                                                               border: Border.all(color: ColorConstant.whiteA700, width: getHorizontalSize(1), strokeAlign: strokeAlignCenter))))
                                                                 ])),
                                                         Padding(
-                                                            padding:
-                                                                getPadding(
-                                                                    left: 21),
+                                                            padding: getPadding(
+                                                                left: 21),
                                                             child: Column(
                                                                 crossAxisAlignment:
                                                                     CrossAxisAlignment
@@ -304,8 +303,8 @@ class UpcomingBooking1Screen extends GetWidget<UpcomingBooking1Controller> {
                                                                             .assured_workload_outlined,
                                                                         size:
                                                                             15,
-                                                                        color:
-                                                                            Colors.black45,
+                                                                        color: Colors
+                                                                            .black45,
                                                                       ),
                                                                       const SizedBox(
                                                                         width:
@@ -315,10 +314,13 @@ class UpcomingBooking1Screen extends GetWidget<UpcomingBooking1Controller> {
                                                                           "${data.value[index].data()['profession'] ?? '___ ___ ___'}"
                                                                               .tr
                                                                               .capitalize!,
-                                                                          overflow:
-                                                                              TextOverflow.ellipsis,
-                                                                          textAlign: TextAlign.left,
-                                                                          style: AppStyle.txtOpenSansRomanSemiBold16Gray800.copyWith(fontSize: 12, color: Colors.black45)),
+                                                                          overflow: TextOverflow
+                                                                              .ellipsis,
+                                                                          textAlign: TextAlign
+                                                                              .left,
+                                                                          style: AppStyle.txtOpenSansRomanSemiBold16Gray800.copyWith(
+                                                                              fontSize: 12,
+                                                                              color: Colors.black45)),
                                                                     ],
                                                                   ),
                                                                   const SizedBox(
@@ -327,30 +329,44 @@ class UpcomingBooking1Screen extends GetWidget<UpcomingBooking1Controller> {
                                                                   Row(
                                                                     children: [
                                                                       Container(
-                                                                          margin:
-                                                                              getMargin(right: 5, bottom: 2),
-                                                                          child: CustomImageView(
-                                                                            svgPath: ImageConstant.imgLocation,
-                                                                            width: 15,
-                                                                            height: 15,
+                                                                          margin: getMargin(
+                                                                              right:
+                                                                                  5,
+                                                                              bottom:
+                                                                                  2),
+                                                                          child:
+                                                                              CustomImageView(
+                                                                            svgPath:
+                                                                                ImageConstant.imgLocation,
+                                                                            width:
+                                                                                15,
+                                                                            height:
+                                                                                15,
                                                                           )),
-                                                                      Text("${data.value[index].data()['address'] ?? '___ ___ ___'}".tr.capitalize!,
-                                                                          overflow: TextOverflow
-                                                                              .ellipsis,
-                                                                          softWrap:
-                                                                              true,
-                                                                          textAlign:
-                                                                              TextAlign.left,
-                                                                          style: AppStyle.txtOpenSansRomanSemiBold16Gray800.copyWith(fontSize: 12, color: Colors.black45)),
+                                                                      SizedBox(
+                                                                        width: size.width *
+                                                                            0.4,
+                                                                        child: Text(
+                                                                            "${data.value[index].data()['address'] ?? '___ ___ ___'}"
+                                                                                .tr
+                                                                                .capitalize!,
+                                                                            overflow: TextOverflow
+                                                                                .ellipsis,
+                                                                            maxLines:
+                                                                                1,
+                                                                            softWrap:
+                                                                                true,
+                                                                            textAlign:
+                                                                                TextAlign.left,
+                                                                            style: AppStyle.txtOpenSansRomanSemiBold16Gray800.copyWith(fontSize: 12, color: Colors.black45)),
+                                                                      ),
                                                                     ],
                                                                   ),
                                                                 ])),
                                                         const Spacer(),
                                                         Padding(
-                                                            padding:
-                                                                getPadding(
-                                                                    bottom:
-                                                                        27),
+                                                            padding: getPadding(
+                                                                bottom: 27),
                                                             child: Column(
                                                                 crossAxisAlignment:
                                                                     CrossAxisAlignment
@@ -364,15 +380,18 @@ class UpcomingBooking1Screen extends GetWidget<UpcomingBooking1Controller> {
                                                                           MainAxisAlignment
                                                                               .end,
                                                                       crossAxisAlignment:
-                                                                          CrossAxisAlignment.start,
+                                                                          CrossAxisAlignment
+                                                                              .start,
                                                                       children: [
                                                                         CustomImageView(
-                                                                            svgPath: ImageConstant.imgStar,
+                                                                            svgPath:
+                                                                                ImageConstant.imgStar,
                                                                             height: getSize(14),
                                                                             width: getSize(14),
                                                                             margin: getMargin(top: 2, bottom: 3)),
                                                                         Padding(
-                                                                            padding: getPadding(left: 5),
+                                                                            padding:
+                                                                                getPadding(left: 5),
                                                                             child: Text("lbl_4_0".tr, overflow: TextOverflow.ellipsis, textAlign: TextAlign.left, style: AppStyle.txtOpenSansRomanSemiBold14PinkA100))
                                                                       ]),
                                                                   Padding(
@@ -382,10 +401,12 @@ class UpcomingBooking1Screen extends GetWidget<UpcomingBooking1Controller> {
                                                                       child: Text(
                                                                           "lbl_12"
                                                                               .tr,
-                                                                          overflow:
-                                                                              TextOverflow.ellipsis,
-                                                                          textAlign: TextAlign.left,
-                                                                          style: AppStyle.txtOpenSansRomanSemiBold10Gray600))
+                                                                          overflow: TextOverflow
+                                                                              .ellipsis,
+                                                                          textAlign: TextAlign
+                                                                              .left,
+                                                                          style:
+                                                                              AppStyle.txtOpenSansRomanSemiBold10Gray600))
                                                                 ]))
                                                       ]),
                                                   Padding(
@@ -416,8 +437,9 @@ class UpcomingBooking1Screen extends GetWidget<UpcomingBooking1Controller> {
                                                                       .center,
                                                               decoration: BoxDecoration(
                                                                   borderRadius:
-                                                                      BorderRadius.circular(
-                                                                          20),
+                                                                      BorderRadius
+                                                                          .circular(
+                                                                              20),
                                                                   color: ColorConstant
                                                                       .whiteA70001),
                                                               child: Row(
@@ -439,16 +461,17 @@ class UpcomingBooking1Screen extends GetWidget<UpcomingBooking1Controller> {
                                                                   Padding(
                                                                       padding:
                                                                           getPadding(
-                                                                        left:
-                                                                            5,
+                                                                        left: 5,
                                                                       ),
                                                                       child: Text(
                                                                           "lbl_book_now"
                                                                               .tr,
-                                                                          overflow:
-                                                                              TextOverflow.ellipsis,
-                                                                          textAlign: TextAlign.left,
-                                                                          style: AppStyle.txtOpenSansRomanSemiBold12PinkA100)),
+                                                                          overflow: TextOverflow
+                                                                              .ellipsis,
+                                                                          textAlign: TextAlign
+                                                                              .left,
+                                                                          style:
+                                                                              AppStyle.txtOpenSansRomanSemiBold12PinkA100)),
                                                                 ],
                                                               ),
                                                             ),
@@ -476,12 +499,15 @@ class UpcomingBooking1Screen extends GetWidget<UpcomingBooking1Controller> {
                                                                         'account':
                                                                             'parent',
                                                                         'partnerDetails': ChatItemModel(
-                                                                            chatId: '${data.value[index].id}-${Authentication.getCurrentUserId()}',
-                                                                            chatActive: true,
-                                                                            employeeId: data.value[index].id,
+                                                                            chatId:
+                                                                                '${data.value[index].id}-${Authentication.getCurrentUserId()}',
+                                                                            chatActive:
+                                                                                true,
+                                                                            employeeId:
+                                                                                data.value[index].id,
                                                                             lastMessage: '',
                                                                             parentId: Authentication.getCurrentUserId(),
-                                                                            accountType: 'parent',
+                                                                            accountType: 'employee',
                                                                             field: 'parent',
                                                                             unread: 0,
                                                                             time: ''),

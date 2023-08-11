@@ -21,13 +21,6 @@ class ParentDashboardScreenPage
     extends GetWidget<ParentDashboardScreenController> {
   ParentDashboardScreenPage({Key? key}) : super(key: key);
 
-  final List<Widget> _pages = [
-    const HomeOnboardingContainerScreen(),
-    const BookedNurseScreen(),
-    const ChatScreen(field: 'parentId'),
-    NoteTakingScreen(),
-    Container(),
-  ];
   final GlobalKey<ScaffoldState> _key = GlobalKey();
 
   @override
@@ -106,7 +99,7 @@ class ParentDashboardScreenPage
                 child: PageView(
               physics: const NeverScrollableScrollPhysics(),
               controller: controller.pageController,
-              children: _pages,
+              children: controller.pages,
             )),
           ],
         ),
@@ -119,7 +112,7 @@ class ParentDashboardScreenPage
                   color: ColorConstant.greenA100,
                   onTap: (index) {
                     controller.pageController.animateToPage(index,
-                        duration: const Duration(milliseconds: 250),
+                        duration: const Duration(milliseconds: 400),
                         curve: Curves.ease);
                     controller.currentPageIndex.value = index;
                   },

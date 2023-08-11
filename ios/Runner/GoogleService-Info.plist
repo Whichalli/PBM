@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>898476850188-rltfn8ea19aa5hfnepodvg9gij4eoj68.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.898476850188-rltfn8ea19aa5hfnepodvg9gij4eoj68</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>898476850188-b0qjckacnud91ttne26plcdtd3ilcnr0.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyAe1bDFCWyn8vd9QfDzTQ0X0C1Z6WBW-tc</string>
+	<key>GCM_SENDER_ID</key>
+	<string>898476850188</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.preciousbabiesandmums.pbmcare</string>
+	<key>PROJECT_ID</key>
+	<string>pbm-care-12d99</string>
+	<key>STORAGE_BUCKET</key>
+	<string>pbm-care-12d99.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:898476850188:ios:e11e7d0fdca0e7e73f0229</string>
+	<key>DATABASE_URL</key>
+	<string>https://pbm-care-12d99-default-rtdb.firebaseio.com</string>
+</dict>
+</plist>

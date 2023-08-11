@@ -39,7 +39,7 @@ target 'Runner' do
 end
 
 # Move this line outside of the post_install block
-pod 'flutter_login_facebook', '~> 1.4.0'
+#pod 'flutter_login_facebook', '~> 1.4.0'
 
 # Adjust the post_install block
 post_install do |installer|

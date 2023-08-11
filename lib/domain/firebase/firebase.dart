@@ -39,6 +39,8 @@ class Database {
       rethrow;
     }
   }
+
+  
   static CollectionReference<Map<String, dynamic>> readCollection(
       {required String parentTable,
       required String childTable,
@@ -109,6 +111,18 @@ class Database {
       rethrow;
     }
   }
+
+  
+  static Future<dynamic> delete(
+      {required String userId,
+      required String table}) async {
+    try {
+      await collection.collection(table).doc('/$userId').delete();
+    } catch (e) {
+      rethrow;
+    }
+  }
+
 
 
   static Future<dynamic> uploadFile(

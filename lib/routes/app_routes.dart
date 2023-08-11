@@ -107,6 +107,8 @@ import 'package:pbm_app/presentation/white_noise_page/white_noise_page.dart';
 
 import '../presentation/nurse_profile/binding/onboarding_two_binding.dart';
 import '../presentation/parent_page/binding/binding.dart';
+import '../presentation/parent_page/pages/booked_nurse/binding/booked_nurse.dart';
+import '../presentation/parent_page/pages/note_taking/binding/binding.dart';
 import '../presentation/white_noise_page/binding/binding.dart';
 import '../presentation/white_noise_page/now_playing/binding/now_playing_binding.dart';
 import '../presentation/white_noise_page/now_playing/now_playing_screen.dart';
@@ -360,6 +362,8 @@ class AppRoutes {
       bindings: [
         ParentDashboardBinding(),
         HomeOnboardingContainerBinding(),
+        BookedNurseBinding(),
+        NoteTakingScreenBinding(),
       ],
     ),
 

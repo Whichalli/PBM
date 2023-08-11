@@ -41,6 +41,10 @@ extension DateTimeExtension on DateTime {
     return daysInMonth[month - 1];
   }
 
+  toActualDate(){
+    return '$day ${months[month - 1]} $year';
+  }
+
   getDateDiffSec({DateTime? nextDate}) {
     DateTime now = DateTime.now();
     // int minutes =
@@ -257,3 +261,5 @@ double getTimeDifferent({required TimeOfDay start, required TimeOfDay end}) {
 }
 
 toTimeOfDay() {}
+
+

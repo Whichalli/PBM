@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -30,10 +28,9 @@ void main() async {
   if (acctType != null) {
     if (acctType == 'parent') {
       Get.offNamedUntil(
-        AppRoutes.homeOnboardingContainerScreen, (route) => false);
-    }else{
-      Get.offNamedUntil(
-        AppRoutes.dashboardScreen, (route) => false);
+          AppRoutes.homeOnboardingContainerScreen, (route) => false);
+    } else {
+      Get.offNamedUntil(AppRoutes.dashboardScreen, (route) => false);
     }
   }
 }
@@ -51,7 +48,7 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.pink),
       translations: AppLocalization(),
       locale: Get.deviceLocale, //for setting localization strings
-      fallbackLocale: Locale('en', 'US'),
+      fallbackLocale: const Locale('en', 'US'),
       title: 'PBM Care',
       initialBinding: InitialBindings(),
       initialRoute: AppRoutes.initialRoute,

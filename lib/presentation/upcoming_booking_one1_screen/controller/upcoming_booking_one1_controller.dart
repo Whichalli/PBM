@@ -53,18 +53,7 @@ class UpcomingBookingOne1Controller extends GetxController {
           },
           table: 'chat');
     }
-
-    //      final employeeParentBookingId =
-    //     '${Get.arguments['employeeId ']}-${Authentication.getCurrentUserId()}';
-    // await Database.writeCollection(
-    //     id: employeeParentBookingId,
-    //     data: Hive.box('booking').get('data'),
-    //     parentTable: 'bookings',
-    //     childTable: 'bookingData');
-    // Get.offAndToNamed(
-    //   AppRoutes.upcomingBookingScreen,
-    //   arguments: {'employeeId': Get.arguments['employeeId']}
-    // );
+    
     Get.offAndToNamed(
       AppRoutes.upcomingBookingScreen,
     );

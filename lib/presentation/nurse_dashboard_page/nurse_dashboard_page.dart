@@ -114,7 +114,10 @@ class NurseDashboardScreenPage
                   },
                   items: [
                     BottomBarButtonModel(
-                        icon: const Icon(Icons.house_outlined),
+                        icon: const Icon(
+                          Icons.house_outlined,
+                          // weight: 6,
+                        ),
                         text: 'Home',
                         activeIcon: const Icon(Icons.house)),
                     BottomBarButtonModel(

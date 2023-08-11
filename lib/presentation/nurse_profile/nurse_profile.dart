@@ -151,7 +151,7 @@ class NurseProfileDetails extends GetWidget<NurseProfileDetailsController> {
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Text('Patients',
+                                Text('Appointments',
                                     textAlign: TextAlign.center,
                                     overflow: TextOverflow.ellipsis,
                                     style:

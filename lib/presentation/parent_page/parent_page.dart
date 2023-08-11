@@ -3,7 +3,9 @@ import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:pbm_app/domain/firebase/authentication.dart';
+import 'package:pbm_app/presentation/parent_page/pages/booked_nurse/booked_nurse.dart';
 import 'package:pbm_app/presentation/parent_page/pages/home_onboarding_container_screen/home_onboarding_container_screen.dart';
+import 'package:pbm_app/presentation/parent_page/pages/note_taking/note_taking_screen.dart';
 import 'package:pbm_app/widgets/app_bar/bottom_bar/bottom_navbar.dart';
 
 import '../../core/app_export.dart';
@@ -21,8 +23,9 @@ class ParentDashboardScreenPage
 
   final List<Widget> _pages = [
     const HomeOnboardingContainerScreen(),
+    const BookedNurseScreen(),
     const ChatScreen(field: 'parentId'),
-    Container(),
+    NoteTakingScreen(),
     Container(),
   ];
   final GlobalKey<ScaffoldState> _key = GlobalKey();
@@ -37,6 +40,8 @@ class ParentDashboardScreenPage
           profileRoutes: AppRoutes.upcomingBookingFourScreen,
         ),
         appBar: CustomAppBar(
+          elevation: 1,
+          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
           height: getVerticalSize(60),
           leadingWidth: 50,
           leading: AppbarImage(
@@ -59,7 +64,7 @@ class ParentDashboardScreenPage
                   return !snapshot.hasData
                       ? CircularProgressIndicator(
                           color: ColorConstant.pinkA100,
-                          strokeWidth: 2,
+                          strokeWidth: .1,
                         )
                       : Padding(
                           padding: const EdgeInsets.all(8.0),
@@ -124,17 +129,17 @@ class ParentDashboardScreenPage
                         text: 'Home',
                         activeIcon: const Icon(Icons.house)),
                     BottomBarButtonModel(
+                        activeIcon: const Icon(Icons.handshake),
+                        icon: const Icon(Icons.handshake_outlined),
+                        text: 'Appointments'),
+                    BottomBarButtonModel(
                         activeIcon: const Icon(Icons.chat),
                         icon: const Icon(Icons.chat_outlined),
-                        text: 'Chat'),
+                        text: 'Messages'),
                     BottomBarButtonModel(
-                        activeIcon: const Icon(Icons.book_online),
-                        icon: const Icon(Icons.book_online_outlined),
-                        text: 'Bookings'),
-                    BottomBarButtonModel(
-                        activeIcon: const Icon(Icons.account_circle_rounded),
-                        icon: const Icon(Icons.account_circle_outlined),
-                        text: 'Profile'),
+                        activeIcon: const Icon(Icons.note_alt_rounded),
+                        icon: const Icon(Icons.note_alt_outlined),
+                        text: 'Notes'),
                   ],
                 )),
           ),

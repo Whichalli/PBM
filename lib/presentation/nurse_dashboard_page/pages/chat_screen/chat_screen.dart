@@ -55,7 +55,7 @@ class ChatScreen extends GetWidget<ChatController> {
                   if (!snapshot.hasData) {
                     return LinearProgressIndicator(
                       color: ColorConstant.pinkA100,
-                      minHeight: 3,
+                      minHeight: .1,
                     );
                   }
                   data = snapshot.data!.docs;
@@ -76,7 +76,6 @@ class ChatScreen extends GetWidget<ChatController> {
                             user.putIfAbsent('chatId', () => data[index].id);
                             user.putIfAbsent('field', () => field);
                             user.putIfAbsent('chatActive', () => true);
-                            
 
                             ChatItemModel model = ChatItemModel.fromMap(user);
                             model.senderId.value =

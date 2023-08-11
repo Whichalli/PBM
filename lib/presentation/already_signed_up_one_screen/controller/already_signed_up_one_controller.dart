@@ -113,6 +113,7 @@ class AlreadySignedUpOneController extends GetxController {
       'regNum': regNumController.text,
       'address': addressController.text,
       'photoUrl': '',
+      'password': passwordController.text,
       'dob': dobController.text,
       'profession': radioGroup.value,
       'experience': expController.text,

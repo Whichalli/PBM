@@ -128,6 +128,7 @@ class ChatItemWidget extends StatelessWidget {
                           child: Text(
                             chatItemModel.lastMessage.value,
                             overflow: TextOverflow.ellipsis,
+                            maxLines: 1,
                             textAlign: TextAlign.left,
                             style: AppStyle.txtOpenSans12,
                           ),

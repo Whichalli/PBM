@@ -83,7 +83,8 @@ class AppDrawer extends StatelessWidget {
                 style: AppStyle.txtAlegreyaSansBold14
                     .copyWith(fontSize: 18, color: Colors.black54)),
             onTap: () {
-              Get.offAndToNamed(AppRoutes.homeOnboardingContainerScreen);
+              Get.back();
+              // Get.offAndToNamed(AppRoutes.homeOnboardingContainerScreen);
             },
           ),
           ListTile(
@@ -95,7 +96,8 @@ class AppDrawer extends StatelessWidget {
                 style: AppStyle.txtAlegreyaSansBold14
                     .copyWith(fontSize: 18, color: Colors.black54)),
             onTap: () {
-              Get.offAndToNamed(AppRoutes.homeOnboardingContainerScreen);
+              Get.back();
+              // Get.offAndToNamed(AppRoutes.homeOnboardingContainerScreen);
             },
           ),
           ListTile(
@@ -107,7 +109,8 @@ class AppDrawer extends StatelessWidget {
                 style: AppStyle.txtAlegreyaSansBold14
                     .copyWith(fontSize: 18, color: Colors.black54)),
             onTap: () {
-              Get.offAndToNamed(AppRoutes.homeOnboardingContainerScreen);
+              Get.back();
+              // Get.offAndToNamed(AppRoutes.homeOnboardingContainerScreen);
             },
           ),
           ListTile(
@@ -119,7 +122,8 @@ class AppDrawer extends StatelessWidget {
                 style: AppStyle.txtAlegreyaSansBold14
                     .copyWith(fontSize: 18, color: Colors.black54)),
             onTap: () {
-              Get.offAndToNamed(AppRoutes.homeOnboardingContainerScreen);
+              Get.back();
+              // Get.offAndToNamed(AppRoutes.homeOnboardingContainerScreen);
             },
           ),
           ListTile(
@@ -131,7 +135,8 @@ class AppDrawer extends StatelessWidget {
                 style: AppStyle.txtAlegreyaSansBold14
                     .copyWith(fontSize: 18, color: Colors.black54)),
             onTap: () {
-              Get.offAndToNamed(AppRoutes.homeOnboardingContainerScreen);
+              Get.back();
+              // Get.offAndToNamed(AppRoutes.homeOnboardingContainerScreen);
             },
           ),
           ListTile(
@@ -143,7 +148,8 @@ class AppDrawer extends StatelessWidget {
                 style: AppStyle.txtAlegreyaSansBold14
                     .copyWith(fontSize: 18, color: Colors.black54)),
             onTap: () {
-              Get.offAndToNamed(AppRoutes.homeOnboardingContainerScreen);
+              Get.back();
+              // Get.offAndToNamed(AppRoutes.homeOnboardingContainerScreen);
             },
           ),
           ListTile(
@@ -157,7 +163,8 @@ class AppDrawer extends StatelessWidget {
                   .copyWith(fontSize: 18, color: Colors.black54),
             ),
             onTap: () {
-              Get.offAndToNamed(AppRoutes.homeOnboardingContainerScreen);
+              Get.back();
+              // Get.offAndToNamed(AppRoutes.homeOnboardingContainerScreen);
             },
           ),
           ListTile(

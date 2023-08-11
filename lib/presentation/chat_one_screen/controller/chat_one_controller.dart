@@ -44,7 +44,9 @@ class ChatOneController extends GetxController {
   }
 
   isChatActive({required List<Map<String, dynamic>> bookingData}) {
-    for (var element in bookingData) {}
+    for (var element in bookingData) {
+
+    }
   }
 
   onOpenMessage({required Map<String, dynamic> chat}) {
@@ -79,13 +81,8 @@ class ChatOneController extends GetxController {
     chatData['lastSentTime'] = message.createdAt;
     chatData['isDocument'] = (message.medias != null);
     chatData['messages'] = allMessages;
-
-    // String senderId = chatData['senderId'];
-    // int unreadCount = chatData['unread'];
-
-    log('senderId = $senderId ...... ${Authentication.getCurrentUserId()}');
+    
     if (senderId == Authentication.getCurrentUserId() || !read) {
-      log('=============== chatData = $chatData');
       chatData['unread'] = (messageCount + 1);
     }
     chatData['read'] = false;

@@ -40,9 +40,9 @@ class ChatOneScreen extends GetWidget<ChatOneController> {
                       //     : '';
                       log('user2 Id = ${controller.user2!.id}');
                       log('accountType = ${controller.chatItemModel!.accountType.value}');
-                      if (snapshot.hasData) {
-                        log('profile = ${profileSnapshot.data!.data()}');
-                      }
+                      // if (snapshot.hasData) {
+                      //   log('profile = ${profileSnapshot.data!.data()}');
+                      // }
                       return Row(
                         children: [
                           IconButton(

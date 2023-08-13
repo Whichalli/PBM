@@ -8,7 +8,7 @@ class ChatItemModel {
   final Rx<String> parentId = Rx("");
   final Rx<String> chatId = Rx("");
   final Rx<String> accountType = Rx("");
-  final Rx<String> time = Rx("");
+  final Rx<DateTime> time = Rx(DateTime.now());
   final Rx<int> unread = Rx(0);
   final Rx<String> lastMessage = Rx("");
   final Rx<String> field = Rx("");
@@ -16,7 +16,7 @@ class ChatItemModel {
   final Rx<bool> chatActive = Rx(true);
   final Rx<String> senderId = Rx('');
   ChatItemModel({
-    required String time,
+    required DateTime time,
     required int unread,
     required String lastMessage,
     required String parentId,
@@ -48,6 +48,6 @@ class ChatItemModel {
       lastMessage: data['lastMessage'],
       parentId: data['parentId'],
       employeeId: data['employeeId'],
-      time: (data['lastSentTime'] as Timestamp).toDate().getDate(),
+      time: (data['lastSentTime'] as Timestamp).toDate(),
       unread: data['unread']);
 }

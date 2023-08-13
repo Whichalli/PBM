@@ -70,26 +70,6 @@ class ParentDashboardScreenPage
                             imagePath: ImageConstant.imageNotFound,
                           ),
                         );
-                  // GestureDetector(
-                  //   onTap: () {
-                  //     Authentication.logout();
-                  //   },
-                  //   child: Padding(
-                  //     padding: const EdgeInsets.all(4.0),
-                  //     child: Container(
-                  //       width: 45,
-                  //       height: 45,
-                  //       margin: getMargin(
-                  //         right: 18,
-                  //       ),
-                  //       decoration: BoxDecoration(
-                  //           borderRadius: BorderRadius.circular(1000),
-                  //           image: DecorationImage(
-                  //               fit: BoxFit.cover,
-                  //               image: NetworkImage(data!['photoUrl'] ?? ''))),
-                  //     ),
-                  //   ),
-                  // );
                 }))
           ],
         ),
@@ -111,7 +91,7 @@ class ParentDashboardScreenPage
                   index: controller.currentPageIndex.value,
                   color: ColorConstant.greenA100,
                   onTap: (index) {
-                    controller.pageController.animateToPage(index,
+                    controller.pageController?.animateToPage(index,
                         duration: const Duration(milliseconds: 400),
                         curve: Curves.ease);
                     controller.currentPageIndex.value = index;

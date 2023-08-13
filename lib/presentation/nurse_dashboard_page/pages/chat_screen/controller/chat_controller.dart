@@ -14,10 +14,12 @@ class ChatController extends GetxController {
 
   Rx<ChatModel> chatModelObj = ChatModel().obs;
 
-  Stream<QuerySnapshot<Map<String, dynamic>>> chatList({required String field}) async* {
+  Stream<QuerySnapshot<Map<String, dynamic>>> chatList(
+      {required String field}) async* {
     var data = FirebaseFirestore.instance
         .collection('chat')
         .where(field, isEqualTo: Authentication.getCurrentUserId())
+        .orderBy('lastSentTime', descending: true)
         .snapshots();
     yield* data;
   }

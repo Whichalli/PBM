@@ -9,9 +9,11 @@ import '../pages/home_onboarding_container_screen/home_onboarding_container_scre
 import '../pages/note_taking/note_taking_screen.dart';
 
 class ParentDashboardScreenController extends GetxController {
+  PageController? pageController;
   @override
   void onInit() {
     super.onInit();
+    pageController = PageController(initialPage: 0);
   }
 
   
@@ -23,7 +25,6 @@ class ParentDashboardScreenController extends GetxController {
     Container(),
   ];
 
-  final pageController = PageController(initialPage: 0);
   Rx<int> currentPageIndex = Rx(0);
   Rx<String> userId = Rx(Authentication.getCurrentUserId() ?? '');
   final chatController = Get.put<ChatController>(ChatController());

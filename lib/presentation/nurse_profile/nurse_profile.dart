@@ -140,47 +140,52 @@ class NurseProfileDetails extends GetWidget<NurseProfileDetailsController> {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         // mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Container(
-                            height: 90,
-                            width: 90,
-                            padding: getPadding(all: 12),
-                            alignment: Alignment.center,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(12),
-                                color: ColorConstant.pinkA10019),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text('Appointments',
-                                    textAlign: TextAlign.center,
-                                    overflow: TextOverflow.ellipsis,
-                                    style:
-                                        AppStyle.txtAlegreyaSansBold14.copyWith(
-                                      fontFamily: 'poppins',
-                                      color: ColorConstant.pinkA100,
-                                    )),
-                                StreamBuilder<
-                                        QuerySnapshot<Map<String, dynamic>>>(
-                                    stream: FirebaseFirestore.instance
-                                        .collection('bookings')
-                                        .where('employeeId',
-                                            isEqualTo: controller.employeeId)
-                                        .snapshots(),
-                                    builder: (context, snapshot) {
-                                      String count = '...';
-                                      if (snapshot.hasData) {
-                                        count = '${snapshot.data!.docs.length}';
-                                      }
-                                      return Text(count,
-                                          textAlign: TextAlign.center,
-                                          overflow: TextOverflow.ellipsis,
-                                          style: AppStyle.txtAlegreyaSansBold14
-                                              .copyWith(
-                                                  fontFamily: 'poppins',
-                                                  color: ColorConstant.pinkA700,
-                                                  fontSize: 14));
-                                    }),
-                              ],
+                          Expanded(
+                            child: Container(
+                              height: 90,
+                              width: 120,
+                              padding: getPadding(all: 12),
+                              alignment: Alignment.center,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(12),
+                                  color: ColorConstant.pinkA10019),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text('Appointments',
+                                      textAlign: TextAlign.center,
+                                      overflow: TextOverflow.ellipsis,
+                                      style: AppStyle.txtAlegreyaSansBold14
+                                          .copyWith(
+                                        fontFamily: 'poppins',
+                                        color: ColorConstant.pinkA100,
+                                      )),
+                                  StreamBuilder<
+                                          QuerySnapshot<Map<String, dynamic>>>(
+                                      stream: FirebaseFirestore.instance
+                                          .collection('bookings')
+                                          .where('employeeId',
+                                              isEqualTo: controller.employeeId)
+                                          .snapshots(),
+                                      builder: (context, snapshot) {
+                                        String count = '...';
+                                        if (snapshot.hasData) {
+                                          count =
+                                              '${snapshot.data!.docs.length}';
+                                        }
+                                        return Text(count,
+                                            textAlign: TextAlign.center,
+                                            overflow: TextOverflow.ellipsis,
+                                            style: AppStyle
+                                                .txtAlegreyaSansBold14
+                                                .copyWith(
+                                                    fontFamily: 'poppins',
+                                                    color:
+                                                        ColorConstant.pinkA700,
+                                                    fontSize: 16));
+                                      }),
+                                ],
+                              ),
                             ),
                           ),
                           const SizedBox(
@@ -188,7 +193,7 @@ class NurseProfileDetails extends GetWidget<NurseProfileDetailsController> {
                           ),
                           Container(
                             height: 90,
-                            width: 90,
+                            width: 120,
                             padding: getPadding(all: 12),
                             alignment: Alignment.center,
                             decoration: BoxDecoration(
@@ -214,7 +219,7 @@ class NurseProfileDetails extends GetWidget<NurseProfileDetailsController> {
                                         .copyWith(
                                             fontFamily: 'poppins',
                                             color: ColorConstant.pinkA700,
-                                            fontSize: 14)),
+                                            fontSize: 16)),
                               ],
                             ),
                           ),

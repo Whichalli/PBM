@@ -76,15 +76,15 @@ class HomeScreen extends GetWidget<HomeController> {
                         width: getSize(32),
                         margin: getMargin(top: 3, bottom: 3)),
                   ),
-                  CustomButton2(
-                    text: "lbl_note".tr,
-                    onTap: () => onTapNote(),
-                    icon: CustomImageView(
-                        svgPath: ImageConstant.imgMdiplay,
-                        height: getSize(32),
-                        width: getSize(32),
-                        margin: getMargin(top: 3, bottom: 3)),
-                  ),
+                  // CustomButton2(
+                  //   text: "lbl_note".tr,
+                  //   onTap: () => onTapNote(),
+                  //   icon: CustomImageView(
+                  //       svgPath: ImageConstant.imgMdiplay,
+                  //       height: getSize(32),
+                  //       width: getSize(32),
+                  //       margin: getMargin(top: 3, bottom: 3)),
+                  // ),
                   CustomButton2(
                     text: "lbl_pumping".tr,
                     onTap: () => onTapPumpig(),

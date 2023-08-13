@@ -510,7 +510,7 @@ class UpcomingBooking1Screen extends GetWidget<UpcomingBooking1Controller> {
                                                                             accountType: 'employee',
                                                                             field: 'parent',
                                                                             unread: 0,
-                                                                            time: ''),
+                                                                            time: DateTime.now()),
                                                                       });
                                                                 },
                                                                 height: 48,

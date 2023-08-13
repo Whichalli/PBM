@@ -139,19 +139,19 @@ class AppDrawer extends StatelessWidget {
               // Get.offAndToNamed(AppRoutes.homeOnboardingContainerScreen);
             },
           ),
-          ListTile(
-            leading: const Icon(
-              Icons.note_alt_outlined,
-              size: 30,
-            ),
-            title: Text('Note',
-                style: AppStyle.txtAlegreyaSansBold14
-                    .copyWith(fontSize: 18, color: Colors.black54)),
-            onTap: () {
-              Get.back();
-              // Get.offAndToNamed(AppRoutes.homeOnboardingContainerScreen);
-            },
-          ),
+          // ListTile(
+          //   leading: const Icon(
+          //     Icons.note_alt_outlined,
+          //     size: 30,
+          //   ),
+          //   title: Text('Note',
+          //       style: AppStyle.txtAlegreyaSansBold14
+          //           .copyWith(fontSize: 18, color: Colors.black54)),
+          //   onTap: () {
+          //     Get.back();
+          //     // Get.offAndToNamed(AppRoutes.homeOnboardingContainerScreen);
+          //   },
+          // ),
           ListTile(
             leading: const Icon(
               Icons.verified_outlined,

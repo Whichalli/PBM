@@ -9,8 +9,8 @@ import 'package:pbm_app/widgets/custom_radio_button.dart';
 import 'package:pbm_app/widgets/custom_text_form_field.dart';
 
 class BookingStepTwoScreen extends GetWidget<BookingStepTwoController> {
-  const BookingStepTwoScreen({Key? key}) : super(key: key);
-
+  BookingStepTwoScreen({Key? key}) : super(key: key);
+  final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,445 +39,504 @@ class BookingStepTwoScreen extends GetWidget<BookingStepTwoController> {
         body: Container(
             width: double.maxFinite,
             padding: getPadding(top: 6, bottom: 6, left: 16, right: 16),
-            child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Align(
-                      alignment: Alignment.center,
-                      child: Padding(
-                          padding: getPadding(left: 25, right: 19),
-                          child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                GestureDetector(
-                                    onTap: () {
-                                      onTapTxtTime();
-                                    },
-                                    child: Padding(
-                                        padding: getPadding(top: 10, bottom: 9),
-                                        child: Text("lbl_time".tr,
-                                            overflow: TextOverflow.ellipsis,
-                                            textAlign: TextAlign.left,
-                                            style: AppStyle.txtOpenSans16))),
-                                Spacer(),
-                                CustomButton(
-                                    height: getVerticalSize(35),
-                                    width: getHorizontalSize(90),
-                                    text: "lbl_details".tr,
-                                    variant: ButtonVariant.OutlinePinkA100_2,
-                                    shape: ButtonShape.RoundedBorder8,
-                                    padding: ButtonPadding.PaddingAll9,
-                                    fontStyle: ButtonFontStyle.OpenSans16),
+            child: Form(
+              key: _formKey,
+              child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Align(
+                        alignment: Alignment.center,
+                        child: Padding(
+                            padding: getPadding(left: 25, right: 19),
+                            child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  GestureDetector(
+                                      onTap: () {
+                                        onTapTxtTime();
+                                      },
+                                      child: Padding(
+                                          padding:
+                                              getPadding(top: 10, bottom: 9),
+                                          child: Text("lbl_time".tr,
+                                              overflow: TextOverflow.ellipsis,
+                                              textAlign: TextAlign.left,
+                                              style: AppStyle.txtOpenSans16))),
+                                  Spacer(),
+                                  CustomButton(
+                                      height: getVerticalSize(35),
+                                      width: getHorizontalSize(90),
+                                      text: "lbl_details".tr,
+                                      variant: ButtonVariant.OutlinePinkA100_2,
+                                      shape: ButtonShape.RoundedBorder8,
+                                      padding: ButtonPadding.PaddingAll9,
+                                      fontStyle: ButtonFontStyle.OpenSans16),
+                                  Spacer(),
+                                  Padding(
+                                      padding: getPadding(top: 10, bottom: 9),
+                                      child: Text("lbl_finish".tr,
+                                          overflow: TextOverflow.ellipsis,
+                                          textAlign: TextAlign.left,
+                                          style: AppStyle.txtOpenSans16))
+                                ]))),
+                    Divider(
+                        height: getVerticalSize(1),
+                        thickness: getVerticalSize(1),
+                        color: ColorConstant.pinkA10019),
+                    Expanded(
+                        child: SingleChildScrollView(
+                      physics: const BouncingScrollPhysics(),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Padding(
+                              padding: getPadding(top: 20, bottom: 8),
+                              child: Text("Appointment Title".tr,
+                                  overflow: TextOverflow.ellipsis,
+                                  textAlign: TextAlign.left,
+                                  style: AppStyle.txtOpenSansRomanSemiBold15)),
+                          CustomTextFormField(
+                            autofocus: false,
+                            hintText: 'My sick baby',
+                            padding: TextFormFieldPadding.PaddingT10,
+                            shape: TextFormFieldShape.RoundedBorder12,
+                            variant: TextFormFieldVariant.OutlineGray10001,
+                            fontStyle: TextFormFieldFontStyle.OpenSans14,
+                            controller: controller.titleController,
+                            validator: (value) {
+                              return (controller.titleController.text.isEmpty)
+                                  ? 'This field is required'
+                                  : null;
+                            },
+                          ),
+                          Padding(
+                              padding: getPadding(top: 20, bottom: 8),
+                              child: Text("Reason for Appointment".tr,
+                                  overflow: TextOverflow.ellipsis,
+                                  textAlign: TextAlign.left,
+                                  style: AppStyle.txtOpenSansRomanSemiBold15)),
+                          CustomTextFormField(
+                            autofocus: false,
+                            maxLines: 5,
+                            validator: (value) {
+                              return (controller
+                                      .descriptionController.text.isEmpty)
+                                  ? 'This field is required'
+                                  : null;
+                            },
+                            hintText: 'Details and reason for the appointment',
+                            padding: TextFormFieldPadding.PaddingT10,
+                            shape: TextFormFieldShape.RoundedBorder12,
+                            variant: TextFormFieldVariant.OutlineGray10001,
+                            fontStyle: TextFormFieldFontStyle.OpenSans14,
+                            controller: controller.descriptionController,
+                          ),
+                          Padding(
+                              padding: getPadding(top: 20),
+                              child: Text("msg_has_this_nurse_worked".tr,
+                                  overflow: TextOverflow.ellipsis,
+                                  textAlign: TextAlign.left,
+                                  style: AppStyle.txtOpenSansRomanSemiBold15)),
+                          Padding(
+                              padding: getPadding(left: 20, top: 12),
+                              child: Obx(() => Column(children: [
+                                    CustomRadioButton(
+                                        text: "lbl_yes".tr,
+                                        value: controller.bookingStepTwoModelObj
+                                            .value.radioList.value[0],
+                                        groupValue:
+                                            controller.radioWorkedB4.value,
+                                        fontStyle: RadioFontStyle
+                                            .OpenSansRomanRegular15,
+                                        onChange: (value) {
+                                          controller.radioWorkedB4.value =
+                                              value;
+                                        }),
+                                    CustomRadioButton(
+                                        text: "lbl_no".tr,
+                                        value: controller.bookingStepTwoModelObj
+                                            .value.radioList.value[1],
+                                        groupValue:
+                                            controller.radioWorkedB4.value,
+                                        margin: getMargin(top: 13, right: 3),
+                                        fontStyle: RadioFontStyle
+                                            .OpenSansRomanRegular15,
+                                        onChange: (value) {
+                                          controller.radioWorkedB4.value =
+                                              value;
+                                        })
+                                  ]))),
+                          Padding(
+                              padding: getPadding(top: 18),
+                              child: Divider(
+                                  height: getVerticalSize(1),
+                                  thickness: getVerticalSize(1),
+                                  color: ColorConstant.pinkA10019)),
+                          Padding(
+                              padding: getPadding(top: 20),
+                              child: Text("lbl_payment_process".tr,
+                                  overflow: TextOverflow.ellipsis,
+                                  textAlign: TextAlign.left,
+                                  style: AppStyle.txtOpenSansRomanSemiBold15)),
+                          Padding(
+                              padding: getPadding(left: 20, top: 11),
+                              child: Obx(() => Column(children: [
+                                    CustomRadioButton(
+                                        text: "lbl_after_visit".tr,
+                                        value: controller.bookingStepTwoModelObj
+                                            .value.radioList1.value[0],
+                                        groupValue:
+                                            controller.radioPayment.value,
+                                        margin: getMargin(right: 13),
+                                        fontStyle: RadioFontStyle
+                                            .OpenSansRomanRegular15,
+                                        onChange: (value) {
+                                          controller.radioPayment.value = value;
+                                        }),
+                                    CustomRadioButton(
+                                        text: "lbl_before_visit".tr,
+                                        value: controller.bookingStepTwoModelObj
+                                            .value.radioList1.value[1],
+                                        groupValue:
+                                            controller.radioPayment.value,
+                                        margin: getMargin(top: 14),
+                                        fontStyle: RadioFontStyle
+                                            .OpenSansRomanRegular15,
+                                        onChange: (value) {
+                                          controller.radioPayment.value = value;
+                                        })
+                                  ]))),
+                          Padding(
+                              padding: getPadding(top: 22),
+                              child: Text("msg_assessment_physical".tr,
+                                  overflow: TextOverflow.ellipsis,
+                                  textAlign: TextAlign.left,
+                                  style: AppStyle
+                                      .txtOpenSansRomanSemiBold15Bluegray90003)),
+                          Align(
+                              alignment: Alignment.center,
+                              child: Padding(
+                                  padding: getPadding(top: 11),
+                                  child: Divider(
+                                      height: getVerticalSize(1),
+                                      thickness: getVerticalSize(1),
+                                      color: ColorConstant.blueGray50,
+                                      indent: getHorizontalSize(23),
+                                      endIndent: getHorizontalSize(21)))),
+                          Padding(
+                              padding: getPadding(top: 1, right: 24),
+                              child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Obx(() => CustomRadioButton(
+                                        text: "lbl_bites".tr,
+                                        value: "lbl_bites".tr,
+                                        groupValue: controller.radioBites.value,
+                                        margin: getMargin(left: 22),
+                                        fontStyle: RadioFontStyle
+                                            .OpenSansRomanRegular15,
+                                        onChange: (value) {
+                                          controller.radioBites.value =
+                                              controller.radioBites.isEmpty
+                                                  ? value
+                                                  : '';
+                                        })),
+                                    Obx(() => CustomRadioButton(
+                                        text: "lbl_rashes".tr,
+                                        value: "lbl_rashes".tr,
+                                        groupValue:
+                                            controller.radioRashes.value,
+                                        // margin: getMargin(left: 78),
+                                        fontStyle: RadioFontStyle
+                                            .OpenSansRomanRegular15,
+                                        onChange: (value) {
+                                          controller.radioRashes.value =
+                                              controller.radioRashes.isEmpty
+                                                  ? value
+                                                  : '';
+                                        }))
+                                  ])),
+                          Padding(
+                              padding: getPadding(left: 22, top: 1, right: 24),
+                              child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Obx(() => CustomRadioButton(
+                                        text: "lbl_bruises".tr,
+                                        value: "lbl_bruises".tr,
+                                        groupValue:
+                                            controller.radioBruises.value,
+                                        fontStyle: RadioFontStyle
+                                            .OpenSansRomanRegular15,
+                                        onChange: (value) {
+                                          controller.radioBruises.value =
+                                              controller.radioBruises.isEmpty
+                                                  ? value
+                                                  : '';
+                                        })),
+                                    Obx(() => CustomRadioButton(
+                                        text: "msg_allergic_reactions".tr,
+                                        value: "msg_allergic_reactions".tr,
+                                        groupValue:
+                                            controller.radioAlergy.value,
+                                        fontStyle: RadioFontStyle
+                                            .OpenSansRomanRegular15,
+                                        onChange: (value) {
+                                          controller.radioAlergy.value =
+                                              controller.radioAlergy.isEmpty
+                                                  ? value
+                                                  : '';
+                                        }))
+                                  ])),
+                          Padding(
+                              padding: getPadding(left: 23, top: 1, right: 24),
+                              child: Row(children: [
+                                Padding(
+                                    padding: getPadding(bottom: 2),
+                                    child: Obx(() => CustomRadioButton(
+                                        text: "lbl_fiver".tr,
+                                        value: "lbl_fiver".tr,
+                                        groupValue: controller.radioFiver.value,
+                                        margin: getMargin(bottom: 2),
+                                        fontStyle: RadioFontStyle
+                                            .OpenSansRomanRegular15,
+                                        onChange: (value) {
+                                          controller.radioFiver.value =
+                                              controller.radioFiver.isEmpty
+                                                  ? value
+                                                  : '';
+                                        }))),
                                 Spacer(),
                                 Padding(
-                                    padding: getPadding(top: 10, bottom: 9),
-                                    child: Text("lbl_finish".tr,
-                                        overflow: TextOverflow.ellipsis,
-                                        textAlign: TextAlign.left,
-                                        style: AppStyle.txtOpenSans16))
-                              ]))),
-                  Divider(
-                      height: getVerticalSize(1),
-                      thickness: getVerticalSize(1),
-                      color: ColorConstant.pinkA10019),
-                  Expanded(
-                      child: SingleChildScrollView(
-                    physics: const BouncingScrollPhysics(),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Padding(
-                            padding: getPadding(top: 20),
-                            child: Text("msg_has_this_nurse_worked".tr,
-                                overflow: TextOverflow.ellipsis,
-                                textAlign: TextAlign.left,
-                                style: AppStyle.txtOpenSansRomanSemiBold15)),
-                        Padding(
-                            padding: getPadding(left: 20, top: 12),
-                            child: Obx(() => Column(children: [
-                                  CustomRadioButton(
-                                      text: "lbl_yes".tr,
-                                      value: controller.bookingStepTwoModelObj
-                                          .value.radioList.value[0],
-                                      groupValue:
-                                          controller.radioWorkedB4.value,
-                                      fontStyle:
-                                          RadioFontStyle.OpenSansRomanRegular15,
-                                      onChange: (value) {
-                                        controller.radioWorkedB4.value = value;
-                                      }),
-                                  CustomRadioButton(
-                                      text: "lbl_no".tr,
-                                      value: controller.bookingStepTwoModelObj
-                                          .value.radioList.value[1],
-                                      groupValue:
-                                          controller.radioWorkedB4.value,
-                                      margin: getMargin(top: 13, right: 3),
-                                      fontStyle:
-                                          RadioFontStyle.OpenSansRomanRegular15,
-                                      onChange: (value) {
-                                        controller.radioWorkedB4.value = value;
-                                      })
-                                ]))),
-                        Padding(
-                            padding: getPadding(top: 18),
-                            child: Divider(
-                                height: getVerticalSize(1),
-                                thickness: getVerticalSize(1),
-                                color: ColorConstant.pinkA10019)),
-                        Padding(
-                            padding: getPadding(top: 20),
-                            child: Text("lbl_payment_process".tr,
-                                overflow: TextOverflow.ellipsis,
-                                textAlign: TextAlign.left,
-                                style: AppStyle.txtOpenSansRomanSemiBold15)),
-                        Padding(
-                            padding: getPadding(left: 20, top: 11),
-                            child: Obx(() => Column(children: [
-                                  CustomRadioButton(
-                                      text: "lbl_after_visit".tr,
-                                      value: controller.bookingStepTwoModelObj
-                                          .value.radioList1.value[0],
-                                      groupValue: controller.radioPayment.value,
-                                      margin: getMargin(right: 13),
-                                      fontStyle:
-                                          RadioFontStyle.OpenSansRomanRegular15,
-                                      onChange: (value) {
-                                        controller.radioPayment.value = value;
-                                      }),
-                                  CustomRadioButton(
-                                      text: "lbl_before_visit".tr,
-                                      value: controller.bookingStepTwoModelObj
-                                          .value.radioList1.value[1],
-                                      groupValue: controller.radioPayment.value,
-                                      margin: getMargin(top: 14),
-                                      fontStyle:
-                                          RadioFontStyle.OpenSansRomanRegular15,
-                                      onChange: (value) {
-                                        controller.radioPayment.value = value;
-                                      })
-                                ]))),
-                        Padding(
-                            padding: getPadding(top: 22),
-                            child: Text("msg_assessment_physical".tr,
-                                overflow: TextOverflow.ellipsis,
-                                textAlign: TextAlign.left,
-                                style: AppStyle
-                                    .txtOpenSansRomanSemiBold15Bluegray90003)),
-                        Align(
-                            alignment: Alignment.center,
-                            child: Padding(
-                                padding: getPadding(top: 11),
-                                child: Divider(
-                                    height: getVerticalSize(1),
-                                    thickness: getVerticalSize(1),
-                                    color: ColorConstant.blueGray50,
-                                    indent: getHorizontalSize(23),
-                                    endIndent: getHorizontalSize(21)))),
-                        Padding(
-                            padding: getPadding(top: 1, right: 24),
-                            child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Obx(() => CustomRadioButton(
-                                      text: "lbl_bites".tr,
-                                      value: "lbl_bites".tr,
-                                      groupValue: controller.radioBites.value,
-                                      margin: getMargin(left: 22),
-                                      fontStyle:
-                                          RadioFontStyle.OpenSansRomanRegular15,
-                                      onChange: (value) {
-                                        controller.radioBites.value =
-                                            controller.radioBites.isEmpty
-                                                ? value
-                                                : '';
-                                      })),
-                                  Obx(() => CustomRadioButton(
-                                      text: "lbl_rashes".tr,
-                                      value: "lbl_rashes".tr,
-                                      groupValue: controller.radioRashes.value,
-                                      // margin: getMargin(left: 78),
-                                      fontStyle:
-                                          RadioFontStyle.OpenSansRomanRegular15,
-                                      onChange: (value) {
-                                        controller.radioRashes.value =
-                                            controller.radioRashes.isEmpty
-                                                ? value
-                                                : '';
-                                      }))
-                                ])),
-                        Padding(
-                            padding: getPadding(left: 22, top: 1, right: 24),
-                            child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Obx(() => CustomRadioButton(
-                                      text: "lbl_bruises".tr,
-                                      value: "lbl_bruises".tr,
-                                      groupValue: controller.radioBruises.value,
-                                      fontStyle:
-                                          RadioFontStyle.OpenSansRomanRegular15,
-                                      onChange: (value) {
-                                        controller.radioBruises.value =
-                                            controller.radioBruises.isEmpty
-                                                ? value
-                                                : '';
-                                      })),
-                                  Obx(() => CustomRadioButton(
-                                      text: "msg_allergic_reactions".tr,
-                                      value: "msg_allergic_reactions".tr,
-                                      groupValue: controller.radioAlergy.value,
-                                      fontStyle:
-                                          RadioFontStyle.OpenSansRomanRegular15,
-                                      onChange: (value) {
-                                        controller.radioAlergy.value =
-                                            controller.radioAlergy.isEmpty
-                                                ? value
-                                                : '';
-                                      }))
-                                ])),
-                        Padding(
-                            padding: getPadding(left: 23, top: 1, right: 24),
-                            child: Row(children: [
-                              Padding(
-                                  padding: getPadding(bottom: 2),
-                                  child: Obx(() => CustomRadioButton(
-                                      text: "lbl_fiver".tr,
-                                      value: "lbl_fiver".tr,
-                                      groupValue: controller.radioFiver.value,
-                                      margin: getMargin(bottom: 2),
-                                      fontStyle:
-                                          RadioFontStyle.OpenSansRomanRegular15,
-                                      onChange: (value) {
-                                        controller.radioFiver.value =
-                                            controller.radioFiver.isEmpty
-                                                ? value
-                                                : '';
-                                      }))),
-                              Spacer(),
-                              Padding(
-                                  padding: getPadding(bottom: 2),
-                                  child: Obx(() => CustomRadioButton(
-                                      text: "lbl_redness".tr,
-                                      value: "lbl_redness".tr,
-                                      groupValue: controller.radioRedness.value,
-                                      margin: getMargin(bottom: 2),
-                                      fontStyle:
-                                          RadioFontStyle.OpenSansRomanRegular15,
-                                      onChange: (value) {
-                                        controller.radioRedness.value =
-                                            controller.radioRedness.isEmpty
-                                                ? value
-                                                : '';
-                                      }))),
-                            ])),
-                        Row(
-                            // alignment: Alignment.topLeft,
-                            children: [
-                              Padding(
-                                  padding: getPadding(bottom: 2),
-                                  child: Obx(() => CustomRadioButton(
-                                      text: "lbl_swelling".tr,
-                                      value: "lbl_swelling".tr,
-                                      groupValue: controller.radioSwell.value,
-                                      margin: getMargin(bottom: 2, left: 24),
-                                      fontStyle:
-                                          RadioFontStyle.OpenSansRomanRegular15,
-                                      onChange: (value) {
-                                        controller.radioSwell.value =
-                                            controller.radioSwell.isEmpty
-                                                ? value
-                                                : '';
-                                      }))),
-                              const SizedBox(
-                                width: 12,
-                              ),
-                              SizedBox(
-                                width: 200,
-                                child: CustomTextFormField(
-                                  autofocus: false,
-                                  hintText: 'others',
-                                  padding: TextFormFieldPadding.PaddingT10,
-                                  shape: TextFormFieldShape.RoundedBorder4,
-                                  variant:
-                                      TextFormFieldVariant.OutlineGray10001,
-                                  fontStyle: TextFormFieldFontStyle.OpenSans14,
-                                  controller: controller.othersController,
+                                    padding: getPadding(bottom: 2),
+                                    child: Obx(() => CustomRadioButton(
+                                        text: "lbl_redness".tr,
+                                        value: "lbl_redness".tr,
+                                        groupValue:
+                                            controller.radioRedness.value,
+                                        margin: getMargin(bottom: 2),
+                                        fontStyle: RadioFontStyle
+                                            .OpenSansRomanRegular15,
+                                        onChange: (value) {
+                                          controller.radioRedness.value =
+                                              controller.radioRedness.isEmpty
+                                                  ? value
+                                                  : '';
+                                        }))),
+                              ])),
+                          Row(
+                              // alignment: Alignment.topLeft,
+                              children: [
+                                Padding(
+                                    padding: getPadding(bottom: 2),
+                                    child: Obx(() => CustomRadioButton(
+                                        text: "lbl_swelling".tr,
+                                        value: "lbl_swelling".tr,
+                                        groupValue: controller.radioSwell.value,
+                                        margin: getMargin(bottom: 2, left: 24),
+                                        fontStyle: RadioFontStyle
+                                            .OpenSansRomanRegular15,
+                                        onChange: (value) {
+                                          controller.radioSwell.value =
+                                              controller.radioSwell.isEmpty
+                                                  ? value
+                                                  : '';
+                                        }))),
+                                const SizedBox(
+                                  width: 12,
                                 ),
-                              ),
-                            ]),
-                        const SizedBox(
-                          height: 16,
-                        ),
-                        Align(
-                            alignment: Alignment.bottomLeft,
-                            child: Text("msg_handed_over_to_who".tr,
-                                overflow: TextOverflow.ellipsis,
-                                textAlign: TextAlign.left,
-                                style: AppStyle
-                                    .txtOpenSansRomanSemiBold15Bluegray90003)),
-                        Align(
-                            alignment: Alignment.center,
-                            child: Padding(
-                                padding: getPadding(top: 12),
-                                child: Divider(
-                                    height: getVerticalSize(1),
-                                    thickness: getVerticalSize(1),
-                                    color: ColorConstant.blueGray50,
-                                    indent: getHorizontalSize(22),
-                                    endIndent: getHorizontalSize(23)))),
-                        Padding(
-                            padding: getPadding(left: 24, top: 2, right: 24),
-                            child: Row(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Obx(() => CustomRadioButton(
-                                      text: "lbl_father".tr,
-                                      value: "lbl_father".tr,
-                                      groupValue:
-                                          controller.radioHanded2Who.value,
-                                      margin: getMargin(top: 9),
-                                      fontStyle:
-                                          RadioFontStyle.OpenSansRomanRegular15,
-                                      onChange: (value) {
-                                        controller.radioHanded2Who.value =
-                                            value;
-                                      })),
-                                  Spacer(),
-                                  Obx(() => CustomRadioButton(
-                                      text: "lbl_home_nanny".tr,
-                                      value: "lbl_home_nanny".tr,
-                                      groupValue:
-                                          controller.radioHanded2Who.value,
-                                      margin: getMargin(top: 9),
-                                      fontStyle:
-                                          RadioFontStyle.OpenSansRomanRegular15,
-                                      onChange: (value) {
-                                        controller.radioHanded2Who.value =
-                                            value;
-                                      }))
-                                ])),
-                        Padding(
-                            padding: getPadding(left: 24, top: 5, right: 24),
-                            child: Row(
-                                crossAxisAlignment: CrossAxisAlignment.end,
-                                children: [
-                                  Obx(() => CustomRadioButton(
-                                      text: "lbl_mother".tr,
-                                      value: "lbl_mother".tr,
-                                      groupValue:
-                                          controller.radioHanded2Who.value,
-                                      // margin: getMargin(bottom: 5),
-                                      fontStyle:
-                                          RadioFontStyle.OpenSansRomanRegular15,
-                                      onChange: (value) {
-                                        controller.radioHanded2Who.value =
-                                            value;
-                                      })),
-                                  Spacer(),
-                                  Obx(() => CustomRadioButton(
-                                      text: "lbl_family".tr,
-                                      value: "lbl_family".tr,
-                                      groupValue:
-                                          controller.radioHanded2Who.value,
-                                      // margin: getMargin(bottom: 5),
-                                      fontStyle:
-                                          RadioFontStyle.OpenSansRomanRegular15,
-                                      onChange: (value) {
-                                        controller.radioHanded2Who.value =
-                                            value;
-                                      })),
-                                ])),
-                        Padding(
-                            padding: getPadding(left: 24, bottom: 5),
-                            child: Obx(() => CustomRadioButton(
-                                text: "lbl_another_staff".tr,
-                                value: "lbl_another_staff".tr,
-                                groupValue: controller.radioHanded2Who.value,
-                                margin: getMargin(bottom: 5),
-                                fontStyle:
-                                    RadioFontStyle.OpenSansRomanRegular15,
-                                onChange: (value) {
-                                  controller.radioHanded2Who.value = value;
-                                }))),
-                        Padding(
-                            padding: getPadding(top: 22),
-                            child: Text("msg_additional_information".tr,
-                                overflow: TextOverflow.ellipsis,
-                                textAlign: TextAlign.left,
-                                style: AppStyle
-                                    .txtOpenSansRomanSemiBold15Bluegray90003)),
-                        Align(
-                            alignment: Alignment.center,
-                            child: Padding(
-                                padding: getPadding(top: 11),
-                                child: Divider(
-                                    height: getVerticalSize(1),
-                                    thickness: getVerticalSize(1),
-                                    color: ColorConstant.blueGray50,
-                                    indent: getHorizontalSize(23),
-                                    endIndent: getHorizontalSize(21)))),
-                        Padding(
-                            padding: getPadding(top: 1, right: 24),
-                            child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Obx(() => CustomRadioButton(
-                                      text: "lbl_formula".tr,
-                                      value: "lbl_formula".tr,
-                                      groupValue: controller.radioAddInfo.value,
-                                      margin: getMargin(left: 22),
-                                      fontStyle:
-                                          RadioFontStyle.OpenSansRomanRegular15,
-                                      onChange: (value) {
-                                        controller.radioAddInfo.value = value;
-                                      })),
-                                  Obx(() => CustomRadioButton(
-                                      text: "lbl_bottles".tr,
-                                      value: "lbl_bottles".tr,
-                                      groupValue: controller.radioAddInfo.value,
-                                      margin: getMargin(left: 22),
-                                      fontStyle:
-                                          RadioFontStyle.OpenSansRomanRegular15,
-                                      onChange: (value) {
-                                        controller.radioAddInfo.value = value;
-                                      })),
-                                ])),
-                        Padding(
-                            padding: getPadding(top: 1, right: 24),
-                            child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Obx(() => CustomRadioButton(
-                                      text: "lbl_pacifiers".tr,
-                                      value: "lbl_pacifiers".tr,
-                                      groupValue: controller.radioAddInfo.value,
-                                      margin: getMargin(left: 22),
-                                      fontStyle:
-                                          RadioFontStyle.OpenSansRomanRegular15,
-                                      onChange: (value) {
-                                        controller.radioAddInfo.value = value;
-                                      })),
-                                  Obx(() => CustomRadioButton(
-                                      text: "lbl_nappies".tr,
-                                      value: "lbl_nappies".tr,
-                                      groupValue: controller.radioAddInfo.value,
-                                      margin: getMargin(left: 22),
-                                      fontStyle:
-                                          RadioFontStyle.OpenSansRomanRegular15,
-                                      onChange: (value) {
-                                        controller.radioAddInfo.value = value;
-                                      })),
-                                ])),
-                      ],
-                    ),
-                  ))
-                ])),
+                                SizedBox(
+                                  width: 200,
+                                  child: CustomTextFormField(
+                                    autofocus: false,
+                                    hintText: 'others',
+                                    padding: TextFormFieldPadding.PaddingT10,
+                                    shape: TextFormFieldShape.RoundedBorder4,
+                                    variant:
+                                        TextFormFieldVariant.OutlineGray10001,
+                                    fontStyle:
+                                        TextFormFieldFontStyle.OpenSans14,
+                                    controller: controller.othersController,
+                                  ),
+                                ),
+                              ]),
+                          const SizedBox(
+                            height: 16,
+                          ),
+                          Align(
+                              alignment: Alignment.bottomLeft,
+                              child: Text("msg_handed_over_to_who".tr,
+                                  overflow: TextOverflow.ellipsis,
+                                  textAlign: TextAlign.left,
+                                  style: AppStyle
+                                      .txtOpenSansRomanSemiBold15Bluegray90003)),
+                          Align(
+                              alignment: Alignment.center,
+                              child: Padding(
+                                  padding: getPadding(top: 12),
+                                  child: Divider(
+                                      height: getVerticalSize(1),
+                                      thickness: getVerticalSize(1),
+                                      color: ColorConstant.blueGray50,
+                                      indent: getHorizontalSize(22),
+                                      endIndent: getHorizontalSize(23)))),
+                          Padding(
+                              padding: getPadding(left: 24, top: 2, right: 24),
+                              child: Row(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Obx(() => CustomRadioButton(
+                                        text: "lbl_father".tr,
+                                        value: "lbl_father".tr,
+                                        groupValue:
+                                            controller.radioHanded2Who.value,
+                                        margin: getMargin(top: 9),
+                                        fontStyle: RadioFontStyle
+                                            .OpenSansRomanRegular15,
+                                        onChange: (value) {
+                                          controller.radioHanded2Who.value =
+                                              value;
+                                        })),
+                                    Spacer(),
+                                    Obx(() => CustomRadioButton(
+                                        text: "lbl_home_nanny".tr,
+                                        value: "lbl_home_nanny".tr,
+                                        groupValue:
+                                            controller.radioHanded2Who.value,
+                                        margin: getMargin(top: 9),
+                                        fontStyle: RadioFontStyle
+                                            .OpenSansRomanRegular15,
+                                        onChange: (value) {
+                                          controller.radioHanded2Who.value =
+                                              value;
+                                        }))
+                                  ])),
+                          Padding(
+                              padding: getPadding(left: 24, top: 5, right: 24),
+                              child: Row(
+                                  crossAxisAlignment: CrossAxisAlignment.end,
+                                  children: [
+                                    Obx(() => CustomRadioButton(
+                                        text: "lbl_mother".tr,
+                                        value: "lbl_mother".tr,
+                                        groupValue:
+                                            controller.radioHanded2Who.value,
+                                        // margin: getMargin(bottom: 5),
+                                        fontStyle: RadioFontStyle
+                                            .OpenSansRomanRegular15,
+                                        onChange: (value) {
+                                          controller.radioHanded2Who.value =
+                                              value;
+                                        })),
+                                    Spacer(),
+                                    Obx(() => CustomRadioButton(
+                                        text: "lbl_family".tr,
+                                        value: "lbl_family".tr,
+                                        groupValue:
+                                            controller.radioHanded2Who.value,
+                                        // margin: getMargin(bottom: 5),
+                                        fontStyle: RadioFontStyle
+                                            .OpenSansRomanRegular15,
+                                        onChange: (value) {
+                                          controller.radioHanded2Who.value =
+                                              value;
+                                        })),
+                                  ])),
+                          Padding(
+                              padding: getPadding(left: 24, bottom: 5),
+                              child: Obx(() => CustomRadioButton(
+                                  text: "lbl_another_staff".tr,
+                                  value: "lbl_another_staff".tr,
+                                  groupValue: controller.radioHanded2Who.value,
+                                  margin: getMargin(bottom: 5),
+                                  fontStyle:
+                                      RadioFontStyle.OpenSansRomanRegular15,
+                                  onChange: (value) {
+                                    controller.radioHanded2Who.value = value;
+                                  }))),
+                          Padding(
+                              padding: getPadding(top: 22),
+                              child: Text("msg_additional_information".tr,
+                                  overflow: TextOverflow.ellipsis,
+                                  textAlign: TextAlign.left,
+                                  style: AppStyle
+                                      .txtOpenSansRomanSemiBold15Bluegray90003)),
+                          Align(
+                              alignment: Alignment.center,
+                              child: Padding(
+                                  padding: getPadding(top: 11),
+                                  child: Divider(
+                                      height: getVerticalSize(1),
+                                      thickness: getVerticalSize(1),
+                                      color: ColorConstant.blueGray50,
+                                      indent: getHorizontalSize(23),
+                                      endIndent: getHorizontalSize(21)))),
+                          Padding(
+                              padding: getPadding(top: 1, right: 24),
+                              child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Obx(() => CustomRadioButton(
+                                        text: "lbl_formula".tr,
+                                        value: "lbl_formula".tr,
+                                        groupValue:
+                                            controller.radioAddInfo.value,
+                                        margin: getMargin(left: 22),
+                                        fontStyle: RadioFontStyle
+                                            .OpenSansRomanRegular15,
+                                        onChange: (value) {
+                                          controller.radioAddInfo.value = value;
+                                        })),
+                                    Obx(() => CustomRadioButton(
+                                        text: "lbl_bottles".tr,
+                                        value: "lbl_bottles".tr,
+                                        groupValue:
+                                            controller.radioAddInfo.value,
+                                        margin: getMargin(left: 22),
+                                        fontStyle: RadioFontStyle
+                                            .OpenSansRomanRegular15,
+                                        onChange: (value) {
+                                          controller.radioAddInfo.value = value;
+                                        })),
+                                  ])),
+                          Padding(
+                              padding: getPadding(top: 1, right: 24),
+                              child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Obx(() => CustomRadioButton(
+                                        text: "lbl_pacifiers".tr,
+                                        value: "lbl_pacifiers".tr,
+                                        groupValue:
+                                            controller.radioAddInfo.value,
+                                        margin: getMargin(left: 22),
+                                        fontStyle: RadioFontStyle
+                                            .OpenSansRomanRegular15,
+                                        onChange: (value) {
+                                          controller.radioAddInfo.value = value;
+                                        })),
+                                    Obx(() => CustomRadioButton(
+                                        text: "lbl_nappies".tr,
+                                        value: "lbl_nappies".tr,
+                                        groupValue:
+                                            controller.radioAddInfo.value,
+                                        margin: getMargin(left: 22),
+                                        fontStyle: RadioFontStyle
+                                            .OpenSansRomanRegular15,
+                                        onChange: (value) {
+                                          controller.radioAddInfo.value = value;
+                                        })),
+                                  ])),
+                        ],
+                      ),
+                    ))
+                  ]),
+            )),
         bottomNavigationBar: Container(
             margin: getMargin(left: 16, right: 16, bottom: 8),
             decoration: AppDecoration.white,
@@ -489,7 +548,9 @@ class BookingStepTwoScreen extends GetWidget<BookingStepTwoController> {
                       height: getVerticalSize(53),
                       text: "lbl_next".tr,
                       onTap: () {
-                        controller.onTapNext();
+                        if (_formKey.currentState!.validate()) {
+                          controller.onTapNext();
+                        }
                       })
                 ])));
   }

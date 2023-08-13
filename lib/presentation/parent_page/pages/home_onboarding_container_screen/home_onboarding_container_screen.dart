@@ -446,157 +446,158 @@ class HomeOnboardingContainerScreen
                                   ])),
                           Padding(
                               padding: getPadding(top: 16, bottom: 12),
-                              child:
-                                  StreamBuilder<
-                                          QuerySnapshot<Map<String, dynamic>>>(
-                                      stream: FirebaseFirestore.instance
-                                          .collection('employee')
-                                          .limit(6)
-                                          .snapshots(),
-                                      builder: (context, snapshot) {
-                                        if (!snapshot.hasData) {
-                                          return LinearProgressIndicator(
-                                            color: ColorConstant.pinkA100,
-                                            minHeight: 2,
-                                          );
-                                        }
-                                        return SizedBox(
-                                          height: getVerticalSize(200),
-                                          child: SingleChildScrollView(
-                                            physics:
-                                                const BouncingScrollPhysics(),
-                                            child: Wrap(
-                                                runSpacing: 8,
-                                                spacing: 12,
-                                                runAlignment:
-                                                    WrapAlignment.start,
-                                                alignment: WrapAlignment.start,
-                                                crossAxisAlignment:
-                                                    WrapCrossAlignment.start,
-                                                children: List.generate(
-                                                  snapshot.data!.docs.length,
-                                                  (index) => GestureDetector(
-                                                    onTap: () {
-                                                      Get.toNamed(
-                                                          AppRoutes
-                                                              .nurseProfileDetails,
-                                                          arguments: {
-                                                            'data': snapshot
-                                                                .data!
-                                                                .docs[index]
-                                                                .data(),
-                                                            'employeeId':
-                                                                snapshot
-                                                                    .data!
-                                                                    .docs[index]
-                                                                    .id
-                                                          });
-                                                    },
-                                                    child: Container(
-                                                        margin:
-                                                            getMargin(all: 8),
-                                                        padding:
-                                                            getPadding(all: 0),
-                                                        width: 150,
-                                                        // height: 10,
-                                                        decoration: AppDecoration
-                                                            .fillPinkA10019
-                                                            .copyWith(
-                                                                borderRadius:
-                                                                    BorderRadiusStyle
-                                                                        .roundedBorder16),
-                                                        child: Column(
-                                                            mainAxisSize:
-                                                                MainAxisSize
-                                                                    .min,
-                                                            crossAxisAlignment:
-                                                                CrossAxisAlignment
-                                                                    .start,
-                                                            mainAxisAlignment:
-                                                                MainAxisAlignment
-                                                                    .start,
-                                                            children: [
-                                                              CustomImageView(
-                                                                  // border: Border.all(
-                                                                  //     color: Colors
-                                                                  //         .black38),
-                                                                  url: snapshot
-                                                                              .data?.docs[
-                                                                          index]
-                                                                      [
-                                                                      'photoUrl'],
-                                                                  radius: const BorderRadius
-                                                                          .only(
-                                                                      topLeft: Radius
-                                                                          .circular(
-                                                                              16),
-                                                                      topRight: Radius
-                                                                          .circular(
-                                                                              16)),
-                                                                  imagePath:
-                                                                      ImageConstant
-                                                                          .imageNotFound,
-                                                                  fit: BoxFit
-                                                                      .cover,
-                                                                  height:
-                                                                      getVerticalSize(
-                                                                          120),
-                                                                  width:
-                                                                      getHorizontalSize(
-                                                                          155)),
-                                                              Container(
-                                                                width: 200,
-                                                                padding:
-                                                                    const EdgeInsets
-                                                                        .all(8),
-                                                                decoration: BoxDecoration(
-                                                                    color: ColorConstant
-                                                                        .pinkA100,
-                                                                    borderRadius: const BorderRadius
-                                                                            .only(
-                                                                        bottomLeft:
-                                                                            Radius.circular(
-                                                                                16),
-                                                                        bottomRight:
-                                                                            Radius.circular(16))),
-                                                                child: Column(
-                                                                  children: [
-                                                                    Padding(
-                                                                        padding: getPadding(
+                              child: StreamBuilder<
+                                      QuerySnapshot<Map<String, dynamic>>>(
+                                  stream: FirebaseFirestore.instance
+                                      .collection('employee')
+                                      .limit(6)
+                                      .snapshots(),
+                                  builder: (context, snapshot) {
+                                    if (!snapshot.hasData) {
+                                      return LinearProgressIndicator(
+                                        color: ColorConstant.pinkA100,
+                                        minHeight: 2,
+                                      );
+                                    }
+                                    return SizedBox(
+                                      height:
+                                          getVerticalSize(size.height - 200),
+                                      child: SingleChildScrollView(
+                                        physics: const BouncingScrollPhysics(),
+                                        child: Wrap(
+                                            runSpacing: 8,
+                                            spacing: 12,
+                                            runAlignment: WrapAlignment.start,
+                                            alignment: WrapAlignment.start,
+                                            crossAxisAlignment:
+                                                WrapCrossAlignment.start,
+                                            children: List.generate(
+                                              snapshot.data!.docs.length,
+                                              (index) => GestureDetector(
+                                                onTap: () {
+                                                  Get.toNamed(
+                                                      AppRoutes
+                                                          .nurseProfileDetails,
+                                                      arguments: {
+                                                        'data': snapshot
+                                                            .data!.docs[index]
+                                                            .data(),
+                                                        'employeeId': snapshot
+                                                            .data!
+                                                            .docs[index]
+                                                            .id
+                                                      });
+                                                },
+                                                child: Container(
+                                                    margin: getMargin(all: 8),
+                                                    padding: getPadding(all: 0),
+                                                    width: 150,
+                                                    // height: 10,
+                                                    decoration: AppDecoration
+                                                        .fillPinkA10019
+                                                        .copyWith(
+                                                            borderRadius:
+                                                                BorderRadiusStyle
+                                                                    .roundedBorder16),
+                                                    child: Column(
+                                                        mainAxisSize:
+                                                            MainAxisSize.min,
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .start,
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .start,
+                                                        children: [
+                                                          CustomImageView(
+                                                              // border: Border.all(
+                                                              //     color: Colors
+                                                              //         .black38),
+                                                              url: snapshot.data
+                                                                          ?.docs[
+                                                                      index]
+                                                                  ['photoUrl'],
+                                                              radius: const BorderRadius
+                                                                      .only(
+                                                                  topLeft: Radius
+                                                                      .circular(
+                                                                          16),
+                                                                  topRight: Radius
+                                                                      .circular(
+                                                                          16)),
+                                                              imagePath:
+                                                                  ImageConstant
+                                                                      .imageNotFound,
+                                                              fit: BoxFit.cover,
+                                                              height:
+                                                                  getVerticalSize(
+                                                                      120),
+                                                              width:
+                                                                  getHorizontalSize(
+                                                                      155)),
+                                                          Container(
+                                                            width: 200,
+                                                            padding:
+                                                                const EdgeInsets
+                                                                    .all(8),
+                                                            decoration: BoxDecoration(
+                                                                color: ColorConstant
+                                                                    .pinkA100,
+                                                                borderRadius: const BorderRadius
+                                                                        .only(
+                                                                    bottomLeft:
+                                                                        Radius.circular(
+                                                                            16),
+                                                                    bottomRight:
+                                                                        Radius.circular(
+                                                                            16))),
+                                                            child: Column(
+                                                              children: [
+                                                                Padding(
+                                                                    padding: getPadding(
+                                                                        bottom:
+                                                                            0,
+                                                                        top: 0),
+                                                                    child: Text(
+                                                                        snapshot.data?.docs[index]
+                                                                            [
+                                                                            'name'],
+                                                                        overflow:
+                                                                            TextOverflow
+                                                                                .ellipsis,
+                                                                        textAlign:
+                                                                            TextAlign
+                                                                                .left,
+                                                                        style: AppStyle
+                                                                            .txtOpenSansRomanSemiBold14Gray800)),
+                                                                Padding(
+                                                                    padding:
+                                                                        getPadding(
+                                                                            // top:
+                                                                            //     2,
                                                                             bottom:
-                                                                                0,
-                                                                            top:
-                                                                                0),
-                                                                        child: Text(
-                                                                            snapshot.data?.docs[index][
-                                                                                'name'],
-                                                                            overflow:
-                                                                                TextOverflow.ellipsis,
-                                                                            textAlign: TextAlign.left,
-                                                                            style: AppStyle.txtOpenSansRomanSemiBold14Gray800)),
-                                                                    Padding(
-                                                                        padding:
-                                                                            getPadding(
-                                                                                // top:
-                                                                                //     2,
-                                                                                bottom:
-                                                                                    4),
-                                                                        child: Text(
-                                                                            "${snapshot.data?.docs[index]['profession']}"
-                                                                                .tr,
-                                                                            overflow:
-                                                                                TextOverflow.ellipsis,
-                                                                            textAlign: TextAlign.left,
-                                                                            style: AppStyle.txtOpenSans12.copyWith(color: Colors.white54))),
-                                                                  ],
-                                                                ),
-                                                              ),
-                                                            ])),
-                                                  ),
-                                                )),
-                                          ),
-                                        );
-                                      }))
+                                                                                4),
+                                                                    child: Text(
+                                                                        "${snapshot.data?.docs[index]['profession']}"
+                                                                            .tr,
+                                                                        overflow:
+                                                                            TextOverflow
+                                                                                .ellipsis,
+                                                                        textAlign:
+                                                                            TextAlign
+                                                                                .left,
+                                                                        style: AppStyle
+                                                                            .txtOpenSans12
+                                                                            .copyWith(color: Colors.white54))),
+                                                              ],
+                                                            ),
+                                                          ),
+                                                        ])),
+                                              ),
+                                            )),
+                                      ),
+                                    );
+                                  }))
                         ])))),
       ),
     );

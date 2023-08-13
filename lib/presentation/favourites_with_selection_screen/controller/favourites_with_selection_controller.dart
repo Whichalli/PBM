@@ -40,9 +40,9 @@ class FavouritesWithSelectionController extends GetxController {
           'favorites': favouritesWithSelectionModelObj.value.favors
         },
         table: 'pbm_user_experience');
-    Get.offNamedUntil(
+    Get.offAllNamed(
       AppRoutes.homeOnboardingContainerScreen,
-      (route) => false,
+      
     );
   }
 }

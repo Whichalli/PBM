@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:pbm_app/domain/firebase/authentication.dart';
 
@@ -22,6 +24,8 @@ class ChatItemWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var timeDiff = DateTime.now().difference(chatItemModel.time.value);
+    log('${chatItemModel.time.value} diff = ${timeDiff.inDays}');
     String table =
         chatItemModel.field.value == 'employeeId' ? 'parent' : 'employee';
     String user = chatItemModel.field.value == 'employeeId'
@@ -141,9 +145,22 @@ class ChatItemWidget extends StatelessWidget {
                   padding: getPadding(left: 8, top: 8),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
+                      
                       Text(
-                        chatItemModel.time.value,
+                        timeDiff.inDays == 1
+                            ? 'Yesterday'
+                            : timeDiff.inDays == 0
+                                ? 'Today'
+                                : chatItemModel.time.value.getDate(),
+                        overflow: TextOverflow.ellipsis,
+                        textAlign: TextAlign.left,
+                        style: AppStyle.txtOpenSansRomanSemiBold12Gray600,
+                      ),
+                      Text(
+                        TimeOfDay.fromDateTime(chatItemModel.time.value)
+                            .getTime(),
                         overflow: TextOverflow.ellipsis,
                         textAlign: TextAlign.left,
                         style: AppStyle.txtOpenSansRomanSemiBold12Gray600,

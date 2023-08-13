@@ -40,6 +40,8 @@ class BookingStepTwoController extends GetxController {
   Rx<String> radioAlergy = "".obs;
 
   Rx<String> radioFiver = "".obs;
+  TextEditingController titleController = TextEditingController();
+  TextEditingController descriptionController = TextEditingController();
 
   RxList<BookingCard> bookings = Get.arguments['bookings'];
   var employeeId = Get.arguments['employeeId'];
@@ -72,6 +74,8 @@ class BookingStepTwoController extends GetxController {
       Hive.box('booking').put('data', {
         'parentId': Authentication.getCurrentUserId(),
         'employeeId': employeeId,
+        'description': descriptionController.text,
+        'title': titleController.text,
         'createdAt': '${DateTime.now()}',
         'booking': bookingData,
         'addionalInfo': radioAddInfo.value,

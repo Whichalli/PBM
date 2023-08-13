@@ -1,17 +1,11 @@
 import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:pbm_app/domain/firebase/authentication.dart';
-
 import '../chat_screen/widgets/chat_item_widget.dart';
 import 'controller/chat_controller.dart';
 import 'models/chat_item_model.dart';
 import 'package:flutter/material.dart';
 import 'package:pbm_app/core/app_export.dart';
-import 'package:pbm_app/widgets/app_bar/appbar_image.dart';
-import 'package:pbm_app/widgets/app_bar/appbar_subtitle_3.dart';
-import 'package:pbm_app/widgets/app_bar/custom_app_bar.dart';
 import 'package:pbm_app/widgets/custom_search_view.dart';
 
 class ChatScreen extends GetWidget<ChatController> {
@@ -73,6 +67,7 @@ class ChatScreen extends GetWidget<ChatController> {
                             // log('parents = ${data[index].data()}');
                             // data[index].data()['chatId'] = data[index].id;
                             var user = data[index].data();
+                            log('messages = ${data[index]['lastSentTime']}');
                             user.putIfAbsent('chatId', () => data[index].id);
                             user.putIfAbsent('field', () => field);
                             user.putIfAbsent('chatActive', () => true);

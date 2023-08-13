@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:pbm_app/core/app_export.dart';
 import 'package:pbm_app/widgets/custom_button.dart';
 import 'package:pbm_app/widgets/custom_radio_button.dart';
-import 'package:pbm_app/widgets/custom_text_form_field.dart';
 
 class UsageFollowUpNegativeSelectionScreen
     extends GetWidget<UsageFollowUpNegativeSelectionController> {
@@ -93,15 +92,39 @@ class UsageFollowUpNegativeSelectionScreen
                             controller.radioGroup.value = value;
                           }))),
                   Spacer(),
-                  CustomButton(
-                      height: getVerticalSize(50),
-                      text: "lbl_next".tr,
-                      // shape: ButtonShape.CircleBorder13,
-                      padding: ButtonPadding.PaddingAll9,
-                      fontStyle: ButtonFontStyle.ManropeBold16,
-                      onTap: () {
-                        controller.onTapNext();
-                      })
+                  Row(
+                    children: [
+                      Expanded(
+                        flex: 2,
+                        child: CustomButton(
+                            height: getVerticalSize(50),
+                            text: "lbl_next".tr,
+                            // shape: ButtonShape.CircleBorder13,
+                            padding: ButtonPadding.PaddingAll9,
+                            fontStyle: ButtonFontStyle.ManropeBold16,
+                            onTap: () {
+                              controller.onTapNext();
+                            }),
+                      ),
+                      const SizedBox(
+                        width: 12,
+                      ),
+                      Expanded(
+                        child: CustomButton(
+                            height: getVerticalSize(50),
+                            text: "Skip".tr,
+                            // shape: ButtonShape.CircleBorder13,
+                            padding: ButtonPadding.PaddingAll9,
+                            fontStyle: ButtonFontStyle.NunitoBold15PinkA100,
+                            variant: ButtonVariant.OutlinePinkA100_2,
+                            onTap: () {
+                              Get.offAllNamed(
+                                AppRoutes.homeOnboardingContainerScreen,
+                              );
+                            }),
+                      ),
+                    ],
+                  )
                 ])));
   }
 

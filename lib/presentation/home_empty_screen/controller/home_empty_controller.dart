@@ -75,83 +75,94 @@ class HomeEmptyController extends GetxController {
 
   List<ChartData> data = [];
   Stream<List<ChartData>> fetchData({required child, required parent}) async* {
-    var resp = Database.readCollection(
-            parentTable: parent, childTable: child, id: Get.arguments['babyId'])
-        // .where('counting', isEqualTo: false)
-        .snapshots();
+    try {
+      var resp = Database.readCollection(
+              parentTable: parent,
+              childTable: child,
+              id: Get.arguments['babyId'])
+          .where('counting', isEqualTo: false)
+          .snapshots();
 
-    log('chart resp = $resp');
-    // log('data = ')
+      log('chart resp = $resp');
+      // log('data = ')
 
-    for (var e in (await resp.first).docs) {
-      hasRoutine.value = true;
+      for (var e in (await resp.first).docs) {
+        hasRoutine.value = true;
 
-      // log('diff = $diff');
-      DateTime stDt;
-      DateTime endDt;
-      ChartData chart;
-      log('parent = $parent');
-      if (child == 'bottleLogs') {
-        stDt = e.data()['feedingDate'].toString().toDate();
-        chart = ChartData(
-            x: '${months[stDt.month - 1]} ${stDt.day}\n${e.data()['feedingTime']}',
-            y: e.data()['waterLevel'],
-            // double.parse('${endDt.hour}.${endDt.minute}'),
-            yValue: '${e.data()['waterLevel']} ML');
-        bottleData.add(chart);
-        log('bottle');
-      }
-      if (parent != 'feeding' && parent != 'diaper') {
-        stDt = e.data()['startDate'].toString().toDate();
-        endDt = e.data()['endDate'].toString().toDate();
-        // log('stDt = $stDt endDt = $endDt');
-        var diff = (stDt.getDateDiffSec(nextDate: endDt));
-        chart = ChartData(
-            x:
-                '${months[stDt.month - 1]} ${stDt.day}\n${stDt.hour < 12 ? stDt.hour : stDt.hour - 12}:${stDt.minute < 10 ? '0${stDt.minute}' : stDt.minute} ${stDt.hour < 12 ? 'AM' : 'PM'}',
-            y: double.parse('${diff['hours']}.${diff['minutes'] % 60}'),
-            // double.parse('${endDt.hour}.${endDt.minute}'),
-            yValue:
-                '${months[endDt.month - 1]} ${endDt.day} ${endDt.hour < 12 ? endDt.hour : endDt.hour - 12}:${endDt.minute < 10 ? '0${endDt.minute}' : endDt.minute} ${endDt.hour < 12 ? 'AM' : 'PM'}');
-        if (parent == 'sleep') {
-          sleepData.add(chart);
+        // log('diff = $diff');
+        DateTime stDt;
+        DateTime endDt;
+        ChartData chart;
+        // log('parent = $parent');
+        if (child == 'bottleLogs') {
+          stDt = e.data()['feedingDate'].toString().toDate();
+          chart = ChartData(
+              x: '${months[stDt.month - 1]} ${stDt.day}\n${e.data()['feedingTime']}',
+              y: e.data()['waterLevel'],
+              // double.parse('${endDt.hour}.${endDt.minute}'),
+              yValue: '${e.data()['waterLevel']} ML');
+          bottleData.add(chart);
+          // log('bottle');
         }
-        if (parent == 'activity') {
-          activityData.add(chart);
+        if (parent == 'sleep' || parent == 'activity' || parent == 'pumping') {
+          // log('ppppp = $parent startDate = ${e.id} ${e.data()['startDate']}');
+          // log('startDate = ${(e.data()['startDate'] as String).toDate()}');
+          stDt = (e.data()['startDate'] as String).toDate();
+          log('.......... parent = $parent  endDate = ${e.data()['endDate']} ..................');
+          endDt = e.data()['endDate'].toString().toDate();
+          // log('stDt = $stDt endDt = $endDt');
+          var diff = (stDt.getDateDiffSec(nextDate: endDt));
+          chart = ChartData(
+              x:
+                  '${months[stDt.month - 1]} ${stDt.day}\n${stDt.hour < 12 ? stDt.hour : stDt.hour - 12}:${stDt.minute < 10 ? '0${stDt.minute}' : stDt.minute} ${stDt.hour < 12 ? 'AM' : 'PM'}',
+              y: double.parse('${diff['hours']}.${diff['minutes'] % 60}'),
+              // double.parse('${endDt.hour}.${endDt.minute}'),
+              yValue:
+                  '${months[endDt.month - 1]} ${endDt.day} ${endDt.hour < 12 ? endDt.hour : endDt.hour - 12}:${endDt.minute < 10 ? '0${endDt.minute}' : endDt.minute} ${endDt.hour < 12 ? 'AM' : 'PM'}');
+          if (parent == 'sleep') {
+            sleepData.add(chart);
+          }
+          if (parent == 'activity') {
+            activityData.add(chart);
+          }
+          if (parent == 'pumping') {
+            pumpingData.add(chart);
+          }
         }
-        if (parent == 'pumping') {
-          pumpingData.add(chart);
+
+        if (parent == 'diaper') {
+          // log('ok');
+          // // log('e = ${e.data()}');
+          // // log('stDt = ${e.data()['time'].toString().toSeconds() / 3600}');
+          // log('date ${((e.data()['date'] as Timestamp).toDate()).runtimeType}');
+          DateTime date = (e.data()['date'] as Timestamp).toDate();
+          log('ddddd = $date');
+          chart = ChartData(
+              x: date,
+              y: double.parse(((e.data()['time'] as String).toSeconds() / 3600)
+                  .toStringAsFixed(2)),
+              // double.parse('${endDt.hour}.${endDt.minute}'),
+              yValue: 0);
+          // log('chartX = ${chart.x}');
+          diaperData.add(chart);
         }
       }
-      if (parent == 'diaper') {
-        log('ok');
-        log('e = ${e.data()}');
-        log('stDt = ${e.data()['time'].toString().toSeconds() / 3600}');
-        DateTime date =
-            (e.data()['date'] ?? e.data()['dateime'] as Timestamp).toDate();
-        log('ok2 ${date.getDate()}');
-        chart = ChartData(
-            x: date,
-            y: (e.data()['time'] as String).toSeconds() / 3600,
-            // double.parse('${endDt.hour}.${endDt.minute}'),
-            yValue: 0);
-        log('chartX = ${chart.x}');
-        diaperData.add(chart);
-      }
+      // log('feeding = $bottleData');
+      data = parent == 'sleep'
+          ? sleepData
+          : parent == 'activity'
+              ? activityData
+              : parent == 'pumping'
+                  ? pumpingData
+                  : child == 'bottleLogs'
+                      ? bottleData
+                      : child == 'diaperLogs'
+                          ? diaperData
+                          : [];
+      yield data;
+    } catch (_) {
+      _.printError();
     }
-    // log('feeding = $bottleData');
-    data = parent == 'sleep'
-        ? sleepData
-        : parent == 'activity'
-            ? activityData
-            : parent == 'pumping'
-                ? pumpingData
-                : child == 'bottleLogs'
-                    ? bottleData
-                    : child == 'diaperLogs'
-                        ? diaperData
-                        : [];
-    yield data;
   }
 
   RxBool hasFeeding = false.obs;
@@ -422,57 +433,36 @@ class HomeEmptyController extends GetxController {
             textStyle: TextStyle(fontSize: 11)),
       );
     }).toList();
-
-    // return <RangeColumnSeries<ChartData, String>>[
-    //   RangeColumnSeries<ChartData, String>(
-    //     dataSource: dataSource,
-    //     xValueMapper: (ChartData sales, _) => sales.x as String,
-    //     lowValueMapper: (ChartData sales, _) => sales.y,
-    //     highValueMapper: (ChartData sales, _) => sales.yValue,
-    //     dataLabelSettings: DataLabelSettings(
-    //         isVisible: true,
-    //         labelAlignment: ChartDataLabelAlignment.top,
-    //         textStyle: const TextStyle(fontSize: 10)),
-    //   )
-    // ];
   }
 
   List<ScatterSeries<ChartData, DateTime>> scatterChartSeries(
       {required List<ChartData> dataSource}) {
-    log('dataSource = ${dataSource.first.x}');
     return [
       ScatterSeries<ChartData, DateTime>(
           dataSource: diaperData,
+          enableTooltip: true,
+          legendIconType: LegendIconType.diamond,
+          xAxisName: 'Date',
+          yAxisName: 'Time',
           color: Colors.white,
+          isVisible: true,
+          dataLabelSettings: const DataLabelSettings(
+              // isVisible: true,
+              overflowMode: OverflowMode.trim,
+              alignment: ChartAlignment.near,
+              showZeroValue: true,
+              labelAlignment: ChartDataLabelAlignment.top,
+              textStyle: TextStyle(fontSize: 11)),
           xValueMapper: (ChartData data, _) => data.x,
           yValueMapper: (ChartData data, _) => data.y,
-          markerSettings: MarkerSettings(
+          dataLabelMapper: (ChartData data, index) {
+            log('dataMaper');
+            return 'Ola';
+          },
+          markerSettings: const MarkerSettings(
               height: 15, width: 15, shape: DataMarkerType.circle))
     ];
   }
-  // diaperChart() {
-  //   final List<ChartData> chartData = [
-  //     // ChartData(2010, 32),
-  //     // ChartData(2011, 40),
-  //     // ChartData(2012, 34),
-  //     // ChartData(2013, 52),
-  //     // ChartData(2014, 42),
-  //     // ChartData(2015, 38),
-  //     // ChartData(2016, 41),
-  //   ];
-  //   return Scaffold(
-  //       body: Center(
-  //           child: Container(
-  //               child: SfCartesianChart(
-  //                   primaryXAxis: DateTimeAxis(),
-  //                   series: <ChartSeries>[
-  //         // Renders scatter chart
-  //         ScatterSeries<ChartData, DateTime>(
-  //             dataSource: chartData,
-  //             xValueMapper: (ChartData data, _) => data.x,
-  //             yValueMapper: (ChartData data, _) => data.y)
-  //       ]))));
-  // }
 }
 
 class ChartData {

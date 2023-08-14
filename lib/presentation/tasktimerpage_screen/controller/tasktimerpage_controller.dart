@@ -1,8 +1,11 @@
 import 'dart:async';
 import 'dart:developer';
+import 'package:flutter/material.dart';
 import 'package:pbm_app/core/app_export.dart';
 import 'package:pbm_app/domain/firebase/firebase.dart';
 import 'package:pbm_app/presentation/tasktimerpage_screen/models/tasktimerpage_model.dart';
+
+import '../../../widgets/widgets.dart';
 
 /// A controller class for the TasktimerpageScreen.
 ///
@@ -55,7 +58,8 @@ class TasktimerpageController extends GetxController {
     var sleepData =
         (await sleepCollection.where('counting', isEqualTo: true).get()).docs;
     log('loadTimer');
-    sleepData.forEach((element) {
+    for (var element in sleepData) {
+      playing.value = true;
       startTime.value = element.data()['startTime'];
       endTime.value = element.data()['endTime'] ?? '';
       DateTime parsedDate = DateTime.parse(startTime.value);
@@ -68,7 +72,7 @@ class TasktimerpageController extends GetxController {
       playing.value = true;
       id = element.id;
       play();
-    });
+    }
   }
 
   play() async {
@@ -97,7 +101,7 @@ class TasktimerpageController extends GetxController {
   sleep() async {
     playing.value = !playing.value;
     startTime.value = '${DateTime.now()}';
-    await Database.writeCollection(
+    id = await Database.writeCollection(
         id: babyId,
         data: {
           'startTime': startTime.value,
@@ -109,22 +113,35 @@ class TasktimerpageController extends GetxController {
         },
         parentTable: 'sleep',
         childTable: 'sleepLogs');
+
     play();
   }
 
   save() async {
     endTime.value = '${DateTime.now()}';
-    await Database.updateCollection(
-        id: babyId,
-        docId: id,
-        data: {
-          'endTime': endTime.value,
-          'counting': false,
-          'endDate': '${DateTime.now()}',
-          'totalTime': counter.value,
-        },
-        parentTable: 'sleep',
-        childTable: 'sleepLogs');
-    pause();
+    if (playing.value && id.isNotEmpty) {
+      log('babyId = $babyId');
+      pause();
+      await Database.updateCollection(
+          id: babyId,
+          docId: id,
+          data: {
+            'endTime': endTime.value,
+            'counting': false,
+            'endDate': '${DateTime.now()}',
+            'totalTime': counter.value,
+          },
+          parentTable: 'sleep',
+          childTable: 'sleepLogs');
+      snackbar(
+          context: Get.context,
+          message: 'Data Saved',
+          icon: Icon(
+            Icons.check_circle_outline_outlined,
+            color: ColorConstant.pink400,
+          ),
+          color: ColorConstant.pinkA100);
+      Get.back();
+    }
   }
 }

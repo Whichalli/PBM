@@ -63,8 +63,9 @@ class PumpingController extends GetxController {
     var sleepData =
         (await sleepCollection.where('counting', isEqualTo: true).get()).docs;
     log('loadTimer');
-    sleepData.forEach((element) {
+    for (var element in sleepData) {
       log('emelemt = ${element.data()}');
+      playing.value = true;
       startTime.value = element.data()['startTime'];
       endTime.value = element.data()['endTime'] ?? '';
       DateTime parsedDate = DateTime.parse(startTime.value);
@@ -78,7 +79,7 @@ class PumpingController extends GetxController {
       playing.value = true;
       id = element.id;
       play();
-    });
+    }
 
     log('id = $id babyId = $babyId');
   }
@@ -106,10 +107,10 @@ class PumpingController extends GetxController {
     _timer = null;
   }
 
-  sleep() async {
+  pump() async {
     playing.value = !playing.value;
     startTime.value = '${DateTime.now()}';
-    await Database.writeCollection(
+    id = await Database.writeCollection(
         id: babyId,
         data: {
           'startTime': startTime.value,
@@ -125,9 +126,9 @@ class PumpingController extends GetxController {
   }
 
   save() async {
-    pause();
     endTime.value = '${DateTime.now()}';
-    if (playing.value) {
+    if (playing.value && id.isNotEmpty) {
+      pause();
       await Database.updateCollection(
           id: babyId,
           docId: id,

@@ -61,10 +61,12 @@ class PumpingScreen extends GetWidget<PumpingController> {
                           ]))),
               Padding(
                 padding: getPadding(top: 24, bottom: 5),
-                child: IconButton(
+                child: Obx(() => IconButton(
                     onPressed: controller.playing.value
                         ? null
-                        : () => controller.sleep(),
+                        : () {
+                            controller.pump();
+                          },
                     icon: Obx(
                       () => (controller.playing.value)
                           ? CustomImageView(
@@ -79,7 +81,7 @@ class PumpingScreen extends GetWidget<PumpingController> {
                               width: getSize(45),
                               // margin: getMargin(left: 37)
                             ),
-                    )),
+                    ))),
               ),
               const SizedBox(
                 height: 14,

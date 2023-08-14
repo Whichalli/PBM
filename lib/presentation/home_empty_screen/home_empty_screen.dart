@@ -23,12 +23,13 @@ class HomeEmptyScreen extends GetWidget<HomeEmptyController> {
           automaticallyImplyLeading: false,
           title: Text(
             "Routines Logs".tr,
-            style: TextStyle(color: Colors.black, fontWeight: FontWeight.w600),
+            style: const TextStyle(
+                color: Colors.black, fontWeight: FontWeight.w600),
           ),
           centerTitle: true,
           leading: IconButton(
               onPressed: () => Get.back(),
-              icon: Icon(
+              icon: const Icon(
                 Icons.arrow_back_ios_new_rounded,
                 color: Colors.black,
               )),
@@ -48,6 +49,86 @@ class HomeEmptyScreen extends GetWidget<HomeEmptyController> {
                       // const SizedBox(
                       //   height: 32,
                       // ),
+                      ///Diaper Log Chart
+                      StreamBuilder<List<ChartData>>(
+                          stream: controller.fetchData(
+                            child: 'diaperLogs',
+                            parent: 'diaper',
+                          ),
+                          builder: (context, snapshot) {
+                            // var table = controller.tables[
+                            //         controller.titles.indexOf(e)]
+                            //     ['parent'];
+                            // log('snapshot.hasData ${snapshot.hasData} ');
+                            log('!!!!!!!!!!!!!!!! diaper = ${snapshot.hasData}');
+                            if (snapshot.hasData) {
+                              if (snapshot.data != null) {
+                                if (snapshot.data!.isNotEmpty) {
+                                  // log('table = $table snapshot.hasData ${snapshot.hasData} ${snapshot.data![0].y}...${snapshot.data![0].yValue}');
+                                  return Padding(
+                                    padding: getPadding(top: 0),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Divider(
+                                          color: ColorConstant.pinkA100,
+                                        ),
+                                        const Text(
+                                          'Diaper Logs',
+                                          style: TextStyle(
+                                              fontSize: 20,
+                                              fontWeight: FontWeight.w600,
+                                              fontFamily: 'Poppins'),
+                                        ),
+                                        const SizedBox(
+                                          height: 8,
+                                        ),
+                                        SingleChildScrollView(
+                                          child: Container(
+                                              height: 240,
+                                              // width: 500,
+                                              padding: getPadding(top: 12),
+                                              decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(20),
+                                                  color:
+                                                      ColorConstant.pinkA100),
+                                              child: SfCartesianChart(
+                                                // plotAreaBorderWidth: 0,
+                                                primaryXAxis: DateTimeAxis(),
+                                                // primaryYAxis: CategoryAxis(
+                                                //     minimum: 1, maximum: 24),
+                                                onTooltipRender: (tooltipArgs) {
+                                                  tooltipArgs.header = 'Diaper';
+                                                  var hh = double.parse(
+                                                              tooltipArgs
+                                                                  .text!
+                                                                  .split(
+                                                                      ':')[1]) <
+                                                          12
+                                                      ? 'AM'
+                                                      : 'PM';
+                                                  tooltipArgs.text =
+                                                      '${tooltipArgs.text!.replaceAll('.', ':')} $hh';
+                                                },
+                                                series: controller
+                                                    .scatterChartSeries(
+                                                        dataSource:
+                                                            snapshot.data!),
+                                                tooltipBehavior:
+                                                    TooltipBehavior(
+                                                        enable: true),
+                                              )),
+                                        ),
+                                      ],
+                                    ),
+                                  );
+                                }
+                              }
+                            }
+                            return const SizedBox();
+                          }),
 
                       StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
                           stream: FirebaseFirestore.instance
@@ -376,182 +457,97 @@ class HomeEmptyScreen extends GetWidget<HomeEmptyController> {
                               ),
                             );
                           }),
+
+                      //Other Routpine logs
                       Column(
-                        children: controller.titles
-                            .map(
-                              (e) => StreamBuilder<List<ChartData>>(
-                                  stream: controller.fetchData(
-                                    child: controller.tables[
-                                        controller.titles.indexOf(e)]['child'],
-                                    parent: controller.tables[
-                                        controller.titles.indexOf(e)]['parent'],
-                                  ),
-                                  builder: (context, snapshot) {
-                                    // var table = controller.tables[
-                                    //         controller.titles.indexOf(e)]
-                                    //     ['parent'];
-                                    // log('snapshot.hasData ${snapshot.hasData} ');
-                                    if (snapshot.hasData) {
-                                      if (snapshot.data != null) {
-                                        if (snapshot.data!.isNotEmpty) {
-                                          // log('table = $table snapshot.hasData ${snapshot.hasData} ${snapshot.data![0].y}...${snapshot.data![0].yValue}');
-                                          return Padding(
-                                            padding: getPadding(top: 0),
-                                            child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Divider(
-                                                  color: ColorConstant.pinkA100,
-                                                ),
-                                                Text(
-                                                  e,
-                                                  style: const TextStyle(
-                                                      fontSize: 20,
-                                                      fontWeight:
-                                                          FontWeight.w600,
-                                                      fontFamily: 'Poppins'),
-                                                ),
-                                                const SizedBox(
-                                                  height: 8,
-                                                ),
-                                                SingleChildScrollView(
-                                                  child: Container(
-                                                      height: 240,
-                                                      // width: 500,
-                                                      padding:
-                                                          getPadding(top: 12),
-                                                      decoration: BoxDecoration(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(20),
-                                                          color: ColorConstant
-                                                              .pinkA100),
-                                                      child: SfCartesianChart(
-                                                        plotAreaBorderWidth: 0,
-
-                                                        // primaryXAxis:
-                                                        //     CategoryAxis(
-                                                        //   majorGridLines:
-                                                        //       const MajorGridLines(
-                                                        //           width: 0),
-                                                        // ),
-                                                        // primaryYAxis:
-                                                        //     NumericAxis(
-                                                        //         axisLine:
-                                                        //             const AxisLine(
-                                                        //                 width:
-                                                        //                     0),
-                                                        //         interval: 1.0,
-                                                        //         labelFormat:
-                                                        //             '{value}',
-                                                        //         majorTickLines:
-                                                        //             const MajorTickLines(
-                                                        //           size: 0,
-                                                        //         )),
-                                                        series: controller
-                                                            .scatterChartSeries(
-                                                                dataSource:
-                                                                    snapshot
-                                                                        .data!),
-                                                        tooltipBehavior:
-                                                            TooltipBehavior(
-                                                                enable: true),
-                                                      )),
-                                                ),
-                                              ],
+                        children: controller.titles.map((e) {
+                          log('routine = $e');
+                          return StreamBuilder<List<ChartData>>(
+                              stream: controller.fetchData(
+                                child: controller
+                                        .tables[controller.titles.indexOf(e)]
+                                    ['child'],
+                                parent: controller
+                                        .tables[controller.titles.indexOf(e)]
+                                    ['parent'],
+                              ),
+                              builder: (context, snapshot) {
+                                var table = controller
+                                        .tables[controller.titles.indexOf(e)]
+                                    ['parent'];
+                                log('other snapshot.hasData ${snapshot.hasData} $e table = $table');
+                                if (snapshot.hasData) {
+                                  if (snapshot.data != null) {
+                                    if (snapshot.data!.isNotEmpty) {
+                                      log('table = $table snapshot.hasData ${snapshot.hasData} ${snapshot.data![0].y}...${snapshot.data![0].yValue}');
+                                      return Padding(
+                                        padding: getPadding(top: 0),
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Divider(
+                                              color: ColorConstant.pinkA100,
                                             ),
-                                          );
-                                        }
-                                      }
+                                            Text(
+                                              e,
+                                              style: const TextStyle(
+                                                  fontSize: 20,
+                                                  fontWeight: FontWeight.w600,
+                                                  fontFamily: 'Poppins'),
+                                            ),
+                                            const SizedBox(
+                                              height: 8,
+                                            ),
+                                            SingleChildScrollView(
+                                              child: Container(
+                                                  height: 240,
+                                                  // width: 500,
+                                                  padding: getPadding(top: 12),
+                                                  decoration: BoxDecoration(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              20),
+                                                      color: ColorConstant
+                                                          .pinkA100),
+                                                  child: SfCartesianChart(
+                                                    plotAreaBorderWidth: 0,
+                                                    // primaryXAxis:
+                                                    //     DateTimeAxis(),
+                                                    primaryXAxis: CategoryAxis(
+                                                      majorGridLines:
+                                                          const MajorGridLines(
+                                                              width: 0),
+                                                    ),
+                                                    primaryYAxis: NumericAxis(
+                                                        axisLine:
+                                                            const AxisLine(
+                                                                width: 0),
+                                                        interval: 1.0,
+                                                        labelFormat: '{value}',
+                                                        majorTickLines:
+                                                            const MajorTickLines(
+                                                          size: 0,
+                                                        )),
+                                                    series:
+                                                        controller.chartSeries(
+                                                            dataSource:
+                                                                snapshot.data!),
+                                                    tooltipBehavior:
+                                                        TooltipBehavior(
+                                                            enable: true),
+                                                  )),
+                                            ),
+                                          ],
+                                        ),
+                                      );
                                     }
-                                    return const SizedBox();
-                                  }),
-                            )
-                            .toList(),
-                      ),
-
-                      StreamBuilder<List<ChartData>>(
-                          stream: controller.fetchData(
-                            child: 'diaperLogs',
-                            parent: 'diaper',
-                          ),
-                          builder: (context, snapshot) {
-                            // var table = controller.tables[
-                            //         controller.titles.indexOf(e)]
-                            //     ['parent'];
-                            // log('snapshot.hasData ${snapshot.hasData} ');
-                            if (snapshot.hasData) {
-                              log('diaper = ${snapshot.data}');
-                              if (snapshot.data != null) {
-                                if (snapshot.data!.isNotEmpty) {
-                                  // log('table = $table snapshot.hasData ${snapshot.hasData} ${snapshot.data![0].y}...${snapshot.data![0].yValue}');
-                                  return Padding(
-                                    padding: getPadding(top: 0),
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Divider(
-                                          color: ColorConstant.pinkA100,
-                                        ),
-                                        const Text(
-                                          'Diaper Logs',
-                                          style: TextStyle(
-                                              fontSize: 20,
-                                              fontWeight: FontWeight.w600,
-                                              fontFamily: 'Poppins'),
-                                        ),
-                                        const SizedBox(
-                                          height: 8,
-                                        ),
-                                        SingleChildScrollView(
-                                          child: Container(
-                                              height: 240,
-                                              // width: 500,
-                                              padding: getPadding(top: 12),
-                                              decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.circular(20),
-                                                  color:
-                                                      ColorConstant.pinkA100),
-                                              child: SfCartesianChart(
-                                                // plotAreaBorderWidth: 0,
-                                                primaryXAxis: DateTimeAxis(),
-                                                
-                                                // primaryXAxis: CategoryAxis(
-                                                //   majorGridLines:
-                                                //       const MajorGridLines(
-                                                //           width: 0),
-                                                // ),
-                                                // primaryYAxis: NumericAxis(
-                                                //     axisLine: const AxisLine(
-                                                //         width: 0),
-                                                //     interval: 1.0,
-                                                //     labelFormat: '{value}',
-                                                //     majorTickLines:
-                                                //         const MajorTickLines(
-                                                //       size: 0,
-                                                //     )),
-                                                
-                                                series: controller
-                                                    .scatterChartSeries(
-                                                        dataSource:
-                                                            snapshot.data!),
-                                                tooltipBehavior:
-                                                    TooltipBehavior(
-                                                        enable: true),
-                                              )),
-                                        ),
-                                      ],
-                                    ),
-                                  );
+                                  }
                                 }
-                              }
-                            }
-                            return const SizedBox();
-                          }),
-
+                                return const SizedBox();
+                              });
+                        }).toList(),
+                      ),
                       Obx(() => controller.hasRoutine.value
                           ? const SizedBox()
                           : Column(

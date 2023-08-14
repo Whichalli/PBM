@@ -20,7 +20,6 @@ class Database {
     }
   }
 
-  
   static DocumentReference<Map<String, dynamic>> readStream(
       {required String userId, required String table}) {
     try {
@@ -29,7 +28,6 @@ class Database {
       rethrow;
     }
   }
-
 
   static Future<DocumentSnapshot<Map<String, dynamic>>> read(
       {required String userId, required String table}) async {
@@ -40,7 +38,6 @@ class Database {
     }
   }
 
-  
   static CollectionReference<Map<String, dynamic>> readCollection(
       {required String parentTable,
       required String childTable,
@@ -61,12 +58,13 @@ class Database {
       required String parentTable,
       required String childTable}) async {
     try {
-      await collection
+      var req = collection
           .collection(parentTable)
           .doc('/$id')
           .collection(childTable)
-          .doc()
-          .set(data);
+          .doc();
+      await req.set(data);
+      return req.id;
     } catch (e) {
       e.printError();
       rethrow;
@@ -112,18 +110,14 @@ class Database {
     }
   }
 
-  
   static Future<dynamic> delete(
-      {required String userId,
-      required String table}) async {
+      {required String userId, required String table}) async {
     try {
       await collection.collection(table).doc('/$userId').delete();
     } catch (e) {
       rethrow;
     }
   }
-
-
 
   static Future<dynamic> uploadFile(
       {required File file, required String path}) async {

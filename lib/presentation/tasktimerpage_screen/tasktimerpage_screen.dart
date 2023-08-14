@@ -61,7 +61,7 @@ class TasktimerpageScreen extends GetWidget<TasktimerpageController> {
                           ]))),
               Padding(
                 padding: getPadding(top: 24, bottom: 5),
-                child: IconButton(
+                child: Obx(() => IconButton(
                     onPressed: controller.playing.value
                         ? null
                         : () => controller.sleep(),
@@ -79,7 +79,7 @@ class TasktimerpageScreen extends GetWidget<TasktimerpageController> {
                               width: getSize(45),
                               // margin: getMargin(left: 37)
                             ),
-                    )),
+                    ))),
               ),
               const SizedBox(
                 height: 14,

@@ -204,7 +204,7 @@ class HomeEmptyScreen extends GetWidget<HomeEmptyController> {
                                               // var table = controller.tables[
                                               //         controller.titles.indexOf(e)]
                                               //     ['parent'];
-                                              log('snapshot.hasData ${snapshot.hasData} ${snapshot.data}');
+                                              // log('snapshot.hasData ${snapshot.hasData} ${snapshot.data}');
                                               if (snapshot.hasData) {
                                                 if (snapshot.data != null) {
                                                   if (snapshot
@@ -372,11 +372,12 @@ class HomeEmptyScreen extends GetWidget<HomeEmptyController> {
                                                         Map<String,
                                                             ChartData>>>>(
                                             stream: controller.fetchFeedingLogs(
-                                                parent: 'feeding'),
+                                              
+                                              parent: 'feeding'),
                                             builder: (context, snapshot) {
-                                              log('ola = ${controller.feedingLogsChart}');
+                                              // log('ola = ${controller.feedingLogsChart}');
 
-                                              log('snapshot.hasData3 ${snapshot.hasData} ${snapshot.data}');
+                                              // log('snapshot.hasData3 ${snapshot.hasData} ${snapshot.data}');
                                               if (snapshot.hasData) {
                                                 if (snapshot.data != null) {
                                                   if (snapshot

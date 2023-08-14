@@ -101,12 +101,12 @@ class SignInController extends GetxController {
       log('response = $response');
       if (response['code'] == 200) {
         User user = response['user'];
-        if (user.emailVerified) {
-          Get.toNamed(
-            AppRoutes.chooseAgeScreen,
-          );
-          return;
-        }
+        // if (user.emailVerified) {
+        //   Get.toNamed(
+        //     AppRoutes.chooseAgeScreen,
+        //   );
+        //   return;
+        // }
         await onSuccessResponse(user, context);
       } else {
         if (response['code'] <= 450) {
@@ -139,7 +139,7 @@ class SignInController extends GetxController {
     if (!user.emailVerified) {
       await user.sendEmailVerification();
       snackbar(
-          icon: Icon(Icons.mail_outline_outlined),
+          icon: const Icon(Icons.mail_outline_outlined),
           color: Colors.black,
           message:
               'A verification link has been sent to the provided email address',
@@ -147,6 +147,7 @@ class SignInController extends GetxController {
       return;
     }
     parentController.userId.value = user.uid;
+    log('id = ${user.uid} exist = ${(await FirebaseFirestore.instance.collection('user').doc('/${user.uid}').get()).exists}');
 
     if ((await FirebaseFirestore.instance
             .collection('user')
@@ -154,11 +155,9 @@ class SignInController extends GetxController {
             .get())
         .exists) {
       Get.offAllNamed(
-        AppRoutes.chooseAgeScreen,
-      );
-      Get.offAllNamed(
         AppRoutes.homeOnboardingContainerScreen,
       );
+
       return;
     }
     // Hive.box('parent').put('user', {

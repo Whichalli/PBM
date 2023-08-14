@@ -95,8 +95,8 @@ class NewroutineController extends GetxController {
     await Database.writeCollection(
         id: babyId,
         data: {
-          'time': time.value,
-          'dateime': date.value,
+          'time': time.value.getTime(),
+          'date': date.value,
           'note': describeactivitController.text,
           'isPoo': isPoo.value,
           'isPee': isPee.value,
@@ -109,7 +109,8 @@ class NewroutineController extends GetxController {
     snackbar(
         context: Get.context!,
         message: 'Data saved',
-        icon: const Icon(Icons.baby_changing_station_rounded),
+        icon: Icon(Icons.baby_changing_station_rounded,
+            color: ColorConstant.pinkA100),
         color: ColorConstant.pinkA100);
     Get.back();
   }

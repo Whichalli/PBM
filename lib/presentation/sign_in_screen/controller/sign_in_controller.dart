@@ -146,13 +146,28 @@ class SignInController extends GetxController {
           context: context);
       return;
     }
+    parentController.userId.value = user.uid;
+
+    if ((await FirebaseFirestore.instance
+            .collection('user')
+            .doc('/${user.uid}')
+            .get())
+        .exists) {
+      Get.offAllNamed(
+        AppRoutes.chooseAgeScreen,
+      );
+      Get.offAllNamed(
+        AppRoutes.homeOnboardingContainerScreen,
+      );
+      return;
+    }
     // Hive.box('parent').put('user', {
     //   'name': user.displayName,
     //   'email': user.email,
     //   'phone': user.phoneNumber,
     //   'photoUrl': user.photoURL
     // });
-    parentController.userId.value = user.uid;
+
     Get.offAllNamed(
       AppRoutes.chooseAgeScreen,
     );

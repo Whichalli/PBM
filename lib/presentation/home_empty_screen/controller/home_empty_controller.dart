@@ -1,7 +1,6 @@
 import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:pbm_app/core/app_export.dart';
 import 'package:pbm_app/domain/firebase/firebase.dart';
@@ -45,6 +44,7 @@ class HomeEmptyController extends GetxController {
   List<ChartData> pumpingData = [];
   List<ChartData> feedingData = [];
   List<ChartData> bottleData = [];
+  List<ChartData> diaperData = [];
   List<ChartData> breastData = [];
   List<ChartData> solidData = [];
 
@@ -80,16 +80,17 @@ class HomeEmptyController extends GetxController {
         // .where('counting', isEqualTo: false)
         .snapshots();
 
-    log('bottleResp = $resp');
+    log('chart resp = $resp');
     // log('data = ')
 
-    (await resp.first).docs.forEach((e) {
+    for (var e in (await resp.first).docs) {
       hasRoutine.value = true;
 
       // log('diff = $diff');
       DateTime stDt;
       DateTime endDt;
       ChartData chart;
+      log('parent = $parent');
       if (child == 'bottleLogs') {
         stDt = e.data()['feedingDate'].toString().toDate();
         chart = ChartData(
@@ -100,7 +101,7 @@ class HomeEmptyController extends GetxController {
         bottleData.add(chart);
         log('bottle');
       }
-      if (parent != 'feeding') {
+      if (parent != 'feeding' && parent != 'diaper') {
         stDt = e.data()['startDate'].toString().toDate();
         endDt = e.data()['endDate'].toString().toDate();
         // log('stDt = $stDt endDt = $endDt');
@@ -122,8 +123,23 @@ class HomeEmptyController extends GetxController {
           pumpingData.add(chart);
         }
       }
-    });
-    log('feeding = $bottleData');
+      if (parent == 'diaper') {
+        log('ok');
+        log('e = ${e.data()}');
+        log('stDt = ${e.data()['time'].toString().toSeconds() / 3600}');
+        DateTime date =
+            (e.data()['date'] ?? e.data()['dateime'] as Timestamp).toDate();
+        log('ok2 ${date.getDate()}');
+        chart = ChartData(
+            x: date,
+            y: (e.data()['time'] as String).toSeconds() / 3600,
+            // double.parse('${endDt.hour}.${endDt.minute}'),
+            yValue: 0);
+        log('chartX = ${chart.x}');
+        diaperData.add(chart);
+      }
+    }
+    // log('feeding = $bottleData');
     data = parent == 'sleep'
         ? sleepData
         : parent == 'activity'
@@ -132,9 +148,13 @@ class HomeEmptyController extends GetxController {
                 ? pumpingData
                 : child == 'bottleLogs'
                     ? bottleData
-                    : [];
+                    : child == 'diaperLogs'
+                        ? diaperData
+                        : [];
     yield data;
   }
+
+  RxBool hasFeeding = false.obs;
 
   Stream<List<Map<String, Map<String, ChartData>>>> fetchFeedingLogs(
       {child, required parent}) async* {
@@ -146,9 +166,10 @@ class HomeEmptyController extends GetxController {
           .where('counting', isEqualTo: false)
           .snapshots();
       resp.forEach((element) {
-        element.docs.forEach((e) {
+        for (var e in element.docs) {
           Color color = Colors.white;
           hasRoutine.value = true;
+          hasFeeding.value = true;
           // if (feedingLogs[i]['log'] == 'breastLogs')
           //   color = ColorConstant.pink400;
 
@@ -189,9 +210,10 @@ class HomeEmptyController extends GetxController {
           //   feedingLogsChart.add({
           //     'data': {'data': chart}
           //   });
-        });
+        }
       });
     });
+    log('testing logs');
     yield [];
   }
 
@@ -205,7 +227,7 @@ class HomeEmptyController extends GetxController {
         .snapshots();
 
     resp.forEach((element) {
-      element.docs.forEach((e) {
+      for (var e in element.docs) {
         Color color = Colors.white;
         hasRoutine.value = true;
         log('breast resp data = ${e.data()}');
@@ -236,20 +258,20 @@ class HomeEmptyController extends GetxController {
         // feedingLogsChart.add({
         //   'left': {'data': leftChart}
         // });
-      });
+      }
     });
   }
 
   List<BarSeries<ChartData, String>> chartSeries(
       {List<ChartData>? dataSource,
       List<Map<String, Map<String, ChartData>>>? children}) {
-    if (children == null && dataSource != null)
+    if (children == null && dataSource != null) {
       return <BarSeries<ChartData, String>>[
         BarSeries<ChartData, String>(
           // width: 0.5,
           enableTooltip: true,
           color: Colors.white,
-          borderRadius: BorderRadius.only(
+          borderRadius: const BorderRadius.only(
               topRight: Radius.circular(8), bottomRight: Radius.circular(8)),
           dataSource: dataSource,
           xValueMapper: (ChartData data, _) => data.x,
@@ -262,14 +284,15 @@ class HomeEmptyController extends GetxController {
           isVisible: true,
           trackPadding: 0,
           // highValueMapper: (ChartData sales, _) => sales.yValue,
-          dataLabelSettings: DataLabelSettings(
+          dataLabelSettings: const DataLabelSettings(
               isVisible: true,
               alignment: ChartAlignment.near,
               showZeroValue: true,
               labelAlignment: ChartDataLabelAlignment.top,
-              textStyle: const TextStyle(fontSize: 11)),
+              textStyle: TextStyle(fontSize: 11)),
         ),
       ];
+    }
 
     return children!.map((e) {
       log('e = $e');
@@ -278,7 +301,7 @@ class HomeEmptyController extends GetxController {
       return BarSeries<ChartData, String>(
         enableTooltip: true,
         color: e['data']!['data']!.color,
-        borderRadius: BorderRadius.only(
+        borderRadius: const BorderRadius.only(
             topRight: Radius.circular(8), bottomRight: Radius.circular(8)),
         dataSource: e['data']!.values.toList(),
         xValueMapper: (ChartData data, _) => data.x,
@@ -292,12 +315,12 @@ class HomeEmptyController extends GetxController {
         trackPadding: 0,
 
         // highValueMapper: (ChartData sales, _) => sales.yValue,
-        dataLabelSettings: DataLabelSettings(
+        dataLabelSettings: const DataLabelSettings(
             isVisible: true,
             alignment: ChartAlignment.near,
             showZeroValue: true,
             labelAlignment: ChartDataLabelAlignment.top,
-            textStyle: const TextStyle(fontSize: 11)),
+            textStyle: TextStyle(fontSize: 11)),
       );
     }).toList();
     // }
@@ -310,7 +333,7 @@ class HomeEmptyController extends GetxController {
         width: 0.5,
         enableTooltip: true,
         color: Colors.white,
-        borderRadius: BorderRadius.only(
+        borderRadius: const BorderRadius.only(
             topRight: Radius.circular(8), bottomRight: Radius.circular(8)),
         dataSource: dataSource,
         xValueMapper: (ChartData data, _) => data.x,
@@ -323,12 +346,12 @@ class HomeEmptyController extends GetxController {
         isVisible: true,
         trackPadding: 0,
         // highValueMapper: (ChartData sales, _) => sales.yValue,
-        dataLabelSettings: DataLabelSettings(
+        dataLabelSettings: const DataLabelSettings(
             isVisible: true,
             alignment: ChartAlignment.near,
             showZeroValue: true,
             labelAlignment: ChartDataLabelAlignment.top,
-            textStyle: const TextStyle(fontSize: 11)),
+            textStyle: TextStyle(fontSize: 11)),
       ),
     ];
   }
@@ -375,7 +398,7 @@ class HomeEmptyController extends GetxController {
       return RangeColumnSeries<ChartData, String>(
         enableTooltip: true,
         color: e.color,
-        borderRadius: BorderRadius.only(
+        borderRadius: const BorderRadius.only(
             topRight: Radius.circular(8), bottomRight: Radius.circular(8)),
         dataSource: data,
         xValueMapper: (ChartData data, _) => data.x,
@@ -391,12 +414,12 @@ class HomeEmptyController extends GetxController {
         trackPadding: 0,
 
         // highValueMapper: (ChartData sales, _) => sales.yValue,
-        dataLabelSettings: DataLabelSettings(
+        dataLabelSettings: const DataLabelSettings(
             isVisible: true,
             alignment: ChartAlignment.near,
             showZeroValue: true,
             labelAlignment: ChartDataLabelAlignment.top,
-            textStyle: const TextStyle(fontSize: 11)),
+            textStyle: TextStyle(fontSize: 11)),
       );
     }).toList();
 
@@ -413,6 +436,43 @@ class HomeEmptyController extends GetxController {
     //   )
     // ];
   }
+
+  List<ScatterSeries<ChartData, DateTime>> scatterChartSeries(
+      {required List<ChartData> dataSource}) {
+    log('dataSource = ${dataSource.first.x}');
+    return [
+      ScatterSeries<ChartData, DateTime>(
+          dataSource: diaperData,
+          color: Colors.white,
+          xValueMapper: (ChartData data, _) => data.x,
+          yValueMapper: (ChartData data, _) => data.y,
+          markerSettings: MarkerSettings(
+              height: 15, width: 15, shape: DataMarkerType.circle))
+    ];
+  }
+  // diaperChart() {
+  //   final List<ChartData> chartData = [
+  //     // ChartData(2010, 32),
+  //     // ChartData(2011, 40),
+  //     // ChartData(2012, 34),
+  //     // ChartData(2013, 52),
+  //     // ChartData(2014, 42),
+  //     // ChartData(2015, 38),
+  //     // ChartData(2016, 41),
+  //   ];
+  //   return Scaffold(
+  //       body: Center(
+  //           child: Container(
+  //               child: SfCartesianChart(
+  //                   primaryXAxis: DateTimeAxis(),
+  //                   series: <ChartSeries>[
+  //         // Renders scatter chart
+  //         ScatterSeries<ChartData, DateTime>(
+  //             dataSource: chartData,
+  //             xValueMapper: (ChartData data, _) => data.x,
+  //             yValueMapper: (ChartData data, _) => data.y)
+  //       ]))));
+  // }
 }
 
 class ChartData {

@@ -49,303 +49,333 @@ class HomeEmptyScreen extends GetWidget<HomeEmptyController> {
                       //   height: 32,
                       // ),
 
-                      // Container(
-                      //   padding: getPadding(all: 8),
-                      //   decoration: BoxDecoration(
-                      //       borderRadius: BorderRadius.circular(12),
-                      //       border: Border.all(color: ColorConstant.pinkA100)),
-                      //   height: 310,
-                      //   // width: getVerticalSize(411),
-                      //   child: Column(
-                      //     children: [
-                      //       Row(
-                      //           mainAxisAlignment: MainAxisAlignment.center,
-                      //           children: controller.tabs
-                      //               .map(
-                      //                 (e) => Expanded(
-                      //                   child: Row(
-                      //                     children: [
-                      //                       Expanded(
-                      //                         child: CustomButton(
-                      //                             onTap: () {
-                      //                               controller.swapPage(
-                      //                                   controller.tabs
-                      //                                       .indexOf(e));
-                      //                             },
-                      //                             margin: getMargin(all: 1.5),
-                      //                             padding:
-                      //                                 ButtonPadding.PaddingAll4,
-                      //                             text: e['value'],
-                      //                             shape: ButtonShape
-                      //                                 .RoundedBorder8,
-                      //                             variant: e['active']
-                      //                                 ? null
-                      //                                 : ButtonVariant
-                      //                                     .FillWhiteA700,
-                      //                             fontStyle: !e['active']
-                      //                                 ? ButtonFontStyle
-                      //                                     .OpenSansRomanSemiBold14Gray600
-                      //                                 : null),
-                      //                       ),
-                      //                     ],
-                      //                   ),
-                      //                 ),
-                      //               )
-                      //               .toList()),
-                      //       SizedBox(
-                      //         height: 240,
-                      //         width: 411,
-                      //         child: PageView(
-                      //           physics: const NeverScrollableScrollPhysics(),
-                      //           controller: controller.pageController,
-                      //           children: [
-                      //             StreamBuilder<List<ChartData>>(
-                      //                 stream: controller.fetchData(
-                      //                   parent: 'feeding',
-                      //                   child: 'bottleLogs',
-                      //                 ),
-                      //                 builder: (context, snapshot) {
-                      //                   // var table = controller.tables[
-                      //                   //         controller.titles.indexOf(e)]
-                      //                   //     ['parent'];
-                      //                   log('snapshot.hasData ${snapshot.hasData} ${snapshot.data}');
-                      //                   if (snapshot.hasData) {
-                      //                     if (snapshot.data != null) {
-                      //                       if (snapshot.data!.isNotEmpty) {
-                      //                         // log('table = $table snapshot.hasData ${snapshot.hasData} ${snapshot.data![0].y}...${snapshot.data![0].yValue}');
-                      //                         return Padding(
-                      //                           padding: getPadding(top: 0),
-                      //                           child: Column(
-                      //                             crossAxisAlignment:
-                      //                                 CrossAxisAlignment.start,
-                      //                             children: [
-                      //                               SingleChildScrollView(
-                      //                                 child: Container(
-                      //                                     height: 240,
-                      //                                     width: 500,
-                      //                                     padding: getPadding(
-                      //                                         top: 12),
-                      //                                     decoration: BoxDecoration(
-                      //                                         borderRadius:
-                      //                                             BorderRadius
-                      //                                                 .circular(
-                      //                                                     20),
-                      //                                         color:
-                      //                                             ColorConstant
-                      //                                                 .pinkA100),
-                      //                                     child:
-                      //                                         SfCartesianChart(
-                      //                                       plotAreaBorderWidth:
-                      //                                           0,
-                      //                                       primaryXAxis:
-                      //                                           CategoryAxis(
-                      //                                         majorGridLines:
-                      //                                             const MajorGridLines(
-                      //                                                 width: 0),
-                      //                                       ),
-                      //                                       primaryYAxis:
-                      //                                           NumericAxis(
-                      //                                               axisLine:
-                      //                                                   const AxisLine(
-                      //                                                       width:
-                      //                                                           0),
-                      //                                               interval:
-                      //                                                   10,
-                      //                                               maximum:
-                      //                                                   300,
-                      //                                               labelFormat:
-                      //                                                   '{value}',
-                      //                                               majorTickLines:
-                      //                                                   const MajorTickLines(
-                      //                                                 size: 0,
-                      //                                               )),
-                      //                                       series: controller
-                      //                                           .bottleChartSeries(
-                      //                                               dataSource:
-                      //                                                   snapshot
-                      //                                                       .data!),
-                      //                                       tooltipBehavior:
-                      //                                           TooltipBehavior(
-                      //                                               enable:
-                      //                                                   true),
-                      //                                     )),
-                      //                               ),
-                      //                             ],
-                      //                           ),
-                      //                         );
-                      //                       }
-                      //                     }
-                      //                   }
-                      //                   return SizedBox();
-                      //                 }),
-                      //             // Breast Logs
-                      //             StreamBuilder<
-                      //                     List<
-                      //                         Map<String,
-                      //                             Map<String, ChartData>>>>(
-                      //                 stream: controller.fetchBreastLogs(),
-                      //                 builder: (context, snapshot) {
-                      //                   log('OPOLOP = ${controller.feedingLogsChart}');
+                      StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
+                          stream: FirebaseFirestore.instance
+                              .collection('feeding')
+                              .snapshots(),
+                          builder: (context, snapshot) {
+                            if (snapshot.hasData) {
+                              log('snap = ${snapshot.data}');
+                              if (snapshot.data!.docs.isEmpty) {
+                                return const SizedBox();
+                              }
+                            }
+                            return Container(
+                              padding: getPadding(all: 8),
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(12),
+                                  border: Border.all(
+                                      color: ColorConstant.pinkA100)),
+                              height: 310,
+                              // width: getVerticalSize(411),
+                              child: Column(
+                                children: [
+                                  Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: controller.tabs
+                                          .map(
+                                            (e) => Expanded(
+                                              child: Row(
+                                                children: [
+                                                  Expanded(
+                                                    child: CustomButton(
+                                                        onTap: () {
+                                                          controller.swapPage(
+                                                              controller.tabs
+                                                                  .indexOf(e));
+                                                        },
+                                                        margin:
+                                                            getMargin(all: 1.5),
+                                                        padding: ButtonPadding
+                                                            .PaddingAll4,
+                                                        text: e['value'],
+                                                        shape: ButtonShape
+                                                            .RoundedBorder8,
+                                                        variant: e['active']
+                                                            ? null
+                                                            : ButtonVariant
+                                                                .FillWhiteA700,
+                                                        fontStyle: !e['active']
+                                                            ? ButtonFontStyle
+                                                                .OpenSansRomanSemiBold14Gray600
+                                                            : null),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          )
+                                          .toList()),
+                                  SizedBox(
+                                    height: 240,
+                                    width: 411,
+                                    child: PageView(
+                                      physics:
+                                          const NeverScrollableScrollPhysics(),
+                                      controller: controller.pageController,
+                                      children: [
+                                        StreamBuilder<List<ChartData>>(
+                                            stream: controller.fetchData(
+                                              parent: 'feeding',
+                                              child: 'bottleLogs',
+                                            ),
+                                            builder: (context, snapshot) {
+                                              // var table = controller.tables[
+                                              //         controller.titles.indexOf(e)]
+                                              //     ['parent'];
+                                              log('snapshot.hasData ${snapshot.hasData} ${snapshot.data}');
+                                              if (snapshot.hasData) {
+                                                if (snapshot.data != null) {
+                                                  if (snapshot
+                                                      .data!.isNotEmpty) {
+                                                    // log('table = $table snapshot.hasData ${snapshot.hasData} ${snapshot.data![0].y}...${snapshot.data![0].yValue}');
+                                                    return Padding(
+                                                      padding:
+                                                          getPadding(top: 0),
+                                                      child: Column(
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .start,
+                                                        children: [
+                                                          SingleChildScrollView(
+                                                            child: Container(
+                                                                height: 240,
+                                                                width: 500,
+                                                                padding:
+                                                                    getPadding(
+                                                                        top:
+                                                                            12),
+                                                                decoration: BoxDecoration(
+                                                                    borderRadius:
+                                                                        BorderRadius.circular(
+                                                                            20),
+                                                                    color: ColorConstant
+                                                                        .pinkA100),
+                                                                child:
+                                                                    SfCartesianChart(
+                                                                  plotAreaBorderWidth:
+                                                                      0,
+                                                                  primaryXAxis:
+                                                                      CategoryAxis(
+                                                                    majorGridLines:
+                                                                        const MajorGridLines(
+                                                                            width:
+                                                                                0),
+                                                                  ),
+                                                                  primaryYAxis:
+                                                                      NumericAxis(
+                                                                          axisLine: const AxisLine(
+                                                                              width:
+                                                                                  0),
+                                                                          interval:
+                                                                              10,
+                                                                          maximum:
+                                                                              300,
+                                                                          labelFormat:
+                                                                              '{value}',
+                                                                          majorTickLines:
+                                                                              const MajorTickLines(
+                                                                            size:
+                                                                                0,
+                                                                          )),
+                                                                  series: controller.bottleChartSeries(
+                                                                      dataSource:
+                                                                          snapshot
+                                                                              .data!),
+                                                                  tooltipBehavior:
+                                                                      TooltipBehavior(
+                                                                          enable:
+                                                                              true),
+                                                                )),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    );
+                                                  }
+                                                }
+                                              }
+                                              return const SizedBox();
+                                            }),
+                                        // Breast Logs
+                                        StreamBuilder<
+                                                List<
+                                                    Map<
+                                                        String,
+                                                        Map<String,
+                                                            ChartData>>>>(
+                                            stream:
+                                                controller.fetchBreastLogs(),
+                                            builder: (context, snapshot) {
+                                              log('OPOLOP = ${controller.feedingLogsChart}');
 
-                      //                   // log('snapshot.hasData2 ${snapshot.hasData} ${snapshot.data}');
-                      //                   if (snapshot.hasData) {
-                      //                     if (snapshot.data != null) {
-                      //                       if (snapshot.data!.isNotEmpty) {
-                      //                         // log('table = $table snapshot.hasData ${snapshot.hasData} ${snapshot.data![0].y}...${snapshot.data![0].yValue}');
-                      //                         return Padding(
-                      //                           padding: getPadding(top: 0),
-                      //                           child: Column(
-                      //                             crossAxisAlignment:
-                      //                                 CrossAxisAlignment.start,
-                      //                             children: [
-                      //                               const SizedBox(
-                      //                                 height: 8,
-                      //                               ),
-                      //                               SingleChildScrollView(
-                      //                                 child: Container(
-                      //                                     height: 230,
-                      //                                     // width: 500,
-                      //                                     padding: getPadding(
-                      //                                         top: 12),
-                      //                                     decoration: BoxDecoration(
-                      //                                         borderRadius:
-                      //                                             BorderRadius
-                      //                                                 .circular(
-                      //                                                     20),
-                      //                                         color:
-                      //                                             ColorConstant
-                      //                                                 .pinkA100),
-                      //                                     child:
-                      //                                         SfCartesianChart(
-                      //                                       plotAreaBorderWidth:
-                      //                                           0,
-                      //                                       primaryXAxis:
-                      //                                           CategoryAxis(
-                      //                                         majorGridLines:
-                      //                                             const MajorGridLines(
-                      //                                                 width: 0),
-                      //                                       ),
-                      //                                       primaryYAxis:
-                      //                                           NumericAxis(
-                      //                                               axisLine:
-                      //                                                   const AxisLine(
-                      //                                                       width:
-                      //                                                           0),
-                      //                                               interval:
-                      //                                                   1.0,
-                      //                                               labelFormat:
-                      //                                                   '{value}',
-                      //                                               majorTickLines:
-                      //                                                   const MajorTickLines(
-                      //                                                 size: 0,
-                      //                                               )),
-                      //                                       series: controller
-                      //                                           .chartSeries(
-                      //                                               children:
-                      //                                                   snapshot
-                      //                                                       .data),
-                      //                                       tooltipBehavior:
-                      //                                           TooltipBehavior(
-                      //                                               enable:
-                      //                                                   true),
-                      //                                     )),
-                      //                               ),
-                      //                             ],
-                      //                           ),
-                      //                         );
-                      //                       }
-                      //                     }
-                      //                   }
-                      //                   return SizedBox();
-                      //                 }),
+                                              // log('snapshot.hasData2 ${snapshot.hasData} ${snapshot.data}');
+                                              if (snapshot.hasData) {
+                                                if (snapshot.data != null) {
+                                                  if (snapshot
+                                                      .data!.isNotEmpty) {
+                                                    // log('table = $table snapshot.hasData ${snapshot.hasData} ${snapshot.data![0].y}...${snapshot.data![0].yValue}');
+                                                    return Padding(
+                                                      padding:
+                                                          getPadding(top: 0),
+                                                      child: Column(
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .start,
+                                                        children: [
+                                                          const SizedBox(
+                                                            height: 8,
+                                                          ),
+                                                          SingleChildScrollView(
+                                                            child: Container(
+                                                                height: 230,
+                                                                // width: 500,
+                                                                padding:
+                                                                    getPadding(
+                                                                        top:
+                                                                            12),
+                                                                decoration: BoxDecoration(
+                                                                    borderRadius:
+                                                                        BorderRadius.circular(
+                                                                            20),
+                                                                    color: ColorConstant
+                                                                        .pinkA100),
+                                                                child:
+                                                                    SfCartesianChart(
+                                                                  plotAreaBorderWidth:
+                                                                      0,
+                                                                  primaryXAxis:
+                                                                      CategoryAxis(
+                                                                    majorGridLines:
+                                                                        const MajorGridLines(
+                                                                            width:
+                                                                                0),
+                                                                  ),
+                                                                  primaryYAxis:
+                                                                      NumericAxis(
+                                                                          axisLine: const AxisLine(
+                                                                              width:
+                                                                                  0),
+                                                                          interval:
+                                                                              1.0,
+                                                                          labelFormat:
+                                                                              '{value}',
+                                                                          majorTickLines:
+                                                                              const MajorTickLines(
+                                                                            size:
+                                                                                0,
+                                                                          )),
+                                                                  series: controller
+                                                                      .chartSeries(
+                                                                          children:
+                                                                              snapshot.data),
+                                                                  tooltipBehavior:
+                                                                      TooltipBehavior(
+                                                                          enable:
+                                                                              true),
+                                                                )),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    );
+                                                  }
+                                                }
+                                              }
+                                              return const SizedBox();
+                                            }),
 
-                      //             // Solid Logs
-                      //             StreamBuilder<
-                      //                     List<
-                      //                         Map<String,
-                      //                             Map<String, ChartData>>>>(
-                      //                 stream: controller.fetchFeedingLogs(
-                      //                     parent: 'feeding'),
-                      //                 builder: (context, snapshot) {
-                      //                   log('ola = ${controller.feedingLogsChart}');
+                                        // Solid Logs
+                                        StreamBuilder<
+                                                List<
+                                                    Map<
+                                                        String,
+                                                        Map<String,
+                                                            ChartData>>>>(
+                                            stream: controller.fetchFeedingLogs(
+                                                parent: 'feeding'),
+                                            builder: (context, snapshot) {
+                                              log('ola = ${controller.feedingLogsChart}');
 
-                      //                   log('snapshot.hasData3 ${snapshot.hasData} ${snapshot.data}');
-                      //                   if (snapshot.hasData) {
-                      //                     if (snapshot.data != null) {
-                      //                       if (snapshot.data!.isNotEmpty) {
-                      //                         // log('table = $table snapshot.hasData ${snapshot.hasData} ${snapshot.data![0].y}...${snapshot.data![0].yValue}');
-                      //                         return Padding(
-                      //                           padding: getPadding(top: 0),
-                      //                           child: Column(
-                      //                             crossAxisAlignment:
-                      //                                 CrossAxisAlignment.start,
-                      //                             children: [
-                      //                               const SizedBox(
-                      //                                 height: 8,
-                      //                               ),
-                      //                               SingleChildScrollView(
-                      //                                 child: Container(
-                      //                                     height: 230,
-                      //                                     // width: 500,
-                      //                                     padding: getPadding(
-                      //                                         top: 12),
-                      //                                     decoration: BoxDecoration(
-                      //                                         borderRadius:
-                      //                                             BorderRadius
-                      //                                                 .circular(
-                      //                                                     20),
-                      //                                         color:
-                      //                                             ColorConstant
-                      //                                                 .pinkA100),
-                      //                                     child:
-                      //                                         SfCartesianChart(
-                      //                                       plotAreaBorderWidth:
-                      //                                           0,
-                      //                                       primaryXAxis:
-                      //                                           CategoryAxis(
-                      //                                         majorGridLines:
-                      //                                             const MajorGridLines(
-                      //                                                 width: 0),
-                      //                                       ),
-                      //                                       primaryYAxis:
-                      //                                           DateTimeAxis(
-                      //                                               axisLine:
-                      //                                                   const AxisLine(
-                      //                                                       width:
-                      //                                                           0),
-                      //                                               interval:
-                      //                                                   1.0,
-                      //                                               labelFormat:
-                      //                                                   '{value}',
-                      //                                               majorTickLines:
-                      //                                                   const MajorTickLines(
-                      //                                                 size: 0,
-                      //                                               )),
-                      //                                       series: controller
-                      //                                           .rangeChartSeries(
-                      //                                               dataSource:
-                      //                                                   snapshot
-                      //                                                       .data!),
-                      //                                       tooltipBehavior:
-                      //                                           TooltipBehavior(
-                      //                                               enable:
-                      //                                                   true),
-                      //                                     )),
-                      //                               ),
-                      //                             ],
-                      //                           ),
-                      //                         );
-                      //                       }
-                      //                     }
-                      //                   }
-                      //                   return SizedBox();
-                      //                 }),
-                      //           ],
-                      //         ),
-                      //       ),
-                      //     ],
-                      //   ),
-                      // ),
+                                              log('snapshot.hasData3 ${snapshot.hasData} ${snapshot.data}');
+                                              if (snapshot.hasData) {
+                                                if (snapshot.data != null) {
+                                                  if (snapshot
+                                                      .data!.isNotEmpty) {
+                                                    // log('table = $table snapshot.hasData ${snapshot.hasData} ${snapshot.data![0].y}...${snapshot.data![0].yValue}');
+                                                    return Padding(
+                                                      padding:
+                                                          getPadding(top: 0),
+                                                      child: Column(
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .start,
+                                                        children: [
+                                                          const SizedBox(
+                                                            height: 8,
+                                                          ),
+                                                          SingleChildScrollView(
+                                                            child: Container(
+                                                                height: 230,
+                                                                // width: 500,
+                                                                padding:
+                                                                    getPadding(
+                                                                        top:
+                                                                            12),
+                                                                decoration: BoxDecoration(
+                                                                    borderRadius:
+                                                                        BorderRadius.circular(
+                                                                            20),
+                                                                    color: ColorConstant
+                                                                        .pinkA100),
+                                                                child:
+                                                                    SfCartesianChart(
+                                                                  plotAreaBorderWidth:
+                                                                      0,
+                                                                  primaryXAxis:
+                                                                      CategoryAxis(
+                                                                    majorGridLines:
+                                                                        const MajorGridLines(
+                                                                            width:
+                                                                                0),
+                                                                  ),
+                                                                  primaryYAxis:
+                                                                      DateTimeAxis(
+                                                                          axisLine: const AxisLine(
+                                                                              width:
+                                                                                  0),
+                                                                          interval:
+                                                                              1.0,
+                                                                          labelFormat:
+                                                                              '{value}',
+                                                                          majorTickLines:
+                                                                              const MajorTickLines(
+                                                                            size:
+                                                                                0,
+                                                                          )),
+                                                                  series: controller.rangeChartSeries(
+                                                                      dataSource:
+                                                                          snapshot
+                                                                              .data!),
+                                                                  tooltipBehavior:
+                                                                      TooltipBehavior(
+                                                                          enable:
+                                                                              true),
+                                                                )),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    );
+                                                  }
+                                                }
+                                              }
+                                              return const SizedBox();
+                                            }),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            );
+                          }),
                       Column(
                         children: controller.titles
                             .map(
@@ -376,7 +406,7 @@ class HomeEmptyScreen extends GetWidget<HomeEmptyController> {
                                                 ),
                                                 Text(
                                                   e,
-                                                  style: TextStyle(
+                                                  style: const TextStyle(
                                                       fontSize: 20,
                                                       fontWeight:
                                                           FontWeight.w600,
@@ -399,27 +429,28 @@ class HomeEmptyScreen extends GetWidget<HomeEmptyController> {
                                                               .pinkA100),
                                                       child: SfCartesianChart(
                                                         plotAreaBorderWidth: 0,
-                                                        primaryXAxis:
-                                                            CategoryAxis(
-                                                          majorGridLines:
-                                                              const MajorGridLines(
-                                                                  width: 0),
-                                                        ),
-                                                        primaryYAxis:
-                                                            NumericAxis(
-                                                                axisLine:
-                                                                    const AxisLine(
-                                                                        width:
-                                                                            0),
-                                                                interval: 1.0,
-                                                                labelFormat:
-                                                                    '{value}',
-                                                                majorTickLines:
-                                                                    const MajorTickLines(
-                                                                  size: 0,
-                                                                )),
+
+                                                        // primaryXAxis:
+                                                        //     CategoryAxis(
+                                                        //   majorGridLines:
+                                                        //       const MajorGridLines(
+                                                        //           width: 0),
+                                                        // ),
+                                                        // primaryYAxis:
+                                                        //     NumericAxis(
+                                                        //         axisLine:
+                                                        //             const AxisLine(
+                                                        //                 width:
+                                                        //                     0),
+                                                        //         interval: 1.0,
+                                                        //         labelFormat:
+                                                        //             '{value}',
+                                                        //         majorTickLines:
+                                                        //             const MajorTickLines(
+                                                        //           size: 0,
+                                                        //         )),
                                                         series: controller
-                                                            .chartSeries(
+                                                            .scatterChartSeries(
                                                                 dataSource:
                                                                     snapshot
                                                                         .data!),
@@ -434,11 +465,92 @@ class HomeEmptyScreen extends GetWidget<HomeEmptyController> {
                                         }
                                       }
                                     }
-                                    return SizedBox();
+                                    return const SizedBox();
                                   }),
                             )
                             .toList(),
                       ),
+
+                      StreamBuilder<List<ChartData>>(
+                          stream: controller.fetchData(
+                            child: 'diaperLogs',
+                            parent: 'diaper',
+                          ),
+                          builder: (context, snapshot) {
+                            // var table = controller.tables[
+                            //         controller.titles.indexOf(e)]
+                            //     ['parent'];
+                            // log('snapshot.hasData ${snapshot.hasData} ');
+                            if (snapshot.hasData) {
+                              log('diaper = ${snapshot.data}');
+                              if (snapshot.data != null) {
+                                if (snapshot.data!.isNotEmpty) {
+                                  // log('table = $table snapshot.hasData ${snapshot.hasData} ${snapshot.data![0].y}...${snapshot.data![0].yValue}');
+                                  return Padding(
+                                    padding: getPadding(top: 0),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Divider(
+                                          color: ColorConstant.pinkA100,
+                                        ),
+                                        const Text(
+                                          'Diaper Logs',
+                                          style: TextStyle(
+                                              fontSize: 20,
+                                              fontWeight: FontWeight.w600,
+                                              fontFamily: 'Poppins'),
+                                        ),
+                                        const SizedBox(
+                                          height: 8,
+                                        ),
+                                        SingleChildScrollView(
+                                          child: Container(
+                                              height: 240,
+                                              // width: 500,
+                                              padding: getPadding(top: 12),
+                                              decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(20),
+                                                  color:
+                                                      ColorConstant.pinkA100),
+                                              child: SfCartesianChart(
+                                                // plotAreaBorderWidth: 0,
+                                                primaryXAxis: DateTimeAxis(),
+                                                
+                                                // primaryXAxis: CategoryAxis(
+                                                //   majorGridLines:
+                                                //       const MajorGridLines(
+                                                //           width: 0),
+                                                // ),
+                                                // primaryYAxis: NumericAxis(
+                                                //     axisLine: const AxisLine(
+                                                //         width: 0),
+                                                //     interval: 1.0,
+                                                //     labelFormat: '{value}',
+                                                //     majorTickLines:
+                                                //         const MajorTickLines(
+                                                //       size: 0,
+                                                //     )),
+                                                
+                                                series: controller
+                                                    .scatterChartSeries(
+                                                        dataSource:
+                                                            snapshot.data!),
+                                                tooltipBehavior:
+                                                    TooltipBehavior(
+                                                        enable: true),
+                                              )),
+                                        ),
+                                      ],
+                                    ),
+                                  );
+                                }
+                              }
+                            }
+                            return const SizedBox();
+                          }),
 
                       Obx(() => controller.hasRoutine.value
                           ? const SizedBox()

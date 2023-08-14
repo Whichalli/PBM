@@ -41,7 +41,7 @@ extension DateTimeExtension on DateTime {
     return daysInMonth[month - 1];
   }
 
-  toActualDate(){
+  toActualDate() {
     return '$day ${months[month - 1]} $year';
   }
 
@@ -65,11 +65,9 @@ extension DateTimeExtension on DateTime {
     return '$this'.split(' ')[0];
   }
 
-  
   String getTime() {
     return '$this'.split(' ')[1];
   }
-
 
   int toSeconds() {
     return (hour * 3600) + (minute * 60) + second;
@@ -179,6 +177,13 @@ extension TimeOfDayFormmater on TimeOfDay {
         '${int.parse(time.split(':')[0]) < 12 ? int.parse(time.split(':')[0]) : int.parse(time.split(':')[0]) - 12}:${int.parse(time.split(':')[1])} ${int.parse(time.split(':')[0]) < 12 ? 'AM' : 'PM'}';
     return time;
   }
+
+  toTime() {
+    String time = toString().replaceAll('TimeOfDay(', '').replaceAll(')', '');
+    // time =
+    //     '${int.parse(time.split(':')[0]) < 12 ? int.parse(time.split(':')[0]) : int.parse(time.split(':')[0]) - 12}:${int.parse(time.split(':')[1])} ${int.parse(time.split(':')[0]) < 12 ? 'AM' : 'PM'}';
+    return toString().replaceAll('TimeOfDay(', '').replaceAll(')', '');
+  }
 }
 
 int getDaysInMonth(int year, int month) {
@@ -261,5 +266,3 @@ double getTimeDifferent({required TimeOfDay start, required TimeOfDay end}) {
 }
 
 toTimeOfDay() {}
-
-

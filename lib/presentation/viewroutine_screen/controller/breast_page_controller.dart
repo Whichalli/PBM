@@ -163,7 +163,7 @@ class BreastController extends GetxController {
   feed() async {
     if (counting) {
       log('babyId = $babyId id = $id');
-      await Database.updateCollection(
+      id = await Database.updateCollection(
           id: babyId,
           docId: id,
           data: {
@@ -180,7 +180,7 @@ class BreastController extends GetxController {
           parentTable: 'feeding',
           childTable: 'breastLogs');
     } else {
-      await Database.writeCollection(
+      id = await Database.writeCollection(
           id: babyId,
           data: {
             'startDate': '${DateTime.now()}',

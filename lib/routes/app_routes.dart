@@ -112,6 +112,7 @@ import '../presentation/parent_page/pages/note_taking/binding/binding.dart';
 import '../presentation/white_noise_page/binding/binding.dart';
 import '../presentation/white_noise_page/now_playing/binding/now_playing_binding.dart';
 import '../presentation/white_noise_page/now_playing/now_playing_screen.dart';
+import '../splash_screen.dart';
 
 class AppRoutes {
   static const String signInScreen = '/sign_in_screen';
@@ -231,6 +232,8 @@ class AppRoutes {
 
   static const String initialRoute = '/initialRoute';
 
+  static const String signinRoute = '/signin';
+
   static const String parentSignupScreen = '/signup_screen';
   static const String pumpingScreen = '/pumping_screen';
 
@@ -252,6 +255,12 @@ class AppRoutes {
     //     PlayerTabContainerBinding(),
     //   ],
     // ),
+    GetPage(
+      name: initialRoute,
+      page: () => const SplashScreen(),
+      
+      transition: Transition.fade
+    ),
     GetPage(
       name: nurseProfileDetails,
       page: () => const NurseProfileDetails(),
@@ -649,7 +658,7 @@ class AppRoutes {
       ],
     ),
     GetPage(
-      name: initialRoute,
+      name: signinRoute,
       page: () => SignInScreen(),
       bindings: [
         SignInBinding(),

@@ -79,18 +79,6 @@ class NewroutineController extends GetxController {
       Fluttertoast.showToast(msg: 'Fill in necessary data');
       return;
     }
-    var data = {
-      'time': time!.value,
-      'dateime': date!.value,
-      'note': describeactivitController.text,
-      'isPoo': isPoo.value,
-      'isPee': isPee.value,
-      'color': this.data[selectedIndex!.value]['value'],
-      'consistency': consistencyController.text,
-      'clearedWith': clearedWithController.text,
-      'createdAt': DateTime.now()
-    };
-    await Future.delayed(const Duration(seconds: 3));
 
     await Database.writeCollection(
         id: babyId,
@@ -102,7 +90,8 @@ class NewroutineController extends GetxController {
           'isPee': isPee.value,
           'consistency': consistencyController.text,
           'clearedWith': clearedWithController.text,
-          'createdAt': DateTime.now()
+          'createdAt': DateTime.now(),
+          'counting': false
         },
         parentTable: 'diaper',
         childTable: 'diaperLogs');

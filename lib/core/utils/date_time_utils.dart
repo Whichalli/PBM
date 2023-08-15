@@ -108,6 +108,7 @@ extension DateTimeFormat on String {
 
   DateTime toValidDate({required String patter, hours, minutes, seconds}) {
     var dt = split(patter);
+    log('kkk ${dt.length}');
     return DateTime(int.parse(dt[2]), int.parse(dt[1]), int.parse(dt[0]),
         hours ?? 0, minutes ?? 0, seconds ?? 0);
   }

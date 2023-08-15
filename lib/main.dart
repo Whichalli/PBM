@@ -24,15 +24,7 @@ void main() async {
   await Hive.openBox('booking');
   await Hive.openBox('experience');
   await Hive.openBox('white_noise');
-  String? acctType = await Authentication.isLoggedIn();
-  if (acctType != null) {
-    if (acctType == 'parent') {
-      Get.offNamedUntil(
-          AppRoutes.homeOnboardingContainerScreen, (route) => false);
-    } else {
-      Get.offNamedUntil(AppRoutes.dashboardScreen, (route) => false);
-    }
-  }
+
 }
 
 class MyApp extends StatelessWidget {

@@ -76,47 +76,46 @@ class HomeEmptyController extends GetxController {
   List<ChartData> data = [];
   Stream<List<ChartData>> fetchData({required child, required parent}) async* {
     try {
-      var resp = Database.readCollection(
-              parentTable: parent,
-              childTable: child,
-              id: Get.arguments['babyId'])
-          .where('counting', isEqualTo: false)
-          .snapshots();
+      Stream<QuerySnapshot<Map<String, dynamic>>> resp;
 
-      log('chart resp = $resp');
-      // log('data = ')
+      if (parent == 'diaper') {
+        resp = Database.readCollection(
+                parentTable: parent,
+                childTable: child,
+                id: Get.arguments['babyId'])
+            .snapshots();
+      } else {
+        resp = Database.readCollection(
+                parentTable: parent,
+                childTable: child,
+                id: Get.arguments['babyId'])
+            .where('counting', isEqualTo: false)
+            .snapshots();
+      }
 
       for (var e in (await resp.first).docs) {
         hasRoutine.value = true;
 
-        // log('diff = $diff');
         DateTime stDt;
         DateTime endDt;
         ChartData chart;
-        // log('parent = $parent');
         if (child == 'bottleLogs') {
           stDt = e.data()['feedingDate'].toString().toDate();
           chart = ChartData(
               x: '${months[stDt.month - 1]} ${stDt.day}\n${e.data()['feedingTime']}',
               y: e.data()['waterLevel'],
-              // double.parse('${endDt.hour}.${endDt.minute}'),
               yValue: '${e.data()['waterLevel']} ML');
           bottleData.add(chart);
-          // log('bottle');
         }
         if (parent == 'sleep' || parent == 'activity' || parent == 'pumping') {
-          // log('ppppp = $parent startDate = ${e.id} ${e.data()['startDate']}');
-          // log('startDate = ${(e.data()['startDate'] as String).toDate()}');
           stDt = (e.data()['startDate'] as String).toDate();
-          log('.......... parent = $parent  endDate = ${e.data()['endDate']} ..................');
           endDt = e.data()['endDate'].toString().toDate();
-          // log('stDt = $stDt endDt = $endDt');
+
           var diff = (stDt.getDateDiffSec(nextDate: endDt));
           chart = ChartData(
               x:
                   '${months[stDt.month - 1]} ${stDt.day}\n${stDt.hour < 12 ? stDt.hour : stDt.hour - 12}:${stDt.minute < 10 ? '0${stDt.minute}' : stDt.minute} ${stDt.hour < 12 ? 'AM' : 'PM'}',
               y: double.parse('${diff['hours']}.${diff['minutes'] % 60}'),
-              // double.parse('${endDt.hour}.${endDt.minute}'),
               yValue:
                   '${months[endDt.month - 1]} ${endDt.day} ${endDt.hour < 12 ? endDt.hour : endDt.hour - 12}:${endDt.minute < 10 ? '0${endDt.minute}' : endDt.minute} ${endDt.hour < 12 ? 'AM' : 'PM'}');
           if (parent == 'sleep') {
@@ -130,20 +129,16 @@ class HomeEmptyController extends GetxController {
           }
         }
 
+        log('ok........ !!!!!! $parent $child ${Get.arguments['babyId']}');
         if (parent == 'diaper') {
-          // log('ok');
-          // // log('e = ${e.data()}');
-          // // log('stDt = ${e.data()['time'].toString().toSeconds() / 3600}');
-          // log('date ${((e.data()['date'] as Timestamp).toDate()).runtimeType}');
+          log('ok........');
+
           DateTime date = (e.data()['date'] as Timestamp).toDate();
-          log('ddddd = $date');
           chart = ChartData(
               x: date,
               y: double.parse(((e.data()['time'] as String).toSeconds() / 3600)
                   .toStringAsFixed(2)),
-              // double.parse('${endDt.hour}.${endDt.minute}'),
               yValue: 0);
-          // log('chartX = ${chart.x}');
           diaperData.add(chart);
         }
       }

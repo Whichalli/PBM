@@ -60,7 +60,7 @@ class ChooseAgeScreen extends GetWidget<ChooseAgeController> {
                                     textInputAction: TextInputAction.done,
                                     alignment: Alignment.center,
                                     validator: (value) {
-                                      if (!isText(value)) {
+                                      if (!isText(value, isRequired: true)) {
                                         return "Please enter valid text";
                                       }
                                       return null;

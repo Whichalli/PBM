@@ -1,8 +1,6 @@
 import 'dart:async';
 import 'dart:developer';
 import 'dart:io';
-import 'dart:math' as Math;
-
 import 'package:pbm_app/core/app_export.dart';
 import 'package:pbm_app/domain/firebase/firebase.dart';
 import 'package:pbm_app/presentation/routinefinishedpage_screen/models/routinefinishedpage_model.dart';
@@ -60,7 +58,7 @@ class RoutinefinishedpageController extends GetxController {
         startDate.isNotEmpty &&
         endTime.isNotEmpty &&
         startTime.isNotEmpty) {
-      log('${endTime.value}');
+      log(endTime.value);
       var stTime = startTime.value.split(':');
       var stTimePeriod = stTime[1].split(' ');
       var edTime = endTime.value.split(':');
@@ -89,7 +87,7 @@ class RoutinefinishedpageController extends GetxController {
     var sleepData =
         (await sleepCollection.where('counting', isEqualTo: true).get()).docs;
     log('loadTimer');
-    sleepData.forEach((element) {
+    for (var element in sleepData) {
       log('emelemt = ${element.data()}');
       isEditable.value = false;
       showTimer = true;
@@ -123,7 +121,7 @@ class RoutinefinishedpageController extends GetxController {
       id = element.id;
       update();
       play();
-    });
+    }
   }
 
   play() async {
@@ -146,16 +144,16 @@ class RoutinefinishedpageController extends GetxController {
   pause() {
     _timer?.cancel();
     _timer = null;
-    playing.value = true;
+    playing.value = false;
   }
 
   startActivity() async {
     playing.value = !playing.value;
     startTime.value = '${DateTime.now()}'.getTime();
-    startDate.value = '${DateTime.now().format()}';
+    startDate.value = DateTime.now().format();
     isEditable = false.obs;
 
-    await Database.writeCollection(
+    id = await Database.writeCollection(
         id: babyId,
         data: {
           'startDate': '${DateTime.now()}',
@@ -174,38 +172,64 @@ class RoutinefinishedpageController extends GetxController {
 
   save() async {
     pause();
-    endTime.value = '${DateTime.now()}'.getTime();
-    endDate.value = '${DateTime.now().format()}';
+
     dynamic downloadUrl;
     if (selectedFile != null) {
       downloadUrl =
           await Database.uploadFile(file: selectedFile!, path: 'activity');
     }
     log('download url = $downloadUrl');
-    await Database.updateCollection(
-        id: babyId,
-        docId: id,
-        data: {
-          'startTime': startTime.value,
-          'endTime': endTime.value,
-          'endDate': '${DateTime.now()}',
-          'note': describeactivitController.text,
-          'img': downloadUrl,
-          'counting': false,
-          'totalTime': counter.value
-        },
-        parentTable: 'activity',
-        childTable: 'activityLogs');
-    pause();
-    snackbar(
-        context: Get.context,
-        message: 'Data Saved',
-        icon: Icon(
-          Icons.check_circle_outline_outlined,
-          color: ColorConstant.pink400,
-        ),
-        color: ColorConstant.pinkA100);
-    Get.back();
+    if (!playing.value &&
+        startDate.isNotEmpty &&
+        endDate.isNotEmpty &&
+        endTime.isNotEmpty &&
+        startTime.isNotEmpty) {
+      if (id.isNotEmpty) {
+        endTime.value = '${DateTime.now()}'.getTime();
+        endDate.value = DateTime.now().format();
+        await Database.updateCollection(
+            id: babyId,
+            docId: id,
+            data: {
+              'startTime': startTime.value,
+              'endTime': endTime.value,
+              'endDate': '${DateTime.now()}',
+              'startDate': '${startDate.value.toValidDate(patter: '/')}',
+              'note': describeactivitController.text,
+              'img': downloadUrl,
+              'counting': false,
+              'totalTime': counter.value
+            },
+            parentTable: 'activity',
+            childTable: 'activityLogs');
+      } else {
+        await Database.writeCollection(
+            id: babyId,
+            data: {
+              'startTime': startTime.value,
+              'endTime': endTime.value,
+              'endDate': '${endDate.value.toValidDate(patter: '/')}',
+              'startDate': '${startDate.value.toValidDate(patter: '/')}',
+              'note': describeactivitController.text,
+              'img': downloadUrl,
+              'counting': false,
+              'totalTime': counter.value
+            },
+            parentTable: 'activity',
+            childTable: 'activityLogs');
+      }
+
+      pause();
+      snackbar(
+          context: Get.context,
+          message: 'Data Saved',
+          icon: Icon(
+            Icons.check_circle_outline_outlined,
+            color: ColorConstant.pink400,
+          ),
+          color: ColorConstant.pinkA100);
+      Get.back();
+    }
   }
 
   /// Navigates to the previous screen.

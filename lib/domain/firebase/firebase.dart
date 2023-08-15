@@ -76,7 +76,8 @@ class Database {
       required Map<String, dynamic> data,
       required String docId,
       required String parentTable,
-      required String childTable}) async {
+      required String childTable,
+      }) async {
     try {
       await collection
           .collection(parentTable)

@@ -19,9 +19,11 @@ class ChooseAgeController extends GetxController {
   }
 
   onTapProceed() {
-    Hive.box('parent').put('baby', {'name': nameController.text});
-    Get.toNamed(
-      AppRoutes.chooseGenderAgeScreen,
-    );
+    if (nameController.text.isNotEmpty) {
+      Hive.box('parent').put('baby', {'name': nameController.text});
+      Get.toNamed(
+        AppRoutes.chooseGenderAgeScreen,
+      );
+    }
   }
 }

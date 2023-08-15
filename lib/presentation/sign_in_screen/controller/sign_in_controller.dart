@@ -68,9 +68,9 @@ class SignInController extends GetxController {
         User? user =
             await authentication.signin(credential: credential, isParent: true);
         resp = await Database.read(userId: user!.uid, table: 'parent');
-        if (resp!.data() != null)
+        if (resp!.data() != null) {
           onSuccessResponse(user, context);
-        else {
+        } else {
           await Database.write(
               userId: user.uid,
               data: {
@@ -147,8 +147,6 @@ class SignInController extends GetxController {
       return;
     }
     parentController.userId.value = user.uid;
-    log('id = ${user.uid} exist = ${(await FirebaseFirestore.instance.collection('user').doc('/${user.uid}').get()).exists}');
-
     if ((await FirebaseFirestore.instance
             .collection('user')
             .doc('/${user.uid}')
@@ -160,13 +158,6 @@ class SignInController extends GetxController {
 
       return;
     }
-    // Hive.box('parent').put('user', {
-    //   'name': user.displayName,
-    //   'email': user.email,
-    //   'phone': user.phoneNumber,
-    //   'photoUrl': user.photoURL
-    // });
-
     Get.offAllNamed(
       AppRoutes.chooseAgeScreen,
     );

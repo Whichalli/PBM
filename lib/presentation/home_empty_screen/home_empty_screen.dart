@@ -56,12 +56,8 @@ class HomeEmptyScreen extends GetWidget<HomeEmptyController> {
                             parent: 'diaper',
                           ),
                           builder: (context, snapshot) {
-                            // var table = controller.tables[
-                            //         controller.titles.indexOf(e)]
-                            //     ['parent'];
-                            // log('snapshot.hasData ${snapshot.hasData} ');
-                            log('!!!!!!!!!!!!!!!! diaper = ${snapshot.hasData}');
                             if (snapshot.hasData) {
+                              log('!!!!!!!!!!!!!!!! diaper = ${snapshot.data}');
                               if (snapshot.data != null) {
                                 if (snapshot.data!.isNotEmpty) {
                                   // log('table = $table snapshot.hasData ${snapshot.hasData} ${snapshot.data![0].y}...${snapshot.data![0].yValue}');
@@ -86,7 +82,7 @@ class HomeEmptyScreen extends GetWidget<HomeEmptyController> {
                                         ),
                                         SingleChildScrollView(
                                           child: Container(
-                                              height: 240,
+                                              // height: 240,
                                               // width: 500,
                                               padding: getPadding(top: 12),
                                               decoration: BoxDecoration(
@@ -94,31 +90,47 @@ class HomeEmptyScreen extends GetWidget<HomeEmptyController> {
                                                       BorderRadius.circular(20),
                                                   color:
                                                       ColorConstant.pinkA100),
-                                              child: SfCartesianChart(
-                                                // plotAreaBorderWidth: 0,
-                                                primaryXAxis: DateTimeAxis(),
-                                                // primaryYAxis: CategoryAxis(
-                                                //     minimum: 1, maximum: 24),
-                                                onTooltipRender: (tooltipArgs) {
-                                                  tooltipArgs.header = 'Diaper';
-                                                  var hh = double.parse(
-                                                              tooltipArgs
-                                                                  .text!
-                                                                  .split(
-                                                                      ':')[1]) <
-                                                          12
-                                                      ? 'AM'
-                                                      : 'PM';
-                                                  tooltipArgs.text =
-                                                      '${tooltipArgs.text!.replaceAll('.', ':')} $hh';
-                                                },
-                                                series: controller
-                                                    .scatterChartSeries(
-                                                        dataSource:
-                                                            snapshot.data!),
-                                                tooltipBehavior:
-                                                    TooltipBehavior(
-                                                        enable: true),
+                                              child: SingleChildScrollView(
+                                                physics:
+                                                    const BouncingScrollPhysics(),
+                                                child: SfCartesianChart(
+                                                  // plotAreaBorderWidth: 0,
+                                                  primaryXAxis: DateTimeAxis(
+                                                      title: AxisTitle(
+                                                          text: 'Date')),
+                                                  primaryYAxis: NumericAxis(
+                                                      // visibleMaximum: 24,
+                                                      // visibleMinimum: 1,
+                                                      // minimum: 1,
+                                                      // maximum: 24,
+                                                      title: AxisTitle(
+                                                          text:
+                                                              'Time (24 hours)')),
+
+                                                  onTooltipRender:
+                                                      (tooltipArgs) {
+                                                    tooltipArgs.header =
+                                                        'Diaper';
+                                                    var hh = double.parse(
+                                                                tooltipArgs
+                                                                        .text!
+                                                                        .split(
+                                                                            ':')[
+                                                                    1]) <
+                                                            12
+                                                        ? 'AM'
+                                                        : 'PM';
+                                                    tooltipArgs.text =
+                                                        '${tooltipArgs.text!.replaceAll('.', ':')} $hh';
+                                                  },
+                                                  series: controller
+                                                      .scatterChartSeries(
+                                                          dataSource:
+                                                              snapshot.data!),
+                                                  tooltipBehavior:
+                                                      TooltipBehavior(
+                                                          enable: true),
+                                                ),
                                               )),
                                         ),
                                       ],
@@ -372,8 +384,7 @@ class HomeEmptyScreen extends GetWidget<HomeEmptyController> {
                                                         Map<String,
                                                             ChartData>>>>(
                                             stream: controller.fetchFeedingLogs(
-                                              
-                                              parent: 'feeding'),
+                                                parent: 'feeding'),
                                             builder: (context, snapshot) {
                                               // log('ola = ${controller.feedingLogsChart}');
 
@@ -549,6 +560,7 @@ class HomeEmptyScreen extends GetWidget<HomeEmptyController> {
                               });
                         }).toList(),
                       ),
+
                       Obx(() => controller.hasRoutine.value
                           ? const SizedBox()
                           : Column(

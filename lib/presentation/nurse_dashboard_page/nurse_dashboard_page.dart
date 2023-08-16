@@ -5,11 +5,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pbm_app/domain/firebase/authentication.dart';
 import 'package:pbm_app/presentation/nurse_dashboard_page/pages/dashboard_screen/dashboard_screen.dart';
+import 'package:pbm_app/presentation/parent_page/pages/note_taking/note_taking_screen.dart';
 import 'package:pbm_app/widgets/app_bar/bottom_bar/bottom_navbar.dart';
 
 import '../../core/app_export.dart';
 import '../../widgets/app_bar/bottom_bar/bottom_bar_buttom_model.dart';
-import '../../widgets/app_bar/custom_app_bar.dart';
 import 'pages/chat_screen/chat_screen.dart';
 import 'controller/controller.dart';
 
@@ -26,7 +26,7 @@ class NurseDashboardScreenPage
   final List<Widget> _pages = [
     const DashboardScreen(),
     const ChatScreen(field: 'employeeId'),
-    Container(),
+    const NoteTakingScreen(),
     Container(),
     // const PackDetailComposerScreen(),
     // const NowPlayingScreen()
@@ -125,9 +125,9 @@ class NurseDashboardScreenPage
                         icon: const Icon(Icons.chat_outlined),
                         text: 'Chat'),
                     BottomBarButtonModel(
-                        activeIcon: const Icon(Icons.book_online),
-                        icon: const Icon(Icons.book_online_outlined),
-                        text: 'Bookings'),
+                        activeIcon: const Icon(Icons.note_alt_rounded),
+                        icon: const Icon(Icons.note_alt_outlined),
+                        text: 'Notes'),
                     BottomBarButtonModel(
                         activeIcon: const Icon(Icons.account_circle_rounded),
                         icon: const Icon(Icons.account_circle_outlined),

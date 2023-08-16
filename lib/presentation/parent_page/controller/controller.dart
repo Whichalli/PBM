@@ -16,10 +16,9 @@ class ParentDashboardScreenController extends GetxController {
     pageController = PageController(initialPage: 0);
   }
 
-  
   final List<Widget> pages = [
     const HomeOnboardingContainerScreen(),
-    const BookedNurseScreen(),
+    // const BookedNurseScreen(),
     const ChatScreen(field: 'parentId'),
     const NoteTakingScreen(),
     Container(),

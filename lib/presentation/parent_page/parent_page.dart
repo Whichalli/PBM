@@ -101,10 +101,10 @@ class ParentDashboardScreenPage
                         icon: const Icon(Icons.house_outlined),
                         text: 'Home',
                         activeIcon: const Icon(Icons.house)),
-                    BottomBarButtonModel(
-                        activeIcon: const Icon(Icons.handshake),
-                        icon: const Icon(Icons.handshake_outlined),
-                        text: 'Appointments'),
+                    // BottomBarButtonModel(
+                    //     activeIcon: const Icon(Icons.handshake),
+                    //     icon: const Icon(Icons.handshake_outlined),
+                    //     text: 'Appointments'),
                     BottomBarButtonModel(
                         activeIcon: const Icon(Icons.chat),
                         icon: const Icon(Icons.chat_outlined),

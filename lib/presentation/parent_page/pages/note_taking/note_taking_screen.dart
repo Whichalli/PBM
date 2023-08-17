@@ -4,7 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:pbm_app/core/app_export.dart';
-
+import 'package:pbm_app/domain/firebase/authentication.dart';
 import 'controller/controller.dart';
 import 'note_taking_details.dart';
 
@@ -16,7 +16,10 @@ class NoteTakingScreen extends GetWidget<NoteTakingScreenController> {
     // TODO: implement build
     return Scaffold(
       body: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
-          stream: FirebaseFirestore.instance.collection('note').snapshots(),
+          stream: FirebaseFirestore.instance
+              .collection('note')
+              .where('userId', isEqualTo: Authentication.getCurrentUserId())
+              .snapshots(),
           builder: (context, snapshot) {
             if (!snapshot.hasData) {
               return LinearProgressIndicator(

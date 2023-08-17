@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "898476850188-b0qjckacnud91ttne26plcdtd3ilcnr0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.pbm_app",
+            "certificate_hash": "d15fb9273f02bccdabf7bb28ffbaa6b74c248357"
+          }
+        },
+        {
           "client_id": "898476850188-ba3htutovkk0env4b2q538mccql9pfpd.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -30,6 +38,13 @@
             {
               "client_id": "898476850188-ba3htutovkk0env4b2q538mccql9pfpd.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "898476850188-mp74sik8lt0p5qg492uqirkil0bsqdu9.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.pbmApp"
+              }
             }
           ]
         }
@@ -37,7 +52,7 @@
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:898476850188:android:1a99bf3cd35440d83f0229",
+        "mobilesdk_app_id": "1:898476850188:android:f483418cbc7cb86c3f0229",
         "android_client_info": {
           "package_name": "com.preciousbabiesandmums.pbmcare"
         }
@@ -67,6 +82,13 @@
             {
               "client_id": "898476850188-ba3htutovkk0env4b2q538mccql9pfpd.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "898476850188-mp74sik8lt0p5qg492uqirkil0bsqdu9.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.pbmApp"
+              }
             }
           ]
         }

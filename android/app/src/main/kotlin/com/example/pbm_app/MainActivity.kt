@@ -1,4 +1,4 @@
-package com.example.pbm_app
+package com.preciousbabiesandmums.pbmcare
 
 import io.flutter.embedding.android.FlutterActivity
 

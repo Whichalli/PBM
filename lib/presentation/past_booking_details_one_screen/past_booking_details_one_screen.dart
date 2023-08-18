@@ -1,7 +1,11 @@
+import 'dart:developer';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:pbm_app/widgets/booking_card.dart';
+
 import 'controller/past_booking_details_one_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:pbm_app/core/app_export.dart';
-import 'package:pbm_app/widgets/app_bar/appbar_button_1.dart';
 import 'package:pbm_app/widgets/app_bar/custom_app_bar.dart';
 import 'package:pbm_app/widgets/custom_bottom_bar.dart';
 import 'package:pbm_app/widgets/custom_button.dart';
@@ -13,537 +17,946 @@ class PastBookingDetailsOneScreen
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-        child: Scaffold(
-            backgroundColor: ColorConstant.whiteA700,
-            appBar: CustomAppBar(
-                height: getVerticalSize(55),
-                title: AppbarButton1(
-                    margin: getMargin(left: 20),
-                    onTap: () {
-                      onTapBookingdetails();
-                    }),
-                styleType: Style.bgFillWhiteA700),
-            body: SizedBox(
-                width: size.width,
-                child: SingleChildScrollView(
-                    padding: getPadding(top: 10),
-                    child: Padding(
-                        padding: getPadding(bottom: 5),
-                        child: Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
+    return Scaffold(
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+      appBar: AppBar(
+        elevation: 1,
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+        leading: IconButton(
+            onPressed: () {
+              Get.back();
+            },
+            icon: const Icon(
+              Icons.arrow_back_ios_new_rounded,
+              color: Colors.black,
+            )),
+        centerTitle: true,
+        title: const Text(
+          'Booking Details',
+          style: TextStyle(color: Colors.black, fontWeight: FontWeight.w600),
+        ),
+      ),
+      body: SizedBox(
+          width: size.width,
+          child: SingleChildScrollView(
+              padding: getPadding(top: 16, left: 16, right: 16),
+              child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    StreamBuilder<DocumentSnapshot<Map<String, dynamic>>>(
+                        stream: FirebaseFirestore.instance
+                            .collection('employee')
+                            .doc(Get.arguments['employeeId'])
+                            .snapshots(),
+                        builder: (context, snapshot) {
+                          return Column(
                             children: [
-                              Container(
-                                  margin: getMargin(left: 19, right: 19),
-                                  padding: getPadding(
-                                      left: 15, top: 20, right: 15, bottom: 20),
-                                  decoration: AppDecoration.outlineBluegray100
-                                      .copyWith(
-                                          borderRadius: BorderRadiusStyle
-                                              .roundedBorder30),
-                                  child: Column(
-                                      mainAxisSize: MainAxisSize.min,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
+                              Row(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  CustomImageView(
+                                    url: snapshot.hasData
+                                        ? snapshot.data!.data()!['photoUrl']
+                                        : '',
+                                    border: Border.all(color: Colors.black),
+                                    width: 50,
+                                    height: 50,
+                                    imagePath: ImageConstant.imageNotFound,
+                                    radius: BorderRadius.circular(1000),
+                                  ),
+                                  const SizedBox(
+                                    width: 12,
+                                  ),
+                                  Expanded(
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: [
-                                        Padding(
-                                            padding:
-                                                getPadding(left: 3, right: 3),
-                                            child: Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.center,
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  Container(
-                                                      height: getSize(44),
-                                                      width: getSize(44),
-                                                      margin:
-                                                          getMargin(bottom: 1),
-                                                      child: Stack(
-                                                          alignment: Alignment
-                                                              .bottomRight,
-                                                          children: [
-                                                            CustomImageView(
-                                                                imagePath:
-                                                                    ImageConstant
-                                                                        .imgAvatar,
-                                                                height:
-                                                                    getSize(44),
-                                                                width:
-                                                                    getSize(44),
-                                                                radius: BorderRadius
-                                                                    .circular(
-                                                                        getHorizontalSize(
-                                                                            22)),
-                                                                alignment:
-                                                                    Alignment
-                                                                        .center),
-                                                            Align(
-                                                                alignment: Alignment
-                                                                    .bottomRight,
-                                                                child: Container(
-                                                                    height:
-                                                                        getSize(
-                                                                            9),
-                                                                    width:
-                                                                        getSize(
-                                                                            9),
-                                                                    decoration: BoxDecoration(
-                                                                        color: ColorConstant
-                                                                            .greenA700,
-                                                                        borderRadius:
-                                                                            BorderRadius.circular(getHorizontalSize(
-                                                                                4)),
-                                                                        border: Border.all(
-                                                                            color:
-                                                                                ColorConstant.whiteA700,
-                                                                            width: getHorizontalSize(1),
-                                                                            strokeAlign: strokeAlignCenter))))
-                                                          ])),
-                                                  Padding(
-                                                      padding:
-                                                          getPadding(left: 21),
-                                                      child: Column(
-                                                          crossAxisAlignment:
-                                                              CrossAxisAlignment
-                                                                  .start,
-                                                          mainAxisAlignment:
-                                                              MainAxisAlignment
-                                                                  .start,
-                                                          children: [
-                                                            Text(
-                                                                "lbl_thanawan_chadee"
-                                                                    .tr,
-                                                                overflow:
-                                                                    TextOverflow
-                                                                        .ellipsis,
-                                                                textAlign:
-                                                                    TextAlign
-                                                                        .left,
-                                                                style: AppStyle
-                                                                    .txtOpenSansRomanSemiBold16Gray800),
-                                                            Padding(
-                                                                padding:
-                                                                    getPadding(
-                                                                        top: 5),
-                                                                child: Text(
-                                                                    "lbl_babysitter"
-                                                                        .tr,
-                                                                    overflow:
-                                                                        TextOverflow
-                                                                            .ellipsis,
-                                                                    textAlign:
-                                                                        TextAlign
-                                                                            .left,
-                                                                    style: AppStyle
-                                                                        .txtOpenSans12))
-                                                          ])),
-                                                  Spacer(),
-                                                  CustomImageView(
-                                                      svgPath: ImageConstant
-                                                          .imgOverflowmenu,
-                                                      height: getSize(24),
-                                                      width: getSize(24),
-                                                      margin:
-                                                          getMargin(bottom: 21))
-                                                ])),
-                                        Padding(
-                                            padding: getPadding(top: 18),
-                                            child: Divider(
-                                                height: getVerticalSize(1),
-                                                thickness: getVerticalSize(1),
-                                                color: ColorConstant.pinkA100)),
-                                        Padding(
-                                            padding: getPadding(top: 19),
-                                            child: Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.center,
-                                                children: [
-                                                  Padding(
-                                                      padding:
-                                                          getPadding(top: 1),
-                                                      child: Column(
-                                                          crossAxisAlignment:
-                                                              CrossAxisAlignment
-                                                                  .start,
-                                                          mainAxisAlignment:
-                                                              MainAxisAlignment
-                                                                  .start,
-                                                          children: [
-                                                            Text(
-                                                                "msg_french_english"
-                                                                    .tr,
-                                                                overflow:
-                                                                    TextOverflow
-                                                                        .ellipsis,
-                                                                textAlign:
-                                                                    TextAlign
-                                                                        .left,
-                                                                style: AppStyle
-                                                                    .txtOpenSansRomanSemiBold12Gray600),
-                                                            Padding(
-                                                                padding:
-                                                                    getPadding(
-                                                                        top: 9),
-                                                                child: Text(
-                                                                    "msg_12_may_12_50_am"
-                                                                        .tr,
-                                                                    overflow:
-                                                                        TextOverflow
-                                                                            .ellipsis,
-                                                                    textAlign:
-                                                                        TextAlign
-                                                                            .left,
-                                                                    style: AppStyle
-                                                                        .txtOpenSansRomanSemiBold16Gray800))
-                                                          ])),
-                                                  Spacer(),
-                                                  CustomIconButton(
-                                                      height: 48,
-                                                      width: 48,
-                                                      margin:
-                                                          getMargin(bottom: 2),
-                                                      shape: IconButtonShape
-                                                          .CircleBorder24,
-                                                      child: CustomImageView(
-                                                          svgPath: ImageConstant
-                                                              .imgCarGray80048x48)),
-                                                  CustomIconButton(
-                                                      height: 48,
-                                                      width: 48,
-                                                      margin: getMargin(
-                                                          left: 10, bottom: 2),
-                                                      variant: IconButtonVariant
-                                                          .FillWhiteA700,
-                                                      shape: IconButtonShape
-                                                          .CircleBorder24,
-                                                      child: CustomImageView(
-                                                          svgPath: ImageConstant
-                                                              .imgVideocamera))
-                                                ])),
-                                        Padding(
-                                            padding: getPadding(top: 17),
-                                            child: Divider(
-                                                height: getVerticalSize(1),
-                                                thickness: getVerticalSize(1),
-                                                color: ColorConstant.pinkA100)),
-                                        Padding(
-                                            padding: getPadding(
-                                                left: 39, top: 9, right: 39),
-                                            child: Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-                                                children: [
-                                                  Padding(
-                                                      padding: getPadding(
-                                                          top: 16, bottom: 15),
-                                                      child: Column(
-                                                          mainAxisAlignment:
-                                                              MainAxisAlignment
-                                                                  .start,
-                                                          children: [
-                                                            Text("lbl_50aed".tr,
-                                                                overflow:
-                                                                    TextOverflow
-                                                                        .ellipsis,
-                                                                textAlign:
-                                                                    TextAlign
-                                                                        .left,
-                                                                style: AppStyle
-                                                                    .txtOpenSansRomanSemiBold16Gray800),
-                                                            Padding(
-                                                                padding: getPadding(
-                                                                    top: 9),
-                                                                child: Text(
-                                                                    "lbl_paid"
-                                                                        .tr,
-                                                                    overflow:
-                                                                        TextOverflow
-                                                                            .ellipsis,
-                                                                    textAlign:
-                                                                        TextAlign
-                                                                            .left,
-                                                                    style: AppStyle
-                                                                        .txtOpenSansRomanSemiBold12Gray600))
-                                                          ])),
-                                                  SizedBox(
-                                                      height:
-                                                          getVerticalSize(81),
-                                                      child: VerticalDivider(
-                                                          width:
-                                                              getHorizontalSize(
-                                                                  1),
-                                                          thickness:
-                                                              getVerticalSize(
-                                                                  1),
-                                                          color: ColorConstant
-                                                              .pinkA100)),
-                                                  Padding(
-                                                      padding: getPadding(
-                                                          top: 16, bottom: 15),
-                                                      child: Column(
-                                                          mainAxisAlignment:
-                                                              MainAxisAlignment
-                                                                  .start,
-                                                          children: [
-                                                            Text("lbl_aetna".tr,
-                                                                overflow:
-                                                                    TextOverflow
-                                                                        .ellipsis,
-                                                                textAlign:
-                                                                    TextAlign
-                                                                        .left,
-                                                                style: AppStyle
-                                                                    .txtOpenSansRomanSemiBold16Gray800),
-                                                            Padding(
-                                                                padding:
-                                                                    getPadding(
-                                                                        top: 9),
-                                                                child: Text(
-                                                                    "lbl_insurance"
-                                                                        .tr,
-                                                                    overflow:
-                                                                        TextOverflow
-                                                                            .ellipsis,
-                                                                    textAlign:
-                                                                        TextAlign
-                                                                            .left,
-                                                                    style: AppStyle
-                                                                        .txtOpenSansRomanSemiBold12Gray600))
-                                                          ]))
-                                                ]))
-                                      ])),
-                              Align(
-                                  alignment: Alignment.centerLeft,
-                                  child: GestureDetector(
-                                      onTap: () {
-                                        onTapRowdetails();
-                                      },
-                                      child: Padding(
-                                          padding: getPadding(
-                                              left: 59, top: 20, right: 79),
-                                          child: Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              children: [
-                                                CustomButton(
-                                                    height: getVerticalSize(42),
-                                                    width:
-                                                        getHorizontalSize(91),
-                                                    text: "lbl_details".tr,
-                                                    variant: ButtonVariant
-                                                        .OutlinePinkA100,
-                                                    shape: ButtonShape.Square,
-                                                    padding: ButtonPadding
-                                                        .PaddingAll9,
-                                                    fontStyle: ButtonFontStyle
-                                                        .OpenSans16),
-                                                Padding(
-                                                    padding: getPadding(
-                                                        top: 10, bottom: 9),
-                                                    child: Text(
-                                                        "lbl_reviews".tr,
-                                                        overflow: TextOverflow
-                                                            .ellipsis,
-                                                        textAlign:
-                                                            TextAlign.left,
-                                                        style: AppStyle
-                                                            .txtOpenSans16))
-                                              ])))),
+                                        Text(
+                                          snapshot.hasData
+                                              ? snapshot.data!.data()!['name']
+                                              : '',
+                                          style: AppStyle.txtManropeMedium16
+                                              .copyWith(
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 16),
+                                        ),
+                                        Text(
+                                          snapshot.hasData
+                                              ? (snapshot.data!
+                                                          .data()!['profession']
+                                                      as String)
+                                                  .tr
+                                              : '',
+                                          style: AppStyle.txtManropeMedium16
+                                              .copyWith(
+                                                  // fontWeight: FontWeight.bold,
+                                                  fontSize: 12),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  CustomIconButton(
+                                      height: 48,
+                                      width: 48,
+                                      margin: getMargin(left: 10, bottom: 2),
+                                      variant: IconButtonVariant.FillWhiteA700,
+                                      shape: IconButtonShape.CircleBorder24,
+                                      child: CustomImageView(
+                                          svgPath:
+                                              ImageConstant.imgCarGray80048x48))
+                                ],
+                              ),
+                              const SizedBox(
+                                height: 16,
+                              ),
+                              // Row(
+                              //   crossAxisAlignment: CrossAxisAlignment.end,
+                              //   mainAxisAlignment: MainAxisAlignment.end,
+                              //   children: [
+                              //     CustomIconButton(
+                              //         height: 48,
+                              //         width: 48,
+                              //         margin: getMargin(left: 10, bottom: 2),
+                              //         variant: IconButtonVariant.FillWhiteA700,
+                              //         shape: IconButtonShape.CircleBorder24,
+                              //         child: const Icon(
+                              //           Icons.thumb_down_off_alt,
+                              //           size: 20,
+                              //           color: Colors.black54,
+                              //         )),
+                              //     const SizedBox(
+                              //       width: 12,
+                              //     ),
+                              //     CustomIconButton(
+                              //         height: 48,
+                              //         width: 48,
+                              //         margin: getMargin(left: 10, bottom: 2),
+                              //         variant: IconButtonVariant.FillWhiteA700,
+                              //         shape: IconButtonShape.CircleBorder24,
+                              //         child: const Icon(
+                              //           Icons.thumb_up_off_alt,
+                              //           size: 20,
+                              //           color: Colors.black54,
+                              //         )),
+                              //   ],
+                              // ),
                               Divider(
-                                  height: getVerticalSize(1),
+                                  height: getVerticalSize(20),
                                   thickness: getVerticalSize(1),
                                   color: ColorConstant.pinkA10019),
+                            ],
+                          );
+                        }),
+                    const SizedBox(
+                      height: 8,
+                    ),
+                    StreamBuilder<DocumentSnapshot<Map<String, dynamic>>>(
+                        stream: FirebaseFirestore.instance
+                            .collection('bookings')
+                            .doc(Get.arguments['bookingId'])
+                            .snapshots(),
+                        builder: (context, snapshot) {
+                          // if (snapshot.hasData) {
+                          //   log('bookingDetsila = ${snapshot.data}');
+                          // }
+                          return Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                snapshot.hasData
+                                    ? snapshot.data!.data()!['title']
+                                    : '',
+                                style: const TextStyle(
+                                    fontSize: 20, fontFamily: 'manrope'),
+                              ),
+                              const SizedBox(
+                                height: 8,
+                              ),
+                              Row(
+                                children: [
+                                  const Icon(
+                                    Icons.calendar_month_outlined,
+                                    color: Colors.black45,
+                                    size: 16,
+                                  ),
+                                  const SizedBox(
+                                    width: 8,
+                                  ),
+                                  Text(
+                                    snapshot.hasData
+                                        ? (snapshot.data!.data()!['createdAt']
+                                                as String)
+                                            .toDate()
+                                            .toActualDate()
+                                        : '',
+                                    style: const TextStyle(
+                                        fontSize: 12,
+                                        color: Colors.black45,
+                                        fontFamily: 'manrope'),
+                                  ),
+                                ],
+                              ),
+                              Divider(
+                                  height: getVerticalSize(32),
+                                  thickness: getVerticalSize(1),
+                                  color: ColorConstant.pinkA10019),
+                              Row(
+                                children: [
+                                  const Icon(
+                                    Icons.description_outlined,
+                                    color: Colors.black45,
+                                    size: 20,
+                                  ),
+                                  const SizedBox(
+                                    width: 8,
+                                  ),
+                                  Text(
+                                    'Appointment Description'.capitalize!,
+                                    style: const TextStyle(
+                                        color: Colors.black54,
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.bold,
+                                        fontFamily: 'manrope'),
+                                  ),
+                                ],
+                              ),
                               Padding(
-                                  padding:
-                                      getPadding(left: 20, top: 30, right: 20),
-                                  child: Row(
+                                padding: getPadding(left: 29, top: 8),
+                                child: Text(
+                                  snapshot.hasData
+                                      ? (snapshot.data!.data()!['description'])
+                                      : '',
+                                  style: const TextStyle(
+                                      fontSize: 14,
+                                      color: Colors.black45,
+                                      fontFamily: 'manrope'),
+                                ),
+                              ),
+                              Divider(
+                                  height: getVerticalSize(32),
+                                  thickness: getVerticalSize(1),
+                                  color: ColorConstant.pinkA10019),
+                              Row(
+                                children: [
+                                  const Icon(
+                                    Icons.health_and_safety_outlined,
+                                    color: Colors.black45,
+                                    size: 20,
+                                  ),
+                                  const SizedBox(
+                                    width: 8,
+                                  ),
+                                  Text(
+                                    'Assesment (Physical)'.capitalize!,
+                                    style: const TextStyle(
+                                        color: Colors.black54,
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.bold,
+                                        fontFamily: 'manrope'),
+                                  ),
+                                ],
+                              ),
+                              const SizedBox(
+                                height: 12,
+                              ),
+                              Padding(
+                                padding: getPadding(left: 29),
+                                child: Column(
+                                  children: [
+                                    Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceBetween,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: [
-                                        Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.start,
-                                            children: [
-                                              Text("lbl_type".tr,
-                                                  overflow:
-                                                      TextOverflow.ellipsis,
-                                                  textAlign: TextAlign.left,
-                                                  style: AppStyle
-                                                      .txtOpenSansRomanSemiBold12Gray600),
-                                              Padding(
-                                                  padding: getPadding(top: 7),
-                                                  child: Text(
-                                                      "lbl_video_interview".tr,
-                                                      overflow:
-                                                          TextOverflow.ellipsis,
-                                                      textAlign: TextAlign.left,
-                                                      style: AppStyle
-                                                          .txtOpenSansRomanSemiBold14Gray800))
-                                            ]),
-                                        CustomImageView(
-                                            svgPath:
-                                                ImageConstant.imgArrowright,
-                                            height: getSize(18),
-                                            width: getSize(18),
-                                            margin: getMargin(top: 25))
-                                      ])),
-                              Container(
-                                  width: double.maxFinite,
-                                  margin: getMargin(top: 29),
-                                  padding: getPadding(
-                                      left: 20, top: 27, right: 20, bottom: 27),
-                                  decoration:
-                                      AppDecoration.txtOutlinePinkA10019,
-                                  child: Text("msg_comment_optional".tr,
-                                      overflow: TextOverflow.ellipsis,
-                                      textAlign: TextAlign.left,
-                                      style: AppStyle.txtOpenSans14Gray600)),
-                              Container(
-                                  height: getVerticalSize(65),
-                                  width: double.maxFinite,
-                                  margin: getMargin(top: 29),
-                                  child: Stack(
-                                      alignment: Alignment.topLeft,
+                                        const Expanded(
+                                          flex: 4,
+                                          child: Text(
+                                            'Has any alergy ?',
+                                            overflow: TextOverflow.clip,
+                                            style: TextStyle(
+                                                color: Colors.black87,
+                                                fontSize: 14,
+                                                fontFamily: 'manrope'),
+                                          ),
+                                        ),
+                                        const SizedBox(
+                                          width: 8,
+                                        ),
+                                        Expanded(
+                                          child: Text(
+                                            snapshot.hasData
+                                                ? (snapshot.data!.data()![
+                                                                'physicalAssesment']
+                                                            [
+                                                            'alergy'] as String)
+                                                        .isEmpty
+                                                    ? 'No'
+                                                    : 'Yes'
+                                                : '',
+                                            style: const TextStyle(
+                                                color: Colors.black54,
+                                                fontSize: 14,
+                                                fontFamily: 'manrope'),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    const SizedBox(
+                                      height: 8,
+                                    ),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: [
-                                        Align(
-                                            alignment: Alignment.center,
-                                            child: Container(
-                                                padding: getPadding(all: 20),
-                                                decoration: AppDecoration
-                                                    .outlinePinkA100191,
-                                                child: Column(
-                                                    mainAxisSize:
-                                                        MainAxisSize.min,
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment.end,
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment.end,
-                                                    children: [
-                                                      CustomImageView(
-                                                          svgPath: ImageConstant
-                                                              .imgArrowright,
-                                                          height: getSize(18),
-                                                          width: getSize(18),
-                                                          margin:
-                                                              getMargin(top: 7))
-                                                    ]))),
-                                        Align(
-                                            alignment: Alignment.topLeft,
-                                            child: Padding(
-                                                padding: getPadding(left: 20),
-                                                child: Column(
-                                                    mainAxisSize:
-                                                        MainAxisSize.min,
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment.start,
+                                        const Expanded(
+                                          flex: 4,
+                                          child: Text(
+                                            'Bites ?',
+                                            overflow: TextOverflow.clip,
+                                            style: TextStyle(
+                                                color: Colors.black87,
+                                                fontSize: 14,
+                                                fontFamily: 'manrope'),
+                                          ),
+                                        ),
+                                        const SizedBox(
+                                          width: 8,
+                                        ),
+                                        Expanded(
+                                          child: Text(
+                                            snapshot.hasData
+                                                ? (snapshot.data!.data()![
+                                                                'physicalAssesment']
+                                                            ['bites'] as String)
+                                                        .isEmpty
+                                                    ? 'No'
+                                                    : 'Yes'
+                                                : '',
+                                            style: const TextStyle(
+                                                color: Colors.black54,
+                                                fontSize: 14,
+                                                fontFamily: 'manrope'),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    const SizedBox(
+                                      height: 8,
+                                    ),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        const Expanded(
+                                          flex: 4,
+                                          child: Text(
+                                            'Has bruises ?',
+                                            overflow: TextOverflow.clip,
+                                            style: TextStyle(
+                                                color: Colors.black87,
+                                                fontSize: 14,
+                                                fontFamily: 'manrope'),
+                                          ),
+                                        ),
+                                        const SizedBox(
+                                          width: 8,
+                                        ),
+                                        Expanded(
+                                          child: Text(
+                                            snapshot.hasData
+                                                ? (snapshot.data!.data()![
+                                                                'physicalAssesment']
+                                                            [
+                                                            'bruises'] as String)
+                                                        .isEmpty
+                                                    ? 'No'
+                                                    : 'Yes'
+                                                : '',
+                                            style: const TextStyle(
+                                                color: Colors.black54,
+                                                fontSize: 14,
+                                                fontFamily: 'manrope'),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    const SizedBox(
+                                      height: 8,
+                                    ),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        const Expanded(
+                                          flex: 4,
+                                          child: Text(
+                                            'Has Fever ?',
+                                            overflow: TextOverflow.clip,
+                                            style: TextStyle(
+                                                color: Colors.black87,
+                                                fontSize: 14,
+                                                fontFamily: 'manrope'),
+                                          ),
+                                        ),
+                                        const SizedBox(
+                                          width: 8,
+                                        ),
+                                        Expanded(
+                                          child: Text(
+                                            snapshot.hasData
+                                                ? (snapshot.data!.data()![
+                                                                'physicalAssesment']
+                                                            ['fiver'] as String)
+                                                        .isEmpty
+                                                    ? 'No'
+                                                    : 'Yes'
+                                                : '',
+                                            style: const TextStyle(
+                                                color: Colors.black54,
+                                                fontSize: 14,
+                                                fontFamily: 'manrope'),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    const SizedBox(
+                                      height: 8,
+                                    ),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        const Expanded(
+                                          flex: 4,
+                                          child: Text(
+                                            'Has rashes ?',
+                                            overflow: TextOverflow.clip,
+                                            style: TextStyle(
+                                                color: Colors.black87,
+                                                fontSize: 14,
+                                                fontFamily: 'manrope'),
+                                          ),
+                                        ),
+                                        const SizedBox(
+                                          width: 8,
+                                        ),
+                                        Expanded(
+                                          child: Text(
+                                            snapshot.hasData
+                                                ? (snapshot.data!.data()![
+                                                                'physicalAssesment']
+                                                            [
+                                                            'rashes'] as String)
+                                                        .isEmpty
+                                                    ? 'No'
+                                                    : 'Yes'
+                                                : '',
+                                            style: const TextStyle(
+                                                color: Colors.black54,
+                                                fontSize: 14,
+                                                fontFamily: 'manrope'),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    const SizedBox(
+                                      height: 8,
+                                    ),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        const Expanded(
+                                          flex: 4,
+                                          child: Text(
+                                            'Has redness ?',
+                                            overflow: TextOverflow.clip,
+                                            style: TextStyle(
+                                                color: Colors.black87,
+                                                fontSize: 14,
+                                                fontFamily: 'manrope'),
+                                          ),
+                                        ),
+                                        const SizedBox(
+                                          width: 8,
+                                        ),
+                                        Expanded(
+                                          child: Text(
+                                            snapshot.hasData
+                                                ? (snapshot.data!.data()![
+                                                                'physicalAssesment']
+                                                            [
+                                                            'redness'] as String)
+                                                        .isEmpty
+                                                    ? 'No'
+                                                    : 'Yes'
+                                                : '',
+                                            style: const TextStyle(
+                                                color: Colors.black54,
+                                                fontSize: 14,
+                                                fontFamily: 'manrope'),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    const SizedBox(
+                                      height: 8,
+                                    ),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        const Expanded(
+                                          flex: 4,
+                                          child: Text(
+                                            'Has any swell ?',
+                                            overflow: TextOverflow.clip,
+                                            style: TextStyle(
+                                                color: Colors.black87,
+                                                fontSize: 14,
+                                                fontFamily: 'manrope'),
+                                          ),
+                                        ),
+                                        const SizedBox(
+                                          width: 8,
+                                        ),
+                                        Expanded(
+                                          child: Text(
+                                            snapshot.hasData
+                                                ? (snapshot.data!.data()![
+                                                                'physicalAssesment']
+                                                            ['swell'] as String)
+                                                        .isEmpty
+                                                    ? 'No'
+                                                    : 'Yes'
+                                                : '',
+                                            style: const TextStyle(
+                                                color: Colors.black54,
+                                                fontSize: 14,
+                                                fontFamily: 'manrope'),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    const SizedBox(
+                                      height: 8,
+                                    ),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        const Expanded(
+                                          flex: 4,
+                                          child: Text(
+                                            'Others',
+                                            overflow: TextOverflow.clip,
+                                            style: TextStyle(
+                                                color: Colors.black87,
+                                                fontSize: 14,
+                                                fontFamily: 'manrope'),
+                                          ),
+                                        ),
+                                        const SizedBox(
+                                          width: 8,
+                                        ),
+                                        Expanded(
+                                          child: Text(
+                                            snapshot.hasData
+                                                ? (snapshot.data!.data()![
+                                                        'physicalAssesment']
+                                                    ['others'] as String)
+                                                : '',
+                                            style: const TextStyle(
+                                                color: Colors.black54,
+                                                fontSize: 14,
+                                                fontFamily: 'manrope'),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    const SizedBox(
+                                      height: 8,
+                                    ),
+                                  ],
+                                ),
+                              ),
+
+                              Divider(
+                                  height: getVerticalSize(32),
+                                  thickness: getVerticalSize(1),
+                                  color: ColorConstant.pinkA10019),
+                              Row(
+                                children: [
+                                  const Icon(
+                                    Icons.chrome_reader_mode_outlined,
+                                    color: Colors.black45,
+                                    size: 20,
+                                  ),
+                                  const SizedBox(
+                                    width: 8,
+                                  ),
+                                  Text(
+                                    'Other details'.capitalize!,
+                                    style: const TextStyle(
+                                        color: Colors.black54,
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.bold,
+                                        fontFamily: 'manrope'),
+                                  ),
+                                ],
+                              ),
+
+                              const SizedBox(
+                                height: 12,
+                              ),
+                              Padding(
+                                padding: getPadding(left: 29),
+                                child: Column(
+                                  children: [
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        const Expanded(
+                                          flex: 4,
+                                          child: Text(
+                                            'Payment',
+                                            overflow: TextOverflow.clip,
+                                            style: TextStyle(
+                                                color: Colors.black87,
+                                                fontSize: 14,
+                                                fontFamily: 'manrope'),
+                                          ),
+                                        ),
+                                        const SizedBox(
+                                          width: 8,
+                                        ),
+                                        Expanded(
+                                          child: Text(
+                                            snapshot.hasData
+                                                ? (snapshot.data!
+                                                            .data()!['payment']
+                                                        as String)
+                                                    .tr
+                                                : '',
+                                            style: const TextStyle(
+                                                color: Colors.black54,
+                                                fontSize: 14,
+                                                fontFamily: 'manrope'),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    const SizedBox(
+                                      height: 8,
+                                    ),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        const Expanded(
+                                          flex: 4,
+                                          child: Text(
+                                            'Has this nurse worked with you before?',
+                                            overflow: TextOverflow.clip,
+                                            style: TextStyle(
+                                                color: Colors.black87,
+                                                fontSize: 14,
+                                                fontFamily: 'manrope'),
+                                          ),
+                                        ),
+                                        const SizedBox(
+                                          width: 8,
+                                        ),
+                                        Expanded(
+                                          child: Text(
+                                            snapshot.hasData
+                                                ? (snapshot.data!.data()![
+                                                        'workedWith'] as String)
+                                                    .tr
+                                                : '',
+                                            style: const TextStyle(
+                                                color: Colors.black54,
+                                                fontSize: 14,
+                                                fontFamily: 'manrope'),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    const SizedBox(
+                                      height: 8,
+                                    ),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        const Expanded(
+                                          flex: 4,
+                                          child: Text(
+                                            'Additional Information',
+                                            overflow: TextOverflow.clip,
+                                            style: TextStyle(
+                                                color: Colors.black87,
+                                                fontSize: 14,
+                                                fontFamily: 'manrope'),
+                                          ),
+                                        ),
+                                        const SizedBox(
+                                          width: 8,
+                                        ),
+                                        Expanded(
+                                          child: Text(
+                                            snapshot.hasData
+                                                ? (snapshot.data!.data()![
+                                                            'addionalInfo']
+                                                        as String)
+                                                    .tr
+                                                : '',
+                                            style: const TextStyle(
+                                                color: Colors.black54,
+                                                fontSize: 14,
+                                                fontFamily: 'manrope'),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    const SizedBox(
+                                      height: 8,
+                                    ),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        const Expanded(
+                                          flex: 4,
+                                          child: Text(
+                                            'Hand over to who ?',
+                                            overflow: TextOverflow.clip,
+                                            style: TextStyle(
+                                                color: Colors.black87,
+                                                fontSize: 14,
+                                                fontFamily: 'manrope'),
+                                          ),
+                                        ),
+                                        const SizedBox(
+                                          width: 8,
+                                        ),
+                                        Expanded(
+                                          child: Text(
+                                            snapshot.hasData
+                                                ? (snapshot.data!.data()![
+                                                        'handOverTo'] as String)
+                                                    .tr
+                                                : '',
+                                            style: const TextStyle(
+                                                color: Colors.black54,
+                                                fontSize: 14,
+                                                fontFamily: 'manrope'),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        const Expanded(
+                                          flex: 4,
+                                          child: Text(
+                                            'Hand over to who ?',
+                                            overflow: TextOverflow.clip,
+                                            style: TextStyle(
+                                                color: Colors.black87,
+                                                fontSize: 14,
+                                                fontFamily: 'manrope'),
+                                          ),
+                                        ),
+                                        const SizedBox(
+                                          width: 8,
+                                        ),
+                                        Expanded(
+                                          child: Text(
+                                            snapshot.hasData
+                                                ? (snapshot.data!.data()![
+                                                        'handOverTo'] as String)
+                                                    .tr
+                                                : '',
+                                            style: const TextStyle(
+                                                color: Colors.black54,
+                                                fontSize: 14,
+                                                fontFamily: 'manrope'),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Divider(
+                                  height: getVerticalSize(32),
+                                  thickness: getVerticalSize(1),
+                                  color: ColorConstant.pinkA10019),
+                              const Row(
+                                children: [
+                                  Icon(
+                                    Icons.handshake_outlined,
+                                    color: Colors.black45,
+                                    size: 20,
+                                  ),
+                                  SizedBox(
+                                    width: 8,
+                                  ),
+                                  Text(
+                                    'Appointment date',
+                                    style: TextStyle(
+                                        color: Colors.black54,
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.bold,
+                                        fontFamily: 'manrope'),
+                                  ),
+                                ],
+                              ),
+                              // Divider(
+                              //     height: getVerticalSize(32),
+                              //     thickness: getVerticalSize(1),
+                              //     color: ColorConstant.pinkA10019),
+                              !snapshot.hasData
+                                  ? const Center()
+                                  : Wrap(
+                                      spacing: 12,
+                                      children: List.generate(
+                                          snapshot.data!
+                                              .data()!['booking']
+                                              .length, (index) {
+                                        DateTime date = (snapshot.data!
+                                                    .data()!['booking'][index]
+                                                ['date'] as Timestamp)
+                                            .toDate();
+                                        return Container(
+                                            padding: getPadding(all: 4),
+                                            margin: getMargin(bottom: 8),
+                                            width: 155,
+                                            decoration: BoxDecoration(
+                                                border: Border.all(
+                                                    color: Colors.black12),
+                                                borderRadius:
+                                                    BorderRadius.circular(16)),
+                                            child: Row(
+                                              children: [
+                                                Container(
+                                                  decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            14),
+                                                    color:
+                                                        ColorConstant.pinkA100,
+                                                  ),
+                                                  padding: getPadding(
+                                                      left: 8,
+                                                      right: 8,
+                                                      bottom: 8),
+                                                  width: 60,
+                                                  height: 60,
+                                                  child: Stack(
+                                                    alignment: Alignment.center,
                                                     children: [
                                                       Text(
-                                                          "msg_conclusion_decision"
-                                                              .tr,
-                                                          overflow: TextOverflow
-                                                              .ellipsis,
-                                                          textAlign:
-                                                              TextAlign.left,
+                                                        '${date.day < 10 ? '0${date.day}' : date.day}',
+                                                        style: AppStyle
+                                                            .txtPoppinsRegular24
+                                                            .copyWith(
+                                                                color: Colors
+                                                                    .white,
+                                                                fontSize: 28,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold),
+                                                      ),
+                                                      Positioned(
+                                                        top: 35,
+                                                        child: Text(
+                                                          months[date.month - 1]
+                                                              .toUpperCase(),
                                                           style: AppStyle
-                                                              .txtOpenSansRomanSemiBold12Gray600),
-                                                      Padding(
-                                                          padding: getPadding(
-                                                              top: 10),
-                                                          child: Text(
-                                                              "msg_far_away_behind"
-                                                                  .tr,
-                                                              overflow:
-                                                                  TextOverflow
-                                                                      .ellipsis,
-                                                              textAlign:
-                                                                  TextAlign
-                                                                      .left,
-                                                              style: AppStyle
-                                                                  .txtOpenSansRomanSemiBold14Gray800))
-                                                    ])))
-                                      ])),
-                              CustomButton(
-                                  height: getVerticalSize(43),
-                                  width: getHorizontalSize(119),
-                                  text: "lbl_book_now".tr,
-                                  margin: getMargin(top: 30),
-                                  variant: ButtonVariant.OutlineBluegray100,
-                                  shape: ButtonShape.CircleBorder19,
-                                  padding: ButtonPadding.PaddingAll9,
-                                  fontStyle: ButtonFontStyle
-                                      .OpenSansRomanSemiBold14PinkA100,
-                                  onTap: () {
-                                    onTapBooknow();
-                                  })
-                            ])))),
-            bottomNavigationBar:
-                CustomBottomBar(onChanged: (BottomBarEnum type) {
-              Get.toNamed(getCurrentRoute(type), id: 1);
-            })));
-  }
-
-  ///Handling route based on bottom click actions
-  String getCurrentRoute(BottomBarEnum type) {
-    switch (type) {
-      case BottomBarEnum.Volume:
-        return "/";
-      case BottomBarEnum.Sort:
-        return "/";
-      case BottomBarEnum.Vuesaxlinearaddpinka100:
-        return "/";
-      case BottomBarEnum.Car:
-        return "/";
-      case BottomBarEnum.User:
-        return "/";
-      default:
-        return "/";
-    }
-  }
-
-  ///Handling page based on route
-  Widget getCurrentPage(String currentRoute) {
-    switch (currentRoute) {
-      default:
-        return DefaultWidget();
-    }
-  }
-
-  /// Navigates to the pastBookingDetailsScreen when the action is triggered.
-
-  /// When the action is triggered, this function uses the `Get` package to
-  /// push the named route for the pastBookingDetailsScreen.
-  onTapRowdetails() {
-    Get.toNamed(
-      AppRoutes.pastBookingDetailsScreen,
-    );
-  }
-
-  /// Navigates to the nurseSDetailsScreen when the action is triggered.
-
-  /// When the action is triggered, this function uses the `Get` package to
-  /// push the named route for the nurseSDetailsScreen.
-  onTapBooknow() {
-    Get.toNamed(
-      AppRoutes.nurseSDetailsScreen,
-    );
-  }
-
-  /// Navigates to the upcomingBookingFiveScreen when the action is triggered.
-
-  /// When the action is triggered, this function uses the `Get` package to
-  /// push the named route for the upcomingBookingFiveScreen.
-  onTapBookingdetails() {
-    Get.toNamed(
-      AppRoutes.upcomingBookingFiveScreen,
+                                                              .txtPoppinsRegular24
+                                                              .copyWith(
+                                                                  color: Colors
+                                                                      .white,
+                                                                  fontSize: 14,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold),
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                                const SizedBox(
+                                                  width: 12,
+                                                ),
+                                                Column(
+                                                  children: [
+                                                    Text(
+                                                      snapshot.data!.data()![
+                                                              'booking'][index]
+                                                          ['startTime'],
+                                                      style: const TextStyle(
+                                                          color: Colors.black54,
+                                                          fontSize: 16,
+                                                          fontFamily: 'manrope',
+                                                          fontWeight:
+                                                              FontWeight.w600),
+                                                    ),
+                                                    const Divider(
+                                                      height: 8,
+                                                    ),
+                                                    Text(
+                                                      snapshot.data!.data()![
+                                                              'booking'][index]
+                                                          ['endTime'],
+                                                      style: const TextStyle(
+                                                          color: Colors.black54,
+                                                          fontSize: 16,
+                                                          fontFamily: 'manrope',
+                                                          fontWeight:
+                                                              FontWeight.w600),
+                                                    ),
+                                                  ],
+                                                )
+                                              ],
+                                            ));
+                                      })),
+                            ],
+                          );
+                        })
+                  ]))),
     );
   }
 }

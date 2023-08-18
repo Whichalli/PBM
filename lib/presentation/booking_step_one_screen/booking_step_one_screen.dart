@@ -1,32 +1,13 @@
-import 'dart:developer';
-
-import 'package:flutter_calendar_carousel/classes/marked_date.dart';
-import 'package:flutter_calendar_carousel/classes/multiple_marked_dates.dart';
-import 'package:fluttertoast/fluttertoast.dart';
-import 'package:pbm_app/widgets/booking_card.dart';
-import 'package:pbm_app/widgets/widgets.dart';
-
-import '../../core/utils/date_time_utils.dart';
-import '../booking_step_one_screen/widgets/booking_step_item_widget.dart';
 import 'controller/booking_step_one_controller.dart';
-import 'models/booking_step_item_model.dart';
 import 'package:flutter/material.dart';
 import 'package:pbm_app/core/app_export.dart';
 import 'package:pbm_app/widgets/app_bar/appbar_image.dart';
 import 'package:pbm_app/widgets/app_bar/appbar_subtitle_3.dart';
 import 'package:pbm_app/widgets/app_bar/custom_app_bar.dart';
 import 'package:pbm_app/widgets/custom_button.dart';
-import 'package:pbm_app/widgets/custom_drop_down.dart';
-import 'package:pbm_app/widgets/custom_radio_button.dart';
-import 'package:pbm_app/widgets/custom_text_form_field.dart';
-import 'package:flutter_calendar_carousel/flutter_calendar_carousel.dart'
-    show CalendarCarousel;
-import 'package:flutter_calendar_carousel/classes/event.dart';
-import 'package:flutter_calendar_carousel/classes/event_list.dart';
-import 'package:intl/intl.dart' show DateFormat;
 
 class BookingStepOneScreen extends GetWidget<BookingStepOneController> {
-  BookingStepOneScreen({Key? key}) : super(key: key);
+  const BookingStepOneScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

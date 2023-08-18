@@ -2,10 +2,6 @@ import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:pbm_app/domain/firebase/authentication.dart';
-import 'package:pbm_app/presentation/parent_page/pages/booked_nurse/booked_nurse.dart';
-import 'package:pbm_app/presentation/parent_page/pages/home_onboarding_container_screen/home_onboarding_container_screen.dart';
-import 'package:pbm_app/presentation/parent_page/pages/note_taking/note_taking_screen.dart';
 import 'package:pbm_app/widgets/app_bar/bottom_bar/bottom_navbar.dart';
 
 import '../../core/app_export.dart';
@@ -13,7 +9,6 @@ import '../../widgets/app_bar/appbar_image.dart';
 import '../../widgets/app_bar/bottom_bar/bottom_bar_buttom_model.dart';
 import '../../widgets/app_bar/custom_app_bar.dart';
 import '../../widgets/app_drawer.dart';
-import '../nurse_dashboard_page/pages/chat_screen/chat_screen.dart';
 import 'controller/controller.dart';
 
 // ignore: must_be_immutable
@@ -101,10 +96,10 @@ class ParentDashboardScreenPage
                         icon: const Icon(Icons.house_outlined),
                         text: 'Home',
                         activeIcon: const Icon(Icons.house)),
-                    // BottomBarButtonModel(
-                    //     activeIcon: const Icon(Icons.handshake),
-                    //     icon: const Icon(Icons.handshake_outlined),
-                    //     text: 'Appointments'),
+                    BottomBarButtonModel(
+                        activeIcon: const Icon(Icons.handshake),
+                        icon: const Icon(Icons.handshake_outlined),
+                        text: 'Appointments'),
                     BottomBarButtonModel(
                         activeIcon: const Icon(Icons.chat),
                         icon: const Icon(Icons.chat_outlined),

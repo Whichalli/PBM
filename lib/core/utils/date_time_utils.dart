@@ -180,7 +180,7 @@ extension TimeOfDayFormmater on TimeOfDay {
   }
 
   toTime() {
-    String time = toString().replaceAll('TimeOfDay(', '').replaceAll(')', '');
+    // String time = toString().replaceAll('TimeOfDay(', '').replaceAll(')', '');
     // time =
     //     '${int.parse(time.split(':')[0]) < 12 ? int.parse(time.split(':')[0]) : int.parse(time.split(':')[0]) - 12}:${int.parse(time.split(':')[1])} ${int.parse(time.split(':')[0]) < 12 ? 'AM' : 'PM'}';
     return toString().replaceAll('TimeOfDay(', '').replaceAll(')', '');

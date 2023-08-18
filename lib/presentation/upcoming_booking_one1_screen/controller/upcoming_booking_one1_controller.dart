@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:developer';
 import 'dart:math' as Math;
 
@@ -26,7 +27,7 @@ class UpcomingBookingOne1Controller extends GetxController {
       UpcomingBookingOne1Model().obs;
   RxBool loading = false.obs;
   onTapPay() async {
-    log('booking ${Hive.box('booking').get('data')}');
+    // log('booking ${json.encode(Hive.box('booking').get('data'))}');
     var employeeId = Hive.box('booking').get('data')['employeeId'];
     var chatId = '$employeeId-${Authentication.getCurrentUserId()}';
     await Database.write(
@@ -53,11 +54,12 @@ class UpcomingBookingOne1Controller extends GetxController {
           },
           table: 'chat');
     }
-    
+
     Get.offAndToNamed(
       AppRoutes.upcomingBookingScreen,
     );
   }
+  
 
   @override
   void onClose() {

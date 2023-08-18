@@ -13,43 +13,48 @@ class UpcomingBookingScreen extends GetWidget<UpcomingBookingController> {
         body: Container(
             width: double.maxFinite,
             padding: getPadding(top: 12, bottom: 12),
-            child:
-                Column(mainAxisAlignment: MainAxisAlignment.start, children: [
-              // Text("lbl_payment".tr,
-              //     overflow: TextOverflow.ellipsis,
-              //     textAlign: TextAlign.left,
-              //     style: AppStyle.txtOpenSansRomanBold18Gray800),
-              Spacer(),
-              CustomImageView(
-                  svgPath: ImageConstant.imgCheckmarkPinkA100,
-                  height: getSize(40),
-                  width: getSize(40)),
-              Padding(
-                  padding: getPadding(top: 13),
-                  child: Text("msg_booking_successful".tr,
-                      overflow: TextOverflow.ellipsis,
-                      textAlign: TextAlign.left,
-                      style: AppStyle.txtOpenSansRomanBold24Gray800)),
-              Padding(
-                  padding: getPadding(top: 8, bottom: 266),
-                  child: Text("msg_your_appointment".tr,
-                      overflow: TextOverflow.ellipsis,
-                      textAlign: TextAlign.left,
-                      style: AppStyle.txtOpenSans14Gray800))
-            ])),
+            child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  // Text("lbl_payment".tr,
+                  //     overflow: TextOverflow.ellipsis,
+                  //     textAlign: TextAlign.left,
+                  //     style: AppStyle.txtOpenSansRomanBold18Gray800),
+                  // Spacer(),
+                  CustomImageView(
+                      svgPath: ImageConstant.imgCheckmarkPinkA100,
+                      height: getSize(40),
+                      width: getSize(40)),
+                  Padding(
+                      padding: getPadding(top: 13),
+                      child: Text("msg_booking_successful".tr,
+                          overflow: TextOverflow.ellipsis,
+                          textAlign: TextAlign.left,
+                          style: AppStyle.txtOpenSansRomanBold24Gray800)),
+                  Padding(
+                      padding: getPadding(top: 8, bottom: 16),
+                      child: Text("msg_your_appointment".tr,
+                          overflow: TextOverflow.ellipsis,
+                          textAlign: TextAlign.left,
+                          style: AppStyle.txtOpenSans14Gray800)),
+                ])),
         bottomNavigationBar: Container(
             margin: getMargin(left: 20, right: 19, bottom: 16),
             decoration: AppDecoration.white,
-            child: Column(
+            child: Row(
                 mainAxisSize: MainAxisSize.min,
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  CustomButton(
-                      height: getVerticalSize(53),
-                      text: "lbl_next".tr,
-                      onTap: () {
-                        onTapNext();
-                      })
+                  Expanded(
+                    flex: 2,
+                    child: CustomButton(
+                        height: getVerticalSize(53),
+                        text: "lbl_next".tr,
+                        onTap: () {
+                          onTapNext();
+                        }),
+                  )
                 ])));
   }
 

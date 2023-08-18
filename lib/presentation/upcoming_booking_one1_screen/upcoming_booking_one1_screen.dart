@@ -247,9 +247,9 @@ class UpcomingBookingOne1Screen
                       height: getVerticalSize(50),
                       text: controller.loading.value ? null : "lbl_pay".tr,
                       icon: controller.loading.value
-                          ? SizedBox(
+                          ? const SizedBox(
                               width: 18,
-                              child: const CircularProgressIndicator(
+                              child: CircularProgressIndicator(
                                 strokeWidth: 2,
                                 color: Colors.white,
                               ),

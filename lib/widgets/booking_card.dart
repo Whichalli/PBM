@@ -1,20 +1,23 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:pbm_app/core/app_export.dart';
-import 'package:pbm_app/widgets/widgets.dart';
 
 class BookingCard extends StatelessWidget {
-  final Future<String> Function(String value) onStartPressed;
-  final Future<String> Function(String value) onEndPressed;
+  final Future<String> Function(String value)? onStartPressed;
+  final Future<String> Function(String value)? onEndPressed;
+  late final String? startTime;
+  late final String? endTime;
   final Function()? onDelete;
+  final bool? closeVisible;
   final DateTime date;
 
   BookingCard(
       {Key? key,
-      required this.onStartPressed,
-      required this.onEndPressed,
+      this.onStartPressed,
+      this.onEndPressed,
       this.onDelete,
+      this.startTime,
+      this.closeVisible = true,
+      this.endTime,
       required this.date})
       : super(key: key);
   RxString start = '__ __ __'.obs;
@@ -53,7 +56,7 @@ class BookingCard extends StatelessWidget {
                 Positioned(
                   top: 28,
                   child: Text(
-                    '${months[date.month - 1].toUpperCase()}',
+                    months[date.month - 1].toUpperCase(),
                     style: AppStyle.txtPoppinsRegular24.copyWith(
                         color: Colors.white,
                         fontSize: 14,
@@ -77,9 +80,11 @@ class BookingCard extends StatelessWidget {
               child: Column(
                 children: [
                   GestureDetector(
-                    onTap: () async {
-                      start.value = (await onStartPressed(start.value));
-                    },
+                    onTap: onStartPressed == null
+                        ? null
+                        : () async {
+                            start.value = (await onStartPressed!(start.value));
+                          },
                     child: Row(
                       children: [
                         Text(
@@ -88,7 +93,7 @@ class BookingCard extends StatelessWidget {
                               .copyWith(color: Colors.black, fontSize: 14),
                         ),
                         const Spacer(),
-                        Icon(
+                        const Icon(
                           Icons.av_timer_rounded,
                           size: 17,
                         ),
@@ -96,7 +101,7 @@ class BookingCard extends StatelessWidget {
                           width: 2,
                         ),
                         Obx(() => Text(
-                              start.value,
+                              startTime?.obs.value ?? start.value,
                               style: AppStyle.txtPoppinsRegular24
                                   .copyWith(color: Colors.black, fontSize: 14),
                             )),
@@ -105,9 +110,11 @@ class BookingCard extends StatelessWidget {
                   ),
                   const Spacer(),
                   GestureDetector(
-                    onTap: () async {
-                      end.value = (await onStartPressed(end.value));
-                    },
+                    onTap: onStartPressed == null
+                        ? null
+                        : () async {
+                            end.value = (await onStartPressed!(end.value));
+                          },
                     child: Row(
                       children: [
                         Text(
@@ -116,7 +123,7 @@ class BookingCard extends StatelessWidget {
                               .copyWith(color: Colors.black, fontSize: 14),
                         ),
                         const Spacer(),
-                        Icon(
+                        const Icon(
                           Icons.av_timer_rounded,
                           size: 17,
                         ),
@@ -124,7 +131,7 @@ class BookingCard extends StatelessWidget {
                           width: 2,
                         ),
                         Obx(() => Text(
-                              end.value,
+                              endTime?.obs.value ?? end.value,
                               style: AppStyle.txtPoppinsRegular24
                                   .copyWith(color: Colors.black, fontSize: 14),
                             )),
@@ -136,23 +143,25 @@ class BookingCard extends StatelessWidget {
             ),
           ),
           // const Spacer(),
-          Container(
-            width: 40,
-            padding: getPadding(bottom: 24),
-            // height: 20,
-            // margin: getMargin(bottom: 40, right: 8),
-            child: IconButton(
-              onPressed: onDelete,
-              // splashRadius: 12,
-              // padding: getPadding(all: 0),
-              style: IconButton.styleFrom(
-                  backgroundColor: Colors.green, alignment: Alignment.topRight),
-              icon: Icon(
-                Icons.close_rounded,
-                color: Colors.black38,
+          if (closeVisible ?? true)
+            Container(
+              width: 40,
+              padding: getPadding(bottom: 24),
+              // height: 20,
+              // margin: getMargin(bottom: 40, right: 8),
+              child: IconButton(
+                onPressed: onDelete,
+                // splashRadius: 12,
+                // padding: getPadding(all: 0),
+                style: IconButton.styleFrom(
+                    backgroundColor: Colors.green,
+                    alignment: Alignment.topRight),
+                icon: const Icon(
+                  Icons.close_rounded,
+                  color: Colors.black38,
+                ),
               ),
-            ),
-          )
+            )
         ],
       ),
     );

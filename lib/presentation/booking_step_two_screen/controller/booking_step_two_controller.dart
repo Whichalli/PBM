@@ -72,6 +72,7 @@ class BookingStepTwoController extends GetxController {
         radioWorkedB4.isNotEmpty &&
         radioPayment.isNotEmpty) {
       Hive.box('booking').put('data', {
+        'isActive': true,
         'parentId': Authentication.getCurrentUserId(),
         'employeeId': employeeId,
         'description': descriptionController.text,

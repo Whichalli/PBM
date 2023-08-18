@@ -9,9 +9,6 @@ import 'package:flutter_calendar_carousel/flutter_calendar_carousel.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
 import 'package:pbm_app/core/app_export.dart';
-import 'package:pbm_app/domain/firebase/authentication.dart';
-import 'package:pbm_app/domain/firebase/firebase.dart';
-import 'package:pbm_app/presentation/booking_step_one_screen/models/booking_step_one_model.dart';
 import 'package:flutter/material.dart';
 
 import '../../../widgets/booking_card.dart';

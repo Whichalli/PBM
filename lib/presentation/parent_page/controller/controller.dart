@@ -1,5 +1,8 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:pbm_app/service/background.service.dart';
 
 import '../../../domain/firebase/authentication.dart';
 import '../../nurse_dashboard_page/pages/chat_screen/chat_screen.dart';
@@ -10,15 +13,25 @@ import '../pages/note_taking/note_taking_screen.dart';
 
 class ParentDashboardScreenController extends GetxController {
   PageController? pageController;
+  late Timer _timer;
   @override
   void onInit() {
     super.onInit();
-    pageController = PageController(initialPage: 0);
+    pageController = PageController(initialPage: currentPageIndex.value);
+    _timer = Timer.periodic(const Duration(minutes: 1), (timer) {
+      BookingProcess.updateBookingStatus(field: 'parentId');
+    });
+  }
+
+  @override
+  dispose() {
+    _timer.cancel();
+    super.dispose();
   }
 
   final List<Widget> pages = [
     const HomeOnboardingContainerScreen(),
-    // const BookedNurseScreen(),
+    const BookedNurseScreen(),
     const ChatScreen(field: 'parentId'),
     const NoteTakingScreen(),
     Container(),

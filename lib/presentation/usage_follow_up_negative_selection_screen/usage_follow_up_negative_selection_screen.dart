@@ -15,7 +15,7 @@ class UsageFollowUpNegativeSelectionScreen
         backgroundColor: ColorConstant.whiteA700,
         body: Container(
             width: double.maxFinite,
-            padding: getPadding(left: 16, top: 46, right: 16, bottom: 46),
+            padding: getPadding(left: 16, top: 46, right: 16, bottom: 16),
             child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.start,

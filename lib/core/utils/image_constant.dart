@@ -23,6 +23,7 @@ class ImageConstant {
   static String imgArrowleft = 'assets/images/img_arrowleft.svg';
   static String imgComponent3 = 'assets/images/img_component3.svg';
   static String imgSkipnext = 'assets/images/img_skipnext.svg';
+  static String emptyRecords = 'assets/images/nuot_found.png';
 
   static String imgSkipprevious = 'assets/images/img_skipprevious.svg';
 

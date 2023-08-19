@@ -19,6 +19,7 @@ class BookedNurseScreen extends GetWidget<BookedNurseController> {
     return GetBuilder<BookedNurseController>(builder: (controller) {
       return Scaffold(
         body: Container(
+            color: Colors.white,
             width: double.maxFinite,
             padding: getPadding(bottom: 10),
             child:
@@ -175,82 +176,158 @@ class BookedNurseScreen extends GetWidget<BookedNurseController> {
                                 padding: getPadding(left: 12, right: 12),
                                 physics: const BouncingScrollPhysics(),
                                 child: Obx(() => Column(
-                                      children: List.generate(data.value.length,
-                                          (index) {
-                                        // log('booking view data ${data.value[index].data()}');
-                                        return Padding(
-                                          padding: const EdgeInsets.all(8.0),
-                                          child: MaterialButton(
-                                            onPressed: () {
-                                              Get.toNamed(
-                                                  AppRoutes
-                                                      .pastBookingDetailsOneScreen,
-                                                  arguments: {
-                                                    'bookingId':
-                                                        data.value[index].id,
-                                                    'employeeId': data
-                                                        .value[index]
-                                                        .data()['employeeId'],
-                                                  });
-                                            },
-                                            padding: getPadding(all: 0),
-                                            shape: RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(16),
-                                            ),
-                                            child: Container(
-                                              // height: 100,
-                                              width: 500,
-                                              padding: getPadding(all: 18),
-                                              decoration: BoxDecoration(
-                                                  boxShadow: const [
-                                                    BoxShadow(
-                                                        blurRadius: 1,
-                                                        spreadRadius: 1,
-                                                        color: Color.fromARGB(
-                                                            64, 198, 198, 198))
-                                                  ],
-                                                  borderRadius:
-                                                      BorderRadius.circular(16),
-                                                  color: Colors.white70),
-                                              child: Row(
-                                                children: [
-                                                  // CustomImageView(
-                                                  //   radius:
-                                                  //       BorderRadius.circular(
-                                                  //           12),
-                                                  //   width: 80,
-                                                  //   height: 100,
-                                                  //   border: Border.all(
-                                                  //       color: Colors.black12),
-                                                  //   imagePath:
-                                                  //       ImageConstant.imgAvatar,
-                                                  // ),
-                                                  // const SizedBox(
-                                                  //   width: 12,
-                                                  // ),
-                                                  Expanded(
+                                      children: data.value.isEmpty
+                                          ? [
+                                              // const Spacer(),
+                                              Container(
+                                                height: size.height - 300,
+                                                alignment: Alignment.center,
+                                                child: CustomImageView(
+                                                  width: 200,
+                                                  height: 200,
+                                                  imagePath: ImageConstant
+                                                      .emptyRecords,
+                                                ),
+                                              ),
+                                              // const Spacer(),
+                                            ]
+                                          : List.generate(data.value.length,
+                                              (index) {
+                                              // log('booking view data ${data.value[index].data()}');
+                                              return Padding(
+                                                padding:
+                                                    const EdgeInsets.all(8.0),
+                                                child: MaterialButton(
+                                                  onPressed: () {
+                                                    Get.toNamed(
+                                                        AppRoutes
+                                                            .pastBookingDetailsOneScreen,
+                                                        arguments: {
+                                                          'bookingId': data
+                                                              .value[index].id,
+                                                          'employeeId': data
+                                                                  .value[index]
+                                                                  .data()[
+                                                              'employeeId'],
+                                                          'parentId': data
+                                                                  .value[index]
+                                                                  .data()[
+                                                              'parentId'],
+                                                        });
+                                                  },
+                                                  padding: getPadding(all: 0),
+                                                  shape: RoundedRectangleBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            16),
+                                                  ),
+                                                  child: Container(
+                                                    // height: 100,
+                                                    width: 500,
+                                                    padding:
+                                                        getPadding(all: 18),
+                                                    decoration: BoxDecoration(
+                                                        boxShadow: const [
+                                                          BoxShadow(
+                                                              blurRadius: 1,
+                                                              spreadRadius: 1,
+                                                              color: Color
+                                                                  .fromARGB(
+                                                                      64,
+                                                                      198,
+                                                                      198,
+                                                                      198))
+                                                        ],
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(16),
+                                                        color: Colors.white70),
                                                     child: Row(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .spaceBetween,
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .start,
                                                       children: [
+                                                        // CustomImageView(
+                                                        //   radius:
+                                                        //       BorderRadius.circular(
+                                                        //           12),
+                                                        //   width: 80,
+                                                        //   height: 100,
+                                                        //   border: Border.all(
+                                                        //       color: Colors.black12),
+                                                        //   imagePath:
+                                                        //       ImageConstant.imgAvatar,
+                                                        // ),
+                                                        // const SizedBox(
+                                                        //   width: 12,
+                                                        // ),
                                                         Expanded(
-                                                          child: Column(
+                                                          child: Row(
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .spaceBetween,
                                                             crossAxisAlignment:
                                                                 CrossAxisAlignment
                                                                     .start,
                                                             children: [
-                                                              Row(
-                                                                children: [
-                                                                  Expanded(
-                                                                    child: Text(
-                                                                      data.value[index]
-                                                                              .data()[
-                                                                          'title'],
+                                                              Expanded(
+                                                                child: Column(
+                                                                  crossAxisAlignment:
+                                                                      CrossAxisAlignment
+                                                                          .start,
+                                                                  children: [
+                                                                    Row(
+                                                                      children: [
+                                                                        Expanded(
+                                                                          child:
+                                                                              Text(
+                                                                            data.value[index].data()['title'],
+                                                                            maxLines:
+                                                                                1,
+                                                                            overflow:
+                                                                                TextOverflow.ellipsis,
+                                                                            style: AppStyle.txtAlegreyaSansBold24.copyWith(
+                                                                                color: Colors.black54,
+                                                                                fontSize: 18,
+                                                                                fontFamily: 'Nunito'),
+                                                                          ),
+                                                                        ),
+                                                                        const SizedBox(
+                                                                          width:
+                                                                              8,
+                                                                        ),
+                                                                        StreamBuilder<DocumentSnapshot<Map<String, dynamic>>>(
+                                                                            stream: FirebaseFirestore.instance.collection('employee').doc(data.value[index].data()['employeeId']).snapshots(),
+                                                                            builder: (context, employeeNameSnapShot) {
+                                                                              return Row(
+                                                                                children: [
+                                                                                  CustomImageView(
+                                                                                    border: Border.all(color: Colors.black54),
+                                                                                    radius: BorderRadius.circular(30),
+                                                                                    width: 20,
+                                                                                    height: 20,
+                                                                                    fit: BoxFit.cover,
+                                                                                    url: employeeNameSnapShot.hasData ? employeeNameSnapShot.data!.data()!['photoUrl'] : '',
+                                                                                    imagePath: ImageConstant.imageNotFound,
+                                                                                  ),
+                                                                                  const SizedBox(
+                                                                                    width: 4,
+                                                                                  ),
+                                                                                  Text(
+                                                                                    employeeNameSnapShot.hasData ? employeeNameSnapShot.data!.data()!['name'] : '',
+                                                                                    maxLines: 1,
+                                                                                    overflow: TextOverflow.ellipsis,
+                                                                                    style: AppStyle.txtAlegreyaSansBold24.copyWith(color: Colors.black54, fontSize: 12, fontFamily: 'Nunito'),
+                                                                                  ),
+                                                                                ],
+                                                                              );
+                                                                            })
+                                                                      ],
+                                                                    ),
+                                                                    const SizedBox(
+                                                                      height: 4,
+                                                                    ),
+                                                                    Text(
+                                                                      '${data.value[index].data()['createdAt']}'
+                                                                          .toDate()
+                                                                          .toActualDate(),
                                                                       maxLines:
                                                                           1,
                                                                       overflow:
@@ -260,156 +337,93 @@ class BookedNurseScreen extends GetWidget<BookedNurseController> {
                                                                           color: Colors
                                                                               .black54,
                                                                           fontSize:
-                                                                              18,
+                                                                              12,
+                                                                          fontWeight: FontWeight
+                                                                              .w500,
                                                                           fontFamily:
                                                                               'Nunito'),
                                                                     ),
-                                                                  ),
-                                                                  const SizedBox(
-                                                                    width: 8,
-                                                                  ),
-                                                                  StreamBuilder<
-                                                                          DocumentSnapshot<
-                                                                              Map<String,
-                                                                                  dynamic>>>(
-                                                                      stream: FirebaseFirestore
-                                                                          .instance
-                                                                          .collection(
-                                                                              'employee')
-                                                                          .doc(data.value[index].data()[
-                                                                              'employeeId'])
-                                                                          .snapshots(),
-                                                                      builder:
-                                                                          (context,
-                                                                              employeeNameSnapShot) {
-                                                                        return Row(
-                                                                          children: [
-                                                                            CustomImageView(
-                                                                              border: Border.all(color: Colors.black54),
-                                                                              radius: BorderRadius.circular(30),
-                                                                              width: 20,
-                                                                              height: 20,
-                                                                              fit: BoxFit.cover,
-                                                                              url: employeeNameSnapShot.hasData ? employeeNameSnapShot.data!.data()!['photoUrl'] : '',
-                                                                              imagePath: ImageConstant.imageNotFound,
-                                                                            ),
-                                                                            const SizedBox(
-                                                                              width: 4,
-                                                                            ),
-                                                                            Text(
-                                                                              employeeNameSnapShot.hasData ? employeeNameSnapShot.data!.data()!['name'] : '',
-                                                                              maxLines: 1,
-                                                                              overflow: TextOverflow.ellipsis,
-                                                                              style: AppStyle.txtAlegreyaSansBold24.copyWith(color: Colors.black54, fontSize: 12, fontFamily: 'Nunito'),
-                                                                            ),
-                                                                          ],
-                                                                        );
-                                                                      })
-                                                                ],
+                                                                    const SizedBox(
+                                                                      height: 4,
+                                                                    ),
+                                                                    Text(
+                                                                      '${data.value[index].data()['description']}',
+                                                                      maxLines:
+                                                                          1,
+                                                                      overflow:
+                                                                          TextOverflow
+                                                                              .ellipsis,
+                                                                      style: AppStyle.txtAlegreyaSansBold24.copyWith(
+                                                                          color: Colors
+                                                                              .black54,
+                                                                          fontSize:
+                                                                              12,
+                                                                          fontWeight: FontWeight
+                                                                              .w500,
+                                                                          fontFamily:
+                                                                              'Nunito'),
+                                                                    )
+                                                                  ],
+                                                                ),
                                                               ),
-                                                              const SizedBox(
-                                                                height: 4,
-                                                              ),
-                                                              Text(
-                                                                '${data.value[index].data()['createdAt']}'
-                                                                    .toDate()
-                                                                    .toActualDate(),
-                                                                maxLines: 1,
-                                                                overflow:
-                                                                    TextOverflow
-                                                                        .ellipsis,
-                                                                style: AppStyle.txtAlegreyaSansBold24.copyWith(
-                                                                    color: Colors
-                                                                        .black54,
-                                                                    fontSize:
-                                                                        12,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w500,
-                                                                    fontFamily:
-                                                                        'Nunito'),
-                                                              ),
-                                                              const SizedBox(
-                                                                height: 4,
-                                                              ),
-                                                              Text(
-                                                                '${data.value[index].data()['description']}',
-                                                                maxLines: 1,
-                                                                overflow:
-                                                                    TextOverflow
-                                                                        .ellipsis,
-                                                                style: AppStyle.txtAlegreyaSansBold24.copyWith(
-                                                                    color: Colors
-                                                                        .black54,
-                                                                    fontSize:
-                                                                        12,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w500,
-                                                                    fontFamily:
-                                                                        'Nunito'),
-                                                              )
+
+                                                              // const SizedBox(
+                                                              //   height: 4,
+                                                              // ),
+                                                              // Expanded(
+                                                              //   child: Text(
+                                                              //     data.value[index]
+                                                              //             .data()[
+                                                              //         'description'],
+                                                              //     maxLines: 2,
+                                                              //     overflow:
+                                                              //         TextOverflow
+                                                              //             .ellipsis,
+                                                              //     style: AppStyle
+                                                              //         .txtAlegreyaSansBold24
+                                                              //         .copyWith(
+                                                              //             color: Colors
+                                                              //                 .black54,
+                                                              //             fontSize:
+                                                              //                 14,
+                                                              //             fontFamily:
+                                                              //                 'Nunito'),
+                                                              //   ),
+                                                              // ),
+                                                              // Align(
+                                                              //   alignment: Alignment
+                                                              //       .bottomRight,
+                                                              //   child: Container(
+                                                              //     height: 20,
+                                                              //     width: 60,
+                                                              //     alignment:
+                                                              //         Alignment
+                                                              //             .center,
+                                                              //     decoration: BoxDecoration(
+                                                              //         borderRadius:
+                                                              //             BorderRadius
+                                                              //                 .circular(
+                                                              //                     4),
+                                                              //         border: Border.all(
+                                                              //             color: ColorConstant
+                                                              //                 .pinkA100)),
+                                                              //     child: const Text(
+                                                              //       'Details',
+                                                              //       style: TextStyle(
+                                                              //           fontSize:
+                                                              //               12),
+                                                              //     ),
+                                                              //   ),
+                                                              // ),
                                                             ],
                                                           ),
-                                                        ),
-
-                                                        // const SizedBox(
-                                                        //   height: 4,
-                                                        // ),
-                                                        // Expanded(
-                                                        //   child: Text(
-                                                        //     data.value[index]
-                                                        //             .data()[
-                                                        //         'description'],
-                                                        //     maxLines: 2,
-                                                        //     overflow:
-                                                        //         TextOverflow
-                                                        //             .ellipsis,
-                                                        //     style: AppStyle
-                                                        //         .txtAlegreyaSansBold24
-                                                        //         .copyWith(
-                                                        //             color: Colors
-                                                        //                 .black54,
-                                                        //             fontSize:
-                                                        //                 14,
-                                                        //             fontFamily:
-                                                        //                 'Nunito'),
-                                                        //   ),
-                                                        // ),
-                                                        // Align(
-                                                        //   alignment: Alignment
-                                                        //       .bottomRight,
-                                                        //   child: Container(
-                                                        //     height: 20,
-                                                        //     width: 60,
-                                                        //     alignment:
-                                                        //         Alignment
-                                                        //             .center,
-                                                        //     decoration: BoxDecoration(
-                                                        //         borderRadius:
-                                                        //             BorderRadius
-                                                        //                 .circular(
-                                                        //                     4),
-                                                        //         border: Border.all(
-                                                        //             color: ColorConstant
-                                                        //                 .pinkA100)),
-                                                        //     child: const Text(
-                                                        //       'Details',
-                                                        //       style: TextStyle(
-                                                        //           fontSize:
-                                                        //               12),
-                                                        //     ),
-                                                        //   ),
-                                                        // ),
+                                                        )
                                                       ],
                                                     ),
-                                                  )
-                                                ],
-                                              ),
-                                            ),
-                                          ),
-                                        );
-                                      }),
+                                                  ),
+                                                ),
+                                              );
+                                            }),
                                     )),
                               ),
                             ),

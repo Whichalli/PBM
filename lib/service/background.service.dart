@@ -1,10 +1,8 @@
 import 'dart:async';
 import 'dart:developer';
-import 'dart:isolate';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
 import 'package:pbm_app/core/app_export.dart';
 import 'package:pbm_app/domain/firebase/authentication.dart';
 import 'package:pbm_app/domain/firebase/firebase.dart';
@@ -35,10 +33,16 @@ class BookingProcess {
         List booking = data['booking'];
         bool isActive = false;
         for (var bookingData in booking) {
-          log("loged booking = ${(bookingData['date'] as Timestamp).toDate().compareTo(DateTime(now.year, now.month, now.day))}");
-          if ((bookingData['date'] as Timestamp)
-                  .toDate()
-                  .compareTo(DateTime(now.year, now.month, now.day, now.hour, now.minute, now.second)) >
+          TimeOfDay endTime =
+              (bookingData['endTime'] as String).timeOfDayFromString();
+          DateTime date = (bookingData['date'] as Timestamp).toDate();
+          DateTime bookedDate = DateTime(
+              date.year, date.month, date.day, endTime.hour, endTime.minute);
+
+          // log('bookedDate = $bookedDate ####### $now');
+          // log('@@@@@@@ ${bookedDate.compareTo(DateTime(now.year, now.month, now.day, now.hour, now.minute))}');
+          if (bookedDate.compareTo(DateTime(
+                  now.year, now.month, now.day, now.hour, now.minute)) >
               0) {
             isActive = true;
           }
@@ -50,12 +54,4 @@ class BookingProcess {
       }
     });
   }
-
-  // runTask(){
-  //   Isolate.spawn(worker, SendPort);
-  //   // Listen for messages from the isolate.
-  //   receivePort.listen((message) {
-  //     print('The message is: $message');
-  //   });
-  // }
 }

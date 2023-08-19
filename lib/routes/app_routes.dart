@@ -640,7 +640,8 @@ class AppRoutes {
       page: () => NurseDashboardScreenPage(),
       bindings: [
         DashboardBinding(),
-        NoteTakingScreenBinding()
+        NoteTakingScreenBinding(),
+        BookedNurseBinding(),
       ],
     ),
     GetPage(

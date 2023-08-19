@@ -75,7 +75,8 @@ class PastBookingDetailsOneScreen
                                       children: [
                                         Text(
                                           snapshot.hasData
-                                              ? snapshot.data!.data()!['name']
+                                              ? '${snapshot.data!.data()!['name']}'
+                                                  .capitalize!
                                               : '',
                                           style: AppStyle.txtManropeMedium16
                                               .copyWith(
@@ -847,6 +848,7 @@ class PastBookingDetailsOneScreen
                               //     height: getVerticalSize(32),
                               //     thickness: getVerticalSize(1),
                               //     color: ColorConstant.pinkA10019),
+                              const SizedBox(height: 16),
                               !snapshot.hasData
                                   ? const Center()
                                   : Wrap(
@@ -867,14 +869,19 @@ class PastBookingDetailsOneScreen
                                                 border: Border.all(
                                                     color: Colors.black12),
                                                 borderRadius:
-                                                    BorderRadius.circular(16)),
+                                                    BorderRadius.circular(8)),
                                             child: Row(
                                               children: [
                                                 Container(
                                                   decoration: BoxDecoration(
                                                     borderRadius:
-                                                        BorderRadius.circular(
-                                                            14),
+                                                        BorderRadius.circular(8)
+                                                            .copyWith(
+                                                      topRight:
+                                                          Radius.circular(0),
+                                                      bottomRight:
+                                                          Radius.circular(0),
+                                                    ),
                                                     color:
                                                         ColorConstant.pinkA100,
                                                   ),
@@ -887,17 +894,20 @@ class PastBookingDetailsOneScreen
                                                   child: Stack(
                                                     alignment: Alignment.center,
                                                     children: [
-                                                      Text(
-                                                        '${date.day < 10 ? '0${date.day}' : date.day}',
-                                                        style: AppStyle
-                                                            .txtPoppinsRegular24
-                                                            .copyWith(
-                                                                color: Colors
-                                                                    .white,
-                                                                fontSize: 28,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .bold),
+                                                      Positioned(
+                                                        top: 4,
+                                                        child: Text(
+                                                          '${date.day < 10 ? '0${date.day}' : date.day}',
+                                                          style: AppStyle
+                                                              .txtPoppinsRegular24
+                                                              .copyWith(
+                                                                  color: Colors
+                                                                      .white,
+                                                                  fontSize: 28,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold),
+                                                        ),
                                                       ),
                                                       Positioned(
                                                         top: 35,

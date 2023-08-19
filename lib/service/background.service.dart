@@ -22,7 +22,9 @@ class BookingProcess {
             )
             .where('isActive', isEqualTo: true)
             .snapshots();
+
     resp.forEach((element) {
+      log('elem');
       DateTime now = DateTime.now();
       // Map<String, dynamic> bookings = element.docs.;
       // log('isolate element = ${element.docs}');
@@ -33,9 +35,10 @@ class BookingProcess {
         List booking = data['booking'];
         bool isActive = false;
         for (var bookingData in booking) {
+          log("loged booking = ${(bookingData['date'] as Timestamp).toDate().compareTo(DateTime(now.year, now.month, now.day))}");
           if ((bookingData['date'] as Timestamp)
                   .toDate()
-                  .compareTo(DateTime(now.year, now.month, now.day)) >
+                  .compareTo(DateTime(now.year, now.month, now.day, now.hour, now.minute, now.second)) >
               0) {
             isActive = true;
           }

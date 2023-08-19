@@ -18,7 +18,8 @@ class ParentDashboardScreenController extends GetxController {
   void onInit() {
     super.onInit();
     pageController = PageController(initialPage: currentPageIndex.value);
-    _timer = Timer.periodic(const Duration(minutes: 1), (timer) {
+    BookingProcess.updateBookingStatus(field: 'parentId');
+    Stream.periodic(const Duration(minutes: 1), (timer) {
       BookingProcess.updateBookingStatus(field: 'parentId');
     });
   }
@@ -31,7 +32,7 @@ class ParentDashboardScreenController extends GetxController {
 
   final List<Widget> pages = [
     const HomeOnboardingContainerScreen(),
-    const BookedNurseScreen(),
+    const BookedNurseScreen(field: 'parentId',),
     const ChatScreen(field: 'parentId'),
     const NoteTakingScreen(),
     Container(),

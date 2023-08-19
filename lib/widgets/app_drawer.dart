@@ -25,7 +25,7 @@ class AppDrawer extends StatelessWidget {
             ),
             child: GestureDetector(
               onTap: () {
-                Get.offAndToNamed(profileRoutes);
+                Get.toNamed(profileRoutes);
               },
               child: Row(
                 children: [
@@ -84,7 +84,7 @@ class AppDrawer extends StatelessWidget {
                     .copyWith(fontSize: 18, color: Colors.black54)),
             onTap: () {
               Get.back();
-              // Get.offAndToNamed(AppRoutes.homeOnboardingContainerScreen);
+              // Get.toNamed(AppRoutes.homeOnboardingContainerScreen);
             },
           ),
           ListTile(
@@ -96,7 +96,7 @@ class AppDrawer extends StatelessWidget {
                 style: AppStyle.txtAlegreyaSansBold14
                     .copyWith(fontSize: 18, color: Colors.black54)),
             onTap: () {
-              Get.offAndToNamed(AppRoutes.servicesScreen);
+              Get.toNamed(AppRoutes.servicesScreen);
             },
           ),
           ListTile(
@@ -109,7 +109,7 @@ class AppDrawer extends StatelessWidget {
                     .copyWith(fontSize: 18, color: Colors.black54)),
             onTap: () {
               Get.back();
-              Get.offAndToNamed(AppRoutes.selectBabyScreen);
+              Get.toNamed(AppRoutes.selectBabyScreen);
             },
           ),
           ListTile(
@@ -122,7 +122,7 @@ class AppDrawer extends StatelessWidget {
                     .copyWith(fontSize: 18, color: Colors.black54)),
             onTap: () {
               Get.back();
-              Get.offAndToNamed(AppRoutes.packDetailComposerScreen);
+              Get.toNamed(AppRoutes.packDetailComposerScreen);
             },
           ),
           ListTile(
@@ -135,7 +135,7 @@ class AppDrawer extends StatelessWidget {
                     .copyWith(fontSize: 18, color: Colors.black54)),
             onTap: () {
               Get.back();
-              Get.offAndToNamed(AppRoutes.upcomingBooking1Screen);
+              Get.toNamed(AppRoutes.upcomingBooking1Screen);
             },
           ),
           // ListTile(
@@ -148,7 +148,7 @@ class AppDrawer extends StatelessWidget {
           //           .copyWith(fontSize: 18, color: Colors.black54)),
           //   onTap: () {
           //     Get.back();
-          //     // Get.offAndToNamed(AppRoutes.homeOnboardingContainerScreen);
+          //     // Get.toNamed(AppRoutes.homeOnboardingContainerScreen);
           //   },
           // ),
           ListTile(
@@ -163,7 +163,7 @@ class AppDrawer extends StatelessWidget {
             ),
             onTap: () {
               Get.back();
-              // Get.offAndToNamed(AppRoutes.homeOnboardingContainerScreen);
+              // Get.toNamed(AppRoutes.homeOnboardingContainerScreen);
             },
           ),
           ListTile(

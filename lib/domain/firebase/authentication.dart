@@ -39,7 +39,7 @@ class Authentication {
     log('UserId = $id');
     if (id != null) {
       return (await Database.read(userId: id, table: 'user'))
-          .data()!['accountType'];
+          .data()?['accountType'];
     }
     return null;
   }

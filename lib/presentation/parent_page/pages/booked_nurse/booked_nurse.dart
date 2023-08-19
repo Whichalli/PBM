@@ -10,7 +10,8 @@ import '../../../../widgets/custom_button.dart';
 import 'controller/controller.dart';
 
 class BookedNurseScreen extends GetWidget<BookedNurseController> {
-  const BookedNurseScreen({Key? key}) : super(key: key);
+  final String field;
+  const BookedNurseScreen({required this.field, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +30,7 @@ class BookedNurseScreen extends GetWidget<BookedNurseController> {
               StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
                   stream: FirebaseFirestore.instance
                       .collection('bookings')
-                      .where('parentId',
+                      .where(field,
                           isEqualTo: Authentication.getCurrentUserId())
                       .where('isActive', isEqualTo: controller.upcoming.value)
                       .snapshots(),
@@ -97,7 +98,7 @@ class BookedNurseScreen extends GetWidget<BookedNurseController> {
                                           },
                                           cursorColor: Colors.black12,
                                           decoration: const InputDecoration(
-                                              hintText: 'Appointment Id',
+                                              hintText: 'Search',
                                               // contentPadding: getPadding(all: 0),
                                               focusColor: Colors.transparent,
                                               fillColor: Colors.transparent,
@@ -418,20 +419,22 @@ class BookedNurseScreen extends GetWidget<BookedNurseController> {
                     }
                   }),
             ])),
-        floatingActionButton: FloatingActionButton(
-          tooltip: 'Book a Pediatrician',
-          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-          onPressed: () {
-            Get.toNamed(AppRoutes.upcomingBooking1Screen);
-          },
-          shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(100),
-              side: BorderSide(color: ColorConstant.pinkA100, width: 2)),
-          child: Icon(
-            Icons.handshake_outlined,
-            color: ColorConstant.pinkA100,
-          ),
-        ),
+        floatingActionButton: (field == 'employeeId')
+            ? null
+            : FloatingActionButton(
+                tooltip: 'Book a Pediatrician',
+                backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+                onPressed: () {
+                  Get.toNamed(AppRoutes.upcomingBooking1Screen);
+                },
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(100),
+                    side: BorderSide(color: ColorConstant.pinkA100, width: 2)),
+                child: Icon(
+                  Icons.handshake_outlined,
+                  color: ColorConstant.pinkA100,
+                ),
+              ),
         // bottomNavigationBar: CustomBottomBar(onChanged: (BottomBarEnum type) {
         //   Get.toNamed(getCurrentRoute(type), id: 1);
         // })

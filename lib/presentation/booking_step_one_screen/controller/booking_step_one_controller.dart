@@ -10,6 +10,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
 import 'package:pbm_app/core/app_export.dart';
 import 'package:flutter/material.dart';
+import 'package:pbm_app/widgets/custom_button.dart';
 
 import '../../../widgets/booking_card.dart';
 import '../widgets/booking_step_item_widget.dart';
@@ -19,7 +20,6 @@ import '../widgets/booking_step_item_widget.dart';
 /// This class manages the state of the BookingStepOneScreen, including the
 /// current bookingStepOneModelObj
 class BookingStepOneController extends GetxController {
-
   final employeeId = '${Get.arguments['employeeId']}';
 
   RxList<MarkedDate> markedDate = <MarkedDate>[].obs;
@@ -208,9 +208,16 @@ class BookingStepOneController extends GetxController {
 
   /// When the action is triggered, this function uses the `Get` package to
   /// push the named route for the bookingStepTwoScreen.
-  onTapNext() {
+  onTapNext() async {
     bool valid = bookings.isNotEmpty;
-    String msg = '';
+    String msg = 'Book a date and time to proceed';
+    // log('arguments = ${Get.arguments}');
+    String employeeId = Get.arguments['employeeId'];
+
+    RxString dialogMessage =
+        'Checking Schedule availabilty for this Pediatrician, this may take longer than expected'
+            .obs;
+
     for (var element in bookings) {
       if (element.start.value == '__ __ __' ||
           element.end.value == '__ __ __') {
@@ -226,11 +233,139 @@ class BookingStepOneController extends GetxController {
       }
     }
 
+    RxList<BookingCard> alreadyBookedDateTime = RxList.empty();
+    bool isBooked = false;
+
     if (valid) {
-      Get.toNamed(AppRoutes.bookingStepTwoScreen, arguments: {
-        'bookings': bookings,
-        'employeeId': Get.arguments['employeeId']
-      });
+      Get.bottomSheet(
+          Container(
+            padding: const EdgeInsets.all(24),
+            height: 400,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(24),
+              color: Colors.white,
+            ),
+            child: Column(
+              children: [
+                Obx(() => Text(
+                      alreadyBookedDateTime.isEmpty
+                          ? 'Please Wait'
+                          : 'Waiting Time',
+                      style: AppStyle.txtManropeExtraBold24,
+                      textAlign: TextAlign.center,
+                      overflow: TextOverflow.clip,
+                    )),
+                const SizedBox(
+                  height: 12,
+                ),
+                Obx(() => Text(
+                      dialogMessage.value,
+                      style: AppStyle.txtManropeBold14,
+                      overflow: TextOverflow.clip,
+                      textAlign: TextAlign.center,
+                    )),
+                const SizedBox(
+                  height: 16,
+                ),
+                Obx(() => Expanded(
+                      child: SizedBox(
+                        child: alreadyBookedDateTime.isEmpty
+                            ? CustomImageView(
+                                imagePath: ImageConstant.sync,
+                              )
+                            : Column(
+                                children: [
+                                  SingleChildScrollView(
+                                    physics: const BouncingScrollPhysics(),
+                                    child: Obx(() => Column(
+                                          children: alreadyBookedDateTime
+                                              .map((element) => Padding(
+                                                    padding: const EdgeInsets
+                                                            .symmetric(
+                                                        vertical: 8.0),
+                                                    child: BookingCard(
+                                                      date: element.date,
+                                                      closeVisible: false,
+                                                      startTime:
+                                                          element.start.value,
+                                                      endTime:
+                                                          element.end.value,
+                                                    ),
+                                                  ))
+                                              .toList(),
+                                        )),
+                                  ),
+                                  const SizedBox(
+                                    height: 16,
+                                  ),
+                                  const Spacer(),
+                                  CustomButton(
+                                    text: 'OK',
+                                    height: 50,
+                                    onTap: () {
+                                      Get.back();
+                                    },
+                                  )
+                                ],
+                              ),
+                      ),
+                    ))
+              ],
+            ),
+          ),
+          isDismissible: false,
+          enableDrag: false,
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)));
+      QuerySnapshot<Map<String, dynamic>> bookedTime = await FirebaseFirestore
+          .instance
+          .collection('bookings')
+          .where('employeeId', isEqualTo: employeeId)
+          .where('isActive', isEqualTo: true)
+          .get();
+      log('bookedTime = ${bookedTime.docs}');
+
+      for (var newBookingsElemet in bookings) {
+        for (var prevBookingElement in bookedTime.docs) {
+          log('bookedTime element = ${prevBookingElement.data()}');
+          for (var element in (prevBookingElement['booking'] as List)) {
+            DateTime timestampToDate = (element['date'] as Timestamp).toDate();
+            DateTime prevBookedDate = DateTime(timestampToDate.year,
+                timestampToDate.month, timestampToDate.day);
+            if (prevBookedDate ==
+                DateTime(newBookingsElemet.date.year,
+                    newBookingsElemet.date.month, newBookingsElemet.date.day)) {
+              // if (newBookingsElemet.endTime!.toSeconds() <=
+              //         '${element['endTime']}'.toSeconds() &&
+              //     newBookingsElemet.startTime!.toSeconds() >=
+              //         '${element['startTime']}'.toSeconds()) {
+              //   isBooked = true;
+              //   alreadyBookedDateTime.add(newBookingsElemet);
+              // }
+
+              if ((newBookingsElemet.start.value.toSeconds() >=
+                          '${element['startTime']}'.toSeconds() &&
+                      newBookingsElemet.start.value.toSeconds() <=
+                          '${element['endTime']}'.toSeconds()) ||
+                  (newBookingsElemet.end.value.toSeconds() >=
+                          '${element['endTime']}'.toSeconds() &&
+                      newBookingsElemet.end.value.toSeconds() <=
+                          '${element['startTime']}'.toSeconds())) {
+                alreadyBookedDateTime.add(newBookingsElemet);
+                isBooked = true;
+              }
+            }
+          }
+        }
+      }
+
+      if (!isBooked) {
+        Get.offNamed(AppRoutes.bookingStepTwoScreen,
+            arguments: {'bookings': bookings, 'employeeId': employeeId});
+      } else {
+        dialogMessage.value =
+            'The dates and time booking card displayed below show the invalid or already booked date and time of this Pediatrician';
+      }
       return;
     }
     Fluttertoast.showToast(msg: msg);

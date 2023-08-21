@@ -163,7 +163,8 @@ extension DateTimeFormat on String {
     // DateTime time = DateTime.parse(this);
     var time = split(' ');
     var hh = time[1] == 'PM' ? 12 : 0;
-    var hour = ((int.parse(time[0].split(':')[0]) + hh) * 3600);
+    var hour = (int.parse(time[0].split(':')[0]));
+    hour = (((hour == 12 ? 0 : hour) + hh) * 3600);
     var min = (int.parse(time[0].split(':')[1]) * 60);
     // var period = hour < 12 ? 'AM' : 'PM';
     // hour = hour < 12 ? hour : hour - 12;

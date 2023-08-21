@@ -25,6 +25,11 @@ class ImageConstant {
   static String imgSkipnext = 'assets/images/img_skipnext.svg';
   static String emptyRecords = 'assets/images/nuot_found.png';
 
+  static String checkCalendar = 'assets/images/check_calendar.png';
+  static String sync = 'assets/images/sync.png';
+  static String calendar = 'assets/images/calendar.png';
+  static String meeting = 'assets/images/meeting.png';
+
   static String imgSkipprevious = 'assets/images/img_skipprevious.svg';
 
   static String logo = 'assets/images/pbm_logo.png';

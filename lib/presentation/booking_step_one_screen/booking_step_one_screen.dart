@@ -197,8 +197,9 @@ class BookingStepOneScreen extends GetWidget<BookingStepOneController> {
                   CustomButton(
                       height: getVerticalSize(53),
                       text: "lbl_next".tr,
-                      onTap: () {
-                        controller.onTapNext();
+                      onTap: () async{
+                        await controller.onTapNext();
+                        
                       })
                 ])));
   }

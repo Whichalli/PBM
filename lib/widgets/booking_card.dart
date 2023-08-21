@@ -25,7 +25,7 @@ class BookingCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: getPadding(left: 8, right: 8),
+      padding: getPadding(left: 8, right: closeVisible ?? true ? 8 : 0),
       margin: getMargin(top: 8),
       decoration: BoxDecoration(
         border: Border.all(color: Colors.black12),

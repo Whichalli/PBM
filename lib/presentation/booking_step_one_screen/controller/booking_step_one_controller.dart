@@ -275,30 +275,31 @@ class BookingStepOneController extends GetxController {
                               )
                             : Column(
                                 children: [
-                                  SingleChildScrollView(
-                                    physics: const BouncingScrollPhysics(),
-                                    child: Obx(() => Column(
-                                          children: alreadyBookedDateTime
-                                              .map((element) => Padding(
-                                                    padding: const EdgeInsets
-                                                            .symmetric(
-                                                        vertical: 8.0),
-                                                    child: BookingCard(
-                                                      date: element.date,
-                                                      closeVisible: false,
-                                                      startTime:
-                                                          element.start.value,
-                                                      endTime:
-                                                          element.end.value,
-                                                    ),
-                                                  ))
-                                              .toList(),
-                                        )),
+                                  Expanded(
+                                    child: SingleChildScrollView(
+                                      physics: const BouncingScrollPhysics(),
+                                      child: Obx(() => Column(
+                                            children: alreadyBookedDateTime
+                                                .map((element) => Padding(
+                                                      padding: const EdgeInsets
+                                                              .symmetric(
+                                                          vertical: 8.0),
+                                                      child: BookingCard(
+                                                        date: element.date,
+                                                        closeVisible: false,
+                                                        startTime:
+                                                            element.start.value,
+                                                        endTime:
+                                                            element.end.value,
+                                                      ),
+                                                    ))
+                                                .toList(),
+                                          )),
+                                    ),
                                   ),
                                   const SizedBox(
                                     height: 16,
                                   ),
-                                  const Spacer(),
                                   CustomButton(
                                     text: 'OK',
                                     height: 50,

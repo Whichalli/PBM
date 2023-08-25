@@ -105,8 +105,8 @@ class BreastController extends GetxController {
 
       left = element.data()['isLeft'] ?? false;
       right = element.data()['isRight'] ?? false;
-      log('rightSeconds = $rightSeconds rightMinutes = $rightMinutes isRignt ${element.data()['isRight']}');
       id = element.id;
+      log('id = $id');
       play(isLeft: left, isRight: right);
 
       breatTaskdescriptionController.text = element.data()['note'] ?? '';
@@ -160,15 +160,21 @@ class BreastController extends GetxController {
   feed() async {
     if (counting) {
       log('babyId = $babyId id = $id');
+      var data = await Database.readCollection(
+        parentTable: 'feeding',
+        childTable: 'breastLogs',
+        id: babyId,
+      ).doc(id).get();
       id = await Database.updateCollection(
           id: babyId,
           docId: id,
           data: {
             'endDate': null,
-            'leftStartDate': leftStartDate.value,
-            'rightStartDate': rightStartDate.value,
-            'leftEndDate': leftStartDate.value,
-            'rightEndDate': rightStartDate.value,
+            'leftEndDate': right ? '${DateTime.now()}' : data['leftEndDate'],
+            'rightEndDate': left ? '${DateTime.now()}' : data['rightEndDate'],
+            'rightStartDate':
+                right ? '${DateTime.now()}' : data['rightStartDate'],
+            'leftStartDate': left ? '${DateTime.now()}' : data['leftStartDate'],
             'counting': true,
             'isLeft': left,
             'isRight': right,
@@ -184,6 +190,8 @@ class BreastController extends GetxController {
             'endDate': null,
             'leftStartDate': leftStartDate.value,
             'rightStartDate': rightStartDate.value,
+            'leftEndDate': null,
+            'rightEndDate': null,
             'counting': true,
             'isLeft': left,
             'isRight': right,
@@ -192,10 +200,16 @@ class BreastController extends GetxController {
           parentTable: 'feeding',
           childTable: 'breastLogs');
     }
+    update();
   }
 
   save() async {
     pause();
+    var data = await Database.readCollection(
+      parentTable: 'feeding',
+      childTable: 'breastLogs',
+      id: babyId,
+    ).doc(id).get();
     await Database.updateCollection(
         id: babyId,
         docId: id,
@@ -206,6 +220,11 @@ class BreastController extends GetxController {
           'isRight': false,
           'leftCount': leftCount.value,
           'rightCount': rightCount.value,
+          'leftEndDate': left ? '${DateTime.now()}' : data['leftEndDate'],
+          'rightEndDate': right ? '${DateTime.now()}' : data['rightEndDate'],
+          'rightStartDate':
+              right ? '${DateTime.now()}' : data['rightStartDate'],
+          'leftStartDate': left ? '${DateTime.now()}' : data['leftStartDate'],
           'note': breatTaskdescriptionController.text
         },
         parentTable: 'feeding',

@@ -36,7 +36,7 @@ class HomeEmptyController extends GetxController {
     // {'log': 'bottleLogs', 'data': <ChartData>[]},
     {'log': 'solidLogs', 'data': <ChartData>[]},
   ];
-  List<Map<String, List<ChartData>>> feedingLogsChart = [];
+  List<Map<String, Map<String, ChartData>>> feedingLogsChart = [];
 
   RxBool hasRoutine = false.obs;
   List<ChartData> sleepData = [];
@@ -55,6 +55,8 @@ class HomeEmptyController extends GetxController {
     tooltip = TooltipBehavior(enable: true);
     super.onInit();
   }
+
+  String babyId = Get.arguments['babyId'];
 
   List tabs = [
     {'value': 'Bottle', 'active': true},
@@ -78,7 +80,9 @@ class HomeEmptyController extends GetxController {
     try {
       Stream<QuerySnapshot<Map<String, dynamic>>> resp;
 
-      if (parent == 'diaper') {
+      // log('babyId = $babyId');
+
+      if (parent == 'diaper' || child == 'bottleLogs' || child == 'solidLogs') {
         resp = Database.readCollection(
                 parentTable: parent,
                 childTable: child,
@@ -99,13 +103,16 @@ class HomeEmptyController extends GetxController {
         DateTime stDt;
         DateTime endDt;
         ChartData chart;
+        // log('bottleIf ${child == 'bottleLogs'}');
         if (child == 'bottleLogs') {
+          // log('isBottle');
           stDt = e.data()['feedingDate'].toString().toDate();
           chart = ChartData(
               x: '${months[stDt.month - 1]} ${stDt.day}\n${e.data()['feedingTime']}',
               y: e.data()['waterLevel'],
               yValue: '${e.data()['waterLevel']} ML');
           bottleData.add(chart);
+          // log('bottle ()()()()()');
         }
         if (parent == 'sleep' || parent == 'activity' || parent == 'pumping') {
           stDt = (e.data()['startDate'] as String).toDate();
@@ -129,9 +136,9 @@ class HomeEmptyController extends GetxController {
           }
         }
 
-        log('ok........ !!!!!! $parent $child ${Get.arguments['babyId']}');
+        // log('ok........ !!!!!! $parent $child ${Get.arguments['babyId']}');
         if (parent == 'diaper') {
-          log('ok........');
+          // log('ok........');
 
           DateTime date = (e.data()['date'] as Timestamp).toDate();
           chart = ChartData(
@@ -140,6 +147,20 @@ class HomeEmptyController extends GetxController {
                   .toStringAsFixed(2)),
               yValue: 0);
           diaperData.add(chart);
+        }
+
+        log('ok........ !!!!!! $parent ${child == 'solidLogs'} ${Get.arguments['babyId']}');
+        if (child == 'solidLogs') {
+          log('solid ok........');
+
+          DateTime date = (e.data()['feedingDate'] as String).toDate();
+          chart = ChartData(
+              x: date,
+              y: double.parse(
+                  ((e.data()['feedingTime'] as String).toSeconds() / 3600)
+                      .toStringAsFixed(2)),
+              yValue: 0);
+          solidData.add(chart);
         }
       }
       // log('feeding = $bottleData');
@@ -153,7 +174,9 @@ class HomeEmptyController extends GetxController {
                       ? bottleData
                       : child == 'diaperLogs'
                           ? diaperData
-                          : [];
+                          : child == 'solidLogs'
+                              ? solidData
+                              : [];
       yield data;
     } catch (_) {
       _.printError();
@@ -164,11 +187,12 @@ class HomeEmptyController extends GetxController {
 
   Stream<List<Map<String, Map<String, ChartData>>>> fetchFeedingLogs(
       {child, required parent}) async* {
+    log('babyId = $babyId');
     Stream.fromIterable([0, 1, 1]).forEach((i) {
       var resp = Database.readCollection(
               childTable: feedingLogs[i]['log'],
               parentTable: parent,
-              id: Get.arguments['babyId'])
+              id: babyId)
           .where('counting', isEqualTo: false)
           .snapshots();
       resp.forEach((element) {
@@ -176,18 +200,6 @@ class HomeEmptyController extends GetxController {
           Color color = Colors.white;
           hasRoutine.value = true;
           hasFeeding.value = true;
-          // if (feedingLogs[i]['log'] == 'breastLogs')
-          //   color = ColorConstant.pink400;
-
-          // if (feedingLogs[i]['log'] == 'bootleLogs') {
-          //   color = Color.fromARGB(255, 255, 244, 237);
-          //   if (e.data()['isFormula']) color = Colors.blueGrey;
-          // }
-
-          // if (feedingLogs[i]['log'] == 'solidLogs')
-          //   color = const Color.fromARGB(255, 224, 84, 33);
-
-          log('resp data = ${e.data()}');
 
           DateTime stDt = e.data()['startDate'].toString().toDate();
           DateTime endDt = e.data()['endDate'].toString().toDate();
@@ -201,30 +213,16 @@ class HomeEmptyController extends GetxController {
                       e.data().containsKey('isLeft')
                   ? double.parse('${endDt.hour}.${endDt.minute}')
                   : '$endDt');
-
-          // if (feedingLogs[i]['log'] == 'breastLogs') {
-          //   color = ColorConstant.pink400;
-          //   if (!e.data()['isRight'])
-          //     feedingLogsChart.add({
-          //       'right': {'data': chart}
-          //     });
-          //   if (!e.data()['isLeft'])
-          //     feedingLogsChart.add({
-          //       'left': {'data': chart}
-          //     });
-          // } else
-          //   feedingLogsChart.add({
-          //     'data': {'data': chart}
-          //   });
         }
       });
     });
-    log('testing logs');
+
     yield [];
   }
 
   Stream<List<Map<String, Map<String, ChartData>>>> fetchBreastLogs() async* {
     feedingLogsChart.clear();
+    log('Beeast feeding');
     var resp = Database.readCollection(
             childTable: 'breastLogs',
             parentTable: 'feeding',
@@ -236,36 +234,38 @@ class HomeEmptyController extends GetxController {
       for (var e in element.docs) {
         Color color = Colors.white;
         hasRoutine.value = true;
-        log('breast resp data = ${e.data()}');
+        log('breast rightStartDate = ${e.data()['rightStartDate']} =========== leftStartDate = ${e.data()['leftStartDate']}');
 
-        DateTime lStDt = e.data()['startDate'].toString().toDate();
-        DateTime rStDt = e.data()['startDate'].toString().toDate();
-        DateTime lEndDt = e.data()['endDate'].toString().toDate();
-        DateTime rEndDt = e.data()['endDate'].toString().toDate();
+        DateTime lStDt = e.data()['leftStartDate'].toString().toDate();
+        DateTime rStDt = e.data()['rightStartDate'].toString().toDate();
+        DateTime lEndDt = e.data()['leftEndDate'].toString().toDate();
+        DateTime rEndDt = e.data()['rightEndDate'].toString().toDate();
+        DateTime startDate = e.data()['startDate'].toString().toDate();
 
         var lDiff = (lStDt.getDateDiffSec(nextDate: lEndDt));
         var rDiff = (rStDt.getDateDiffSec(nextDate: rEndDt));
         var leftChart = ChartData(
             color: Colors.greenAccent,
-            x: '${months[lStDt.month - 1]} ${lStDt.day}\n${lStDt.hour < 12 ? lStDt.hour : lStDt.hour - 12}:${lStDt.minute < 10 ? '0${lStDt.minute}' : lStDt.minute} ${lStDt.hour < 12 ? 'AM' : 'PM'}',
+            x: '${months[startDate.month - 1]} ${startDate.day}\n${startDate.hour < 12 ? startDate.hour : startDate.hour - 12}:${startDate.minute < 10 ? '0${startDate.minute}' : startDate.minute} ${startDate.hour < 12 ? 'AM' : 'PM'}',
             y: double.parse('${lStDt.hour}.${lStDt.minute}'),
             yValue: double.parse('${lEndDt.hour}.${lEndDt.minute}'));
 
         var rightChart = ChartData(
             color: Colors.blueAccent,
-            x: '${months[rStDt.month - 1]} ${rStDt.day}\n${rStDt.hour < 12 ? rStDt.hour : rStDt.hour - 12}:${rStDt.minute < 10 ? '0${rStDt.minute}' : rStDt.minute} ${rStDt.hour < 12 ? 'AM' : 'PM'}',
+            // x: '${months[rStDt.month - 1]} ${rStDt.day}\n${rStDt.hour < 12 ? rStDt.hour : rStDt.hour - 12}:${rStDt.minute < 10 ? '0${rStDt.minute}' : rStDt.minute} ${rStDt.hour < 12 ? 'AM' : 'PM'}',
+            x: '${months[startDate.month - 1]} ${startDate.day}\n${startDate.hour < 12 ? startDate.hour : startDate.hour - 12}:${startDate.minute < 10 ? '0${startDate.minute}' : startDate.minute} ${startDate.hour < 12 ? 'AM' : 'PM'}',
             y: double.parse('${rStDt.hour}.${rStDt.minute}'),
             yValue: double.parse('${rEndDt.hour}.${rEndDt.minute}'));
 
-        // color = ColorConstant.pink400;
+        log('####  left ${double.parse('${lStDt.hour}.${lStDt.minute}')} #### ${double.parse('${rStDt.hour}.${rStDt.minute}')}');
+
         feedingLogsChart.add({
-          'data': [leftChart, rightChart]
+          'left': {'data': leftChart},
+          'right': {'data': rightChart},
         });
-        // feedingLogsChart.add({
-        //   'left': {'data': leftChart}
-        // });
       }
     });
+    yield feedingLogsChart;
   }
 
   List<BarSeries<ChartData, String>> chartSeries(
@@ -313,7 +313,7 @@ class HomeEmptyController extends GetxController {
         xValueMapper: (ChartData data, _) => data.x,
         yValueMapper: (ChartData data, _) => data.y,
         dataLabelMapper: (ChartData data, index) {
-          return data.yValue;
+          return data.yValue.toString();
         },
         // yAxisName: 'Start',
         // xAxisName: 'End',
@@ -330,6 +330,49 @@ class HomeEmptyController extends GetxController {
       );
     }).toList();
     // }
+  }
+
+  List<ChartSeries<ChartData, String>> breastChatSeries(
+      {List<Map<String, Map<String, ChartData>>>? children}) {
+    List<ChartSeries<ChartData, String>> seriesList = [];
+
+    for (final child in children!) {
+      log('children = left = ${child['left']!['data']!.y}  right = ${child['right']!['data']!.y}');
+      final leftSeries = RangeColumnSeries<ChartData, String>(
+        dataSource: child['left']!.values.toList(),
+        color: Colors.white,
+        xValueMapper: (ChartData data, _) => data.x,
+        highValueMapper: (ChartData data, _) => data.y,
+        lowValueMapper: (ChartData data, _) => data.yValue,
+        name: 'Left Breast',
+        dataLabelSettings: const DataLabelSettings(
+            isVisible: true,
+            alignment: ChartAlignment.near,
+            showZeroValue: true,
+            labelAlignment: ChartDataLabelAlignment.top,
+            textStyle: TextStyle(fontSize: 11)),
+      );
+
+      final rightSeries = RangeColumnSeries<ChartData, String>(
+        dataSource: child['right']!.values.toList(),
+        color: Colors.blue,
+        xValueMapper: (ChartData data, _) => data.x,
+        highValueMapper: (ChartData data, _) => data.y,
+        lowValueMapper: (ChartData data, _) => data.yValue,
+        name: 'Right Breast',
+        dataLabelSettings: const DataLabelSettings(
+            isVisible: true,
+            alignment: ChartAlignment.near,
+            showZeroValue: true,
+            labelAlignment: ChartDataLabelAlignment.top,
+            textStyle: TextStyle(fontSize: 11)),
+      );
+
+      seriesList.add(leftSeries);
+      seriesList.add(rightSeries);
+    }
+
+    return seriesList;
   }
 
   List<BarSeries<ChartData, String>> bottleChartSeries(
@@ -362,37 +405,6 @@ class HomeEmptyController extends GetxController {
     ];
   }
 
-  // List<RangeColumnSeries<ChartData, String>> rangeChartSeries(
-  //     {required List<Map<String, Map<String, ChartData>>> dataSource}) {
-  //   return <RangeColumnSeries<ChartData, String>>[
-  //     RangeColumnSeries<ChartData, String>(
-  //       width: 0.5,
-  //       enableTooltip: true,
-  //       color: Colors.white,
-  //       borderRadius: BorderRadius.only(
-  //           topRight: Radius.circular(8), bottomRight: Radius.circular(8)),
-  //       dataSource: dataSource,
-  //       xValueMapper: (ChartData data, _) => data.x,
-  //       highValueMapper: (ChartData data, _) => data.y,
-  //       lowValueMapper: (ChartData data, _) => data.yValue,
-  //       dataLabelMapper: (ChartData data, index) {
-  //         return data.yValue;
-  //       },
-  //       yAxisName: 'Start',
-  //       xAxisName: 'End',
-  //       isVisible: true,
-  //       trackPadding: 0,
-  //       // highValueMapper: (ChartData sales, _) => sales.yValue,
-  //       dataLabelSettings: DataLabelSettings(
-  //           isVisible: true,
-  //           alignment: ChartAlignment.near,
-  //           showZeroValue: true,
-  //           labelAlignment: ChartDataLabelAlignment.top,
-  //           textStyle: const TextStyle(fontSize: 11)),
-  //     ),
-  //   ];
-  // }
-
   /// Retursn the list of chart series
   /// which need to render on the default range column chart.
   List<RangeColumnSeries<ChartData, String>> rangeChartSeries(
@@ -400,7 +412,7 @@ class HomeEmptyController extends GetxController {
     return data.map((e) {
       log('e = $e');
       int index = data.indexOf(e);
-      log('children = $data');
+      // log('children = $data');
       return RangeColumnSeries<ChartData, String>(
         enableTooltip: true,
         color: e.color,
@@ -450,10 +462,6 @@ class HomeEmptyController extends GetxController {
               textStyle: TextStyle(fontSize: 11)),
           xValueMapper: (ChartData data, _) => data.x,
           yValueMapper: (ChartData data, _) => data.y,
-          dataLabelMapper: (ChartData data, index) {
-            log('dataMaper');
-            return 'Ola';
-          },
           markerSettings: const MarkerSettings(
               height: 15, width: 15, shape: DataMarkerType.circle))
     ];

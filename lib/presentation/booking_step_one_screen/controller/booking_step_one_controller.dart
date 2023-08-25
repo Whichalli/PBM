@@ -336,14 +336,7 @@ class BookingStepOneController extends GetxController {
             if (prevBookedDate ==
                 DateTime(newBookingsElemet.date.year,
                     newBookingsElemet.date.month, newBookingsElemet.date.day)) {
-              // if (newBookingsElemet.endTime!.toSeconds() <=
-              //         '${element['endTime']}'.toSeconds() &&
-              //     newBookingsElemet.startTime!.toSeconds() >=
-              //         '${element['startTime']}'.toSeconds()) {
-              //   isBooked = true;
-              //   alreadyBookedDateTime.add(newBookingsElemet);
-              // }
-
+    
               if ((newBookingsElemet.start.value.toSeconds() >=
                           '${element['startTime']}'.toSeconds() &&
                       newBookingsElemet.start.value.toSeconds() <=

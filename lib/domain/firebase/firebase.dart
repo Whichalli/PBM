@@ -71,19 +71,19 @@ class Database {
     }
   }
 
-  static Future<dynamic> updateCollection(
-      {required String id,
-      required Map<String, dynamic> data,
-      required String docId,
-      required String parentTable,
-      required String childTable,
-      }) async {
+  static Future<dynamic> updateCollection({
+    required String id,
+    required Map<String, dynamic> data,
+    required String docId,
+    required String parentTable,
+    required String childTable,
+  }) async {
     try {
       await collection
           .collection(parentTable)
-          .doc('/$id')
+          .doc(id)
           .collection(childTable)
-          .doc('/$docId')
+          .doc(docId)
           .update(data);
     } catch (e) {
       e.printError();

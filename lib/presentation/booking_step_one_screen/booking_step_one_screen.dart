@@ -88,76 +88,81 @@ class BookingStepOneScreen extends GetWidget<BookingStepOneController> {
                                     alignment: Alignment.center,
                                     child: Container(
                                         margin: getMargin(top: 19),
-                                        // height: 350,
+                                        height: 310,
                                         padding: getPadding(top: 8, bottom: 8),
                                         decoration: AppDecoration
                                             .outlinePinkA1001
                                             .copyWith(
                                                 borderRadius: BorderRadiusStyle
                                                     .roundedBorder16),
-                                        child: Column(
-                                            mainAxisSize: MainAxisSize.min,
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.end,
-                                            children: [
-                                              Padding(
-                                                  padding: getPadding(
-                                                      left: 16,
-                                                      top: 10,
-                                                      right: 16),
-                                                  child: Row(
-                                                      // mainAxisAlignment:
-                                                      //     MainAxisAlignment
-                                                      //         .center,
-                                                      children: [
-                                                        Expanded(
-                                                          child: Padding(
-                                                              padding:
-                                                                  getPadding(
-                                                                      top: 3),
-                                                              child: Obx(() => Text(
-                                                                  "${fullMonths[controller.targetDateTime.value.month - 1]['month']}"
-                                                                      .tr
-                                                                      .toUpperCase(),
-                                                                  textAlign:
-                                                                      TextAlign
-                                                                          .left,
-                                                                  style: AppStyle
-                                                                      .txtOpenSansRomanBold14))),
-                                                        ),
-                                                        CustomImageView(
-                                                          onTap: () =>
-                                                              controller.prev(
-                                                                  context),
-                                                          svgPath: ImageConstant
-                                                              .imgArrowleftBlueGray90003,
-                                                          height: getSize(24),
-                                                          width: getSize(24),
-                                                        ),
-                                                        CustomImageView(
+                                        child: SingleChildScrollView(
+                                          physics:
+                                              const BouncingScrollPhysics(),
+                                          child: Column(
+                                              mainAxisSize: MainAxisSize.min,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.end,
+                                              children: [
+                                                Padding(
+                                                    padding: getPadding(
+                                                        left: 16,
+                                                        top: 10,
+                                                        right: 16),
+                                                    child: Row(
+                                                        // mainAxisAlignment:
+                                                        //     MainAxisAlignment
+                                                        //         .center,
+                                                        children: [
+                                                          Expanded(
+                                                            child: Padding(
+                                                                padding:
+                                                                    getPadding(
+                                                                        top: 3),
+                                                                child: Obx(() => Text(
+                                                                    "${fullMonths[controller.targetDateTime.value.month - 1]['month']}"
+                                                                        .tr
+                                                                        .toUpperCase(),
+                                                                    textAlign:
+                                                                        TextAlign
+                                                                            .left,
+                                                                    style: AppStyle
+                                                                        .txtOpenSansRomanBold14))),
+                                                          ),
+                                                          CustomImageView(
                                                             onTap: () =>
-                                                                controller.next(
+                                                                controller.prev(
                                                                     context),
                                                             svgPath: ImageConstant
-                                                                .imgArrowrightBlueGray90003,
+                                                                .imgArrowleftBlueGray90003,
                                                             height: getSize(24),
                                                             width: getSize(24),
-                                                            margin: getMargin(
-                                                                left: 8))
-                                                      ])),
-                                              Padding(
-                                                padding: getPadding(top: 0),
-                                                child: Container(
-                                                  margin: const EdgeInsets
-                                                          .symmetric(
-                                                      horizontal: 16.0),
-                                                  child: SizedBox(
-                                                      height: 300,
+                                                          ),
+                                                          CustomImageView(
+                                                              onTap: () =>
+                                                                  controller.next(
+                                                                      context),
+                                                              svgPath: ImageConstant
+                                                                  .imgArrowrightBlueGray90003,
+                                                              height:
+                                                                  getSize(24),
+                                                              width:
+                                                                  getSize(24),
+                                                              margin: getMargin(
+                                                                  left: 8))
+                                                        ])),
+                                                Padding(
+                                                  padding: getPadding(top: 0),
+                                                  child: SingleChildScrollView(
+                                                      padding: const EdgeInsets
+                                                              .symmetric(
+                                                          horizontal: 16.0),
+                                                      physics:
+                                                          const BouncingScrollPhysics(),
                                                       child: controller
                                                           .calendarCarouselNoHeader()),
-                                                ),
-                                              )
-                                            ]))),
+                                                )
+                                              ]),
+                                        ))),
                                 Align(
                                   alignment: Alignment.bottomLeft,
                                   child: Padding(
@@ -197,9 +202,8 @@ class BookingStepOneScreen extends GetWidget<BookingStepOneController> {
                   CustomButton(
                       height: getVerticalSize(53),
                       text: "lbl_next".tr,
-                      onTap: () async{
+                      onTap: () async {
                         await controller.onTapNext();
-                        
                       })
                 ])));
   }

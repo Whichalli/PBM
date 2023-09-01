@@ -30,10 +30,10 @@ class UpcomingBookingOne1Controller extends GetxController {
     // log('booking ${json.encode(Hive.box('booking').get('data'))}');
     var employeeId = Hive.box('booking').get('data')['employeeId'];
     var chatId = '$employeeId-${Authentication.getCurrentUserId()}';
+    Map<String, dynamic> bookingData = Hive.box('booking').get('data');
+    bookingData.putIfAbsent('price', () => Get.arguments['price']);
     await Database.write(
-        userId:
-            '${Math.Random.secure().nextInt(88888) + 111111}-${Math.Random.secure().nextInt(88888) + 111111}',
-        data: Hive.box('booking').get('data'),
+        data: bookingData,
         table: 'bookings');
 
     var exist = (await Database.read(userId: 'chat', table: chatId)).exists;
@@ -59,7 +59,6 @@ class UpcomingBookingOne1Controller extends GetxController {
       AppRoutes.upcomingBookingScreen,
     );
   }
-  
 
   @override
   void onClose() {

@@ -67,10 +67,13 @@ class BookingStepTwoController extends GetxController {
 
   onTapNext() async {
     log('employeeId = ${Get.arguments}');
-    if (radioAddInfo.isNotEmpty &&
-        radioHanded2Who.isNotEmpty &&
-        radioWorkedB4.isNotEmpty &&
-        radioPayment.isNotEmpty) {
+    if (
+        // radioAddInfo.isNotEmpty &&
+        // radioHanded2Who.isNotEmpty &&
+        // radioWorkedB4.isNotEmpty &&
+        // radioPayment.isNotEmpty
+        descriptionController.text.isNotEmpty &&
+            titleController.text.isNotEmpty) {
       Hive.box('booking').put('data', {
         'isActive': true,
         'parentId': Authentication.getCurrentUserId(),
@@ -79,22 +82,24 @@ class BookingStepTwoController extends GetxController {
         'title': titleController.text,
         'createdAt': '${DateTime.now()}',
         'booking': bookingData,
-        'addionalInfo': radioAddInfo.value,
-        'handOverTo': radioHanded2Who.value,
-        'workedWith': radioWorkedB4.value,
-        'payment': radioPayment.value,
-        'physicalAssesment': {
-          'redness': radioRedness.value,
-          'bites': radioBites.value,
-          'rashes': radioRashes.value,
-          'bruises': radioBruises.value,
-          'alergy': radioAlergy.value,
-          'fiver': radioFiver.value,
-          'swell': radioSwell.value,
-          'others': othersController.text,
-        },
+        // 'price': Hive.box('price').get('total'),
+        // 'addionalInfo': radioAddInfo.value,
+        // 'handOverTo': radioHanded2Who.value,
+        // 'workedWith': radioWorkedB4.value,
+        // 'payment': radioPayment.value,
+        // 'physicalAssesment': {
+        //   'redness': radioRedness.value,
+        //   'bites': radioBites.value,
+        //   'rashes': radioRashes.value,
+        //   'bruises': radioBruises.value,
+        //   'alergy': radioAlergy.value,
+        //   'fiver': radioFiver.value,
+        //   'swell': radioSwell.value,
+        //   'others': othersController.text,
+        // },
       });
-      Get.toNamed(AppRoutes.upcomingBookingTwoScreen, arguments: {});
+      Get.toNamed(AppRoutes.pricingScreen, arguments: {'isBooking': true});
+      // Get.toNamed(AppRoutes.upcomingBookingTwoScreen, arguments: {});
     }
   }
 }

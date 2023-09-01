@@ -294,7 +294,7 @@ class BookedNurseScreen extends GetWidget<BookedNurseController> {
                                                                               8,
                                                                         ),
                                                                         StreamBuilder<DocumentSnapshot<Map<String, dynamic>>>(
-                                                                            stream: FirebaseFirestore.instance.collection('employee').doc(data.value[index].data()['employeeId']).snapshots(),
+                                                                            stream: field == 'employeeId' ? FirebaseFirestore.instance.collection('parent').doc(data.value[index].data()['parentId']).snapshots() : FirebaseFirestore.instance.collection('employee').doc(data.value[index].data()['employeeId']).snapshots(),
                                                                             builder: (context, employeeNameSnapShot) {
                                                                               return Row(
                                                                                 children: [

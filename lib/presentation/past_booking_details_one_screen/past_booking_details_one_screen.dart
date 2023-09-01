@@ -229,615 +229,615 @@ class PastBookingDetailsOneScreen
                                       fontFamily: 'manrope'),
                                 ),
                               ),
-                              Divider(
-                                  height: getVerticalSize(32),
-                                  thickness: getVerticalSize(1),
-                                  color: ColorConstant.pinkA10019),
-                              Row(
-                                children: [
-                                  const Icon(
-                                    Icons.health_and_safety_outlined,
-                                    color: Colors.black45,
-                                    size: 20,
-                                  ),
-                                  const SizedBox(
-                                    width: 8,
-                                  ),
-                                  Text(
-                                    'Assesment (Physical)'.capitalize!,
-                                    style: const TextStyle(
-                                        color: Colors.black54,
-                                        fontSize: 14,
-                                        fontWeight: FontWeight.bold,
-                                        fontFamily: 'manrope'),
-                                  ),
-                                ],
-                              ),
-                              const SizedBox(
-                                height: 12,
-                              ),
-                              Padding(
-                                padding: getPadding(left: 29),
-                                child: Column(
-                                  children: [
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        const Expanded(
-                                          flex: 4,
-                                          child: Text(
-                                            'Has any alergy ?',
-                                            overflow: TextOverflow.clip,
-                                            style: TextStyle(
-                                                color: Colors.black87,
-                                                fontSize: 14,
-                                                fontFamily: 'manrope'),
-                                          ),
-                                        ),
-                                        const SizedBox(
-                                          width: 8,
-                                        ),
-                                        Expanded(
-                                          child: Text(
-                                            snapshot.hasData
-                                                ? (snapshot.data!.data()![
-                                                                'physicalAssesment']
-                                                            [
-                                                            'alergy'] as String)
-                                                        .isEmpty
-                                                    ? 'No'
-                                                    : 'Yes'
-                                                : '',
-                                            style: const TextStyle(
-                                                color: Colors.black54,
-                                                fontSize: 14,
-                                                fontFamily: 'manrope'),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                    const SizedBox(
-                                      height: 8,
-                                    ),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        const Expanded(
-                                          flex: 4,
-                                          child: Text(
-                                            'Bites ?',
-                                            overflow: TextOverflow.clip,
-                                            style: TextStyle(
-                                                color: Colors.black87,
-                                                fontSize: 14,
-                                                fontFamily: 'manrope'),
-                                          ),
-                                        ),
-                                        const SizedBox(
-                                          width: 8,
-                                        ),
-                                        Expanded(
-                                          child: Text(
-                                            snapshot.hasData
-                                                ? (snapshot.data!.data()![
-                                                                'physicalAssesment']
-                                                            ['bites'] as String)
-                                                        .isEmpty
-                                                    ? 'No'
-                                                    : 'Yes'
-                                                : '',
-                                            style: const TextStyle(
-                                                color: Colors.black54,
-                                                fontSize: 14,
-                                                fontFamily: 'manrope'),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                    const SizedBox(
-                                      height: 8,
-                                    ),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        const Expanded(
-                                          flex: 4,
-                                          child: Text(
-                                            'Has bruises ?',
-                                            overflow: TextOverflow.clip,
-                                            style: TextStyle(
-                                                color: Colors.black87,
-                                                fontSize: 14,
-                                                fontFamily: 'manrope'),
-                                          ),
-                                        ),
-                                        const SizedBox(
-                                          width: 8,
-                                        ),
-                                        Expanded(
-                                          child: Text(
-                                            snapshot.hasData
-                                                ? (snapshot.data!.data()![
-                                                                'physicalAssesment']
-                                                            [
-                                                            'bruises'] as String)
-                                                        .isEmpty
-                                                    ? 'No'
-                                                    : 'Yes'
-                                                : '',
-                                            style: const TextStyle(
-                                                color: Colors.black54,
-                                                fontSize: 14,
-                                                fontFamily: 'manrope'),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                    const SizedBox(
-                                      height: 8,
-                                    ),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        const Expanded(
-                                          flex: 4,
-                                          child: Text(
-                                            'Has Fever ?',
-                                            overflow: TextOverflow.clip,
-                                            style: TextStyle(
-                                                color: Colors.black87,
-                                                fontSize: 14,
-                                                fontFamily: 'manrope'),
-                                          ),
-                                        ),
-                                        const SizedBox(
-                                          width: 8,
-                                        ),
-                                        Expanded(
-                                          child: Text(
-                                            snapshot.hasData
-                                                ? (snapshot.data!.data()![
-                                                                'physicalAssesment']
-                                                            ['fiver'] as String)
-                                                        .isEmpty
-                                                    ? 'No'
-                                                    : 'Yes'
-                                                : '',
-                                            style: const TextStyle(
-                                                color: Colors.black54,
-                                                fontSize: 14,
-                                                fontFamily: 'manrope'),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                    const SizedBox(
-                                      height: 8,
-                                    ),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        const Expanded(
-                                          flex: 4,
-                                          child: Text(
-                                            'Has rashes ?',
-                                            overflow: TextOverflow.clip,
-                                            style: TextStyle(
-                                                color: Colors.black87,
-                                                fontSize: 14,
-                                                fontFamily: 'manrope'),
-                                          ),
-                                        ),
-                                        const SizedBox(
-                                          width: 8,
-                                        ),
-                                        Expanded(
-                                          child: Text(
-                                            snapshot.hasData
-                                                ? (snapshot.data!.data()![
-                                                                'physicalAssesment']
-                                                            [
-                                                            'rashes'] as String)
-                                                        .isEmpty
-                                                    ? 'No'
-                                                    : 'Yes'
-                                                : '',
-                                            style: const TextStyle(
-                                                color: Colors.black54,
-                                                fontSize: 14,
-                                                fontFamily: 'manrope'),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                    const SizedBox(
-                                      height: 8,
-                                    ),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        const Expanded(
-                                          flex: 4,
-                                          child: Text(
-                                            'Has redness ?',
-                                            overflow: TextOverflow.clip,
-                                            style: TextStyle(
-                                                color: Colors.black87,
-                                                fontSize: 14,
-                                                fontFamily: 'manrope'),
-                                          ),
-                                        ),
-                                        const SizedBox(
-                                          width: 8,
-                                        ),
-                                        Expanded(
-                                          child: Text(
-                                            snapshot.hasData
-                                                ? (snapshot.data!.data()![
-                                                                'physicalAssesment']
-                                                            [
-                                                            'redness'] as String)
-                                                        .isEmpty
-                                                    ? 'No'
-                                                    : 'Yes'
-                                                : '',
-                                            style: const TextStyle(
-                                                color: Colors.black54,
-                                                fontSize: 14,
-                                                fontFamily: 'manrope'),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                    const SizedBox(
-                                      height: 8,
-                                    ),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        const Expanded(
-                                          flex: 4,
-                                          child: Text(
-                                            'Has any swell ?',
-                                            overflow: TextOverflow.clip,
-                                            style: TextStyle(
-                                                color: Colors.black87,
-                                                fontSize: 14,
-                                                fontFamily: 'manrope'),
-                                          ),
-                                        ),
-                                        const SizedBox(
-                                          width: 8,
-                                        ),
-                                        Expanded(
-                                          child: Text(
-                                            snapshot.hasData
-                                                ? (snapshot.data!.data()![
-                                                                'physicalAssesment']
-                                                            ['swell'] as String)
-                                                        .isEmpty
-                                                    ? 'No'
-                                                    : 'Yes'
-                                                : '',
-                                            style: const TextStyle(
-                                                color: Colors.black54,
-                                                fontSize: 14,
-                                                fontFamily: 'manrope'),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                    const SizedBox(
-                                      height: 8,
-                                    ),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        const Expanded(
-                                          flex: 4,
-                                          child: Text(
-                                            'Others',
-                                            overflow: TextOverflow.clip,
-                                            style: TextStyle(
-                                                color: Colors.black87,
-                                                fontSize: 14,
-                                                fontFamily: 'manrope'),
-                                          ),
-                                        ),
-                                        const SizedBox(
-                                          width: 8,
-                                        ),
-                                        Expanded(
-                                          child: Text(
-                                            snapshot.hasData
-                                                ? (snapshot.data!.data()![
-                                                        'physicalAssesment']
-                                                    ['others'] as String)
-                                                : '',
-                                            style: const TextStyle(
-                                                color: Colors.black54,
-                                                fontSize: 14,
-                                                fontFamily: 'manrope'),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                    const SizedBox(
-                                      height: 8,
-                                    ),
-                                  ],
-                                ),
-                              ),
+                              // Divider(
+                              //     height: getVerticalSize(32),
+                              //     thickness: getVerticalSize(1),
+                              //     color: ColorConstant.pinkA10019),
+                              // Row(
+                              //   children: [
+                              //     const Icon(
+                              //       Icons.health_and_safety_outlined,
+                              //       color: Colors.black45,
+                              //       size: 20,
+                              //     ),
+                              //     const SizedBox(
+                              //       width: 8,
+                              //     ),
+                              //     Text(
+                              //       'Assesment (Physical)'.capitalize!,
+                              //       style: const TextStyle(
+                              //           color: Colors.black54,
+                              //           fontSize: 14,
+                              //           fontWeight: FontWeight.bold,
+                              //           fontFamily: 'manrope'),
+                              //     ),
+                              //   ],
+                              // ),
+                              // const SizedBox(
+                              //   height: 12,
+                              // ),
+                              // Padding(
+                              //   padding: getPadding(left: 29),
+                              //   child: Column(
+                              //     children: [
+                              //       Row(
+                              //         mainAxisAlignment:
+                              //             MainAxisAlignment.spaceBetween,
+                              //         crossAxisAlignment:
+                              //             CrossAxisAlignment.start,
+                              //         children: [
+                              //           const Expanded(
+                              //             flex: 4,
+                              //             child: Text(
+                              //               'Has any alergy ?',
+                              //               overflow: TextOverflow.clip,
+                              //               style: TextStyle(
+                              //                   color: Colors.black87,
+                              //                   fontSize: 14,
+                              //                   fontFamily: 'manrope'),
+                              //             ),
+                              //           ),
+                              //           const SizedBox(
+                              //             width: 8,
+                              //           ),
+                              //           Expanded(
+                              //             child: Text(
+                              //               snapshot.hasData
+                              //                   ? (snapshot.data!.data()![
+                              //                                   'physicalAssesment']
+                              //                               [
+                              //                               'alergy'] as String)
+                              //                           .isEmpty
+                              //                       ? 'No'
+                              //                       : 'Yes'
+                              //                   : '',
+                              //               style: const TextStyle(
+                              //                   color: Colors.black54,
+                              //                   fontSize: 14,
+                              //                   fontFamily: 'manrope'),
+                              //             ),
+                              //           ),
+                              //         ],
+                              //       ),
+                              //       const SizedBox(
+                              //         height: 8,
+                              //       ),
+                              //       Row(
+                              //         mainAxisAlignment:
+                              //             MainAxisAlignment.spaceBetween,
+                              //         crossAxisAlignment:
+                              //             CrossAxisAlignment.start,
+                              //         children: [
+                              //           const Expanded(
+                              //             flex: 4,
+                              //             child: Text(
+                              //               'Bites ?',
+                              //               overflow: TextOverflow.clip,
+                              //               style: TextStyle(
+                              //                   color: Colors.black87,
+                              //                   fontSize: 14,
+                              //                   fontFamily: 'manrope'),
+                              //             ),
+                              //           ),
+                              //           const SizedBox(
+                              //             width: 8,
+                              //           ),
+                              //           Expanded(
+                              //             child: Text(
+                              //               snapshot.hasData
+                              //                   ? (snapshot.data!.data()![
+                              //                                   'physicalAssesment']
+                              //                               ['bites'] as String)
+                              //                           .isEmpty
+                              //                       ? 'No'
+                              //                       : 'Yes'
+                              //                   : '',
+                              //               style: const TextStyle(
+                              //                   color: Colors.black54,
+                              //                   fontSize: 14,
+                              //                   fontFamily: 'manrope'),
+                              //             ),
+                              //           ),
+                              //         ],
+                              //       ),
+                              //       const SizedBox(
+                              //         height: 8,
+                              //       ),
+                              //       Row(
+                              //         mainAxisAlignment:
+                              //             MainAxisAlignment.spaceBetween,
+                              //         crossAxisAlignment:
+                              //             CrossAxisAlignment.start,
+                              //         children: [
+                              //           const Expanded(
+                              //             flex: 4,
+                              //             child: Text(
+                              //               'Has bruises ?',
+                              //               overflow: TextOverflow.clip,
+                              //               style: TextStyle(
+                              //                   color: Colors.black87,
+                              //                   fontSize: 14,
+                              //                   fontFamily: 'manrope'),
+                              //             ),
+                              //           ),
+                              //           const SizedBox(
+                              //             width: 8,
+                              //           ),
+                              //           Expanded(
+                              //             child: Text(
+                              //               snapshot.hasData
+                              //                   ? (snapshot.data!.data()![
+                              //                                   'physicalAssesment']
+                              //                               [
+                              //                               'bruises'] as String)
+                              //                           .isEmpty
+                              //                       ? 'No'
+                              //                       : 'Yes'
+                              //                   : '',
+                              //               style: const TextStyle(
+                              //                   color: Colors.black54,
+                              //                   fontSize: 14,
+                              //                   fontFamily: 'manrope'),
+                              //             ),
+                              //           ),
+                              //         ],
+                              //       ),
+                              //       const SizedBox(
+                              //         height: 8,
+                              //       ),
+                              //       Row(
+                              //         mainAxisAlignment:
+                              //             MainAxisAlignment.spaceBetween,
+                              //         crossAxisAlignment:
+                              //             CrossAxisAlignment.start,
+                              //         children: [
+                              //           const Expanded(
+                              //             flex: 4,
+                              //             child: Text(
+                              //               'Has Fever ?',
+                              //               overflow: TextOverflow.clip,
+                              //               style: TextStyle(
+                              //                   color: Colors.black87,
+                              //                   fontSize: 14,
+                              //                   fontFamily: 'manrope'),
+                              //             ),
+                              //           ),
+                              //           const SizedBox(
+                              //             width: 8,
+                              //           ),
+                              //           Expanded(
+                              //             child: Text(
+                              //               snapshot.hasData
+                              //                   ? (snapshot.data!.data()![
+                              //                                   'physicalAssesment']
+                              //                               ['fiver'] as String)
+                              //                           .isEmpty
+                              //                       ? 'No'
+                              //                       : 'Yes'
+                              //                   : '',
+                              //               style: const TextStyle(
+                              //                   color: Colors.black54,
+                              //                   fontSize: 14,
+                              //                   fontFamily: 'manrope'),
+                              //             ),
+                              //           ),
+                              //         ],
+                              //       ),
+                              //       const SizedBox(
+                              //         height: 8,
+                              //       ),
+                              //       Row(
+                              //         mainAxisAlignment:
+                              //             MainAxisAlignment.spaceBetween,
+                              //         crossAxisAlignment:
+                              //             CrossAxisAlignment.start,
+                              //         children: [
+                              //           const Expanded(
+                              //             flex: 4,
+                              //             child: Text(
+                              //               'Has rashes ?',
+                              //               overflow: TextOverflow.clip,
+                              //               style: TextStyle(
+                              //                   color: Colors.black87,
+                              //                   fontSize: 14,
+                              //                   fontFamily: 'manrope'),
+                              //             ),
+                              //           ),
+                              //           const SizedBox(
+                              //             width: 8,
+                              //           ),
+                              //           Expanded(
+                              //             child: Text(
+                              //               snapshot.hasData
+                              //                   ? (snapshot.data!.data()![
+                              //                                   'physicalAssesment']
+                              //                               [
+                              //                               'rashes'] as String)
+                              //                           .isEmpty
+                              //                       ? 'No'
+                              //                       : 'Yes'
+                              //                   : '',
+                              //               style: const TextStyle(
+                              //                   color: Colors.black54,
+                              //                   fontSize: 14,
+                              //                   fontFamily: 'manrope'),
+                              //             ),
+                              //           ),
+                              //         ],
+                              //       ),
+                              //       const SizedBox(
+                              //         height: 8,
+                              //       ),
+                              //       Row(
+                              //         mainAxisAlignment:
+                              //             MainAxisAlignment.spaceBetween,
+                              //         crossAxisAlignment:
+                              //             CrossAxisAlignment.start,
+                              //         children: [
+                              //           const Expanded(
+                              //             flex: 4,
+                              //             child: Text(
+                              //               'Has redness ?',
+                              //               overflow: TextOverflow.clip,
+                              //               style: TextStyle(
+                              //                   color: Colors.black87,
+                              //                   fontSize: 14,
+                              //                   fontFamily: 'manrope'),
+                              //             ),
+                              //           ),
+                              //           const SizedBox(
+                              //             width: 8,
+                              //           ),
+                              //           Expanded(
+                              //             child: Text(
+                              //               snapshot.hasData
+                              //                   ? (snapshot.data!.data()![
+                              //                                   'physicalAssesment']
+                              //                               [
+                              //                               'redness'] as String)
+                              //                           .isEmpty
+                              //                       ? 'No'
+                              //                       : 'Yes'
+                              //                   : '',
+                              //               style: const TextStyle(
+                              //                   color: Colors.black54,
+                              //                   fontSize: 14,
+                              //                   fontFamily: 'manrope'),
+                              //             ),
+                              //           ),
+                              //         ],
+                              //       ),
+                              //       const SizedBox(
+                              //         height: 8,
+                              //       ),
+                              //       Row(
+                              //         mainAxisAlignment:
+                              //             MainAxisAlignment.spaceBetween,
+                              //         crossAxisAlignment:
+                              //             CrossAxisAlignment.start,
+                              //         children: [
+                              //           const Expanded(
+                              //             flex: 4,
+                              //             child: Text(
+                              //               'Has any swell ?',
+                              //               overflow: TextOverflow.clip,
+                              //               style: TextStyle(
+                              //                   color: Colors.black87,
+                              //                   fontSize: 14,
+                              //                   fontFamily: 'manrope'),
+                              //             ),
+                              //           ),
+                              //           const SizedBox(
+                              //             width: 8,
+                              //           ),
+                              //           Expanded(
+                              //             child: Text(
+                              //               snapshot.hasData
+                              //                   ? (snapshot.data!.data()![
+                              //                                   'physicalAssesment']
+                              //                               ['swell'] as String)
+                              //                           .isEmpty
+                              //                       ? 'No'
+                              //                       : 'Yes'
+                              //                   : '',
+                              //               style: const TextStyle(
+                              //                   color: Colors.black54,
+                              //                   fontSize: 14,
+                              //                   fontFamily: 'manrope'),
+                              //             ),
+                              //           ),
+                              //         ],
+                              //       ),
+                              //       const SizedBox(
+                              //         height: 8,
+                              //       ),
+                              //       Row(
+                              //         mainAxisAlignment:
+                              //             MainAxisAlignment.spaceBetween,
+                              //         crossAxisAlignment:
+                              //             CrossAxisAlignment.start,
+                              //         children: [
+                              //           const Expanded(
+                              //             flex: 4,
+                              //             child: Text(
+                              //               'Others',
+                              //               overflow: TextOverflow.clip,
+                              //               style: TextStyle(
+                              //                   color: Colors.black87,
+                              //                   fontSize: 14,
+                              //                   fontFamily: 'manrope'),
+                              //             ),
+                              //           ),
+                              //           const SizedBox(
+                              //             width: 8,
+                              //           ),
+                              //           Expanded(
+                              //             child: Text(
+                              //               snapshot.hasData
+                              //                   ? (snapshot.data!.data()![
+                              //                           'physicalAssesment']
+                              //                       ['others'] as String)
+                              //                   : '',
+                              //               style: const TextStyle(
+                              //                   color: Colors.black54,
+                              //                   fontSize: 14,
+                              //                   fontFamily: 'manrope'),
+                              //             ),
+                              //           ),
+                              //         ],
+                              //       ),
+                              //       const SizedBox(
+                              //         height: 8,
+                              //       ),
+                              //     ],
+                              //   ),
+                              // ),
 
-                              Divider(
-                                  height: getVerticalSize(32),
-                                  thickness: getVerticalSize(1),
-                                  color: ColorConstant.pinkA10019),
-                              Row(
-                                children: [
-                                  const Icon(
-                                    Icons.chrome_reader_mode_outlined,
-                                    color: Colors.black45,
-                                    size: 20,
-                                  ),
-                                  const SizedBox(
-                                    width: 8,
-                                  ),
-                                  Text(
-                                    'Other details'.capitalize!,
-                                    style: const TextStyle(
-                                        color: Colors.black54,
-                                        fontSize: 14,
-                                        fontWeight: FontWeight.bold,
-                                        fontFamily: 'manrope'),
-                                  ),
-                                ],
-                              ),
+                              // Divider(
+                              //     height: getVerticalSize(32),
+                              //     thickness: getVerticalSize(1),
+                              //     color: ColorConstant.pinkA10019),
+                              // Row(
+                              //   children: [
+                              //     const Icon(
+                              //       Icons.chrome_reader_mode_outlined,
+                              //       color: Colors.black45,
+                              //       size: 20,
+                              //     ),
+                              //     const SizedBox(
+                              //       width: 8,
+                              //     ),
+                              //     Text(
+                              //       'Other details'.capitalize!,
+                              //       style: const TextStyle(
+                              //           color: Colors.black54,
+                              //           fontSize: 14,
+                              //           fontWeight: FontWeight.bold,
+                              //           fontFamily: 'manrope'),
+                              //     ),
+                              //   ],
+                              // ),
 
-                              const SizedBox(
-                                height: 12,
-                              ),
-                              Padding(
-                                padding: getPadding(left: 29),
-                                child: Column(
-                                  children: [
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        const Expanded(
-                                          flex: 4,
-                                          child: Text(
-                                            'Payment',
-                                            overflow: TextOverflow.clip,
-                                            style: TextStyle(
-                                                color: Colors.black87,
-                                                fontSize: 14,
-                                                fontFamily: 'manrope'),
-                                          ),
-                                        ),
-                                        const SizedBox(
-                                          width: 8,
-                                        ),
-                                        Expanded(
-                                          child: Text(
-                                            snapshot.hasData
-                                                ? (snapshot.data!
-                                                            .data()!['payment']
-                                                        as String)
-                                                    .tr
-                                                : '',
-                                            style: const TextStyle(
-                                                color: Colors.black54,
-                                                fontSize: 14,
-                                                fontFamily: 'manrope'),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                    const SizedBox(
-                                      height: 8,
-                                    ),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        const Expanded(
-                                          flex: 4,
-                                          child: Text(
-                                            'Has this nurse worked with you before?',
-                                            overflow: TextOverflow.clip,
-                                            style: TextStyle(
-                                                color: Colors.black87,
-                                                fontSize: 14,
-                                                fontFamily: 'manrope'),
-                                          ),
-                                        ),
-                                        const SizedBox(
-                                          width: 8,
-                                        ),
-                                        Expanded(
-                                          child: Text(
-                                            snapshot.hasData
-                                                ? (snapshot.data!.data()![
-                                                        'workedWith'] as String)
-                                                    .tr
-                                                : '',
-                                            style: const TextStyle(
-                                                color: Colors.black54,
-                                                fontSize: 14,
-                                                fontFamily: 'manrope'),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                    const SizedBox(
-                                      height: 8,
-                                    ),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        const Expanded(
-                                          flex: 4,
-                                          child: Text(
-                                            'Additional Information',
-                                            overflow: TextOverflow.clip,
-                                            style: TextStyle(
-                                                color: Colors.black87,
-                                                fontSize: 14,
-                                                fontFamily: 'manrope'),
-                                          ),
-                                        ),
-                                        const SizedBox(
-                                          width: 8,
-                                        ),
-                                        Expanded(
-                                          child: Text(
-                                            snapshot.hasData
-                                                ? (snapshot.data!.data()![
-                                                            'addionalInfo']
-                                                        as String)
-                                                    .tr
-                                                : '',
-                                            style: const TextStyle(
-                                                color: Colors.black54,
-                                                fontSize: 14,
-                                                fontFamily: 'manrope'),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                    const SizedBox(
-                                      height: 8,
-                                    ),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        const Expanded(
-                                          flex: 4,
-                                          child: Text(
-                                            'Hand over to who ?',
-                                            overflow: TextOverflow.clip,
-                                            style: TextStyle(
-                                                color: Colors.black87,
-                                                fontSize: 14,
-                                                fontFamily: 'manrope'),
-                                          ),
-                                        ),
-                                        const SizedBox(
-                                          width: 8,
-                                        ),
-                                        Expanded(
-                                          child: Text(
-                                            snapshot.hasData
-                                                ? (snapshot.data!.data()![
-                                                        'handOverTo'] as String)
-                                                    .tr
-                                                : '',
-                                            style: const TextStyle(
-                                                color: Colors.black54,
-                                                fontSize: 14,
-                                                fontFamily: 'manrope'),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        const Expanded(
-                                          flex: 4,
-                                          child: Text(
-                                            'Hand over to who ?',
-                                            overflow: TextOverflow.clip,
-                                            style: TextStyle(
-                                                color: Colors.black87,
-                                                fontSize: 14,
-                                                fontFamily: 'manrope'),
-                                          ),
-                                        ),
-                                        const SizedBox(
-                                          width: 8,
-                                        ),
-                                        Expanded(
-                                          child: Text(
-                                            snapshot.hasData
-                                                ? (snapshot.data!.data()![
-                                                        'handOverTo'] as String)
-                                                    .tr
-                                                : '',
-                                            style: const TextStyle(
-                                                color: Colors.black54,
-                                                fontSize: 14,
-                                                fontFamily: 'manrope'),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              Divider(
-                                  height: getVerticalSize(32),
-                                  thickness: getVerticalSize(1),
-                                  color: ColorConstant.pinkA10019),
-                              const Row(
-                                children: [
-                                  Icon(
-                                    Icons.handshake_outlined,
-                                    color: Colors.black45,
-                                    size: 20,
-                                  ),
-                                  SizedBox(
-                                    width: 8,
-                                  ),
-                                  Text(
-                                    'Appointment date',
-                                    style: TextStyle(
-                                        color: Colors.black54,
-                                        fontSize: 14,
-                                        fontWeight: FontWeight.bold,
-                                        fontFamily: 'manrope'),
-                                  ),
-                                ],
-                              ),
+                              // const SizedBox(
+                              //   height: 12,
+                              // ),
+                              // Padding(
+                              //   padding: getPadding(left: 29),
+                              //   child: Column(
+                              //     children: [
+                              //       Row(
+                              //         mainAxisAlignment:
+                              //             MainAxisAlignment.spaceBetween,
+                              //         crossAxisAlignment:
+                              //             CrossAxisAlignment.start,
+                              //         children: [
+                              //           const Expanded(
+                              //             flex: 4,
+                              //             child: Text(
+                              //               'Payment',
+                              //               overflow: TextOverflow.clip,
+                              //               style: TextStyle(
+                              //                   color: Colors.black87,
+                              //                   fontSize: 14,
+                              //                   fontFamily: 'manrope'),
+                              //             ),
+                              //           ),
+                              //           const SizedBox(
+                              //             width: 8,
+                              //           ),
+                              //           Expanded(
+                              //             child: Text(
+                              //               snapshot.hasData
+                              //                   ? (snapshot.data!
+                              //                               .data()!['payment']
+                              //                           as String)
+                              //                       .tr
+                              //                   : '',
+                              //               style: const TextStyle(
+                              //                   color: Colors.black54,
+                              //                   fontSize: 14,
+                              //                   fontFamily: 'manrope'),
+                              //             ),
+                              //           ),
+                              //         ],
+                              //       ),
+                              //       const SizedBox(
+                              //         height: 8,
+                              //       ),
+                              //       Row(
+                              //         mainAxisAlignment:
+                              //             MainAxisAlignment.spaceBetween,
+                              //         crossAxisAlignment:
+                              //             CrossAxisAlignment.start,
+                              //         children: [
+                              //           const Expanded(
+                              //             flex: 4,
+                              //             child: Text(
+                              //               'Has this nurse worked with you before?',
+                              //               overflow: TextOverflow.clip,
+                              //               style: TextStyle(
+                              //                   color: Colors.black87,
+                              //                   fontSize: 14,
+                              //                   fontFamily: 'manrope'),
+                              //             ),
+                              //           ),
+                              //           const SizedBox(
+                              //             width: 8,
+                              //           ),
+                              //           Expanded(
+                              //             child: Text(
+                              //               snapshot.hasData
+                              //                   ? (snapshot.data!.data()![
+                              //                           'workedWith'] as String)
+                              //                       .tr
+                              //                   : '',
+                              //               style: const TextStyle(
+                              //                   color: Colors.black54,
+                              //                   fontSize: 14,
+                              //                   fontFamily: 'manrope'),
+                              //             ),
+                              //           ),
+                              //         ],
+                              //       ),
+                              //       const SizedBox(
+                              //         height: 8,
+                              //       ),
+                              //       Row(
+                              //         mainAxisAlignment:
+                              //             MainAxisAlignment.spaceBetween,
+                              //         crossAxisAlignment:
+                              //             CrossAxisAlignment.start,
+                              //         children: [
+                              //           const Expanded(
+                              //             flex: 4,
+                              //             child: Text(
+                              //               'Additional Information',
+                              //               overflow: TextOverflow.clip,
+                              //               style: TextStyle(
+                              //                   color: Colors.black87,
+                              //                   fontSize: 14,
+                              //                   fontFamily: 'manrope'),
+                              //             ),
+                              //           ),
+                              //           const SizedBox(
+                              //             width: 8,
+                              //           ),
+                              //           Expanded(
+                              //             child: Text(
+                              //               snapshot.hasData
+                              //                   ? (snapshot.data!.data()![
+                              //                               'addionalInfo']
+                              //                           as String)
+                              //                       .tr
+                              //                   : '',
+                              //               style: const TextStyle(
+                              //                   color: Colors.black54,
+                              //                   fontSize: 14,
+                              //                   fontFamily: 'manrope'),
+                              //             ),
+                              //           ),
+                              //         ],
+                              //       ),
+                              //       const SizedBox(
+                              //         height: 8,
+                              //       ),
+                              //       Row(
+                              //         mainAxisAlignment:
+                              //             MainAxisAlignment.spaceBetween,
+                              //         crossAxisAlignment:
+                              //             CrossAxisAlignment.start,
+                              //         children: [
+                              //           const Expanded(
+                              //             flex: 4,
+                              //             child: Text(
+                              //               'Hand over to who ?',
+                              //               overflow: TextOverflow.clip,
+                              //               style: TextStyle(
+                              //                   color: Colors.black87,
+                              //                   fontSize: 14,
+                              //                   fontFamily: 'manrope'),
+                              //             ),
+                              //           ),
+                              //           const SizedBox(
+                              //             width: 8,
+                              //           ),
+                              //           Expanded(
+                              //             child: Text(
+                              //               snapshot.hasData
+                              //                   ? (snapshot.data!.data()![
+                              //                           'handOverTo'] as String)
+                              //                       .tr
+                              //                   : '',
+                              //               style: const TextStyle(
+                              //                   color: Colors.black54,
+                              //                   fontSize: 14,
+                              //                   fontFamily: 'manrope'),
+                              //             ),
+                              //           ),
+                              //         ],
+                              //       ),
+                              //       Row(
+                              //         mainAxisAlignment:
+                              //             MainAxisAlignment.spaceBetween,
+                              //         crossAxisAlignment:
+                              //             CrossAxisAlignment.start,
+                              //         children: [
+                              //           const Expanded(
+                              //             flex: 4,
+                              //             child: Text(
+                              //               'Hand over to who ?',
+                              //               overflow: TextOverflow.clip,
+                              //               style: TextStyle(
+                              //                   color: Colors.black87,
+                              //                   fontSize: 14,
+                              //                   fontFamily: 'manrope'),
+                              //             ),
+                              //           ),
+                              //           const SizedBox(
+                              //             width: 8,
+                              //           ),
+                              //           Expanded(
+                              //             child: Text(
+                              //               snapshot.hasData
+                              //                   ? (snapshot.data!.data()![
+                              //                           'handOverTo'] as String)
+                              //                       .tr
+                              //                   : '',
+                              //               style: const TextStyle(
+                              //                   color: Colors.black54,
+                              //                   fontSize: 14,
+                              //                   fontFamily: 'manrope'),
+                              //             ),
+                              //           ),
+                              //         ],
+                              //       ),
+                              //     ],
+                              //   ),
+                              // ),
+                              // Divider(
+                              //     height: getVerticalSize(32),
+                              //     thickness: getVerticalSize(1),
+                              //     color: ColorConstant.pinkA10019),
+                              // const Row(
+                              //   children: [
+                              //     Icon(
+                              //       Icons.handshake_outlined,
+                              //       color: Colors.black45,
+                              //       size: 20,
+                              //     ),
+                              //     SizedBox(
+                              //       width: 8,
+                              //     ),
+                              //     Text(
+                              //       'Appointment date',
+                              //       style: TextStyle(
+                              //           color: Colors.black54,
+                              //           fontSize: 14,
+                              //           fontWeight: FontWeight.bold,
+                              //           fontFamily: 'manrope'),
+                              //     ),
+                              //   ],
+                              // ),
                               // Divider(
                               //     height: getVerticalSize(32),
                               //     thickness: getVerticalSize(1),

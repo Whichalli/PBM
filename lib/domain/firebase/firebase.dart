@@ -9,10 +9,14 @@ class Database {
   static final collection = FirebaseFirestore.instance;
   static final storage = FirebaseStorage.instance;
   static Future<dynamic> write(
-      {required String userId,
+      {String? userId,
       required Map<String, dynamic> data,
       required String table}) async {
     try {
+      if (userId == null) {
+        await collection.collection(table).doc().set(data);
+        return;
+      }
       await collection.collection(table).doc('/$userId').set(data);
     } catch (e) {
       e.printError();

@@ -72,6 +72,7 @@ class WhiteNoiseController extends GetxController {
       for (var element in resp.docs) {
         var data = <String, dynamic>{};
         data = element.data();
+        log('${categories[i]} music data = ${element.id}');
 
         data.putIfAbsent('id', () => element.id);
         data.putIfAbsent('index', () => index);

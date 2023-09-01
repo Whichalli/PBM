@@ -7,7 +7,7 @@ import 'package:pbm_app/widgets/custom_text_form_field.dart';
 
 // ignore_for_file: must_be_immutable
 class UpcomingBookingOne1Screen
-    extends GetWidget<UpcomingBookingOne1Controller> {
+    extends GetWidget<UpcomingBookingOne1Controller> {  
   UpcomingBookingOne1Screen({Key? key}) : super(key: key);
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();

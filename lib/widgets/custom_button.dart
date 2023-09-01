@@ -433,7 +433,17 @@ class CustomButton extends StatelessWidget {
           fontWeight: FontWeight.w700,
         );
 
-        case ButtonFontStyle.RalewayBold16Black:
+      case ButtonFontStyle.Selected:
+        return TextStyle(
+          color: ColorConstant.pinkA100,
+          fontSize: getFontSize(
+            20,
+          ),
+          fontFamily: 'Poppins',
+          fontWeight: FontWeight.w700,
+        );
+
+      case ButtonFontStyle.RalewayBold16Black:
         return TextStyle(
           color: ColorConstant.black900,
           fontSize: getFontSize(
@@ -477,6 +487,16 @@ class CustomButton extends StatelessWidget {
           ),
           fontFamily: 'Open Sans',
           fontWeight: FontWeight.w400,
+        );
+
+      case ButtonFontStyle.OpenSans20:
+        return TextStyle(
+          color: ColorConstant.black90059,
+          fontSize: getFontSize(
+            20,
+          ),
+          fontFamily: 'Open Sans',
+          fontWeight: FontWeight.bold,
         );
       case ButtonFontStyle.OpenSansItalicLight17:
         return TextStyle(
@@ -882,10 +902,12 @@ enum ButtonFontStyle {
   RalewayBold16Black,
   OpenSansRomanSemiBold14,
   RalewayBold16,
+  Selected,
   NunitoExtraBold18,
   PoppinsRegular24,
   OpenSansLight24Black90001,
   OpenSans24,
+  OpenSans20,
   OpenSansItalicLight17,
   OpenSansItalicLight17WhiteA700,
   OpenSansItalicLight17OrangeA200,

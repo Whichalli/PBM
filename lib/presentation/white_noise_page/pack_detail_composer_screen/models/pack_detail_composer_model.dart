@@ -87,7 +87,7 @@ class MusicModel {
     this.isPlaying.value = isPlaying;
     this.title.value = title;
     this.url.value = url;
-    this.artist.value = artist ?? 'Artist Unkown';
+    this.artist .value = artist ?? 'Artist Unkown';
     this.cover_photo.value = cover_photo ?? ImageConstant.imgBabyMusic;
   }
 

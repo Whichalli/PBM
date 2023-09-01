@@ -134,7 +134,11 @@ class PackDetailComposerScreen extends GetWidget<WhiteNoiseController> {
                               const Divider(
                                 height: .5,
                               ),
-                              Expanded(child: GetBuilder<WhiteNoiseController>(
+                              Expanded(
+                                  child: GetBuilder<WhiteNoiseController>(
+                                initState: (_) {
+                                  // controller.getLullaby();
+                                },
                                 builder: (_) {
                                   log("e['table'] = ${e['table']}");
                                   var data = controller.musicModelList.value

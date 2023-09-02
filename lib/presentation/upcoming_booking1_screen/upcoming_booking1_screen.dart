@@ -15,9 +15,7 @@ class UpcomingBooking1Screen extends GetWidget<UpcomingBooking1Controller> {
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () => Future.value(false),
-      child: Scaffold(
+    return Scaffold(
         resizeToAvoidBottomInset: false,
         backgroundColor: ColorConstant.whiteA700,
         appBar: CustomAppBar(
@@ -471,7 +469,6 @@ class UpcomingBooking1Screen extends GetWidget<UpcomingBooking1Controller> {
         // bottomNavigationBar: CustomBottomBar(onChanged: (BottomBarEnum type) {
         //   Get.toNamed(getCurrentRoute(type), id: 1);
         // })
-      ),
     );
   }
 

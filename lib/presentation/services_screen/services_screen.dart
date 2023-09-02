@@ -128,13 +128,48 @@ class ServicesScreen extends GetWidget<ServicesController> {
                                         },
                                         body: Padding(
                                           padding: getPadding(left: 60),
-                                          child: Text(
-                                            e['subHeading'],
-                                            style: const TextStyle(
-                                                letterSpacing: .7,
-                                                fontFamily: 'poppins',
-                                                color: Colors.black87,
-                                                fontSize: 12),
+                                          child: Column(
+                                            children: [
+                                              Text(
+                                                e['subHeading'],
+                                                style: const TextStyle(
+                                                    letterSpacing: .7,
+                                                    fontFamily: 'poppins',
+                                                    color: Colors.black87,
+                                                    fontSize: 12),
+                                              ),
+                                              if(controller.services.indexOf(e) == 1 || controller.services.indexOf(e) == 2)...[
+                                                  Padding(
+                                                    padding: getPadding(left: 19, top: 28),
+                                                    child: Text("msg_pediatrician_consultation2".tr,
+                                                        overflow: TextOverflow.ellipsis,
+                                                        textAlign: TextAlign.left,
+                                                        style: AppStyle
+                                                            .txtOpenSansRomanSemiBold12Gray600
+                                                            .copyWith(fontSize: 14))),
+                                                Padding(
+                                                    padding: getPadding(left: 19, top: 8),
+                                                    child: Text("msg_would_you_like_to".tr,
+                                                        overflow: TextOverflow.ellipsis,
+                                                        textAlign: TextAlign.left,
+                                                        style: AppStyle
+                                                            .txtOpenSansRomanSemiBold14PinkA100)),
+                                                CustomButton(
+                                                  margin: getMargin(top: 8),
+                                                  shape: ButtonShape.RoundedBorder16,
+                                                  variant: ButtonVariant.OutlinePinkA100,
+                                                  height: 50,
+                                                  padding: ButtonPadding.none,
+                                                  alignment: Alignment.center,
+                                                  fontStyle: ButtonFontStyle.RalewayBold16Black,
+                                                  backgroundColor: ColorConstant.pinkA10019,
+                                                  text: "msg_choose_pediatrician".tr,
+                                                  onTap: () {
+                                                    controller.onTapChoosePediatrician();
+                                                  },
+                                                ),
+                                              ]
+                                            ],
                                           ),
                                         )))
                                     .toList(),
@@ -237,35 +272,7 @@ class ServicesScreen extends GetWidget<ServicesController> {
                                               onTapRoutine();
                                             }))
                                   ])),
-                          Padding(
-                              padding: getPadding(left: 19, top: 28),
-                              child: Text("msg_pediatrician_consultation2".tr,
-                                  overflow: TextOverflow.ellipsis,
-                                  textAlign: TextAlign.left,
-                                  style: AppStyle
-                                      .txtOpenSansRomanSemiBold12Gray600
-                                      .copyWith(fontSize: 14))),
-                          Padding(
-                              padding: getPadding(left: 19, top: 8),
-                              child: Text("msg_would_you_like_to".tr,
-                                  overflow: TextOverflow.ellipsis,
-                                  textAlign: TextAlign.left,
-                                  style: AppStyle
-                                      .txtOpenSansRomanSemiBold14PinkA100)),
-                          CustomButton(
-                            margin: getMargin(top: 8),
-                            shape: ButtonShape.RoundedBorder16,
-                            variant: ButtonVariant.OutlinePinkA100,
-                            height: 50,
-                            padding: ButtonPadding.none,
-                            alignment: Alignment.center,
-                            fontStyle: ButtonFontStyle.RalewayBold16Black,
-                            backgroundColor: ColorConstant.pinkA10019,
-                            text: "msg_choose_pediatrician".tr,
-                            onTap: () {
-                              controller.onTapChoosePediatrician();
-                            },
-                          ),
+                        
                           const SizedBox(
                             height: 40,
                           ),
@@ -277,9 +284,7 @@ class ServicesScreen extends GetWidget<ServicesController> {
   /// When the action is triggered, this function uses the `Get` package to
   /// push the named route for the pricingScreen.
   onTapPricing() {
-    Get.toNamed(
-      AppRoutes.pricingScreen,
-    );
+    Get.toNamed(AppRoutes.pricingScreen, arguments: {'isBooking': false});
   }
 
   /// Navigates to the launchScreen when the action is triggered.

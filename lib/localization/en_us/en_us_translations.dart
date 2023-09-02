@@ -339,7 +339,7 @@ final Map<String, String> enUs = {
   "msg_pbm_consent_forms": "PBM Consent Forms",
   "lbl_toolkit2": "TOOLKIT",
   "msg_receive_daily_content":
-      "Receive daily content from us about our - Events, Merch updates, Poll forms, and So much more.",
+      "Receive daily content from usabout our - Events, Merch updates,Poll forms, and So much more.",
   "msg_my_nurses_providers":
       "My nurses/providers have been responsive & attentive to the queries and concerns",
   "msg_login_slide_three": "Login - Slide Three",

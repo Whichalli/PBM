@@ -127,45 +127,89 @@ class ServicesScreen extends GetWidget<ServicesController> {
                                           );
                                         },
                                         body: Padding(
-                                          padding: getPadding(left: 60),
+                                          padding: getPadding(
+                                              left: controller.services
+                                                              .indexOf(e) ==
+                                                          1 ||
+                                                      controller.services
+                                                              .indexOf(e) ==
+                                                          2
+                                                  ? 0
+                                                  : 60),
                                           child: Column(
                                             children: [
-                                              Text(
-                                                e['subHeading'],
-                                                style: const TextStyle(
-                                                    letterSpacing: .7,
-                                                    fontFamily: 'poppins',
-                                                    color: Colors.black87,
-                                                    fontSize: 12),
+                                              Padding(
+                                                padding: getPadding(
+                                                    left: controller.services
+                                                                    .indexOf(
+                                                                        e) ==
+                                                                1 ||
+                                                            controller.services
+                                                                    .indexOf(
+                                                                        e) ==
+                                                                2
+                                                        ? 60
+                                                        : 0),
+                                                child: Text(
+                                                  e['subHeading'],
+                                                  style: const TextStyle(
+                                                      letterSpacing: .7,
+                                                      fontFamily: 'poppins',
+                                                      color: Colors.black87,
+                                                      fontSize: 12),
+                                                ),
                                               ),
-                                              if(controller.services.indexOf(e) == 1 || controller.services.indexOf(e) == 2)...[
-                                                  Padding(
-                                                    padding: getPadding(left: 19, top: 28),
-                                                    child: Text("msg_pediatrician_consultation2".tr,
-                                                        overflow: TextOverflow.ellipsis,
-                                                        textAlign: TextAlign.left,
+                                              if (controller.services
+                                                          .indexOf(e) ==
+                                                      1 ||
+                                                  controller.services
+                                                          .indexOf(e) ==
+                                                      2) ...[
+                                                Padding(
+                                                    padding: getPadding(
+                                                        left: 19, top: 28),
+                                                    child: Text(
+                                                        "msg_pediatrician_consultation2"
+                                                            .tr,
+                                                        overflow: TextOverflow
+                                                            .ellipsis,
+                                                        textAlign:
+                                                            TextAlign.left,
                                                         style: AppStyle
                                                             .txtOpenSansRomanSemiBold12Gray600
-                                                            .copyWith(fontSize: 14))),
+                                                            .copyWith(
+                                                                fontSize: 14))),
                                                 Padding(
-                                                    padding: getPadding(left: 19, top: 8),
-                                                    child: Text("msg_would_you_like_to".tr,
-                                                        overflow: TextOverflow.ellipsis,
-                                                        textAlign: TextAlign.left,
+                                                    padding: getPadding(
+                                                        left: 19, top: 8),
+                                                    child: Text(
+                                                        "msg_would_you_like_to"
+                                                            .tr,
+                                                        overflow: TextOverflow
+                                                            .ellipsis,
+                                                        textAlign:
+                                                            TextAlign.left,
                                                         style: AppStyle
                                                             .txtOpenSansRomanSemiBold14PinkA100)),
                                                 CustomButton(
                                                   margin: getMargin(top: 8),
-                                                  shape: ButtonShape.RoundedBorder16,
-                                                  variant: ButtonVariant.OutlinePinkA100,
+                                                  shape: ButtonShape
+                                                      .RoundedBorder16,
+                                                  variant: ButtonVariant
+                                                      .OutlinePinkA100,
                                                   height: 50,
                                                   padding: ButtonPadding.none,
                                                   alignment: Alignment.center,
-                                                  fontStyle: ButtonFontStyle.RalewayBold16Black,
-                                                  backgroundColor: ColorConstant.pinkA10019,
-                                                  text: "msg_choose_pediatrician".tr,
+                                                  fontStyle: ButtonFontStyle
+                                                      .RalewayBold16Black,
+                                                  backgroundColor:
+                                                      ColorConstant.pinkA10019,
+                                                  text:
+                                                      "msg_choose_pediatrician"
+                                                          .tr,
                                                   onTap: () {
-                                                    controller.onTapChoosePediatrician();
+                                                    controller
+                                                        .onTapChoosePediatrician();
                                                   },
                                                 ),
                                               ]
@@ -272,7 +316,7 @@ class ServicesScreen extends GetWidget<ServicesController> {
                                               onTapRoutine();
                                             }))
                                   ])),
-                        
+
                           const SizedBox(
                             height: 40,
                           ),

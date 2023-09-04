@@ -17,9 +17,9 @@ class ChatController extends GetxController {
   Stream<QuerySnapshot<Map<String, dynamic>>> chatList(
       {required String field}) async* {
     var data = FirebaseFirestore.instance
-        .collection('chat_collection')
+        .collection('chat')
         .where(field, isEqualTo: Authentication.getCurrentUserId())
-        .orderBy('lastSentMessageTime', descending: true)
+        .orderBy('lastSentTime', descending: true)
         .snapshots();
     yield* data;
   }

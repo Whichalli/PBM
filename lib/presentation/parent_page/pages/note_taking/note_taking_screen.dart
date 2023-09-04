@@ -15,7 +15,7 @@ class NoteTakingScreen extends GetWidget<NoteTakingScreenController> {
     return Scaffold(
       body: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
           stream: FirebaseFirestore.instance
-              .collection('note')
+              .collection('note_taking')
               .where('userId', isEqualTo: Authentication.getCurrentUserId())
               .snapshots(),
           builder: (context, snapshot) {
@@ -60,7 +60,7 @@ class NoteTakingScreen extends GetWidget<NoteTakingScreenController> {
                                     .searchController.text.isNotEmpty) {
                                   data.value = resp
                                       .where((element) =>
-                                          '${element.data()['title']}'
+                                          '${element.data()['note_title']}'
                                               .toLowerCase()
                                               .contains(controller
                                                   .searchController.text

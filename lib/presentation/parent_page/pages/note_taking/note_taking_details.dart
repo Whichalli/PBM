@@ -22,7 +22,7 @@ class AddNoteScreen extends GetWidget<NoteTakingScreenController> {
       // '${date.toActualDate()}, ${TimeOfDay.fromDateTime(date).getTime()}';
     } else {
       controller.dateController.text =
-          '${date.toActualDate()}, ${TimeOfDay.fromDateTime(date).getTime()}';
+          '${date.toActualDate()*100}, ${TimeOfDay.fromDateTime(date).getTime()*100}';
     }
 
     // TODO: implement build

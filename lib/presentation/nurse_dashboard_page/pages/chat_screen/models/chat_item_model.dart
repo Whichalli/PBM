@@ -43,7 +43,7 @@ class ChatItemModel {
       chatId: data['chatId'],
       senderId: data['senderId'],
       chatActive: data['chatActive'],
-      accountType: data['accountType'],
+      accountType: data['typeOfAccount'],
       field: data['field'],
       lastMessage: data['lastMessage'],
       parentId: data['parentId'],

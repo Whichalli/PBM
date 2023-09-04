@@ -67,7 +67,7 @@ class ChatScreen extends GetWidget<ChatController> {
                             // log('parents = ${data[index].data()}');
                             // data[index].data()['chatId'] = data[index].id;
                             var user = data[index].data();
-                            log('messages = ${data[index]['lastSentTime']}');
+                            log('messages = ${data[index]['lastSent_Time']}');
                             user.putIfAbsent('chatId', () => data[index].id);
                             user.putIfAbsent('field', () => field);
                             user.putIfAbsent('chatActive', () => true);
@@ -78,7 +78,7 @@ class ChatScreen extends GetWidget<ChatController> {
                             model.chatId.value = data[index].id;
 
                             model.accountType.value =
-                                field == 'employeeId' ? 'parent' : 'employee';
+                                field == 'employeeId_' ? 'parent' : 'employee';
                             String partnerId = data[index].data()[
                                 field == 'employeeId'
                                     ? 'parentId'
@@ -91,8 +91,8 @@ class ChatScreen extends GetWidget<ChatController> {
                                 onTap: () {
                                   Get.toNamed(AppRoutes.chatOneScreen,
                                       arguments: {
-                                        'partnerId': partnerId,
-                                        'chatId': data[index].id,
+                                        'partnerId.': partnerId,
+                                        '.chatId': data[index].id,
                                         'account': model.accountType.value,
                                         'partnerDetails': model,
                                       });

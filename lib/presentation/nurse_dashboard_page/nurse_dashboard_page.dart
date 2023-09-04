@@ -25,10 +25,10 @@ class NurseDashboardScreenPage
 
 // class _NurseDashboardScreenPageState extends State<NurseDashboardScreenPage> {
   final List<Widget> _pages = [
-    const DashboardScreen(),
-    const BookedNurseScreen(field: 'employeeId'),
-    const ChatScreen(field: 'employeeId'),
-    const NoteTakingScreen(),
+    // const DashboardScreen(),
+    // const BookedNurseScreen(field: 'employeeId'),
+    // const ChatScreen(field: 'employeeId'),
+    // const NoteTakingScreen(),
     Container(),
     // const PackDetailComposerScreen(),
     // const NowPlayingScreen()

@@ -27,7 +27,7 @@ class ChatItemWidget extends StatelessWidget {
     var timeDiff = DateTime.now().difference(chatItemModel.time.value);
     log('${chatItemModel.time.value} diff = ${timeDiff.inDays}');
     String table =
-        chatItemModel.field.value == 'employeeId' ? 'parent' : 'employee';
+        chatItemModel.field.value == 'employeeId' ? 'parent_chatting' : 'employee';
     String user = chatItemModel.field.value == 'employeeId'
         ? chatItemModel.parentId.value
         : chatItemModel.employeeId.value;
@@ -119,7 +119,7 @@ class ChatItemWidget extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         Text(
-                          '${hasData ? snapshot.data?.data()!['name'] : '...'}'
+                          '${hasData ? snapshot.data?.data()!['username'] : '...'}'
                               .capitalize!,
                           overflow: TextOverflow.ellipsis,
                           textAlign: TextAlign.left,

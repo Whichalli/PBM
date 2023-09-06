@@ -409,7 +409,8 @@ class HomeOnboardingContainerScreen
                                 onTap: () {
                                   onTapClicktoview();
                                 }),
-                              Align(
+                          ),
+                            Align(
                             child: CustomButton(
                                 height: getVerticalSize(40),
                                 width: getHorizontalSize(100),
@@ -421,7 +422,6 @@ class HomeOnboardingContainerScreen
                                 onTap: () {
                                   onTapClicktochat();
                                 }),
-                          ),
                           ),
                           Padding(
                               padding: getPadding(top: 6, right: 29),

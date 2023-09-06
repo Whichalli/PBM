@@ -16,6 +16,8 @@ import 'package:pbm_app/presentation/services_screen/services_screen.dart';
 import 'package:pbm_app/presentation/services_screen/binding/services_binding.dart';
 import 'package:pbm_app/presentation/choose_age_screen/choose_age_screen.dart';
 import 'package:pbm_app/presentation/choose_age_screen/binding/choose_age_binding.dart';
+import 'package:pbm_app/presentation/ai_screen/ai_screen.dart';
+import 'package:pbm_app/presentation/ai_screen/binding/ai_binding.dart';
 import 'package:pbm_app/presentation/choose_gender_age_screen/choose_gender_age_screen.dart';
 import 'package:pbm_app/presentation/choose_gender_age_screen/binding/choose_gender_age_binding.dart';
 import 'package:pbm_app/presentation/home_screen/home_screen.dart';
@@ -122,6 +124,8 @@ class AppRoutes {
   static const String servicesScreen = '/services_screen';
 
   static const String chooseAgeScreen = '/choose_age_screen';
+
+  static const String aiScreen = '/Ai_screen';
 
   static const String chooseGenderAgeScreen = '/choose_gender_age_screen';
 
@@ -310,6 +314,13 @@ class AppRoutes {
       page: () => ServicesScreen(),
       bindings: [
         ServicesBinding(),
+      ],
+    ),
+     GetPage(
+      name: aiScreen,
+      page: () => AiScreen(),
+      bindings: [
+        AiBinding(),
       ],
     ),
     GetPage(

@@ -112,6 +112,7 @@ final Map<String, String> enUs = {
   "lbl_my_nurses": "My Nurses",
   "lbl_play": "Play",
   "msg_click_to_view_services": "Click to view Services details",
+  "msg_chat_with_ai": "Chat with Ai",
   "lbl_20_08": "20:08",
   "lbl_01": "01",
   "lbl_02": "02",

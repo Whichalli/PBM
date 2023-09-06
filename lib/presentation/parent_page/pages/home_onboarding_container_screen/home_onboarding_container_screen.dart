@@ -409,6 +409,19 @@ class HomeOnboardingContainerScreen
                                 onTap: () {
                                   onTapClicktoview();
                                 }),
+                              Align(
+                            child: CustomButton(
+                                height: getVerticalSize(40),
+                                width: getHorizontalSize(100),
+                                text: "msg_chat_with_ai".tr,
+                                margin: getMargin(bottom: 7, top: 3),
+                                shape: ButtonShape.RoundedBorder8,
+                                padding: ButtonPadding.PaddingT14,
+                                fontStyle: ButtonFontStyle.RalewayBold16,
+                                onTap: () {
+                                  onTapClicktochat();
+                                }),
+                          ),
                           ),
                           Padding(
                               padding: getPadding(top: 6, right: 29),
@@ -612,6 +625,11 @@ class HomeOnboardingContainerScreen
       AppRoutes.servicesScreen,
     );
   }
+    onTapClicktochat() {
+    Get.toNamed(
+      AppRoutes.aiScreen,
+    );
+  } 
 
   /// Navigates to the upcomingBookingFourScreen when the action is triggered.
 
